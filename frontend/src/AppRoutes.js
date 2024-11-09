@@ -1,28 +1,35 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-// Import all page components
+// Booking pages
 import Booking from "./pages/Booking/Booking";
-import Explore from "./pages/Explore/Explore";
-import QAirline from "./pages/QAirline/QAirline";
-import Info from "./pages/Info/Info";
-import Account from "./pages/Account/Account";
-
 import BookTicket from "./pages/Booking/BookTicket";
 import ManageTicket from "./pages/Booking/ManageTicket";
 import PaymentGuide from "./pages/Booking/PaymentGuide";
 import AddOnServices from "./pages/Booking/AddOnServices";
+
+// Info pages
+import Info from "./pages/Info/Info";
 import TicketSchedule from "./pages/Info/TicketSchedule";
 import SpecialServices from "./pages/Info/SpecialServices";
 import Baggage from "./pages/Info/Baggage";
 import CheckIn from "./pages/Info/CheckIn";
 import DocumentRequirements from "./pages/Info/DocumentRequirements";
 import Airport from "./pages/Info/Airport";
+
+// Explore pages
+import Explore from "./pages/Explore/Explore";
 import Destinations from "./pages/Explore/Destinations";
 import Offers from "./pages/Explore/Offers";
 import FlightExperience from "./pages/Explore/FlightExperience";
+
+// QAirline pages
+import QAirline from "./pages/QAirline/QAirline";
 import About from "./pages/QAirline/About";
 import News from "./pages/QAirline/News";
+
+// Account pages
+import Account from "./pages/Account/Account";
 import Profile from "./pages/Account/Profile";
 import Setting from "./pages/Account/Setting";
 import Logout from "./pages/Account/Logout";
