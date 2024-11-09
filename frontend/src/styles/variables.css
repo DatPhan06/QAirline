@@ -1,0 +1,8 @@
+/* styles/variables.css */
+:root {
+  --primary-color: #003366;
+  --secondary-color: #ffcc00;
+  --text-color: #333;
+  --background-color: #f9f9f9;
+  --font-family: Arial, sans-serif;
+}
