@@ -1,75 +1,156 @@
-// components/Navbar.js
 import React from "react";
 import { Link } from "react-router-dom";
+import styles from "./Navbar.module.css";
 
 const Navbar = () => {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/booking">Booking</Link>
-          <ul>
-            <li>
-              <Link to="/booking/book-ticket">Book Ticket</Link>
-            </li>
-            <li>
-              <Link to="/booking/manage-ticket">Manage Ticket</Link>
-            </li>
-            <li>
-              <Link to="/booking/payment-guide">Payment Guide</Link>
-            </li>
-            <li>
-              <Link to="/booking/add-on-services">Add-on Services</Link>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <Link to="/info">Info</Link>
-          <ul>
-            <li>
-              <Link to="/info/ticket-schedule">Ticket & Schedule</Link>
-            </li>
-            <li>
-              <Link to="/info/special-services">Special Services</Link>
-            </li>
-            <li>
-              <Link to="/info/baggage">Baggage</Link>
-            </li>
-            <li>
-              <Link to="/info/check-in">Check-In</Link>
-            </li>
-            <li>
-              <Link to="/info/document-requirements">
-                Document Requirements
+    <nav className={styles.nav}>
+      <ul className={styles.navList}>
+        {/* Mục Đặt Vé */}
+        <li className={styles.navItem}>
+          <Link to="/booking" className={styles.navLink}>
+            Đặt Vé
+          </Link>
+          <ul className={styles.subMenu}>
+            <li className={styles.subMenuItem}>
+              <Link to="/booking/book-ticket" className={styles.subMenuLink}>
+                Mua Vé
               </Link>
             </li>
-            <li>
-              <Link to="/info/airport">Airport</Link>
+            <li className={styles.subMenuItem}>
+              <Link to="/booking/manage-ticket" className={styles.subMenuLink}>
+                Quản Lý Vé
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
+              <Link to="/booking/payment-guide" className={styles.subMenuLink}>
+                Hướng Dẫn Mua Vé & Thanh Toán
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
+              <Link
+                to="/booking/add-on-services"
+                className={styles.subMenuLink}
+              >
+                Dịch Vụ Bổ Trợ
+              </Link>
             </li>
           </ul>
         </li>
-        <li>
-          <Link to="/explore">Explore</Link>
-          <ul>
-            <li>
-              <Link to="/explore/destinations">Destinations</Link>
+
+        {/* Mục Thông Tin */}
+        <li className={styles.navItem}>
+          <Link to="/info" className={styles.navLink}>
+            Thông Tin Hành Trình
+          </Link>
+          <ul className={styles.subMenu}>
+            <li className={styles.subMenuItem}>
+              <Link to="/info/ticket-schedule" className={styles.subMenuLink}>
+                Vé & Lịch Bay
+              </Link>
             </li>
-            <li>
-              <Link to="/explore/offers">Offers</Link>
+            <li className={styles.subMenuItem}>
+              <Link to="/info/special-services" className={styles.subMenuLink}>
+                Dịch Vụ Đặc Biệt
+              </Link>
             </li>
-            <li>
-              <Link to="/explore/flight-experience">Flight Experience</Link>
+            <li className={styles.subMenuItem}>
+              <Link to="/info/baggage" className={styles.subMenuLink}>
+                Hành Lý
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
+              <Link to="/info/check-in" className={styles.subMenuLink}>
+                Thủ Tục
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
+              <Link
+                to="/info/document-requirements"
+                className={styles.subMenuLink}
+              >
+                Yêu Cầu Giấy Tờ
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
+              <Link to="/info/airport" className={styles.subMenuLink}>
+                Sân Bay
+              </Link>
             </li>
           </ul>
         </li>
-        <li>
-          <Link to="/qairline">QAirline</Link>
-          <ul>
-            <li>
-              <Link to="/qairline/about">About</Link>
+
+        {/* Mục Khám Phá */}
+        <li className={styles.navItem}>
+          <Link to="/explore" className={styles.navLink}>
+            Khám Phá
+          </Link>
+          <ul className={styles.subMenu}>
+            <li className={styles.subMenuItem}>
+              <Link to="/explore/destinations" className={styles.subMenuLink}>
+                Điểm Đến
+              </Link>
             </li>
-            <li>
-              <Link to="/qairline/news">News</Link>
+            <li className={styles.subMenuItem}>
+              <Link to="/explore/offers" className={styles.subMenuLink}>
+                Ưu Đãi
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
+              <Link
+                to="/explore/flight-experience"
+                className={styles.subMenuLink}
+              >
+                Trải Nghiệm Bay
+              </Link>
+            </li>
+          </ul>
+        </li>
+
+        {/* Mục Hãng Hàng Không */}
+        <li className={styles.navItem}>
+          <Link to="/qairline" className={styles.navLink}>
+            QAirline
+          </Link>
+          <ul className={styles.subMenu}>
+            <li className={styles.subMenuItem}>
+              <Link to="/qairline/about" className={styles.subMenuLink}>
+                Giới Thiệu
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
+              <Link to="/qairline/news" className={styles.subMenuLink}>
+                Tin Tức
+              </Link>
+            </li>
+          </ul>
+        </li>
+
+        {/* Mục Tài Khoản */}
+        <li className={`${styles.navItem} ${styles.account}`}>
+          <Link to="/account" className={styles.navLink}>
+            Tài Khoản
+            <img
+              src="https://via.placeholder.com/30"
+              alt="Avatar"
+              className={styles.avatar}
+            />
+          </Link>
+          <ul className={styles.subMenu}>
+            <li className={styles.subMenuItem}>
+              <Link to="/account/profile" className={styles.subMenuLink}>
+                Hồ Sơ
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
+              <Link to="/account/settings" className={styles.subMenuLink}>
+                Cài Đặt
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
+              <Link to="/account/logout" className={styles.subMenuLink}>
+                Đăng Xuất
+              </Link>
             </li>
           </ul>
         </li>

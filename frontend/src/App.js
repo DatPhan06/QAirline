@@ -17,6 +17,12 @@ import Offers from "./pages/Explore/Offers";
 import FlightExperience from "./pages/Explore/FlightExperience";
 import About from "./pages/QAirline/About";
 import News from "./pages/QAirline/News";
+import Profile from "./pages/Account/Profile";
+import Setting from "./pages/Account/Setting";
+import Logout from "./pages/Account/Logout";
+
+import "./styles/global.css";
+import "./styles/variables.css";
 
 function App() {
   return (
@@ -51,6 +57,11 @@ function App() {
         {/* QAirline */}
         <Route path="/qairline/about" element={<About />} />
         <Route path="/qairline/news" element={<News />} />
+
+        {/* Account */}
+        <Route path="/account/profile" element={<Profile />} />
+        <Route path="/account/settings" element={<Setting />} />
+        <Route path="/account/logout" element={<Logout />} />
       </Routes>
     </Router>
   );

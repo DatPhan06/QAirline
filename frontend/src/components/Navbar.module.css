@@ -1,0 +1,102 @@
+/* Navbar.module.css */
+
+/* Tổng thể thanh điều hướng */
+.nav {
+  background-color: #ffffff; /* Màu nền */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+  padding: 10px 20px;
+  font-family: "Arial", sans-serif;
+  position: sticky; /* Thanh cố định */
+  top: 0;
+  z-index: 1000;
+}
+
+/* Danh sách menu chính */
+.navList {
+  display: flex;
+  justify-content: space-around; /* Giãn đều các mục */
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Từng mục menu chính */
+.navItem {
+  position: relative; /* Quan trọng để hiển thị menu con */
+  margin-right: 20px;
+}
+
+.navLink {
+  color: #333; /* Màu chữ */
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 15px;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+/* Hiệu ứng hover trên menu chính */
+.navLink:hover {
+  color: #4caf50; /* Màu xanh khi hover */
+  border-bottom: 2px solid #4caf50; /* Gạch chân khi hover */
+}
+
+/* Kiểu dáng menu con */
+.subMenu {
+  display: none; /* Ẩn mặc định */
+  position: absolute;
+  top: 100%; /* Menu con hiển thị dưới mục chính */
+  left: 0;
+  background-color: #f9f9f9; /* Màu nền menu con */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+  border-radius: 5px; /* Bo góc */
+  padding: 10px;
+  z-index: 1000;
+  min-width: 200px; /* Chiều rộng tối thiểu */
+  flex-direction: column;
+}
+
+/* Hiển thị menu con khi hover */
+.navItem:hover .subMenu {
+  display: block; /* Hiển thị menu con */
+}
+
+/* Danh sách bên trong menu con */
+.subMenuItem {
+  margin: 5px 0;
+}
+
+.subMenuLink {
+  display: block;
+  padding: 8px 10px;
+  color: #333; /* Màu chữ */
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+/* Hiệu ứng hover trên menu con */
+.subMenuLink:hover {
+  color: #ffffff;
+  background-color: #4caf50; /* Màu nền khi hover */
+  border-radius: 3px;
+}
+
+/* Responsive cho màn hình nhỏ */
+@media (max-width: 768px) {
+  .navList {
+    flex-direction: column; /* Menu chính hiển thị dọc */
+    align-items: flex-start;
+  }
+
+  .navItem {
+    margin-bottom: 10px;
+  }
+
+  .subMenu {
+    position: static; /* Menu con hiển thị bên dưới mục chính */
+    box-shadow: none;
+    min-width: 100%;
+  }
+}
