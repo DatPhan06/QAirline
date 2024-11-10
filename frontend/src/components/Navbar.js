@@ -6,6 +6,11 @@ const Navbar = () => {
   return (
     <nav className={styles.nav}>
       <ul className={styles.navList}>
+        <li className={styles.navItem}>
+          <Link to="/" className={styles.navLink}>
+            Home
+          </Link>
+        </li>
         {/* Mục Đặt Vé */}
         <li className={styles.navItem}>
           <Link to="/booking" className={styles.navLink}>
@@ -145,6 +150,16 @@ const Navbar = () => {
             <li className={styles.subMenuItem}>
               <Link to="/account/settings" className={styles.subMenuLink}>
                 Cài Đặt
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
+              <Link to="/account/signin" className={styles.subMenuLink}>
+                Đăng Nhập
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
+              <Link to="/account/signup" className={styles.subMenuLink}>
+                Đăng Ký
               </Link>
             </li>
             <li className={styles.subMenuItem}>
