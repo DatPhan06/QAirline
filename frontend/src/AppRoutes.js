@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
+import Home from "./pages/Home";
+
 // Booking pages
 import Booking from "./pages/Booking/Booking";
 import BookTicket from "./pages/Booking/BookTicket";
@@ -33,10 +35,16 @@ import Account from "./pages/Account/Account";
 import Profile from "./pages/Account/Profile";
 import Setting from "./pages/Account/Setting";
 import Logout from "./pages/Account/Logout";
+import SignIn from "./pages/Account/SignIn";
+import SignUp from "./pages/Account/SignUp";
 
 function AppRoutes() {
   return (
     <Routes>
+      {/* Home */}
+
+      <Route path="/" element={<Home />} />
+
       {/* Booking */}
       <Route path="/booking" element={<Booking />} />
       <Route path="/booking/book-ticket" element={<BookTicket />} />
@@ -72,6 +80,8 @@ function AppRoutes() {
       <Route path="/account/profile" element={<Profile />} />
       <Route path="/account/settings" element={<Setting />} />
       <Route path="/account/logout" element={<Logout />} />
+      <Route path="/account/signin" element={<SignIn />} />
+      <Route path="/account/signup" element={<SignUp />} />
     </Routes>
   );
 }
