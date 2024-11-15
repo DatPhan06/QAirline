@@ -10,3 +10,6 @@ def create_flight(db: Session, flight: schemas.FlightCreate):
 
 def get_flight(db: Session, flight_id: int):
     return db.query(models.Flight).filter(models.Flight.id == flight_id).first()
+
+def get_flights(db: Session):
+    return db.query(models.Flight).all()
