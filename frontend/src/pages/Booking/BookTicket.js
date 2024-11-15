@@ -1,7 +1,13 @@
 import React from "react";
+import FlightList from "../../components/FlightList"; // Đổi tên import
 
 const BookTicket = () => {
-  return <h1>Trang Mua Vé</h1>;
+  return (
+    <div>
+      <h1>Đặt vé</h1>
+      <FlightList />
+    </div>
+  );
 };
 
 export default BookTicket;

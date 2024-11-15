@@ -1,6 +1,7 @@
 # QAIRLINE Project Structure (FastAPI & ReactJS)
 
 ## Project Root:
+
 ```bash
 ├── backend/                        # Backend FastAPI
 │   ├── app/
@@ -51,6 +52,7 @@
 └── .env                            # Các biến môi trường cho dự án
 
 ```
+
 ## Descriptions:
 
 1. **backend/app/**
@@ -75,3 +77,6 @@
 
 5. **frontend/Dockerfile (trong thư mục frontend)**
    - Dockerfile được sử dụng để xây dựng image cho frontend.
+
+uvicorn app.main:app --reload
+npm start
