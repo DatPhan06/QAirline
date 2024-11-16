@@ -16,6 +16,14 @@ origins = [
     # Thêm các địa chỉ khác nếu cần
 ]
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Include routers
 app.include_router(flights_router)
 app.include_router(bookings_router)
@@ -27,6 +35,3 @@ Base.metadata.create_all(bind=engine)
 @app.get("/")
 def read_root():
     return {"message": "Welcome to Flight Booking System API"}
-
-# Create database tables
-Base.metadata.create_all(bind=engine)
