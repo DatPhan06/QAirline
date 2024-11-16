@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 
 import Home from "./pages/Home";
 
@@ -47,22 +48,75 @@ function AppRoutes() {
 
       {/* Booking */}
       <Route path="/booking" element={<Booking />} />
-      <Route path="/booking/book-ticket" element={<BookTicket />} />
-      <Route path="/booking/manage-ticket" element={<ManageTicket />} />
+      <Route
+        path="/booking/book-ticket"
+        element={
+          <PrivateRoute>
+            <BookTicket />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/booking/manage-ticket"
+        element={
+          <PrivateRoute>
+            <ManageTicket />
+          </PrivateRoute>
+        }
+      />
       <Route path="/booking/payment-guide" element={<PaymentGuide />} />
       <Route path="/booking/add-on-services" element={<AddOnServices />} />
 
       {/* Info */}
       <Route path="/info" element={<Info />} />
-      <Route path="/info/ticket-schedule" element={<TicketSchedule />} />
-      <Route path="/info/special-services" element={<SpecialServices />} />
-      <Route path="/info/baggage" element={<Baggage />} />
-      <Route path="/info/check-in" element={<CheckIn />} />
+      <Route
+        path="/info/ticket-schedule"
+        element={
+          <PrivateRoute>
+            <TicketSchedule />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/info/special-services"
+        element={
+          <PrivateRoute>
+            <SpecialServices />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/info/baggage"
+        element={
+          <PrivateRoute>
+            <Baggage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/info/check-in"
+        element={
+          <PrivateRoute>
+            <CheckIn />
+          </PrivateRoute>
+        }
+      />
       <Route
         path="/info/document-requirements"
-        element={<DocumentRequirements />}
+        element={
+          <PrivateRoute>
+            <DocumentRequirements />
+          </PrivateRoute>
+        }
       />
-      <Route path="/info/airport" element={<Airport />} />
+      <Route
+        path="/info/airport"
+        element={
+          <PrivateRoute>
+            <Airport />
+          </PrivateRoute>
+        }
+      />
 
       {/* Explore */}
       <Route path="/explore" element={<Explore />} />
@@ -77,7 +131,14 @@ function AppRoutes() {
 
       {/* Account */}
       <Route path="/account" element={<Account />} />
-      <Route path="/account/profile" element={<Profile />} />
+      <Route
+        path="/account/profile"
+        element={
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        }
+      />
       <Route path="/account/settings" element={<Setting />} />
       <Route path="/account/logout" element={<Logout />} />
       <Route path="/account/signin" element={<SignIn />} />
