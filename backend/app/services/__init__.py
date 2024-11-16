@@ -1,3 +1,8 @@
 from .flight_service import create_flight, get_flight, get_flights
 from .booking_service import create_booking, get_booking
-from .user_service import create_user, get_user
+from .user_service import (
+    verify_password,
+    get_password_hash,
+    get_user_by_email,
+    authenticate_user,
+)
