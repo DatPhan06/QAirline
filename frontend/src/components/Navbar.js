@@ -2,6 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
+/**
+ * Thành phần Navbar hiển thị thanh điều hướng của trang web.
+ * Bao gồm các mục chính như Đặt Vé, Thông Tin Hành Trình, Khám Phá, QAirline và Tài Khoản.
+ *
+ * @component
+ * @returns {JSX.Element} Thành phần Navbar.
+ */
 const Navbar = () => {
   return (
     <nav className={styles.nav}>

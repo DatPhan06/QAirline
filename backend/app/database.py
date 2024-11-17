@@ -27,7 +27,7 @@ def get_db():
     finally:
         db.close()
 
-def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)) -> models.User:
+def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     """
     Xác thực và trả về người dùng hiện tại dựa trên token.
 
@@ -37,9 +37,6 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
 
     Raises:
         HTTPException: Nếu không thể xác thực thông tin hoặc người dùng không tồn tại.
-
-    Returns:
-        models.User: Người dùng hiện tại.
     """
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
