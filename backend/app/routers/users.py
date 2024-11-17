@@ -12,8 +12,6 @@ from ..services.user_service import (
     authenticate_user,
 )
 
-
-
 router = APIRouter(
     prefix="/users",
     tags=["users"],
@@ -28,8 +26,16 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/login")
 
+
 @router.post("/register", response_model=schemas.User)
-def register(user: schemas.UserCreate, db: Session = Depends(database.get_db)):
+def register(user: schemas.UserCreate, db: Session = Depends(database.get_db)) -> models.User:
+    """
+    Đăng ký người dùng mới.
+
+    :param user: Thông tin người dùng cần đăng ký.
+    :param db: Phiên làm việc với cơ sở dữ liệu.
+    :return: Thông tin người dùng đã đăng ký.
+    """
     if get_user_by_email(db, user.email):
         raise HTTPException(status_code=400, detail="Email đã được đăng ký")
     hashed_password = get_password_hash(user.password)
@@ -43,8 +49,19 @@ def register(user: schemas.UserCreate, db: Session = Depends(database.get_db)):
     db.refresh(new_user)
     return new_user
 
+
 @router.post("/login")
-def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(database.get_db)):
+def login(
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    db: Session = Depends(database.get_db)
+) -> dict:
+    """
+    Đăng nhập người dùng.
+
+    :param form_data: Dữ liệu đăng nhập của người dùng.
+    :param db: Phiên làm việc với cơ sở dữ liệu.
+    :return: Token truy cập và loại token.
+    """
     user = authenticate_user(db, form_data.username, form_data.password)
     if not user:
         raise HTTPException(
@@ -60,6 +77,13 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
+
 @router.get("/me", response_model=schemas.User)
-def read_users_me(current_user: models.User = Depends(database.get_current_user)):
+def read_users_me(current_user: models.User = Depends(database.get_current_user)) -> models.User:
+    """
+    Lấy thông tin người dùng hiện tại.
+
+    :param current_user: Người dùng hiện tại.
+    :return: Thông tin người dùng hiện tại.
+    """
     return current_user
