@@ -24,7 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include routers
+# Bao gồm các router
 app.include_router(flights_router)
 app.include_router(bookings_router)
 app.include_router(users_router)
@@ -33,5 +33,11 @@ app.include_router(users_router)
 Base.metadata.create_all(bind=engine)
 
 @app.get("/")
-def read_root():
+def read_root() -> dict:
+    """
+    Hàm xử lý yêu cầu GET tại endpoint gốc.
+
+    Trả về:
+        dict: Thông điệp chào mừng.
+    """
     return {"message": "Welcome to Flight Booking System API"}
