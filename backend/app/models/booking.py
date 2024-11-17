@@ -3,14 +3,25 @@ from sqlalchemy.orm import relationship
 from ..database import Base
 
 class Booking(Base):
+    """
+    Lớp đại diện cho bảng 'bookings' trong cơ sở dữ liệu.
+
+    Attributes:
+        id (int): ID của booking.
+        flight_id (int): ID của chuyến bay.
+        user_name (str): Tên người dùng.
+        user_id (int): ID của người dùng.
+        booking_date (date): Ngày đặt vé.
+        status (str): Trạng thái của booking.
+    """
     __tablename__ = "bookings"
 
-    id = Column(Integer, primary_key=True, index=True)
-    flight_id = Column(Integer, ForeignKey('flights.id'))
-    user_name = Column(String(255), nullable=False)
-    user_id = Column(Integer, ForeignKey("users.id"))
-    booking_date = Column(Date)
-    status = Column(String(255), default="pending")
+    id: int = Column(Integer, primary_key=True, index=True)
+    flight_id: int = Column(Integer, ForeignKey('flights.id'))
+    user_name: str = Column(String(255), nullable=False)
+    user_id: int = Column(Integer, ForeignKey("users.id"))
+    booking_date: Date = Column(Date)
+    status: str = Column(String(255), default="pending")
 
     flight = relationship("Flight", back_populates="bookings")
     user = relationship("User", back_populates="bookings")
