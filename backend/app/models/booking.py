@@ -9,7 +9,7 @@ class Booking(Base):
     Attributes:
         id (int): ID của booking.
         flight_id (int): ID của chuyến bay.
-        user_name (str): Tên người dùng.
+        username (str): Tên người dùng.
         user_id (int): ID của người dùng.
         booking_date (date): Ngày đặt vé.
         status (str): Trạng thái của booking.
@@ -18,7 +18,7 @@ class Booking(Base):
 
     id: int = Column(Integer, primary_key=True, index=True)
     flight_id: int = Column(Integer, ForeignKey('flights.id'))
-    user_name: str = Column(String(255), nullable=False)
+    username: str = Column(String(255), nullable=False)
     user_id: int = Column(Integer, ForeignKey("users.id"))
     booking_date: Date = Column(Date)
     status: str = Column(String(255), default="pending")

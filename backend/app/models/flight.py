@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Date
 from sqlalchemy.orm import relationship
 from ..database import Base
 
@@ -20,6 +20,7 @@ class Flight(Base):
     name: str = Column(String(255), nullable=False)
     departure: str = Column(String(255), nullable=False)
     destination: str = Column(String(255), nullable=False)
+    departureDate: Date = Column(Date)
     duration: int = Column(Integer, nullable=False)
 
     bookings = relationship("Booking", back_populates="flight")

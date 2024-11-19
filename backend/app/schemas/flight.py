@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from datetime import date
 from typing import List
 
 class FlightBase(BaseModel):
@@ -14,6 +15,7 @@ class FlightBase(BaseModel):
     name: str
     departure: str
     destination: str
+    departureDate: date
     duration: int
 
 class FlightCreate(FlightBase):

@@ -11,6 +11,7 @@ from ..services.user_service import (
     get_user_by_email,
     authenticate_user,
 )
+from ..config import settings
 
 router = APIRouter(
     prefix="/users",
@@ -18,8 +19,6 @@ router = APIRouter(
 )
 
 # Cài đặt bảo mật
-SECRET_KEY = "your_secret_key_here"  # Thay bằng một khóa bí mật thực tế
-ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -72,8 +71,8 @@ def login(
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = jwt.encode(
         {"sub": user.email, "exp": datetime.utcnow() + access_token_expires},
-        SECRET_KEY,
-        algorithm=ALGORITHM,
+        settings.SECRET_KEY,
+        algorithm=settings.ALGORITHM,
     )
     return {"access_token": access_token, "token_type": "bearer"}
 

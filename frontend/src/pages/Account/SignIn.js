@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function SignIn() {
@@ -8,6 +8,7 @@ function SignIn() {
     password: "",
   });
 
+  const navigate = useNavigate();
   const location = useLocation();
   const { state } = location;
   const message = state?.message;

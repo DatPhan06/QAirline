@@ -14,7 +14,7 @@ class BookingCreate(BookingBase):
     """
     Lớp cho việc tạo mới thông tin đặt vé.
     """
-    pass
+    username: str
 
 class BookingUpdate(BookingBase):
     """
