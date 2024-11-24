@@ -1,22 +1,31 @@
 from pydantic import BaseModel
-from datetime import date
-from typing import List
+from datetime import date, datetime
+from typing import Optional
 
 class FlightBase(BaseModel):
     """
     Lớp cơ sở cho thông tin chuyến bay.
     
     Attributes:
-        name (str): Tên chuyến bay.
-        departure (str): Điểm khởi hành.
-        destination (str): Điểm đến.
-        duration (int): Thời gian bay (phút).
+        flight_number (str): Số hiệu chuyến bay.
+        departure_airport (str): Sân bay khởi hành.
+        arrival_airport (str): Sân bay đến.
+        departure_time (datetime): Thời gian khởi hành.
+        arrival_time (datetime): Thời gian đến.
+        flight_duration (time): Thời gian bay.
+        status (str): Trạng thái của chuyến bay.
+        available_seats (int): Số ghế còn trống.
+        price (decimal): Giá vé.
     """
-    name: str
-    departure: str
-    destination: str
-    departureDate: date
-    duration: int
+    flight_number: str
+    departure_airport: str
+    arrival_airport: str
+    departure_time: datetime
+    arrival_time: datetime
+    flight_duration: Optional[datetime]
+    status: Optional[str] = "scheduled"
+    available_seats: Optional[int]
+    price: float
 
 class FlightCreate(FlightBase):
     """
@@ -29,12 +38,9 @@ class Flight(FlightBase):
     Lớp cho thông tin chuyến bay với ID, kế thừa từ FlightBase.
     
     Attributes:
-        id (int): ID của chuyến bay.
+        flight_id (int): ID của chuyến bay.
     """
-    id: int
+    flight_id: int
 
     class Config:
-        """
-        Cấu hình cho lớp Flight.
-        """
-        from_attributes: bool = True
+        orm_mode = True

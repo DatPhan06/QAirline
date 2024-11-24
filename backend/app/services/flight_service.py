@@ -29,7 +29,7 @@ def get_flight(db: Session, flight_id: int) -> models.Flight:
     Returns:
         models.Flight: Đối tượng chuyến bay nếu tìm thấy, ngược lại là None.
     """
-    return db.query(models.Flight).filter(models.Flight.id == flight_id).first()
+    return db.query(models.Flight).filter(models.Flight.flight_id == flight_id).first()
 
 def get_flights(db: Session) -> list[models.Flight]:
     """

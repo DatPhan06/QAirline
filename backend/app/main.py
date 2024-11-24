@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .routers import flights_router, bookings_router, users_router
-from .database import engine, Base
+from .base import Base
+from .database import engine
 import os
 from dotenv import load_dotenv
 

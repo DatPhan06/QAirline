@@ -20,7 +20,8 @@ def create_flight(flight: schemas.FlightCreate, db: Session = Depends(database.g
     Returns:
         schemas.Flight: Thông tin chuyến bay đã được tạo.
     """
-    return services.flight_service.create_flight(db, flight)
+    db_flight = services.flight_service.create_flight(db, flight)
+    return db_flight
 
 @router.get("/{flight_id}", response_model=schemas.Flight)
 def read_flight(flight_id: int, db: Session = Depends(database.get_db)) -> schemas.Flight:
