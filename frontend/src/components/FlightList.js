@@ -43,11 +43,12 @@ const FlightList = () => {
       <h2>Danh sách chuyến bay</h2>
       <ul>
         {flights.map((flight) => (
-          <li key={flight.id}>
-            <h3>{flight.name}</h3>
-            <p>Departure: {flight.departure}</p>
-            <p>Destination: {flight.destination}</p>
-            <p>Duration: {flight.duration} minutes</p>
+          <li key={flight.flight_id}>
+            <h3>{flight.flight_number}</h3>
+            <p>Departure: {flight.departure_airport}</p>
+            <p>Destination: {flight.arrival_airport}</p>
+            <p>Duration: {flight.flight_duration} minutes</p>
+            <p>Price: ${flight.price}</p>
           </li>
         ))}
       </ul>

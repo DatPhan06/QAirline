@@ -29,7 +29,7 @@ class Seat(Base):
     created_at = Column(DateTime, default=datetime.now(timezone.utc))
     updated_at = Column(DateTime, default=datetime.now(timezone.utc), onupdate=datetime.now(timezone.utc))
 
-    # # Relationships
+    # Relationships
     airplane = relationship("Airplane", back_populates="seats")  # Seat belongs to an airplane
-    tickets = relationship("Ticket", back_populates="seat")  # Seat can have many tickets
+    tickets = relationship("Ticket", back_populates="seat")  # Thêm thuộc tính tickets
     booked_tickets = relationship("BookedTicket", back_populates="seat")

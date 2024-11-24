@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 from datetime import datetime, timezone
 from app.base import Base
 
@@ -23,3 +24,6 @@ class News(Base):
     author_id = Column(Integer, ForeignKey("admins.admin_id"), nullable=False)
     created_at = Column(DateTime, default=datetime.now(timezone.utc))
     updated_at = Column(DateTime, default=datetime.now(timezone.utc), onupdate=datetime.now(timezone.utc))
+    
+    # Relationships
+    author = relationship("Admin", back_populates="news")

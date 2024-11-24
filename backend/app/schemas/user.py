@@ -5,7 +5,9 @@ class UserBase(BaseModel):
     Lớp cơ sở cho người dùng.
     """
     username: str
-    email: str
+    email: str    
+    full_name: str
+
 
 class UserCreate(UserBase):
     """
@@ -17,7 +19,7 @@ class User(UserBase):
     """
     Lớp cho người dùng với ID.
     """
-    id: int
+    user_id: int  # Đảm bảo rằng trường này khớp với model User
 
     class Config:
         from_attributes: bool = True

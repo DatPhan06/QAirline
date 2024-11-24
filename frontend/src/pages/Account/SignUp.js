@@ -5,6 +5,7 @@ function SignUp() {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
+    full_name: "",
     password: "",
   });
 
@@ -13,11 +14,17 @@ function SignUp() {
     try {
       await axios.post(
         `${process.env.REACT_APP_API_URL}/users/register`,
-        formData
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       alert("Đăng ký thành công!");
     } catch (error) {
       console.error("Error during sign up:", error);
+      alert("Đăng ký thất bại, vui lòng thử lại.");
     }
   };
 
@@ -38,6 +45,14 @@ function SignUp() {
           placeholder="Email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Họ và tên"
+          value={formData.full_name}
+          onChange={(e) =>
+            setFormData({ ...formData, full_name: e.target.value })
+          }
         />
         <input
           type="password"

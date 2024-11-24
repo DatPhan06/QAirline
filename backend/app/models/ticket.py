@@ -20,10 +20,12 @@ class Ticket(Base):
 
     ticket_id = Column(Integer, primary_key=True, index=True)
     flight_id = Column(Integer, ForeignKey("flights.flight_id"), nullable=False)
+    seat_id = Column(Integer, ForeignKey("seats.seat_id"), nullable=False)  # Thêm khóa ngoại liên kết với bảng seats
     class_type = Column(String(50), nullable=False)  # Ví dụ: 'economy', 'business'
     price = Column(DECIMAL(10, 2), nullable=False)
     status = Column(String(50), default="available")  # Trạng thái vé: 'available', 'sold out', v.v.
 
     # Relationships
     flight = relationship("Flight", back_populates="ticket_types")
+    seat = relationship("Seat", back_populates="tickets")
     booked_tickets = relationship("BookedTicket", back_populates="ticket_type")

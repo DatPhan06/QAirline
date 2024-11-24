@@ -30,6 +30,5 @@ class User(Base):
     updated_at = Column(DateTime, default=datetime.now(timezone.utc), onupdate=datetime.now(timezone.utc))
 
     # Quan hệ
-    tickets = relationship("Ticket", back_populates="user")  # Người dùng có thể đặt nhiều vé
     notifications = relationship("Notification", back_populates="user")  # Người dùng có thể nhận nhiều thông báo
     booked_tickets = relationship("BookedTicket", back_populates="user")  # Người dùng có thể có nhiều vé đã đặt
