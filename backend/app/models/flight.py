@@ -4,6 +4,25 @@ from datetime import datetime, timezone
 from app.base import Base
 
 class Flight(Base):
+    """
+    Lớp đại diện cho chuyến bay trong cơ sở dữ liệu.
+
+    Attributes:
+        flight_id (int): ID của chuyến bay.
+        airplane_id (int): ID của máy bay.
+        flight_number (str): Số hiệu chuyến bay.
+        departure_airport (str): Sân bay khởi hành.
+        arrival_airport (str): Sân bay đến.
+        departure_time (datetime): Thời gian khởi hành.
+        arrival_time (datetime): Thời gian đến.
+        flight_duration (time): Thời gian bay.
+        status (str): Trạng thái của chuyến bay.
+        available_seats (int): Số ghế còn trống.
+        price (decimal): Giá vé.
+        created_at (datetime): Thời gian tạo bản ghi.
+        updated_at (datetime): Thời gian cập nhật bản ghi.
+    """
+
     __tablename__ = "flights"
 
     flight_id = Column(Integer, primary_key=True, index=True)
@@ -20,9 +39,9 @@ class Flight(Base):
     created_at = Column(DateTime, default=datetime.now(timezone.utc))
     updated_at = Column(DateTime, default=datetime.now(timezone.utc), onupdate=datetime.now(timezone.utc))
 
-    # Relationships
-    airplane = relationship("Airplane", back_populates="flights")  # Flight uses one airplane
-    notifications = relationship("Notification", back_populates="flight")  # Notifications related to the flight
-    logs = relationship("FlightLog", back_populates="flight")  # Flight has many logs
-    ticket_types = relationship("Ticket", back_populates="flight")
-    booked_tickets = relationship("BookedTicket", back_populates="flight")
+    # Quan hệ
+    airplane = relationship("Airplane", back_populates="flights")  # Chuyến bay sử dụng một máy bay
+    notifications = relationship("Notification", back_populates="flight")  # Thông báo liên quan đến chuyến bay
+    logs = relationship("FlightLog", back_populates="flight")  # Chuyến bay có nhiều nhật ký
+    ticket_types = relationship("Ticket", back_populates="flight")  # Các loại vé của chuyến bay
+    booked_tickets = relationship("BookedTicket", back_populates="flight")  # Vé đã đặt của chuyến bay
