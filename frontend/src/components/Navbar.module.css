@@ -1,92 +1,133 @@
-/* Navbar.module.css */
-
 /* Tổng thể thanh điều hướng */
 .nav {
-  background-color: #ffffff; /* Màu nền */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
-  padding: 10px 20px;
-  font-family: "Arial", sans-serif;
-  position: sticky; /* Thanh cố định */
   top: 0;
-  z-index: 1000;
+  width: 100%; /* Giảm chiều ngang */
+  z-index: 1000; /* Luôn nằm trên cùng */
+  background: linear-gradient(to bottom, #ffffff, #dfe9f3); 
+  /* border-radius: 0 0 20px 20px;  */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1); /* Bóng mờ */
+  padding: 10px 30px;
+  font-family: "Rokkit", Arial, sans-serif;
+  transition: all 0.3s ease; /* Hiệu ứng mượt */
+}
+
+/* Logo */
+.logo {
+  height: 50px; /* Chiều cao logo */
+  width: auto;
+  display: inline-block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1); /* Phóng to nhẹ khi hover */
+  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2)); /* Thêm bóng đổ */
 }
 
 /* Danh sách menu chính */
 .navList {
   display: flex;
-  justify-content: space-around; /* Giãn đều các mục */
+  justify-content: space-between; /* Giãn đều các mục */
   align-items: center;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* Từng mục menu chính */
+/* Mục menu chính */
 .navItem {
-  position: relative; /* Quan trọng để hiển thị menu con */
-  margin-right: 20px;
+  position: relative;
+  margin: 0 15px; /* Giảm khoảng cách giữa các mục */
 }
 
 .navLink {
-  color: #333; /* Màu chữ */
+  color: #1e88e5; /* Xanh dương nhạt */
+  font-family : "Rokkit";
   text-decoration: none;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 10px 15px;
-  transition: color 0.3s, border-bottom 0.3s;
+  font-size: 16px; /* Giảm kích thước chữ */
+  font-weight: 600;
+  border-radius: 8px; /* Bo góc mềm mại */
+  transition: all 0.3s ease;
 }
 
-/* Hiệu ứng hover trên menu chính */
+/* Hover trên menu chính */
 .navLink:hover {
-  color: #4caf50; /* Màu xanh khi hover */
-  border-bottom: 2px solid #4caf50; /* Gạch chân khi hover */
+  background: rgba(222, 242, 255, 0.8); /* Nền xanh dương nhạt khi hover */
+  color: #1565c0; /* Xanh dương đậm hơn khi hover */
+  transform: translateY(-3px); /* Nhấc lên nhẹ */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Bóng mờ */
 }
 
-/* Kiểu dáng menu con */
+/* Menu con */
 .subMenu {
   display: none; /* Ẩn mặc định */
   position: absolute;
-  top: 100%; /* Menu con hiển thị dưới mục chính */
+  top: 110%; /* Hiển thị ngay dưới menu chính */
   left: 0;
-  background-color: #f9f9f9; /* Màu nền menu con */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
-  border-radius: 5px; /* Bo góc */
-  padding: 10px;
-  z-index: 1000;
-  min-width: 200px; /* Chiều rộng tối thiểu */
-  flex-direction: column;
+  background: #ffffff; /* Nền trắng */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1); /* Bóng mờ */
+  border-radius: 12px; /* Bo góc mềm mại */
+  padding: 15px 0;
+  z-index: 999;
+  min-width: 240px; /* Độ rộng tối thiểu */
+  display: flex;
+  flex-direction: column; /* Hiển thị các mục dọc */
+  opacity: 0; /* Hiệu ứng mờ dần */
+  visibility: hidden;
+  transition: all 0.3s ease;
 }
 
 /* Hiển thị menu con khi hover */
 .navItem:hover .subMenu {
-  display: block; /* Hiển thị menu con */
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(5px); /* Di chuyển nhẹ khi hiển thị */
 }
 
-/* Danh sách bên trong menu con */
+/* Mục con */
 .subMenuItem {
-  margin: 5px 0;
+  margin: 4px 0;
 }
 
 .subMenuLink {
-  display: block;
-  padding: 8px 10px;
-  color: #333; /* Màu chữ */
+  color: #1565c0; /* Xanh dương đậm */
   text-decoration: none;
-  font-size: 14px;
-  transition: color 0.3s, background-color 0.3s;
+  font-size: 13px; /* Kích thước chữ nhỏ hơn */
+  padding: 8px 15px; /* Giảm padding */
+  border-radius: 6px; /* Bo góc nhẹ */
+  transition: all 0.3s ease;
 }
 
-/* Hiệu ứng hover trên menu con */
+/* Hover trên mục con */
 .subMenuLink:hover {
-  color: #ffffff;
-  background-color: #4caf50; /* Màu nền khi hover */
-  border-radius: 3px;
+  background-color: #e3f2fd; /* Nền xanh dương nhạt hơn */
+  color: #0d47a1; /* Chữ xanh dương đậm */
 }
 
-/* Responsive cho màn hình nhỏ */
+/* Hiệu ứng thêm biểu tượng */
+.subMenuLink::before {
+  content: '→'; /* Biểu tượng mũi tên */
+  font-size: 12px;
+  color: #90caf9; /* Màu mờ nhạt */
+  margin-right: 8px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.subMenuLink:hover::before {
+  opacity: 1; /* Hiển thị biểu tượng khi hover */
+  color: #1e88e5; /* Màu xanh dương */
+}
+
+/* Responsive */
 @media (max-width: 768px) {
+  .nav {
+    width: 100%; /* Phủ toàn màn hình khi ở kích thước nhỏ */
+    border-radius: 0; /* Loại bỏ bo góc */
+  }
+
   .navList {
-    flex-direction: column; /* Menu chính hiển thị dọc */
+    flex-direction: column; /* Hiển thị dọc */
     align-items: flex-start;
   }
 
@@ -95,8 +136,10 @@
   }
 
   .subMenu {
-    position: static; /* Menu con hiển thị bên dưới mục chính */
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
     box-shadow: none;
-    min-width: 100%;
   }
 }

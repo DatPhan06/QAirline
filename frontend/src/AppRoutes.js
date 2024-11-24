@@ -9,7 +9,7 @@ import Booking from "./pages/Booking/Booking";
 import BookTicket from "./pages/Booking/BookTicket";
 import ManageTicket from "./pages/Booking/ManageTicket";
 import PaymentGuide from "./pages/Booking/PaymentGuide";
-import AddOnServices from "./pages/Booking/AddOnServices";
+import CancellTicket from "./pages/Booking/CancellTicket";
 
 // Info pages
 import Info from "./pages/Info/Info";
@@ -65,7 +65,7 @@ function AppRoutes() {
         }
       />
       <Route path="/booking/payment-guide" element={<PaymentGuide />} />
-      <Route path="/booking/add-on-services" element={<AddOnServices />} />
+      <Route path="/booking/cancell-ticket" element={<CancellTicket/>} />
 
       {/* Info */}
       <Route path="/info" element={<Info />} />

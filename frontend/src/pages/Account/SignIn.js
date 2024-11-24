@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import styles from "./SignIn.module.css";
 
 function SignIn() {
   const [formData, setFormData] = useState({
@@ -22,7 +23,6 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Tạo dữ liệu dạng form-encoded
     const params = new URLSearchParams();
     params.append("username", formData.username);
     params.append("password", formData.password);
@@ -39,7 +39,6 @@ function SignIn() {
       );
       localStorage.setItem("token", response.data.access_token);
       alert("Đăng nhập thành công!");
-      // Chuyển hướng đến trang hồ sơ cá nhân hoặc trang mong muốn
       navigate("/account/profile");
     } catch (error) {
       console.error("Error during sign in:", error);
@@ -47,10 +46,19 @@ function SignIn() {
   };
 
   return (
-    <div>
-      <h1>Đăng Nhập</h1>
-      {/* {message && <p>{message}</p>} */}
-      <form onSubmit={handleSubmit}>
+    <div className={styles.signInContainer}>
+
+      {/* Form */}
+      <form onSubmit={handleSubmit} className={styles.signInForm}>
+        {/* Logo */}
+      <img
+        src="/images/logo.png" 
+        alt="Logo"
+        className={styles.logo}
+      />
+
+      {/* Tiêu đề */}
+      <h1 className={styles.title}>Đăng Nhập</h1>
         <input
           type="text"
           placeholder="Email hoặc Tên đăng nhập"
@@ -58,6 +66,7 @@ function SignIn() {
           onChange={(e) =>
             setFormData({ ...formData, username: e.target.value })
           }
+          className={styles.inputField}
         />
         <input
           type="password"
@@ -66,8 +75,14 @@ function SignIn() {
           onChange={(e) =>
             setFormData({ ...formData, password: e.target.value })
           }
+          className={styles.inputField}
         />
-        <button type="submit">Đăng Nhập</button>
+        <button type="submit" className={styles.submitButton}>
+          Đăng Nhập
+        </button>
+        <a href="#" className={styles.link}>
+          Quên mật khẩu?
+        </a>
       </form>
     </div>
   );

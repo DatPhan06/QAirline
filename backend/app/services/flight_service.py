@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from typing import List  # Add this import
 from .. import models, schemas
 
 def create_flight(db: Session, flight: schemas.FlightCreate) -> models.Flight:
@@ -31,7 +32,7 @@ def get_flight(db: Session, flight_id: int) -> models.Flight:
     """
     return db.query(models.Flight).filter(models.Flight.flight_id == flight_id).first()
 
-def get_flights(db: Session) -> list[models.Flight]:
+def get_flights(db: Session) -> List[models.Flight]:
     """
     Lấy danh sách tất cả các chuyến bay.
 
