@@ -4,6 +4,23 @@ from datetime import datetime, timezone
 from app.base import Base
 
 class Airplane(Base):
+    """
+    Mô hình máy bay.
+    Thuộc tính:
+        airplane_id (int): ID của máy bay.
+        model (str): Mô hình của máy bay.
+        manufacturer (str): Nhà sản xuất của máy bay.
+        seat_capacity (int): Tổng số ghế.
+        range_km (int, optional): Tầm bay tính bằng km.
+        year_of_manufacture (int, optional): Năm sản xuất.
+        maintenance_status (str, optional): Trạng thái bảo trì (ví dụ: 'up-to-date').
+        status (str, optional): Trạng thái hiện tại (ví dụ: 'active').
+        created_at (datetime): Thời gian tạo bản ghi.
+        updated_at (datetime): Thời gian cập nhật bản ghi.
+    Quan hệ:
+        seats (relationship): Máy bay có nhiều ghế.
+        flights (relationship): Máy bay phục vụ nhiều chuyến bay.
+    """
     __tablename__ = "airplanes"
 
     airplane_id = Column(Integer, primary_key=True, index=True)
