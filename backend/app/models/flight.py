@@ -1,26 +1,28 @@
-from sqlalchemy import Column, Integer, String, Date
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, DECIMAL, Time
 from sqlalchemy.orm import relationship
-from ..database import Base
+from datetime import datetime, timezone
+from app.base import Base
 
 class Flight(Base):
-    """
-    Mô hình chuyến bay.
+    __tablename__ = "flights"
 
-    Attributes:
-        id (int): Mã chuyến bay.
-        name (str): Tên chuyến bay.
-        departure (str): Điểm khởi hành.
-        destination (str): Điểm đến.
-        duration (int): Thời gian bay.
-        bookings (relationship): Danh sách đặt chỗ liên quan đến chuyến bay.
-    """
-    __tablename__ = 'flights'
+    flight_id = Column(Integer, primary_key=True, index=True)
+    airplane_id = Column(Integer, ForeignKey("airplanes.airplane_id"), nullable=False)
+    flight_number = Column(String(20), unique=True, nullable=False)
+    departure_airport = Column(String(100), nullable=False)
+    arrival_airport = Column(String(100), nullable=False)
+    departure_time = Column(DateTime, nullable=False)
+    arrival_time = Column(DateTime, nullable=False)
+    flight_duration = Column(Time, nullable=True)
+    status = Column(String(50), default="scheduled")
+    available_seats = Column(Integer, nullable=True)
+    price = Column(DECIMAL(10, 2), nullable=False)
+    created_at = Column(DateTime, default=datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=datetime.now(timezone.utc), onupdate=datetime.now(timezone.utc))
 
-    id: int = Column(Integer, primary_key=True, index=True)
-    name: str = Column(String(255), nullable=False)
-    departure: str = Column(String(255), nullable=False)
-    destination: str = Column(String(255), nullable=False)
-    departureDate: Date = Column(Date)
-    duration: int = Column(Integer, nullable=False)
-
-    bookings = relationship("Booking", back_populates="flight")
+    # Relationships
+    airplane = relationship("Airplane", back_populates="flights")  # Flight uses one airplane
+    notifications = relationship("Notification", back_populates="flight")  # Notifications related to the flight
+    logs = relationship("FlightLog", back_populates="flight")  # Flight has many logs
+    ticket_types = relationship("Ticket", back_populates="flight")
+    booked_tickets = relationship("BookedTicket", back_populates="flight")

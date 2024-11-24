@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from datetime import timedelta, datetime
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-from .. import models, schemas, database
+from .. import models, schemas, database, services
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from ..services.user_service import (
     verify_password,
@@ -78,7 +78,7 @@ def login(
 
 
 @router.get("/me", response_model=schemas.User)
-def read_users_me(current_user: models.User = Depends(database.get_current_user)) -> models.User:
+def read_users_me(current_user: models.User = Depends(services.get_current_user)) -> models.User:
     """
     Lấy thông tin người dùng hiện tại.
 
