@@ -6,8 +6,8 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from app.models import flight, booking, user
-from app.database import Base
+from app.base import Base  # Base là declarative_base() được định nghĩa
+from app.models import *  # Import tất cả các models
 
 # Lấy chuỗi kết nối từ biến môi trường hoặc cấu hình ứng dụng
 from app.config import settings

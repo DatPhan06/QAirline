@@ -6,3 +6,4 @@ from .user_service import (
     get_user_by_email,
     authenticate_user,
 )
+from .auth import get_current_user
