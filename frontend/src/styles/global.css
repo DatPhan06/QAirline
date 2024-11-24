@@ -17,3 +17,20 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+/* Font */
+@font-face {
+  font-family: 'Rokkitt';
+  src: url('../assets/fonts/Londrina_Sketch,Rokkitt/Rokkitt/Rokkitt-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rokkitt';
+  src: url('../assets/fonts/Londrina_Sketch,Rokkitt/Rokkitt/Rokkitt-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+}
+
+

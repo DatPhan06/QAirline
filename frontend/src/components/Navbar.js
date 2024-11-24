@@ -13,15 +13,20 @@ const Navbar = () => {
   return (
     <nav className={styles.nav}>
       <ul className={styles.navList}>
-        <li className={styles.navItem}>
-          <Link to="/" className={styles.navLink}>
-            Home
-          </Link>
-        </li>
+          <li className={styles.navItem}>
+            <Link to="/">
+              <img 
+                src="/images/logo.png" 
+                alt="Logo" 
+                className={styles.logo}
+              />
+            </Link>
+          </li>
+
         {/* Mục Đặt Vé */}
         <li className={styles.navItem}>
           <Link to="/booking" className={styles.navLink}>
-            Đặt Vé
+            ĐẶT VÉ
           </Link>
           <ul className={styles.subMenu}>
             <li className={styles.subMenuItem}>
@@ -36,15 +41,15 @@ const Navbar = () => {
             </li>
             <li className={styles.subMenuItem}>
               <Link to="/booking/payment-guide" className={styles.subMenuLink}>
-                Hướng Dẫn Mua Vé & Thanh Toán
+                Hướng Dẫn 
               </Link>
             </li>
             <li className={styles.subMenuItem}>
               <Link
-                to="/booking/add-on-services"
+                to="/booking/cancell-ticket"
                 className={styles.subMenuLink}
               >
-                Dịch Vụ Bổ Trợ
+                Đổi vé & Hủy vé
               </Link>
             </li>
           </ul>
@@ -53,7 +58,7 @@ const Navbar = () => {
         {/* Mục Thông Tin */}
         <li className={styles.navItem}>
           <Link to="/info" className={styles.navLink}>
-            Thông Tin Hành Trình
+            THÔNG TIN HÀNH TRÌNH
           </Link>
           <ul className={styles.subMenu}>
             <li className={styles.subMenuItem}>
@@ -95,7 +100,7 @@ const Navbar = () => {
         {/* Mục Khám Phá */}
         <li className={styles.navItem}>
           <Link to="/explore" className={styles.navLink}>
-            Khám Phá
+            KHÁM PHÁ
           </Link>
           <ul className={styles.subMenu}>
             <li className={styles.subMenuItem}>

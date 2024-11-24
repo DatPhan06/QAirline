@@ -1,7 +1,7 @@
 import React from "react";
 
 const AddOnServices = () => {
-  return <h1>Trang Dịch Vụ Bổ Trợ</h1>;
+  return <h1>Trang Đổi vé & Hủy vé</h1>;
 };
 
 export default AddOnServices;
