@@ -15,27 +15,80 @@
   filter: brightness(0.8); /* Làm mờ nền */
 }
 
+/*Title header*/
+/* Hero Header Styling */
+.hero h1 {
+  position: absolute; /* Đặt vị trí tuyệt đối */
+  top: 30px; /* Cách mép trên 30px */
+  left: 50%; /* Căn giữa theo chiều ngang */
+  transform: translateX(-50%); /* Căn giữa hoàn toàn */
+  font-size: 64px; /* Kích thước lớn, nổi bật */
+  font-weight: 700; /* Đậm hơn để tạo sự sang trọng */
+  font-family: "Playfair Display", serif; /* Font serif cao cấp */
+  color: #ffd700; /* Màu vàng ánh kim */
+  letter-spacing: 4px; /* Tăng khoảng cách giữa các ký tự */
+  text-align: center; /* Căn giữa chữ */
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), /* Bóng mờ nhẹ */
+               0 0 20px rgba(255, 215, 0, 0.8); /* Ánh sáng vàng nổi bật */
+  z-index: 10; /* Hiển thị trên các lớp khác */
+  transition: all 0.4s ease-in-out; /* Hiệu ứng chuyển đổi mượt */
+}
+
+/* Hover Effect */
+.hero h1:hover {
+  transform: translateX(-50%) scale(1.05); /* Phóng to nhẹ khi hover */
+  color: #fff8dc; /* Màu trắng ngà */
+  text-shadow: 0 6px 15px rgba(0, 0, 0, 0.6), 
+               0 0 30px rgba(255, 215, 0, 1); /* Bóng mờ mạnh hơn */
+}
+
+/* Decorative Line Under Header */
+.hero h1::after {
+  content: ""; /* Thêm một đường kẻ bên dưới */
+  display: block;
+  width: 120px; /* Độ dài đường kẻ */
+  height: 4px; /* Độ dày */
+  background: linear-gradient(to right, #ffd700, #fff8dc); /* Gradient ánh kim */
+  margin: 15px auto 0; /* Căn giữa và cách tiêu đề 15px */
+  border-radius: 2px; /* Bo góc nhẹ */
+  transition: width 0.4s ease-in-out; /* Hiệu ứng khi hover */
+}
+
+/* Hover Effect for Decorative Line */
+.hero h1:hover::after {
+  width: 180px; /* Tăng chiều dài khi hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 48px; /* Giảm kích thước trên thiết bị nhỏ */
+    top: 20px; /* Cách mép trên nhỏ hơn */
+  }
+
+  .hero h1::after {
+    width: 80px; /* Đường kẻ ngắn hơn trên thiết bị nhỏ */
+  }
+}
+
 /* Hero Overlay */
 .heroOverlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 40%;
+  left: 0;
+  transform: translateY(-50%);
   text-align: center;
-  padding: 40px 80px; /* Tăng padding để nội dung thoáng hơn */
+  padding-left: 80px; /* Tăng padding để nội dung thoáng hơn */
   border-radius: 30px; /* Bo góc mềm mại hơn */
   color: #fff;
   z-index: 2;
-
-  max-width: 80%; /* Giới hạn chiều rộng */
+  max-width: 50%; /* Giới hạn chiều rộng */
   transition: all 0.4s ease; /* Hiệu ứng mượt khi xuất hiện */
 }
 
 
 /* Description Box */
 .descriptionBox {
-  max-width: 600px;
-  margin: 0 auto;
   opacity: 0.9; /* Làm mờ nhạt để tạo sự tinh tế */
 }
 
@@ -268,16 +321,13 @@
 
 /* Flight List Section */
 .flightListSection {
+  position: absolute; /* Đặt vị trí tuyệt đối để dễ canh chỉnh */
+  top: 60%; /* Căn giữa theo chiều dọc */
+  right: 120px; /* Đưa về sát mép phải */
+  transform: translateY(-50%); /* Căn giữa theo chiều dọc bằng transform */
   gap: 30px;
-  width: 90%;
-  max-width: 1200px;
-  position: relative;
+  width: 45%;
   z-index: 1; /* Nội dung phía trên overlay */
-  background: rgba(255, 255, 255, 0.1); /* Nền trắng mờ */
-  padding: 30px;
-  border-radius: 15px; /* Bo góc mềm mại */
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3); /* Bóng mờ */
-  backdrop-filter: blur(5px); /* Hiệu ứng làm mờ phía sau */
 }
 
 /* Responsive Adjustments */
