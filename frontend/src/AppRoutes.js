@@ -30,6 +30,7 @@ import FlightExperience from "./pages/Explore/FlightExperience";
 import QAirline from "./pages/QAirline/QAirline";
 import About from "./pages/QAirline/About";
 import News from "./pages/QAirline/News";
+import GeneralInfo from "./pages/QAirline/GeneralInfo";
 
 // Account pages
 import Account from "./pages/Account/Account";
@@ -65,7 +66,7 @@ function AppRoutes() {
         }
       />
       <Route path="/booking/payment-guide" element={<PaymentGuide />} />
-      <Route path="/booking/cancel-ticket" element={<CancelTicket/>} />
+      <Route path="/booking/cancel-ticket" element={<CancelTicket />} />
 
       {/* Info */}
       <Route path="/info" element={<Info />} />
@@ -126,6 +127,7 @@ function AppRoutes() {
 
       {/* QAirline */}
       <Route path="/qairline" element={<QAirline />} />
+      <Route path="/info/general" element={<GeneralInfo />} />
       <Route path="/qairline/about" element={<About />} />
       <Route path="/qairline/news" element={<News />} />
 

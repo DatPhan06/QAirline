@@ -13,15 +13,11 @@ const Navbar = () => {
   return (
     <nav className={styles.nav}>
       <ul className={styles.navList}>
-          <li className={styles.navItem}>
-            <Link to="/">
-              <img 
-                src="/images/ylogo.png" 
-                alt="Logo" 
-                className={styles.logo}
-              />
-            </Link>
-          </li>
+        <li className={styles.navItem}>
+          <Link to="/">
+            <img src="/images/ylogo.png" alt="Logo" className={styles.logo} />
+          </Link>
+        </li>
 
         {/* Mục Đặt Vé */}
         <li className={styles.navItem}>
@@ -41,14 +37,11 @@ const Navbar = () => {
             </li>
             <li className={styles.subMenuItem}>
               <Link to="/booking/payment-guide" className={styles.subMenuLink}>
-                Hướng Dẫn 
+                Hướng Dẫn
               </Link>
             </li>
             <li className={styles.subMenuItem}>
-              <Link
-                to="/booking/cancell-ticket"
-                className={styles.subMenuLink}
-              >
+              <Link to="/booking/cancell-ticket" className={styles.subMenuLink}>
                 Đổi vé & Hủy vé
               </Link>
             </li>
@@ -130,6 +123,11 @@ const Navbar = () => {
             QAirline
           </Link>
           <ul className={styles.subMenu}>
+            <li className={styles.subMenuItem}>
+              <Link to="/info/general" className={styles.subMenuLink}>
+                Thông Tin Chung
+              </Link>
+            </li>
             <li className={styles.subMenuItem}>
               <Link to="/qairline/about" className={styles.subMenuLink}>
                 Giới Thiệu
