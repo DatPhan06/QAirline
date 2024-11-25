@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import bcryptjs from "bcryptjs"; // Ensure bcryptjs is installed
 import axios from "axios";
 import styles from "./SignIn.module.css";
 
@@ -24,11 +23,9 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const hashedPassword = await bcryptjs.hash(formData.password, 10);
-
     const params = new URLSearchParams();
     params.append("username", formData.username);
-    params.append("password", hashedPassword);
+    params.append("password", formData.password);
 
     try {
       const response = await axios.post(

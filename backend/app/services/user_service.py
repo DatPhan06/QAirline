@@ -15,7 +15,17 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     Returns:
         bool: True nếu mật khẩu khớp, ngược lại False.
     """
-    return plain_password == hashed_password
+    return pwd_context.verify(plain_password, hashed_password)
+
+def get_password_hash(password: str) -> str:
+    """
+    Băm mật khẩu.
+    Args:
+        password (str): Mật khẩu gốc.
+    Returns:
+        str: Mật khẩu đã được băm.
+    """
+    return pwd_context.hash(password)
 
 def get_user_by_email(db: Session, email: str) -> models.User:
     """
@@ -30,7 +40,7 @@ def get_user_by_email(db: Session, email: str) -> models.User:
     """
     return db.query(models.User).filter(models.User.email == email).first()
 
-def authenticate_user(db: Session, email: str, hashed_password: str) -> models.User:
+def authenticate_user(db: Session, email: str, password: str) -> models.User:
     """
     Xác thực người dùng.
 
@@ -45,6 +55,6 @@ def authenticate_user(db: Session, email: str, hashed_password: str) -> models.U
     user = get_user_by_email(db, email)
     if not user:
         return False
-    if user.hashed_password != hashed_password:
+    if not verify_password(password, user.hashed_password):
         return False
     return user

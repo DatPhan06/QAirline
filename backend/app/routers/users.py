@@ -7,6 +7,7 @@ from .. import models, schemas, database, services
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from ..services.user_service import (
     verify_password,
+    get_password_hash,
     get_user_by_email,
     authenticate_user,
 )
@@ -36,11 +37,12 @@ def register(user: schemas.UserCreate, db: Session = Depends(database.get_db)) -
     """
     if get_user_by_email(db, user.email):
         raise HTTPException(status_code=400, detail="Email đã được đăng ký")
+    hashed_password = get_password_hash(user.password)
     new_user = models.User(
         username=user.username,
         email=user.email,
         full_name=user.full_name,
-        hashed_password=user.password,
+        hashed_password=hashed_password,
     )
     db.add(new_user)
     db.commit()
