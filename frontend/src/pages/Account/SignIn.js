@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import bcryptjs from "bcryptjs"; // Ensure bcryptjs is installed
 import axios from "axios";
 import styles from "./SignIn.module.css";
 
@@ -23,9 +24,11 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const hashedPassword = await bcryptjs.hash(formData.password, 10);
+
     const params = new URLSearchParams();
     params.append("username", formData.username);
-    params.append("password", formData.password);
+    params.append("password", hashedPassword);
 
     try {
       const response = await axios.post(
@@ -47,18 +50,13 @@ function SignIn() {
 
   return (
     <div className={styles.signInContainer}>
-
       {/* Form */}
       <form onSubmit={handleSubmit} className={styles.signInForm}>
         {/* Logo */}
-      <img
-        src="/images/logo.png" 
-        alt="Logo"
-        className={styles.logo}
-      />
+        <img src="/images/logo.png" alt="Logo" className={styles.logo} />
 
-      {/* Tiêu đề */}
-      <h1 className={styles.title}>Đăng Nhập</h1>
+        {/* Tiêu đề */}
+        <h1 className={styles.title}>Đăng Nhập</h1>
         <input
           type="text"
           placeholder="Email hoặc Tên đăng nhập"
