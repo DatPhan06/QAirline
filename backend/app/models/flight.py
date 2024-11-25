@@ -28,8 +28,8 @@ class Flight(Base):
     flight_id = Column(Integer, primary_key=True, index=True)
     airplane_id = Column(Integer, ForeignKey("airplanes.airplane_id"), nullable=False)
     flight_number = Column(String(20), unique=True, nullable=False)
-    departure_airport = Column(String(100), nullable=False)
-    arrival_airport = Column(String(100), nullable=False)
+    departure_airport_id = Column(Integer, ForeignKey("airports.airport_id"), nullable=False)
+    arrival_airport_id = Column(Integer, ForeignKey("airports.airport_id"), nullable=False)
     departure_time = Column(DateTime, nullable=False)
     arrival_time = Column(DateTime, nullable=False)
     flight_duration = Column(Time, nullable=True)
@@ -41,6 +41,8 @@ class Flight(Base):
 
     # Quan hệ
     airplane = relationship("Airplane", back_populates="flights")  # Chuyến bay sử dụng một máy bay
+    departure_airport = relationship("Airport", foreign_keys=[departure_airport_id], back_populates="departure_flights")
+    arrival_airport = relationship("Airport", foreign_keys=[arrival_airport_id], back_populates="arrival_flights")
     notifications = relationship("Notification", back_populates="flight")  # Thông báo liên quan đến chuyến bay
     logs = relationship("FlightLog", back_populates="flight")  # Chuyến bay có nhiều nhật ký
     ticket_types = relationship("Ticket", back_populates="flight")  # Các loại vé của chuyến bay
