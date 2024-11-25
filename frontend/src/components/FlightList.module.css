@@ -1,65 +1,138 @@
-/* Tổng thể container */
-.flightListContainer {
-  width: 90%;
-  padding: 20px 40px;
-  text-align: center;
-  border-radius: 20px;
+/* Flight List Container */
+* {
+  box-sizing: border-box;
 }
 
-/* Danh sách chuyến bay */
+
+.flightListContainer {
+  background: linear-gradient(145deg, #ffffff, #fbfbfb); /* Hiệu ứng gradient nền sáng hơn */
+  border-radius: 20px; /* Bo góc lớn hơn */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1), inset 0 -5px 10px rgba(0, 0, 0, 0.05); /* Bóng mờ nổi bật hơn */
+  padding: 30px;
+  width: 100%;
+  margin: 20px auto; /* Căn giữa container với khoảng cách */
+  font-family: "Arial", sans-serif;
+}
+
+/* Section Title */
+.sectionTitle {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #003f82; /* Màu xanh đậm sang trọng */
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.sectionTitle::after {
+  content: "";
+  display: block;
+  width: 200px;
+  height: 4px;
+  background: #ffd54f; /* Thanh nhấn vàng */
+  margin: 10px auto;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bóng nhẹ */
+}
+
+/* Flight List */
 .flightList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+
   width: 100%;
 }
 
-/* Card chuyến bay dưới dạng thanh ngang */
+/* Flight Card */
 .flightCard {
-  display: flex; /* Hiển thị các nội dung trong card ngang */
-  align-items: center;
-  justify-content: space-between;
-  background: #ffffff; /* Nền trắng */
-  border-radius: 8px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* Bóng đổ */
-  padding: 15px 20px;
-  margin-bottom: 15px; /* Khoảng cách giữa các hàng */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  background: linear-gradient(145deg, #ffffff, #d9eaff); /* Nền gradient sáng hơn */
+  border-left: 6px solid #ffd54f; /* Dải màu vàng bên trái */
+  border-radius: 15px; /* Bo góc mềm mại */
+  padding: 20px 25px;
+  margin-bottom: 20px; /* Khoảng cách giữa các thẻ */
+  display: flex;
+  flex-direction: row; /* Sắp xếp nội dung trên một dòng */
+  align-items: center; /* Căn giữa nội dung theo chiều dọc */
+  justify-content: space-between; /* Giãn cách đều các nội dung */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.8); /* Bóng nổi bật hơn */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng hover */
 }
 
-/* Hover effect cho card */
 .flightCard:hover {
-  transform: translateY(-3px); /* Nhấc lên nhẹ khi hover */
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Bóng lớn hơn */
+  transform: scale(1.03); /* Phóng to nhẹ khi hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Bóng nổi rõ hơn khi hover */
 }
 
 /* Flight Number */
 .flightNumber {
   font-size: 20px;
   font-weight: bold;
-  color: #1e88e5;
+  color: #003f82; /* Xanh đậm */
+  margin-right: 20px; /* Khoảng cách với các thông tin khác */
 }
 
-/* Chi tiết chuyến bay */
+/* Flight Details */
 .flightDetails {
   font-size: 16px;
-  color: #555;
-  margin: 0 10px; /* Khoảng cách giữa các mục */
+  color: #555555; /* Màu xám cho chi tiết */
+  margin: 0 10px; /* Khoảng cách ngang giữa các mục */
+  white-space: nowrap; /* Không cho phép xuống dòng */
 }
 
 .flightDetails span {
   font-weight: bold;
-  color: #1565c0;
+  color: #003f82; /* Xanh đậm cho nhãn */
 }
 
-/* Responsive */
+/* No Flights Message */
+.noFlights {
+  text-align: center;
+  font-size: 18px;
+  color: #555555;
+  margin-top: 20px;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
+  .flightListContainer {
+    padding: 20px;
+  }
+
   .flightCard {
-    flex-direction: column; /* Hiển thị dọc trên màn hình nhỏ */
-    align-items: flex-start;
+    padding: 15px 20px;
+    flex-direction: column; /* Chuyển sang dạng cột trên màn hình nhỏ */
+    align-items: flex-start; /* Căn nội dung về bên trái */
+  }
+
+  .flightNumber {
+    font-size: 18px;
+    margin-bottom: 10px; /* Tạo khoảng cách giữa flightNumber và các thông tin khác */
   }
 
   .flightDetails {
-    margin: 5px 0;
+    font-size: 14px;
+    margin: 5px 0; /* Tạo khoảng cách dọc giữa các thông tin */
   }
+}
+
+/* Animation */
+.flightCard {
+  position: relative;
+  overflow: hidden;
+}
+
+.flightCard::before {
+  width: 100px;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: skewX(-30deg);
+  transition: left 0.5s ease;
+}
+
+.flightCard:hover::before {
+  left: 100%;
 }
