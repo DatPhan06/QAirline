@@ -6,7 +6,7 @@
   align-items: center;
   background-color: #333333; /* Dark background */
   padding: 10px 20px;
-  font-family: Arial, sans-serif;
+  font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
 .navList {
@@ -24,7 +24,7 @@
 }
 
 .navLink {
-  color: white; /* White text */
+  color: rgb(231, 225, 225); /* White text */
   text-decoration: none;
   font-size: 14px;
   font-weight: bold;
@@ -33,6 +33,7 @@
   display: block;
   transition: color 0.3s ease, background-color 0.3s ease;
   border-radius: 4px;
+  margin-right: 50px;
 }
 
 .navLink:hover {
@@ -42,7 +43,8 @@
 
 .logo {
   height: 40px;
-  margin-right: auto; /* Push logo to the left */
+  margin-right: 120px; /* Push logo to the left */
+  margin-left: 20px;
 }
 
 /* Submenu styles */
@@ -50,12 +52,12 @@
   display: none;
   position: absolute;
   top: 100%;
+  width: 100%;
   left: 0;
   background-color: #444444; /* Slightly lighter than the navbar */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   list-style: none;
-  margin: 0;
-  padding: 10px 0;
+  padding: 10px 10px;
   z-index: 1000;
   border-radius: 4px;
 }
