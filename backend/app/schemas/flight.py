@@ -44,3 +44,14 @@ class Flight(FlightBase):
 
     class Config:
         orm_mode = True
+
+class FlightResponse(BaseModel):
+    flight_id: int
+    flight_number: str
+    departure_airport: int
+    arrival_airport: int
+    departure_time: str
+    arrival_time: str
+    flight_duration: str
+    available_seats: Optional[int]
+    price: float

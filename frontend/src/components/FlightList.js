@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { getFlights } from "../services/api";
 import styles from "./FlightList.module.css";
 
-
 /**
  * Component hiển thị danh sách các chuyến bay.
  * Sử dụng hook useEffect để gọi API lấy dữ liệu chuyến bay khi component được render.
@@ -42,22 +41,23 @@ const FlightList = () => {
         <p className={styles.noFlights}>Hiện tại không có chuyến bay nào.</p>
       ) : (
         <ul className={styles.flightList}>
-  {flights.map((flight) => (
-    <li key={flight.flight_id} className={styles.flightCard}>
-      <span className={styles.flightNumber}>{flight.flight_number}</span>
-      <p className={styles.flightDetails}>
-        <span>Departure:</span> {flight.departure_airport}
-      </p>
-      <p className={styles.flightDetails}>
-        <span>Destination:</span> {flight.arrival_airport}
-      </p>
-      <p className={styles.flightDetails}>
-        <span>Duration:</span> {flight.flight_duration} minutes
-      </p>
-    </li>
-  ))}
-</ul>
-
+          {flights.map((flight) => (
+            <li key={flight.flight_id} className={styles.flightCard}>
+              <span className={styles.flightNumber}>
+                {flight.flight_number}
+              </span>
+              <p className={styles.flightDetails}>
+                <span>Departure:</span> {flight.departure_airport}
+              </p>
+              <p className={styles.flightDetails}>
+                <span>Destination:</span> {flight.arrival_airport}
+              </p>
+              <p className={styles.flightDetails}>
+                <span>Duration:</span> {flight.flight_duration} minutes
+              </p>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );

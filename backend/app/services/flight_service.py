@@ -1,6 +1,8 @@
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from typing import List  # Add this import
 from .. import models, schemas
+
 
 def create_flight(db: Session, flight: schemas.FlightCreate) -> models.Flight:
     """
@@ -42,4 +44,22 @@ def get_flights(db: Session) -> List[models.Flight]:
     Returns:
         list[models.Flight]: Danh sách các chuyến bay.
     """
-    return db.query(models.Flight).all()
+    flights = db.query(models.Flight).all()
+    try:
+        response = [
+            schemas.FlightResponse(
+                flight_id=flight.flight_id,
+                flight_number=flight.flight_number,
+                departure_airport=flight.departure_airport.airport_id,
+                arrival_airport=flight.arrival_airport.airport_id,
+                departure_time=flight.departure_time.strftime("%Y-%m-%d %H:%M:%S"),
+                arrival_time=flight.arrival_time.strftime("%Y-%m-%d %H:%M:%S"),
+                flight_duration=str(flight.flight_duration),
+                available_seats=flight.available_seats,
+                price=flight.price,
+            )
+            for flight in flights
+        ]
+        return response
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
