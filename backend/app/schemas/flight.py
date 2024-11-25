@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import date, datetime
+from datetime import date, datetime, time, timedelta
 from typing import Optional
 
 class FlightBase(BaseModel):
@@ -22,7 +22,7 @@ class FlightBase(BaseModel):
     arrival_airport: str
     departure_time: datetime
     arrival_time: datetime
-    flight_duration: Optional[datetime]
+    flight_duration: Optional[time]
     status: Optional[str] = "scheduled"
     available_seats: Optional[int]
     price: float

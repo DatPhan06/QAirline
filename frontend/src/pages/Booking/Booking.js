@@ -11,19 +11,19 @@ const Booking = () => {
       <br></br>
       <br></br>
       <div className={styles.bookingSections}>
-        <Link to="/booking/mua-ve" className={styles.section}>
+        <Link to="/booking/book-ticket" className={styles.section}>
           <h2>Mua Vé</h2>
           <p>Chọn chuyến bay và đặt vé dễ dàng.</p>
         </Link>
-        <Link to="/booking/huong-dan" className={styles.section}>
+        <Link to="/booking/payment-guide" className={styles.section}>
           <h2>Hướng Dẫn Thanh Toán & Mua Vé</h2>
           <p>Các bước đơn giản để mua vé và thanh toán an toàn.</p>
         </Link>
-        <Link to="/booking/doi-huy-ve" className={styles.section}>
+        <Link to="/booking/cancel-ticket" className={styles.section}>
           <h2>Đổi & Hủy Vé</h2>
           <p>Xử lý các thay đổi hoặc hủy vé nhanh chóng.</p>
         </Link>
-        <Link to="/booking/quan-ly-ve" className={styles.section}>
+        <Link to="/booking/manage-ticket" className={styles.section}>
           <h2>Quản Lý Vé</h2>
           <p>Theo dõi và quản lý thông tin vé của bạn.</p>
         </Link>
