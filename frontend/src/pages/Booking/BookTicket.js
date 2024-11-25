@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import FlightList from "../../components/FlightList";
+import { getFlights } from "../../services/api";
 
 const BookTicket = () => {
+  const navigate = useNavigate();
+
   const [tripType, setTripType] = useState("one-way");
-  const [departure, setDeparture] = useState("");
-  const [destination, setDestination] = useState("");
-  const [departureDate, setDepartureDate] = useState("");
-  const [returnDate, setReturnDate] = useState("");
-  const [adults, setAdults] = useState(1);
-  const [children, setChildren] = useState(0);
+  const [departure_airport, setDeparture_airport] = useState("");
+  const [arrival_airport, setArrival_airport] = useState("");
+  const [departure_time, setDeparture_time] = useState("");
+  const [arrival_time, setArrival_time] = useState("");
+  const [passengers, setPassengers] = useState(1);
 
   const [flights, setFlights] = useState([]);
   const [user, setUser] = useState(null); 
@@ -40,8 +43,9 @@ const BookTicket = () => {
   useEffect(() => {
     const fetchFlights = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/flights/`);
-        setFlights(response.data);
+        const response = await getFlights();
+        console.log(response)
+        setFlights(response);
       } catch (error) {
         console.error("Error fetching flights:", error);
       }
@@ -50,51 +54,54 @@ const BookTicket = () => {
     fetchFlights();
   }, []);
 
+  var matchingFlight = [];
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!user) {
       alert("Vui lòng đăng nhập trước khi đặt vé.");
+      navigate("/account/signin");
       return;
     }
 
     // Lọc chuyến bay phù hợp
-    const matchingFlight = flights.find(
+    matchingFlight = flights.find(
       (flight) =>
-        flight.departure === departure &&
-        flight.destination === destination &&
-        flight.departureDate === departureDate
+        flight.departure_airport === departure_airport &&
+        flight.arrival_airport === arrival_airport &&
+        flight.departure_time.split(' ')[0] === departure_time
     );
 
     if (!matchingFlight) {
       alert("Không tìm thấy chuyến bay phù hợp.");
       return;
     }
+    
 
-    const bookingData = JSON.stringify(
-      {
-        flight_id: matchingFlight.id,
-        user_id: user.id,
-        username: user.username,
-        booking_date: new Date().toISOString().split('T')[0],
-      }
-    );
-    console.log(bookingData)
-    try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/bookings/`, 
-        bookingData, 
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      alert("Vé của bạn đã được đặt thành công!");
-    } catch (error) {
-      console.error("Error creating booking:", error);
-      alert("Đặt vé thất bại, vui lòng thử lại.");
-    }
+    // const bookingData = JSON.stringify(
+    //   {
+    //     flight_id: matchingFlight.id,
+    //     user_id: user.id,
+    //     username: user.username,
+    //     booking_date: new Date().toISOString().split('T')[0],
+    //   }
+    // );
+    // console.log(bookingData)
+    // try {
+    //   await axios.post(
+    //     `${process.env.REACT_APP_API_URL}/bookings/`, 
+    //     bookingData, 
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    //   alert("Vé của bạn đã được đặt thành công!");
+    // } catch (error) {
+    //   console.error("Error creating booking:", error);
+    //   alert("Đặt vé thất bại, vui lòng thử lại.");
+    // }
   };
 
   return (
@@ -126,8 +133,8 @@ const BookTicket = () => {
         <div>
           <label>Điểm khởi hành:</label>
           <select
-            value={departure}
-            onChange={(e) => setDeparture(e.target.value)}
+            value={departure_airport}
+            onChange={(e) => setDeparture_airport(e.target.value)}
             required
           >
             <option value="">-- Chọn sân bay --</option>
@@ -141,13 +148,13 @@ const BookTicket = () => {
         <div>
           <label>Điểm đến:</label>
           <select
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
+            value={arrival_airport}
+            onChange={(e) => setArrival_airport(e.target.value)}
             required
           >
             <option value="">-- Chọn sân bay --</option>
             {airports
-              .filter((airport) => airport !== departure)
+              .filter((airport) => airport !== departure_airport)
               .map((airport) => (
                 <option key={airport} value={airport}>
                   {airport}
@@ -159,8 +166,8 @@ const BookTicket = () => {
           <label>Ngày đi:</label>
           <input
             type="date"
-            value={departureDate}
-            onChange={(e) => setDepartureDate(e.target.value)}
+            value={departure_time}
+            onChange={(e) => setDeparture_time(e.target.value)}
             required
           />
         </div>
@@ -169,36 +176,48 @@ const BookTicket = () => {
             <label>Ngày về:</label>
             <input
               type="date"
-              value={returnDate}
-              onChange={(e) => setReturnDate(e.target.value)}
+              value={arrival_time}
+              onChange={(e) => setArrival_time(e.target.value)}
               required={tripType === "round-trip"}
             />
           </div>
         )}
         <div>
-          <label>Người lớn:</label>
+          <label>Hành khách:</label>
           <input
             type="number"
             min="1"
-            value={adults}
-            onChange={(e) => setAdults(parseInt(e.target.value) || 1)}
+            value={passengers}
+            onChange={(e) => setPassengers(parseInt(e.target.value) || 1)}
             required
           />
         </div>
         <div>
-          <label>Trẻ em:</label>
-          <input
-            type="number"
-            min="0"
-            value={children}
-            onChange={(e) => setChildren(parseInt(e.target.value) || 0)}
-          />
-        </div>
-        <div>
-          <button type="submit">Đặt vé</button>
+          <button type="submit">Tìm chuyến bay</button>
         </div>
       </form>
-      <FlightList />
+      <div>
+        <h2>Kết quả tìm kiếm</h2>
+        {matchingFlight ? (
+          <ul>
+            {matchingFlight.map((flight) => (
+              <li key={flight.flight_id}>
+                <h3>Chuyến bay: {flight.flight_number}</h3>
+                <strong>Khởi hành:</strong> {flight.departure_airport} -{" "}
+                {new Date(flight.departure_time).toLocaleString()} <br />
+                <strong>Điểm đến:</strong> {flight.arrival_airport} -{" "}
+                {new Date(flight.arrival_time).toLocaleString()} <br />
+                <strong>Thời gian bay:</strong> {flight.flight_duration} <br />
+                <strong>Giá vé:</strong> {flight.price.toLocaleString()} VND <br />
+                <strong>Ghế trống:</strong> {flight.available_seats} <br />
+                <strong>Trạng thái:</strong> {flight.status} <br /><br />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Không có chuyến bay phù hợp.</p>
+        )}
+      </div>
     </div>
   );
 };
