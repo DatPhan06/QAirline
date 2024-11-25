@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getFlights } from "../services/api";
+import styles from "./FlightList.module.css";
+
 
 /**
  * Component hiển thị danh sách các chuyến bay.
@@ -22,14 +24,10 @@ const FlightList = () => {
   const [flights, setFlights] = useState([]);
 
   useEffect(() => {
-    /**
-     * Hàm fetchFlights gọi API để lấy dữ liệu chuyến bay và cập nhật state flights.
-     * Sử dụng try-catch để xử lý lỗi nếu có.
-     */
     const fetchFlights = async () => {
       try {
         const data = await getFlights();
-        setFlights(data);
+        setFlights(data.slice(0, 3)); // Lấy 3 chuyến bay đầu tiên
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu chuyến bay:", error);
       }
@@ -39,19 +37,28 @@ const FlightList = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Danh sách chuyến bay</h2>
-      <ul>
-        {flights.map((flight) => (
-          <li key={flight.flight_id}>
-            <h3>{flight.flight_number}</h3>
-            <p>Departure: {flight.departure_airport}</p>
-            <p>Destination: {flight.arrival_airport}</p>
-            <p>Duration: {flight.flight_duration} minutes</p>
-            <p>Price: ${flight.price}</p>
-          </li>
-        ))}
-      </ul>
+    <div className={styles.flightListContainer}>
+      {flights.length === 0 ? (
+        <p className={styles.noFlights}>Hiện tại không có chuyến bay nào.</p>
+      ) : (
+        <ul className={styles.flightList}>
+  {flights.map((flight) => (
+    <li key={flight.flight_id} className={styles.flightCard}>
+      <span className={styles.flightNumber}>{flight.flight_number}</span>
+      <p className={styles.flightDetails}>
+        <span>Departure:</span> {flight.departure_airport}
+      </p>
+      <p className={styles.flightDetails}>
+        <span>Destination:</span> {flight.arrival_airport}
+      </p>
+      <p className={styles.flightDetails}>
+        <span>Duration:</span> {flight.flight_duration} minutes
+      </p>
+    </li>
+  ))}
+</ul>
+
+      )}
     </div>
   );
 };

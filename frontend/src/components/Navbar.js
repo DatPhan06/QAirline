@@ -16,7 +16,7 @@ const Navbar = () => {
           <li className={styles.navItem}>
             <Link to="/">
               <img 
-                src="/images/logo.png" 
+                src="/images/ylogo.png" 
                 alt="Logo" 
                 className={styles.logo}
               />

@@ -1,0 +1,65 @@
+/* Tổng thể container */
+.flightListContainer {
+  width: 90%;
+  padding: 20px 40px;
+  text-align: center;
+  border-radius: 20px;
+}
+
+/* Danh sách chuyến bay */
+.flightList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+/* Card chuyến bay dưới dạng thanh ngang */
+.flightCard {
+  display: flex; /* Hiển thị các nội dung trong card ngang */
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff; /* Nền trắng */
+  border-radius: 8px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* Bóng đổ */
+  padding: 15px 20px;
+  margin-bottom: 15px; /* Khoảng cách giữa các hàng */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect cho card */
+.flightCard:hover {
+  transform: translateY(-3px); /* Nhấc lên nhẹ khi hover */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Bóng lớn hơn */
+}
+
+/* Flight Number */
+.flightNumber {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1e88e5;
+}
+
+/* Chi tiết chuyến bay */
+.flightDetails {
+  font-size: 16px;
+  color: #555;
+  margin: 0 10px; /* Khoảng cách giữa các mục */
+}
+
+.flightDetails span {
+  font-weight: bold;
+  color: #1565c0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .flightCard {
+    flex-direction: column; /* Hiển thị dọc trên màn hình nhỏ */
+    align-items: flex-start;
+  }
+
+  .flightDetails {
+    margin: 5px 0;
+  }
+}
