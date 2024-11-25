@@ -2,6 +2,7 @@ from app.models.user import User
 from app.models.admin import Admin
 from app.models.airplane import Airplane
 from app.models.seat import Seat
+from app.models.airport import Airport
 from app.models.flight import Flight
 from app.models.ticket import Ticket
 from app.models.flight_log import FlightLog

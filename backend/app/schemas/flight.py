@@ -18,8 +18,8 @@ class FlightBase(BaseModel):
         price (decimal): Giá vé.
     """
     flight_number: str
-    departure_airport: str
-    arrival_airport: str
+    departure_airport: int
+    arrival_airport: int
     departure_time: datetime
     arrival_time: datetime
     flight_duration: Optional[time]
