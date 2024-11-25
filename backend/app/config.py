@@ -9,6 +9,6 @@ class Settings:
     """
     SECRET_KEY: str = "123456"
     ALGORITHM: str = "HS256"
-    DATABASE_URL: str = os.getenv("DATABASE_URL", "mysql+pymysql://user:password@localhost/dbname")
+    DATABASE_URL: str = os.getenv("DATABASE_URL", "mysql+pymysql://root:@localhost/qairline")
 
 settings: Settings = Settings()

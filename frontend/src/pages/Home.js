@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Home.module.css"; // Import CSS Module
 import { Link } from "react-router-dom";
+import FlightList from "../components/FlightList";
 
 const locations = [
   {
@@ -29,6 +30,14 @@ function Home() {
 
   return (
     <div>
+      {/* Flight List Section */}
+<section className={styles.exploreServices}>
+  <h2 className={styles.sectionTitle}>LỊCH BAY HÔM NAY</h2>
+  <div className={styles.flightListSection}>
+    <FlightList />
+  </div>
+</section>
+
       {/* Hero Section */}
       <section
         className={styles.hero}
@@ -61,50 +70,6 @@ function Home() {
           ))}
         </div>
       </section>
-
-
-      {/* Explore Our Services Section */}
-<section className={styles.exploreServices}>
-  <h2 className={styles.sectionTitle}>LỊCH BAY HÔM NAY</h2>
-  <div className={styles.servicesGrid}>
-    <div className={styles.serviceCard}>
-      <img
-        src="/images/service-luggage.png"
-        alt="Mua Hành Lý"
-        className={styles.serviceIcon}
-      />
-      <h3>Mua Hành Lý</h3>
-      <p>Đặt thêm hành lý với giá ưu đãi.</p>
-    </div>
-    <div className={styles.serviceCard}>
-      <img
-        src="/images/service-support.png"
-        alt="Hỗ Trợ"
-        className={styles.serviceIcon}
-      />
-      <h3>Hỗ Trợ</h3>
-      <p>Dịch vụ hỗ trợ 24/7 sẵn sàng phục vụ bạn.</p>
-    </div>
-    <div className={styles.serviceCard}>
-      <img
-        src="/images/service-discounts.png"
-        alt="Ưu Đãi"
-        className={styles.serviceIcon}
-      />
-      <h3>Ưu Đãi</h3>
-      <p>Nhận ngay các ưu đãi đặc biệt khi bay.</p>
-    </div>
-    <div className={styles.serviceCard}>
-      <img
-        src="/images/service-special.png"
-        alt="Dịch Vụ Đặc Biệt"
-        className={styles.serviceIcon}
-      />
-      <h3>Dịch Vụ Đặc Biệt</h3>
-      <p>Trải nghiệm dịch vụ cao cấp dành riêng cho bạn.</p>
-    </div>
-  </div>
-</section>
 
 <section className={styles.flightInfoSection}>
       <div className={styles.infoBanner}>
