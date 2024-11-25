@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import bcryptjs from "bcryptjs"; // Ensure bcryptjs is installed
 import axios from "axios";
 
 function SignUp() {
@@ -11,10 +12,20 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Hash the password on the frontend
+    const hashedPassword = await bcryptjs.hash(formData.password, 10);
+
+    // Create a new form data object with the hashed password
+    const dataToSend = {
+      ...formData,
+      password: hashedPassword,
+    };
+
     try {
       await axios.post(
         `${process.env.REACT_APP_API_URL}/users/register`,
-        formData,
+        dataToSend,
         {
           headers: {
             "Content-Type": "application/json",
