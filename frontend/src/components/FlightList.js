@@ -21,7 +21,7 @@ const FlightList = () => {
 
     fetchFlights();
   }, []);
-
+  
   return (
     <div className={styles.flightListContainer}>
       {flights.length === 0 ? (
