@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getFlights, getAirport } from "../services/api";
+import { getFlights } from "../services/api";
 import styles from "./FlightList.module.css";
 
 /**
@@ -27,7 +27,6 @@ const FlightList = () => {
       try {
         const data = await getFlights();
         setFlights(data.slice(0, 3)); // Lấy 3 chuyến bay đầu tiên
-        console.log(getAirport())
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu chuyến bay:", error);
       }
@@ -35,14 +34,6 @@ const FlightList = () => {
 
     fetchFlights();
   }, []);
-
-  // lặp để thay airport_id
-  // flights.forEach((flight) => {
-  //   // flight.departure_airport = getAirport(flight.departure_airport);
-  //   // flight.arrival_airport = getAirport(flight.arrival_airport);
-  //   flight.departure_airport = 'ha noi';
-  //   flight.arrival_airport = 'hcm';
-  // });
   
   return (
     <div className={styles.flightListContainer}>

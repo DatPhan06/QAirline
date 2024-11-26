@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import flights_router, bookings_router, users_router, general_info_router
+from .routers import flights_router, bookings_router, users_router, general_info_router, airports_router
 from .base import Base
 from .database import engine
 import os
@@ -30,6 +30,7 @@ app.include_router(flights_router)
 app.include_router(bookings_router)
 app.include_router(users_router)
 app.include_router(general_info_router)
+app.include_router(airports_router)
 
 # Tạo các bảng trong cơ sở dữ liệu
 Base.metadata.create_all(bind=engine)
