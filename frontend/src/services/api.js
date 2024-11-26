@@ -22,3 +22,25 @@ export const getFlights = async () => {
     throw error;
   }
 };
+
+export const getAirport = async () => {
+  const token = localStorage.getItem("token");
+  try {
+    const response = await fetch(`${API_URL}/airports/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    console.log(response)
+    return response;
+  } catch (error) {
+    console.error("Error fetching flights:", error);
+    throw error;
+  }
+};
+
+
