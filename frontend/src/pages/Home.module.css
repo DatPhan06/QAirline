@@ -239,7 +239,6 @@
 }
 
 
-
 /* Flight Info Section */
 .flightInfoSection {
   background-color: #f9fafc;
@@ -543,88 +542,4 @@ body {
     width: 100%;
     max-width: 350px; /* Tăng chiều rộng cho các card khi màn hình nhỏ */
   }
-}
-
-/* Footer Styles */
-.footer {
-  background-color: #333;
-  color: #fff;
-  padding: 20px 0;
-  text-align: center;
-  font-family: 'Helvetica', sans-serif;
-  margin-top: 40px;
-}
-
-.footerContent {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-
-/* Footer Links */
-.footerLinks {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-bottom: 20px;
-}
-
-/* Logo trong Footer */
-.footerLogo {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.logoImage {
-  max-width: 150px;  /* Đảm bảo kích thước logo hợp lý */
-  height: auto;
-  transition: transform 0.3s ease;
-}
-
-/* Thông tin bổ sung (Liên hệ, Địa chỉ) */
-.footerInfo {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #ddd; /* Màu chữ sáng cho phần thông tin bổ sung */
-}
-
-.footerInfo p {
-  margin: 5px 0;
-  font-size: 14px;
-  font-weight: normal;
-}
-
-/* Footer Links */
-.footerLinks {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-bottom: 20px;
-}
-
-.footerLink {
-  color: #fff;
-  font-size: 16px;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.footerLink:hover {
-  color: #f1c40f; /* Gold color for hover effect */
-}
-
-.footerCopyright {
-  font-size: 14px;
-  color: #aaa;
-  margin-top: 20px;
-}
-
-.footerCopyright a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.footerCopyright a:hover {
-  color: #f1c40f; /* Gold color for hover effect */
 }

@@ -136,34 +136,6 @@ function Home() {
         </div>
       </section>
 
-      {/* Footer Section */}
-      <footer className={styles.footer}>
-        <div className={styles.footerContent}>
-          {/* Logo */}
-          <div className={styles.footerLogo}>
-            <img src="/images/ylogo.png" alt="Logo" className={styles.logoImage} />
-          </div>
-
-          {/* Thêm thông tin liên hệ hoặc thông tin bổ sung ở đây */}
-          <div className={styles.footerInfo}>
-            <p>Địa chỉ: 144 Xuân Thủy, Cầu Giấy, Hà Nội, Việt Nam</p>
-            <p>Email: contact@company.com</p>
-            <p>Hotline: +84 123 456 789</p>
-          </div>
-
-          <div className={styles.footerLinks}>
-            <Link to="/about" className={styles.footerLink}>Giới thiệu</Link>
-            <Link to="/contact" className={styles.footerLink}>Liên hệ</Link>
-            <Link to="/privacy" className={styles.footerLink}>Chính sách bảo mật</Link>
-          </div>
-
-          <p className={styles.footerCopyright}>
-            &copy; 2024 Hãng hàng không QAirline.
-          </p>
-        </div>
-      </footer>
-
-
       
     </div>
   );
