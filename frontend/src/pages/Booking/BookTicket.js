@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import FlightList from "../../components/FlightList";
 import { getFlights, getAirports } from "../../services/api";
+import styles from "./BookTicket.module.css"; // Import CSS Module
 
 const BookTicket = () => {
   const navigate = useNavigate();
@@ -18,15 +19,14 @@ const BookTicket = () => {
   const [airports, setAirports] = useState([]);
   const [user, setUser] = useState(null); 
 
-  // Lấy thông tin người dùng hiện tại
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/users/me`, 
+          `${process.env.REACT_APP_API_URL}/users/me`,
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`, 
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
         );
@@ -39,7 +39,6 @@ const BookTicket = () => {
     fetchUser();
   }, []);
 
-  // Lấy danh sách chuyến bay
   useEffect(() => {
     const fetchFlights = async () => {
       try {
@@ -100,105 +99,135 @@ const BookTicket = () => {
     }
   }
 
+
   return (
-    <div>
-      <h1>Đặt vé</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            <input
-              type="radio"
-              name="tripType"
-              value="one-way"
-              checked={tripType === "one-way"}
-              onChange={(e) => setTripType(e.target.value)}
-            />
-            Một chiều
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="tripType"
-              value="round-trip"
-              checked={tripType === "round-trip"}
-              onChange={(e) => setTripType(e.target.value)}
-            />
-            Khứ hồi
-          </label>
+    <div className={styles.pageContainer}>
+      {/* Khung đặt vé */}
+      <div className={styles.container}>
+        <div className={styles.headingcontainer}>
+          <h1 className={styles.heading}>ĐẶT VÉ </h1>
         </div>
-        <div>
-          <label>Điểm khởi hành:</label>
-          <select
-            value={departure_airport}
-            onChange={(e) => setDeparture_airport(e.target.value)}
-            required
-          >
-            <option value="">-- Chọn sân bay --</option>
-            {airport_names.map((city) => (
+        <form onSubmit={handleSubmit} className={styles.form}>
+          {/* Loại chuyến đi */}
+          <div className={styles.tripType}>
+            <label>
+              <input
+                type="radio"
+                name="tripType"
+                value="one-way"
+                checked={tripType === "one-way"}
+                onChange={(e) => setTripType(e.target.value)}
+                className={styles.radio}
+              />
+              Một chiều
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="tripType"
+                value="round-trip"
+                checked={tripType === "round-trip"}
+                onChange={(e) => setTripType(e.target.value)}
+                className={styles.radio}
+              />
+              Khứ hồi
+            </label>
+          </div>
+
+          {/* Điểm đi và điểm đến */}
+          <div className={styles.formRow}>
+            <div className={styles.selectContainer}>
+              <label className={styles.label}>Điểm khởi hành:</label>
+              <select
+                value={departure_airport}
+                onChange={(e) => setDeparture_airport(e.target.value)}
+                required
+                className={styles.select}
+              >
+                <option value="">-- Chọn sân bay --</option>
+                {airport_names.map((city) => (
               <option key={city} value={city}>
                 {city}
               </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label>Điểm đến:</label>
-          <select
-            value={arrival_airport}
-            onChange={(e) => setArrival_airport(e.target.value)}
-            required
-          >
-            <option value="">-- Chọn sân bay --</option>
-            {airport_names
+                ))}
+              </select>
+            </div>
+            <div className={styles.selectContainer}>
+              <label className={styles.label}>Điểm đến:</label>
+              <select
+                value={arrival_airport}
+                onChange={(e) => setArrival_airport(e.target.value)}
+                required
+                className={styles.select}
+              >
+                <option value="">-- Chọn sân bay --</option>
+                {airport_names
               .filter((city) => city !== departure_airport)
               .map((city) => (
                 <option key={city} value={city}>
                   {city}
                 </option>
-              ))}
-          </select>
-        </div>
-        <div>
-          <label>Ngày đi:</label>
-          <input
-            type="date"
-            value={departure_time}
-            onChange={(e) => setDeparture_time(e.target.value)}
-            required
-          />
-        </div>
-        {tripType === "round-trip" && (
-          <div>
-            <label>Ngày về:</label>
+                  ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Ngày đi và ngày về */}
+          <div className={styles.dateRow}>
+            <div className={styles.dateContainer}>
+              <label className={styles.label}>Ngày đi:</label>
+              <input
+                type="date"
+                value={departure_time}
+                onChange={(e) => setDeparture_time(e.target.value)}
+                required
+                className={styles.input}
+              />
+            </div>
+
+            {tripType === "round-trip" && (
+              <div className={styles.dateContainer}>
+                <label className={styles.label}>Ngày về:</label>
+                <input
+                  type="date"
+                  value={arrival_time}
+                  onChange={(e) => setArrival_time(e.target.value)}
+                  required
+                  className={styles.input}
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Số hành khách */}
+          <div className={styles.passengerContainer}>
+            <label className={styles.label}>Hành khách:</label>
             <input
-              type="date"
-              value={arrival_time}
-              onChange={(e) => setArrival_time(e.target.value)}
-              required={tripType === "round-trip"}
+              type="number"
+              min="1"
+              value={passengers}
+              onChange={(e) => setPassengers(parseInt(e.target.value) || 1)}
+              required
+              className={styles.input}
             />
           </div>
-        )}
-        <div>
-          <label>Hành khách:</label>
-          <input
-            type="number"
-            min="1"
-            value={passengers}
-            onChange={(e) => setPassengers(parseInt(e.target.value) || 1)}
-            required
-          />
-        </div>
-        <div>
-          <button type="submit">Tìm chuyến bay</button>
-        </div>
-      </form>
-      <div>
+
+          {/* Nút tìm chuyến bay */}
+          <div>
+            <button type="submit" className={styles.submitButton}>
+              Tìm chuyến bay
+            </button>
+          </div>
+        </form>
+
+        {/* Kết quả tìm kiếm */}
+        <div className={styles.results}>
         <h2>Kết quả tìm kiếm</h2>
         {matchingFlight.length > 0 ? (
           <ul>
             {matchingFlight.map((flight) => (
-              <li key={flight.flight_id}>
-                <h3>Chuyến bay: {flight.flight_number}</h3>
+              <li key={flight.flight_id} className={styles.flightItem}>
+                <h3 className={styles.flightTitle}>Chuyến bay: {flight.flight_number}</h3>
                 <strong>Khởi hành:</strong> {departure_airport} -{" "}
                 {new Date(flight.departure_time).toLocaleString()} <br />
                 <strong>Điểm đến:</strong> {arrival_airport} -{" "}
@@ -213,6 +242,12 @@ const BookTicket = () => {
         ) : (
           <p>Không có chuyến bay phù hợp.</p>
         )}
+        </div>
+      </div>
+
+      {/* FlightList nằm riêng ngoài khung đặt vé */}
+      <div className={styles.flightSchedule}>
+        <FlightList flights={flights} />
       </div>
     </div>
   );

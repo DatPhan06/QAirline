@@ -1,229 +1,87 @@
-/* Booking Page with Background Image */
-body {
-    font-family: 'Roboto', Arial, sans-serif; /* Font chính cho toàn bộ trang */
-    background-color: #f0f4f8; /* Màu nền tổng thể */
-  }
-  
-  .section h2,
-  .section p {
-    font-family: 'Roboto', Arial, sans-serif; /* Font chữ đẹp cho các thẻ */
-  }
-  
-/* Booking Page with Background Image */
+/* Booking.module.css */
 .bookingPage {
-    position: relative;
-    text-align: center;
-    padding: 50px 20px;
-    background-image: url('../../assets/images/cloud.png'); 
-    background-size: cover; /* Đảm bảo hình nền bao phủ toàn bộ */
-    background-position: center; /* Đặt hình ở giữa */
-    position: relative; /* Để thêm lớp phủ */
-    min-height: 100vh; /* Đảm bảo trang phủ toàn màn hình */
-    font-family: Arial, sans-serif;
-    color: #ffffff; /* Màu chữ trắng để nổi bật trên nền */
-  }
-  
-  
-  /* Overlay to Blur Background */
-  .bookingPage::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Lớp phủ tối */
-    backdrop-filter: blur(5px); /* Làm mờ hình nền */
-    z-index: 1; /* Đặt dưới nội dung chính */
-  }
-  
-  .bookingPage h1 {
-    position: relative; /* Giúp chữ không bị ảnh hưởng bởi lớp phủ */
-    font-size: 40px;
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 50px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    z-index: 2; /* Đảm bảo chữ nằm trên lớp phủ */
-  }
-  
-  /* Booking Sections */
+  font-family: 'Arial', sans-serif;
+  padding: 50px;
+  color: #333;
+}
+
 .bookingSections {
-    position: relative;
-    display: grid; /* Sử dụng Grid Layout */
-    grid-template-columns: repeat(2, 1fr); /* 2 cột với kích thước đồng đều */
-    gap: 30px; /* Khoảng cách giữa các phần */
-    justify-content: center;
-    z-index: 2; /* Đảm bảo thẻ nằm trên lớp phủ */
-    margin: 0 auto;
-    max-width: 900px; /* Đặt chiều rộng tối đa */
-  }
-  
-  /* Section Cards */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
 .section {
-    position: relative;
-    background: linear-gradient(145deg, #e3f2fd, #ffffff); /* Gradient tươi sáng */
-    border-radius: 20px; /* Bo góc mềm mại */
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1), inset -3px -3px 6px #ffffff; /* Bóng sáng mờ */
-    text-align: center;
-    padding: 25px 20px;
-    height: 240px; /* Chiều cao cố định */
-    display: flex;
-    flex-direction: column; /* Nội dung xếp dọc */
-    justify-content: center;
-    align-items: center;
-    text-decoration: none; /* Loại bỏ gạch chân */
-    color: #333333; /* Màu chữ */
-    transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease; /* Hiệu ứng hover mượt */
-    overflow: hidden; /* Giấu các phần tử tràn */
-    z-index: 1;
-  }
-  
-  /* Hover Effect */
-  .section:hover {
-    transform: translateY(-12px); /* Nhấc lên nhẹ khi hover */
-    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2), inset -5px -5px 10px #ffffff; /* Bóng đổ mạnh */
-    border: 2px solid #64b5f6; /* Viền phát sáng khi hover */
-    background: linear-gradient(145deg, #ffffff, #bbdefb); /* Thay đổi gradient khi hover */
-  }
-  
-  /* Section Title */
-  .section h2 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #0d47a1; /* Màu xanh đậm */
-    margin-bottom: 15px;
-    text-transform: uppercase; /* Chữ in hoa */
-    letter-spacing: 1.5px; /* Khoảng cách chữ */
-    transition: color 0.3s ease; /* Hiệu ứng chuyển màu chữ */
-  }
-  
-  .section:hover h2 {
-    color: #004d40; /* Xanh lá đậm khi hover */
-  }
-  
-  /* Section Description */
-  .section p {
-    font-size: 16px;
-    color: #555555;
-    line-height: 1.5;
-    margin-top: 8px;
-    text-align: center;
-    transition: color 0.3s ease;
-  }
-  
-  .section:hover p {
-    color: #333333; /* Đậm hơn khi hover */
-  }
-  
-  /* Icon Decorative */
-  .section img {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 20px;
-    opacity: 0.85; /* Làm nhạt icon */
-    transition: opacity 0.3s ease, transform 0.3s ease; /* Hiệu ứng hover */
-  }
-  
-  .section:hover img {
-    opacity: 1; /* Sáng hơn khi hover */
-    transform: scale(1.2); /* Phóng to icon */
-  }
-  
-  /* Highlight Glow Effect */
-  .section::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, rgba(100, 181, 246, 0.2), transparent);
-    transform: translate(-50%, -50%);
-    z-index: -1; /* Phía sau nội dung */
-    border-radius: 50%; /* Hình tròn */
-    opacity: 0.5;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  
-  .section:hover::before {
-    opacity: 0.7; /* Làm sáng hơn khi hover */
-    transform: translate(-50%, -50%) scale(1.3); /* Phóng to vòng sáng */
-  }
+  background-color: #ffffff;
+  border: none;
+  padding: 50px;
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  border-radius: 16px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
 
-  
+.section:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
 
-  /* Section: Hãy chọn QAirline */
+.section h2 {
+  color: #b59f3b;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+}
+
+.section p {
+  font-size: 1.1em;
+  color: #666;
+}
+
 .chooseQAirline {
-    position: relative; /* Đảm bảo z-index hoạt động */
-    z-index: 2; /* Đưa phần này lên trên nội dung khác */
-    padding: 60px 20px;
-    text-align: center;
-    border-top: 2px solid #e0e0e0; /* Đường ngăn cách phía trên */
-  }
-  
-  .chooseQAirline h2 {
-    font-size: 36px;
-    font-weight: bold;
-    color: #0d47a1; /* Xanh đậm */
-    margin-bottom: 50px;
-    text-transform: uppercase; /* Viết hoa */
-    letter-spacing: 1.5px; /* Khoảng cách giữa các chữ */
-  }
-  
-  /* Bố trí lý do */
-  .reasons {
-    display: flex;
-    flex-direction: column; /* Hiển thị theo cột */
-    gap: 30px; /* Khoảng cách giữa các lý do */
-    max-width: 800px;
-    margin: 0 auto; /* Căn giữa nội dung */
-  }
-  
-  /* Lý do */
-  .reason {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px; /* Khoảng cách giữa icon và nội dung */
-    text-align: left; /* Căn trái cho nội dung */
-  }
-  
-  .reason-icon {
-    font-size: 36px; /* Kích thước icon lớn */
-    color: #1565c0; /* Xanh lam */
-  }
-  
-  .reason-content h3 {
-    font-size: 22px;
-    font-weight: bold;
-    color: #0d47a1; /* Xanh đậm */
-    margin-bottom: 10px;
-  }
-  
-  .reason-content p {
-    font-size: 16px;
-    color: #555555;
-    line-height: 1.8;
-  }
-  
-  /* Responsive Layout */
-  @media (max-width: 768px) {
-    .reasons {
-      align-items: center; /* Căn giữa lý do */
-    }
-  
-    .reason {
-      flex-direction: column; /* Chuyển thành hàng dọc */
-      text-align: center; /* Căn giữa nội dung */
-    }
-  
-    .reason-icon {
-      margin-bottom: 10px; /* Thêm khoảng cách giữa icon và nội dung */
-    }
-  
-    .reason-content {
-      text-align: center; /* Nội dung căn giữa trên màn hình nhỏ */
-    }
-  }
-  
+  background-image: none;
+  color: #333;
+  text-align: center;
+}
+
+.chooseQAirline h2 {
+  font-size: 2.4em;
+  margin-bottom: 40px;
+  color: #b59f3b;
+}
+
+.reasons {
+  font-style: italic;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+}
+
+.reason {
+  background-color: transparent;
+  padding: 40px;
+  width: 300px;
+  text-align: left;
+  border-left: 4px solid #b59f3b;
+  transition: transform 0.4s ease;
+}
+
+.reason:hover {
+  transform: translateX(10px);
+}
+
+.reasonContent h3 {
+  color: #b59f3b;
+  font-size: 1.6em;
+  margin-bottom: 20px;
+}
+
+.reasonContent p {
+  font-size: 1.1em;
+  color: #666;
+}
