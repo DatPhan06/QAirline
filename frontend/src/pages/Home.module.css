@@ -12,73 +12,36 @@
   justify-content: center;
   overflow: hidden;
   transition: background-image 0.5s ease-in-out;
-  filter: brightness(0.8); /* Làm mờ nền */
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: inherit; /* Sao chép hình nền từ .hero */
+  filter: blur(3px); /* Làm mờ lớp phủ */
+  z-index: 1; /* Đặt dưới nội dung chính */
+}
+
+/* Đảm bảo nội dung nằm trên lớp phủ */
+.hero > * {
+  position: relative;
+  z-index: 2;
 }
 
 /*Title header*/
-/* Hero Header Styling */
-.hero h1 {
-  position: absolute; /* Đặt vị trí tuyệt đối */
-  top: 30px; /* Cách mép trên 30px */
-  left: 50%; /* Căn giữa theo chiều ngang */
-  transform: translateX(-50%); /* Căn giữa hoàn toàn */
-  font-size: 64px; /* Kích thước lớn, nổi bật */
-  font-weight: 700; /* Đậm hơn để tạo sự sang trọng */
-  font-family: "Playfair Display", serif; /* Font serif cao cấp */
-  color: #ffd700; /* Màu vàng ánh kim */
-  letter-spacing: 4px; /* Tăng khoảng cách giữa các ký tự */
-  text-align: center; /* Căn giữa chữ */
-  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), /* Bóng mờ nhẹ */
-               0 0 20px rgba(255, 215, 0, 0.8); /* Ánh sáng vàng nổi bật */
-  z-index: 10; /* Hiển thị trên các lớp khác */
-  transition: all 0.4s ease-in-out; /* Hiệu ứng chuyển đổi mượt */
-}
-
-/* Hover Effect */
-.hero h1:hover {
-  transform: translateX(-50%) scale(1.05); /* Phóng to nhẹ khi hover */
-  color: #fff8dc; /* Màu trắng ngà */
-  text-shadow: 0 6px 15px rgba(0, 0, 0, 0.6), 
-               0 0 30px rgba(255, 215, 0, 1); /* Bóng mờ mạnh hơn */
-}
-
-/* Decorative Line Under Header */
-.hero h1::after {
-  content: ""; /* Thêm một đường kẻ bên dưới */
-  display: block;
-  width: 120px; /* Độ dài đường kẻ */
-  height: 4px; /* Độ dày */
-  background: linear-gradient(to right, #ffd700, #fff8dc); /* Gradient ánh kim */
-  margin: 15px auto 0; /* Căn giữa và cách tiêu đề 15px */
-  border-radius: 2px; /* Bo góc nhẹ */
-  transition: width 0.4s ease-in-out; /* Hiệu ứng khi hover */
-}
-
-/* Hover Effect for Decorative Line */
-.hero h1:hover::after {
-  width: 180px; /* Tăng chiều dài khi hover */
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 48px; /* Giảm kích thước trên thiết bị nhỏ */
-    top: 20px; /* Cách mép trên nhỏ hơn */
-  }
-
-  .hero h1::after {
-    width: 80px; /* Đường kẻ ngắn hơn trên thiết bị nhỏ */
-  }
-}
 
 /* Hero Overlay */
 .heroOverlay {
   position: absolute;
-  top: 40%;
+  top: 30%;
   left: 0;
   transform: translateY(-50%);
   text-align: center;
-  padding-left: 80px; /* Tăng padding để nội dung thoáng hơn */
+
   border-radius: 30px; /* Bo góc mềm mại hơn */
   color: #fff;
   z-index: 2;
@@ -90,6 +53,7 @@
 /* Description Box */
 .descriptionBox {
   opacity: 0.9; /* Làm mờ nhạt để tạo sự tinh tế */
+  margin-left: 80px;
 }
 
 /* Location Title */
@@ -97,17 +61,11 @@
   font-size: 86px; /* Phông chữ to và nổi bật */
   font-weight: bold;
   margin-bottom: 15px;
-  color: #ffd54f; /* Màu vàng pastel nổi bật */
+  color: #282623; /* Màu vàng pastel nổi bật */
   font-family: "Dancing Script", cursive; /* Font chữ kiểu viết tay */
-  text-shadow: 3px 3px 10px rgba(71, 71, 71, 0.6); /* Hiệu ứng bóng mờ tinh tế */
+  text-shadow: 3px 3px 10px rgba(142, 140, 140, 0.6); /* Hiệu ứng bóng mờ tinh tế */
   letter-spacing: 2px; /* Tăng khoảng cách giữa các ký tự */
   transition: all 0.4s ease; /* Hiệu ứng mượt khi hiển thị */
-}
-
-.locationTitle:hover {
-  color: #ffd54f; /* Màu vàng sáng hơn khi hover */
-  text-shadow: 3px 5px 15px rgba(255, 213, 79, 0.8); /* Hiệu ứng sáng mờ */
-  transform: scale(1.05); /* Phóng to nhẹ */
 }
 
 /* Location Description */
@@ -116,12 +74,12 @@
   font-size: 20px;
   line-height: 1.8; /* Tăng khoảng cách dòng để dễ đọc */
   margin-bottom: 25px;
-  color: #ffffff;
+  color: #393434;
   text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5); /* Bóng mờ nhẹ hơn */
   transition: transform 0.4s ease, opacity 0.4s ease; /* Hiệu ứng khi hiển thị */
 }
 
-.locationDescription:hover {
+.locationDescription:hover {  
   transform: scale(1.02); /* Phóng to nhẹ khi hover */
   opacity: 1; /* Hiển thị rõ hơn */
 }
@@ -267,78 +225,17 @@
   }
 }
 
-/* Explore Our Services Section */
-.exploreServices {
-  display: flex; /* Sử dụng flexbox để căn giữa */
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100vw; /* Chiếm toàn bộ chiều ngang màn hình */
-  height: 100vh; /* Chiếm toàn bộ chiều cao màn hình */
-  background: url('../assets/images/airplanee.png') no-repeat center center; /* Nền hình airplane */
-  background-size: cover; /* Bao phủ toàn bộ section */
-  color: #fff; /* Màu chữ trắng nổi bật */
-  position: relative; /* Để overlay làm mờ nền hoạt động */
-  overflow: hidden; /* Ẩn nội dung tràn */
-  text-align: center; /* Căn giữa nội dung */
-}
 
-/* Overlay để làm mờ nền */
-.exploreServices::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(79, 78, 78, 0.6); /* Lớp phủ làm mờ nền */
-  z-index: 0; /* Đặt phía sau nội dung */
-  filter: blur(3px); /* Hiệu ứng làm mờ */
-}
-
-/* Section Title */
-.sectionTitle {
-  font-size: 48px;
-  font-weight: bold;
-  color: #ffffff; /* Màu trắng nổi bật */
-  margin-bottom: 50px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  position: relative;
-  z-index: 1; /* Nội dung phía trên overlay */
-  text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.7); /* Hiệu ứng đổ bóng */
-}
-
-.sectionTitle::after {
-  content: "";
-  display: block;
-  width: 100px;
-  height: 5px;
-  background: #42a5f5; /* Thanh nhấn xanh */
-  margin: 10px auto;
-  border-radius: 3px;
-}
 
 /* Flight List Section */
 .flightListSection {
   position: absolute; /* Đặt vị trí tuyệt đối để dễ canh chỉnh */
-  top: 60%; /* Căn giữa theo chiều dọc */
-  right: 120px; /* Đưa về sát mép phải */
+  top: 45%; /* Căn giữa theo chiều dọc */
+  right: 165px; /* Đưa về sát mép phải */
   transform: translateY(-50%); /* Căn giữa theo chiều dọc bằng transform */
   gap: 30px;
   width: 45%;
   z-index: 1; /* Nội dung phía trên overlay */
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .sectionTitle {
-    font-size: 36px;
-  }
-
-  .flightListSection {
-    grid-template-columns: 1fr; /* Một cột trên thiết bị nhỏ */
-  }
 }
 
 
@@ -353,110 +250,381 @@
   text-align: center;
 }
 
-/* Info Banner */
-.infoBanner {
-  background: linear-gradient(to bottom, rgba(66, 165, 245, 0.8), rgba(100, 181, 246, 0.8)), url('../assets/images/airplanee.png') no-repeat center;
-  background-size: cover;
-  border-radius: 10px;
-  padding: 40px 20px;
-  color: white;
-  position: relative;
-  text-align: left;
-  margin-bottom: 20px;
+/* General Styling */
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background-color: #f8f9fc;
 }
 
-.infoBanner h2 {
-  font-size: 28px;
-  font-weight: bold;
+/* Info Banner Section */
+.infoBanner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: url('../assets/images/travel.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 20px 40px;
+  border-radius: 12px;
+  margin: 20px auto;
+  color: #fff;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+}
+
+.infoBanner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  z-index: 0;
+}
+
+.infoContent {
+  position: relative;
+  z-index: 1;
+  max-width: 70%;
+}
+
+.infoContent h2 {
+  font-size: 1.5em;
   margin-bottom: 10px;
 }
 
-.infoBanner p {
-  font-size: 16px;
-  margin-bottom: 20px;
+.infoContent p {
+  font-size: 1em;
 }
 
 .infoBtn {
-  background-color: #0056b3;
-  color: white;
+  position: relative;
+  z-index: 1;
+  background-color: #007bc7;
+  color: #fff;
+  font-weight: bold;
   padding: 10px 20px;
-  font-size: 14px;
-  border-radius: 20px;
+  border-radius: 6px;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .infoBtn:hover {
-  background-color: #003f82;
+  background-color: #005a9e;
 }
 
 /* News Section */
 .newsSection {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-  text-align: left;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  padding: 15px 30px;
+  max-width: 1200px;
 }
 
-.newsItem {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.newsHeader {
+.newsContent {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
-  color: #555;
-}
-
-.newsCategory {
-  display: flex;
-  align-items: center;
-}
-
-.newsCategory i {
-  margin-right: 5px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .newsTitle {
-  font-size: 16px;
+  font-size: 1.2em;
   font-weight: bold;
-  color: #0056b3;
+  color: #005a9e;
+}
+
+.newsLink {
+  color: #333;
+  text-decoration: none;
+  font-size: 1em;
+  transition: color 0.3s ease;
+  flex-grow: 1;
+  max-width: 50%;
+}
+
+.newsLink:hover {
+  color: #007bc7;
+}
+
+.newsControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.newsControls span {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.controlBtn {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  color: #005a9e;
+  cursor: pointer;
+}
+
+.controlBtn:hover {
+  color: #007bc7;
+}
+
+.newsMore {
+  background-color: #007bc7;
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.newsMore:hover {
+  background-color: #005a9e;
+}
+
+/* .module.css */
+.exploreServices {
+  padding: 15px 40px;
+  max-width: 1200px;
+  background: url('../assets/images/airplanee.png') center/cover no-repeat; /* Đặt ảnh nền */
+  position: relative;
+  text-align: center;
+  border-top: 5px solid #f4c542; /* Màu vàng */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 0 auto; /* Căn giữa phần dịch vụ */
+  margin-top : 50px;
+  margin-bottom : 30px;
+}
+
+/* Làm mờ ảnh nền */
+.exploreServices::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Lớp màu mờ */
+  z-index: 1;
+}
+
+/* Căn giữa phần nội dung và giảm chiều rộng */
+.exploreServices > * {
+  position: relative;
+  z-index: 2; /* Đảm bảo các phần tử này nằm trên lớp nền */
+  max-width: 1000px; /* Giới hạn chiều rộng */
+  margin: 0 auto;
+}
+
+/* Tiêu đề */
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff; /* Màu trắng để nổi bật trên nền ảnh */
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Bố cục thẻ dịch vụ */
+.serviceGridWrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.serviceGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* Cải thiện thiết kế thẻ dịch vụ */
+.serviceCard {
+  background: #fff;
+  border-radius: 16px; /* Bo tròn góc nhiều hơn để tạo vẻ mềm mại */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng đổ bóng tinh tế */
+  text-align: center;
+  padding: 35px 25px;
+  width: 280px; /* Chiều rộng cố định cho mỗi card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+/* Thêm hiệu ứng nâng cao khi hover */
+.serviceCard:hover {
+  transform: translateY(-15px); /* Di chuyển lên một chút khi hover */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Bóng đổ mạnh hơn khi hover */
+  background-color: #f7f7f7; /* Chuyển nền sang màu sáng hơn khi hover */
+}
+
+/* Ảnh dịch vụ */
+.serviceImage {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px; /* Bo tròn góc ảnh */
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.serviceCard:hover .serviceImage {
+  transform: scale(1.1); /* Phóng to ảnh khi hover vào thẻ */
+}
+
+/* Tiêu đề dịch vụ */
+.serviceTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c3e50; /* Màu xanh dương đậm cho tiêu đề */
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px; /* Tăng khoảng cách chữ cho tiêu đề */
+  transition: color 0.3s ease;
+}
+
+.serviceCard:hover .serviceTitle {
+  color: #f4c542; /* Màu vàng khi hover */
+}
+
+/* Mô tả dịch vụ */
+.serviceDescription {
+  font-size: 16px;
+  color: #7f8c8d; /* Màu xám nhạt cho mô tả */
+  line-height: 1.5;
+  margin-bottom: 25px;
+  font-family: 'Arial', sans-serif; /* Cải thiện font chữ */
+  transition: color 0.3s ease;
+}
+
+.serviceCard:hover .serviceDescription {
+  color: #34495e; /* Màu xám đậm khi hover */
+}
+
+/* Hiệu ứng viền và nền */
+.serviceCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.05); /* Một lớp bóng nhẹ tạo chiều sâu */
+  z-index: 1;
+}
+
+/* Cải thiện giao diện cho các card khi nhìn trên màn hình nhỏ */
+@media (max-width: 768px) {
+  .serviceGridWrapper {
+    gap: 20px;
+  }
+
+  .serviceCard {
+    width: 100%;
+    max-width: 350px; /* Tăng chiều rộng cho các card khi màn hình nhỏ */
+  }
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  font-family: 'Helvetica', sans-serif;
+  margin-top: 40px;
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+/* Footer Links */
+.footerLinks {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+/* Logo trong Footer */
+.footerLogo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logoImage {
+  max-width: 150px;  /* Đảm bảo kích thước logo hợp lý */
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+/* Thông tin bổ sung (Liên hệ, Địa chỉ) */
+.footerInfo {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ddd; /* Màu chữ sáng cho phần thông tin bổ sung */
+}
+
+.footerInfo p {
+  margin: 5px 0;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+/* Footer Links */
+.footerLinks {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.footerLink {
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footerLink:hover {
+  color: #f1c40f; /* Gold color for hover effect */
+}
+
+.footerCopyright {
+  font-size: 14px;
+  color: #aaa;
+  margin-top: 20px;
+}
+
+.footerCopyright a {
+  color: #fff;
   text-decoration: none;
 }
 
-.newsTitle:hover {
-  text-decoration: underline;
-}
-
-.newsActions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.newsPagination {
-  font-size: 14px;
-  color: #555;
-}
-
-.newsBtn {
-  background-color: #0056b3;
-  color: white;
-  padding: 8px 16px;
-  font-size: 14px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.newsBtn:hover {
-  background-color: #003f82;
+.footerCopyright a:hover {
+  color: #f1c40f; /* Gold color for hover effect */
 }

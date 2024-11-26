@@ -28,7 +28,7 @@ const FlightList = () => {
         <p className={styles.noFlights}>Hiện tại không có chuyến bay nào.</p>
       ) : (
         <>
-          <h2 className={styles.sectionTitle}>LỊCH BAY HÔM NAY</h2>{" "}
+          <h2 className={styles.sectionTitle}>VUI TỪNG CHUYẾN BAY</h2>{" "}
           {/* Tiêu đề chỉ xuất hiện một lần */}
           <ul className={styles.flightList}>
             {flights.map((flight) => (
