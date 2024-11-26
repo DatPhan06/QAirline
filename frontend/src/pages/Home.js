@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef} from "react";
 import styles from "./Home.module.css"; // Import CSS Module
 import { Link } from "react-router-dom";
 import FlightList from "../components/FlightList";
@@ -21,13 +21,43 @@ const locations = [
   },
 ];
 
+const services = [
+  {
+    title: "Dịch vụ ẩm thực",
+    description: "Thưởng thức dịch vụ ẩm thực tùy chọn trực tiếp trên chuyến bay.",
+    image: "/images/hanhly.jpg",
+  },
+  {
+    title: "Chỗ ngồi yêu thích",
+    description: "Lựa chọn ghế ngồi yêu thích của bạn trên chuyến bay ngay hôm nay.",
+    image: "/images/hanhly.jpg",
+  },
+  {
+    title: "Mua thêm hành lý",
+    description: "Bạn có thể nâng trọng lượng hành lý ký gửi theo các gói đa dạng và linh hoạt.",
+    image: "/images/hanhly.jpg",
+  },
+];
+
 function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
+  const servicesPerPage = 3; // Hiển thị 3 dịch vụ mỗi lần
+  const serviceGridRef = useRef(null);
 
-  const handleDotClick = (index) => {
-    setCurrentIndex(index);
+  // Hàm chuyển dịch các dịch vụ
+  const handleNextService = () => {
+    setCurrentServiceIndex((prevIndex) =>
+      prevIndex + 1 >= services.length - servicesPerPage ? 0 : prevIndex + 1
+    );
   };
 
+  const handlePrevService = () => {
+    setCurrentServiceIndex(
+      (prevIndex) => (prevIndex - 1 + services.length) % services.length
+    );
+  };
+  
   return (
     <div>
       {/* Hero Section */}
@@ -35,7 +65,6 @@ function Home() {
         className={styles.hero}
         style={{ backgroundImage: `url(${locations[currentIndex].image})` }}
       >
-        <h1 className={styles.header}> QAIRLINE - VUI TỪNG CHUYẾN BAY </h1>
         <div className={styles.heroOverlay}>
           <div className={styles.heroContent}>
             <div className={styles.descriptionBox}>
@@ -50,7 +79,7 @@ function Home() {
           </div>
         </div>
         <div className={styles.flightListSection}>
-              <FlightList />
+          <FlightList />
         </div>
 
         {/* Navigation Dots */}
@@ -61,7 +90,7 @@ function Home() {
               className={`${styles.dot} ${
                 currentIndex === index ? styles.activeDot : ""
               }`}
-              onClick={() => handleDotClick(index)}
+              onClick={() => setCurrentIndex(index)}
             ></div>
           ))}
         </div>
@@ -69,49 +98,73 @@ function Home() {
 
       {/* Featured Section */}
       <section className={styles.exploreServices}>
-        <h2 className={styles.sectionTitle}>Khám phá QAirline</h2>
-        <div className={styles.serviceGrid}>
-          <div className={styles.serviceCard}>
-            <img src="/images/service1.jpeg" alt="Dịch vụ" className={styles.serviceImage} />
-            <h3>Trải nghiệm bay cao cấp</h3>
-            <p>Thưởng thức dịch vụ 5 sao trên mọi chuyến bay.</p>
-          </div>
-          <div className={styles.serviceCard}>
-            <img src="/images/service2.jpeg" alt="Ưu đãi" className={styles.serviceImage} />
-            <h3>Ưu đãi đặc biệt</h3>
-            <p>Nhận ngay ưu đãi khi đặt vé trực tuyến.</p>
-          </div>
-          <div className={styles.serviceCard}>
-            <img src="/images/service3.jpeg" alt="Hành lý" className={styles.serviceImage} />
-            <h3>Hành lý tiện lợi</h3>
-            <p>Đảm bảo tiêu chuẩn hành lý dễ dàng và nhanh chóng.</p>
+        <h2 className={styles.sectionTitle}>Dịch Vụ Bổ Trợ</h2>
+        <div className={styles.serviceGridWrapper}>
+          <div className={styles.serviceGrid}>
+            {services.map((service, index) => (
+              <div key={index} className={styles.serviceCard}>
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className={styles.serviceImage}
+                />
+                <h3 className={styles.serviceTitle}>{service.title}</h3>
+                <p className={styles.serviceDescription}>{service.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Info Section */}
+      {/* Info Banner Section */}
       <section className={styles.infoBanner}>
-        <h2>Thông tin hữu ích</h2>
-        <p>Tất cả bạn cần biết cho hành trình của mình.</p>
-        <button className={styles.infoBtn}>Tìm hiểu thêm</button>
+        <div className={styles.infoContent}>
+          <h2>Thông tin hữu ích cho chuyến bay của bạn</h2>
+          <p>Tiêu chuẩn hành lý, điều kiện vé bay,… đều có ở đây!</p>
+        </div>
+        <button className={styles.infoBtn}>Tra cứu →</button>
       </section>
 
       {/* News Section */}
       <section className={styles.newsSection}>
-        <h2 className={styles.sectionTitle}>Tin tức mới nhất</h2>
-        <div className={styles.newsGrid}>
-          <div className={styles.newsCard}>
-            <h3>Thủ tục trực tuyến tại sân bay Phù Cát</h3>
-            <p>Ngày cập nhật: 02/10/2024</p>
-            <button className={styles.newsBtn}>Xem thêm</button>
-          </div>
-          <div className={styles.newsCard}>
-            <h3>Khuyến mãi mùa hè</h3>
-            <p>Ngày cập nhật: 15/06/2024</p>
-            <button className={styles.newsBtn}>Xem thêm</button>
-          </div>
+        <div className={styles.newsContent}>
+          <span className={styles.newsTitle}>Tin tức</span>
+          <a href="#" className={styles.newsLink}>
+            Bay Bangkok (Sân bay Don Mueang) - Tần suất hằng ngày
+          </a>
+          <button className={styles.newsMore}>Xem Thêm →</button>
         </div>
       </section>
+
+      {/* Footer Section */}
+      <footer className={styles.footer}>
+        <div className={styles.footerContent}>
+          {/* Logo */}
+          <div className={styles.footerLogo}>
+            <img src="/images/ylogo.png" alt="Logo" className={styles.logoImage} />
+          </div>
+
+          {/* Thêm thông tin liên hệ hoặc thông tin bổ sung ở đây */}
+          <div className={styles.footerInfo}>
+            <p>Địa chỉ: 144 Xuân Thủy, Cầu Giấy, Hà Nội, Việt Nam</p>
+            <p>Email: contact@company.com</p>
+            <p>Hotline: +84 123 456 789</p>
+          </div>
+
+          <div className={styles.footerLinks}>
+            <Link to="/about" className={styles.footerLink}>Giới thiệu</Link>
+            <Link to="/contact" className={styles.footerLink}>Liên hệ</Link>
+            <Link to="/privacy" className={styles.footerLink}>Chính sách bảo mật</Link>
+          </div>
+
+          <p className={styles.footerCopyright}>
+            &copy; 2024 Hãng hàng không QAirline.
+          </p>
+        </div>
+      </footer>
+
+
+      
     </div>
   );
 }
