@@ -55,3 +55,44 @@ def read_airports(db: Session = Depends(database.get_db)) -> List[schemas.Airpor
         List[schemas.Airport]: Danh sách thông tin các sân bay.
     """
     return services.airport_service.get_airports(db)
+
+@router.put("/{airport_id}", response_model=schemas.Airport)
+def update_airport(airport_id: int, airport: schemas.AirportCreate, db: Session = Depends(database.get_db)) -> schemas.Airport:
+    """
+    Cập nhật thông tin của một sân bay.
+
+    Args:
+        airport_id (int): ID của sân bay cần cập nhật.
+        airport (schemas.AirportCreate): Thông tin sân bay cần cập nhật.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Raises:
+        HTTPException: Nếu sân bay không tồn tại.
+
+    Returns:
+        schemas.Airport: Thông tin sân bay đã được cập nhật.
+    """
+    db_airport = services.airport_service.get_airport(db, airport_id)
+    if db_airport is None:
+        raise HTTPException(status_code=404, detail="Airport not found")
+    return services.airport_service.update_airport(db, db_airport, airport)
+
+@router.delete("/{airport_id}", response_model=schemas.Airport)
+def delete_airport(airport_id: int, db: Session = Depends(database.get_db)) -> schemas.Airport:
+    """
+    Xóa một sân bay.
+
+    Args:
+        airport_id (int): ID của sân bay cần xóa.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Raises:
+        HTTPException: Nếu sân bay không tồn tại.
+
+    Returns:
+        schemas.Airport: Thông tin sân bay đã bị xóa.
+    """
+    db_airport = services.airport_service.get_airport(db, airport_id)
+    if db_airport is None:
+        raise HTTPException(status_code=404, detail="Airport not found")
+    return services.airport_service.delete_airport(db, db_airport)

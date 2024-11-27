@@ -44,3 +44,35 @@ def get_airports(db: Session) -> List[models.Airport]:
     """
     return db.query(models.Airport).all()
 
+def update_airport(db: Session, db_airport: models.Airport, airport: schemas.AirportCreate) -> models.Airport:
+    """
+    Cập nhật thông tin của một sân bay.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+        db_airport (models.Airport): Đối tượng sân bay cần cập nhật.
+        airport (schemas.AirportCreate): Thông tin sân bay cần cập nhật.
+
+    Returns:
+        models.Airport: Đối tượng sân bay đã được cập nhật.
+    """
+    for key, value in airport.dict().items():
+        setattr(db_airport, key, value)
+    db.commit()
+    db.refresh(db_airport)
+    return db_airport
+
+def delete_airport(db: Session, db_airport: models.Airport) -> models.Airport:
+    """
+    Xóa một sân bay.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+        db_airport (models.Airport): Đối tượng sân bay cần xóa.
+
+    Returns:
+        models.Airport: Đối tượng sân bay đã bị xóa.
+    """
+    db.delete(db_airport)
+    db.commit()
+    return db_airport
