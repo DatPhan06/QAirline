@@ -1,4 +1,4 @@
-from .flight_service import create_flight, get_flight, get_flights
+from .flight_service import create_flight, get_flight, get_flights, update_flight, delete_flight
 from .booking_service import create_booking, get_booking
 from .user_service import (
     verify_password,

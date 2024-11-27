@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from typing import List  # Add this import
 from .. import models, schemas
 
@@ -44,22 +44,41 @@ def get_flights(db: Session) -> List[models.Flight]:
     Returns:
         list[models.Flight]: Danh sách các chuyến bay.
     """
-    flights = db.query(models.Flight).all()
-    try:
-        response = [
-            schemas.FlightResponse(
-                flight_id=flight.flight_id,
-                flight_number=flight.flight_number,
-                departure_airport=flight.departure_airport.airport_id,
-                arrival_airport=flight.arrival_airport.airport_id,
-                departure_time=flight.departure_time.strftime("%Y-%m-%d %H:%M:%S"),
-                arrival_time=flight.arrival_time.strftime("%Y-%m-%d %H:%M:%S"),
-                flight_duration=str(flight.flight_duration),
-                available_seats=flight.available_seats,
-                price=flight.price,
-            )
-            for flight in flights
-        ]
-        return response
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+    flights = db.query(models.Flight).options(
+        joinedload(models.Flight.departure_airport),
+        joinedload(models.Flight.arrival_airport)
+    ).all()
+    return flights
+    
+def update_flight(db: Session, db_flight: models.Flight, flight: schemas.FlightCreate) -> models.Flight:
+    """
+    Cập nhật thông tin của một chuyến bay.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+        db_flight (models.Flight): Đối tượng chuyến bay cần cập nhật.
+        flight (schemas.FlightCreate): Thông tin chuyến bay cần cập nhật.
+
+    Returns:
+        models.Flight: Đối tượng chuyến bay đã được cập nhật.
+    """
+    update_data = flight.dict(exclude_unset=True)
+    for key, value in update_data.items():
+        setattr(db_flight, key, value)
+    db.commit()
+    db.refresh(db_flight)
+    return db_flight
+
+def delete_flight(db: Session, db_flight: models.Flight) -> None:
+    """
+    Xóa một chuyến bay.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+        db_flight (models.Flight): Đối tượng chuyến bay cần xóa.
+
+    Returns:
+        models.Flight: Đối tượng chuyến bay đã bị xóa.
+    """
+    db.delete(db_flight)
+    db.commit()

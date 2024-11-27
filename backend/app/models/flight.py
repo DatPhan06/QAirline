@@ -40,7 +40,7 @@ class Flight(Base):
     updated_at = Column(DateTime, default=datetime.now(timezone.utc), onupdate=datetime.now(timezone.utc))
 
     # Quan hệ
-    airplane = relationship("Airplane", back_populates="flights")  # Chuyến bay sử dụng một máy bay
+    airplane = relationship("Airplane", foreign_keys=[airplane_id], back_populates="flights")  # Chuyến bay sử dụng một máy bay
     departure_airport = relationship("Airport", foreign_keys=[departure_airport_id], back_populates="departure_flights")
     arrival_airport = relationship("Airport", foreign_keys=[arrival_airport_id], back_populates="arrival_flights")
     notifications = relationship("Notification", back_populates="flight")  # Thông báo liên quan đến chuyến bay

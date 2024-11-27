@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 from .. import models, schemas, database, services
@@ -55,3 +55,44 @@ def read_flights(db: Session = Depends(database.get_db)) -> List[schemas.Flight]
         List[schemas.Flight]: Danh sách thông tin các chuyến bay.
     """
     return services.flight_service.get_flights(db)
+
+@router.put("/{flight_id}", response_model=schemas.Flight)
+def update_flight(flight_id: int, flight: schemas.FlightCreate, db: Session = Depends(database.get_db)) -> schemas.Flight:
+    """
+    Cập nhật thông tin của một chuyến bay.
+
+    Args:
+        flight_id (int): ID của chuyến bay cần cập nhật.
+        flight (schemas.FlightCreate): Thông tin chuyến bay cần cập nhật.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Raises:
+        HTTPException: Nếu chuyến bay không tồn tại.
+
+    Returns:
+        schemas.Flight: Thông tin chuyến bay đã được cập nhật.
+    """
+    db_flight = services.flight_service.get_flight(db, flight_id)
+    if db_flight is None:
+        raise HTTPException(status_code=404, detail="Flight not found")
+    return services.flight_service.update_flight(db, db_flight, flight)
+
+@router.delete("/{flight_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_flight(flight_id: int, db: Session = Depends(database.get_db)) -> None:
+    """
+    Xóa một chuyến bay.
+
+    Args:
+        flight_id (int): ID của chuyến bay cần xóa.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Raises:
+        HTTPException: Nếu chuyến bay không tồn tại.
+
+    Returns:
+        schemas.Flight: Thông tin chuyến bay đã bị xóa.
+    """
+    db_flight = services.flight_service.get_flight(db, flight_id)
+    if db_flight is None:
+        raise HTTPException(status_code=404, detail="Flight not found")
+    services.flight_service.delete_flight(db, db_flight)
