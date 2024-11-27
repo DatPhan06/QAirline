@@ -7,4 +7,4 @@ from .user_service import (
     authenticate_user,
 )
 from .auth import get_current_user
-from .airport_service import create_airport, get_airport, get_airports
+from .airport_service import create_airport, get_airport, get_airports, update_airport, delete_airport
