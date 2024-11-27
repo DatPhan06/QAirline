@@ -21,7 +21,7 @@ const FlightList = () => {
 
     fetchFlights();
   }, []);
-  
+
   return (
     <div className={styles.flightListContainer}>
       {flights.length === 0 ? (
@@ -37,10 +37,10 @@ const FlightList = () => {
                   {flight.flight_number}
                 </span>
                 <p className={styles.flightDetails}>
-                  <span>Departure:</span> {flight.departure_airport}
+                  <span>Departure:</span> {flight.departure_airport.iata_code}
                 </p>
                 <p className={styles.flightDetails}>
-                  <span>Destination:</span> {flight.arrival_airport}
+                  <span>Destination:</span> {flight.arrival_airport.iata_code}
                 </p>
                 <p className={styles.flightDetails}>
                   <span>Duration:</span> {flight.flight_duration} minutes
