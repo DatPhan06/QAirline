@@ -1,6 +1,8 @@
 from pydantic import BaseModel
 from datetime import date, datetime, time, timedelta
 from typing import Optional
+from .airport import Airport  # Import schema Airport
+
 
 class FlightBase(BaseModel):
     """
@@ -18,8 +20,9 @@ class FlightBase(BaseModel):
         price (decimal): Giá vé.
     """
     flight_number: str
-    departure_airport: int
-    arrival_airport: int
+    airplane_id: int
+    departure_airport_id: int
+    arrival_airport_id: int
     departure_time: datetime
     arrival_time: datetime
     flight_duration: Optional[time]
@@ -41,17 +44,10 @@ class Flight(FlightBase):
         flight_id (int): ID của chuyến bay.
     """
     flight_id: int
+    created_at: datetime
+    updated_at: datetime
+    departure_airport: Airport
+    arrival_airport: Airport
 
     class Config:
         orm_mode = True
-
-class FlightResponse(BaseModel):
-    flight_id: int
-    flight_number: str
-    departure_airport: int
-    arrival_airport: int
-    departure_time: str
-    arrival_time: str
-    flight_duration: str
-    available_seats: Optional[int]
-    price: float
