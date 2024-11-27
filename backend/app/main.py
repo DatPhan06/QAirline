@@ -31,6 +31,7 @@ app.include_router(bookings_router)
 app.include_router(users_router)
 app.include_router(general_info_router)
 app.include_router(airports_router)
+app.include_router(news_router)
 
 # Tạo các bảng trong cơ sở dữ liệu
 Base.metadata.create_all(bind=engine)

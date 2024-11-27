@@ -9,3 +9,4 @@ from .user_service import (
 from .auth import get_current_user
 from .general_info_service import *
 from .airport_service import *
+from .news_service import *
