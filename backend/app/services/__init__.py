@@ -8,3 +8,4 @@ from .user_service import (
 )
 from .auth import get_current_user
 from .airport_service import create_airport, get_airport, get_airports
+from .general_info_service import *
