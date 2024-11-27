@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import flights_router, bookings_router, users_router, general_info_router, airports_router
+from .routers import *
 from .base import Base
 from .database import engine
 import os
