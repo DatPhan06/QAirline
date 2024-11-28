@@ -6,3 +6,4 @@ from .airport import AirportBase, AirportCreate, Airport
 
 from .general_info import GeneralInfo, GeneralInfoBase, GeneralInfoCreate, GeneralInfoUpdate
 from .news import NewsBase, NewsCreate, News
+from .notification import NotificationBase, NotificationCreate, Notification
