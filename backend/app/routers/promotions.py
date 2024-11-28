@@ -8,13 +8,19 @@ router = APIRouter(
     tags=["promotions"],
 )
 
-
 @router.post("/", response_model=schemas.Promotion)
 def create_promotion(
     promotion: schemas.PromotionCreate, db: Session = Depends(database.get_db)
 ):
     """
     Tạo khuyến mãi mới.
+
+    Args:
+        promotion (schemas.PromotionCreate): Thông tin khuyến mãi cần tạo.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        schemas.Promotion: Đối tượng khuyến mãi vừa được tạo.
     """
     return services.promotion_service.create_promotion(db, promotion)
 
@@ -25,6 +31,16 @@ def read_promotion(
 ):
     """
     Lấy thông tin khuyến mãi theo ID.
+
+    Args:
+        promotion_id (int): ID của khuyến mãi cần lấy.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        schemas.Promotion: Đối tượng khuyến mãi nếu tìm thấy.
+    
+    Raises:
+        HTTPException: Nếu khuyến mãi không được tìm thấy (404).
     """
     promotion = services.promotion_service.get_promotion(db, promotion_id)
     if not promotion:
@@ -36,6 +52,12 @@ def read_promotion(
 def read_promotions(db: Session = Depends(database.get_db)):
     """
     Lấy danh sách tất cả khuyến mãi.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        List[schemas.Promotion]: Danh sách các khuyến mãi.
     """
     return services.promotion_service.get_promotions(db)
 
@@ -48,6 +70,17 @@ def update_promotion(
 ):
     """
     Cập nhật thông tin khuyến mãi theo ID.
+
+    Args:
+        promotion_id (int): ID của khuyến mãi cần cập nhật.
+        promotion_update (schemas.PromotionCreate): Dữ liệu khuyến mãi mới để cập nhật.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        schemas.Promotion: Khuyến mãi đã được cập nhật nếu tìm thấy.
+    
+    Raises:
+        HTTPException: Nếu khuyến mãi không được tìm thấy (404).
     """
     updated_promotion = services.promotion_service.update_promotion(
         db, promotion_id, promotion_update
@@ -63,6 +96,16 @@ def delete_promotion(
 ):
     """
     Xóa khuyến mãi theo ID.
+
+    Args:
+        promotion_id (int): ID của khuyến mãi cần xóa.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        dict: Thông báo xác nhận việc xóa thành công.
+    
+    Raises:
+        HTTPException: Nếu khuyến mãi không được tìm thấy (404).
     """
     success = services.promotion_service.delete_promotion(db, promotion_id)
     if not success:
