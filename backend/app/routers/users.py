@@ -1,89 +1,144 @@
+from datetime import timedelta
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-from datetime import timedelta, datetime
-from jose import JWTError, jwt
-from passlib.context import CryptContext
-from .. import models, schemas, database, services
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from ..services.user_service import (
-    verify_password,
-    get_password_hash,
-    get_user_by_email,
-    authenticate_user,
-)
+
+from .. import models, schemas, services
 from ..config import settings
+from ..database import get_db
 
 router = APIRouter(
     prefix="/users",
     tags=["users"],
 )
 
-# Cài đặt bảo mật
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/login")
 
 
 @router.post("/register", response_model=schemas.User)
-def register(user: schemas.UserCreate, db: Session = Depends(database.get_db)) -> models.User:
+def register(user: schemas.UserCreate, db: Session = Depends(get_db)) -> models.User:
     """
-    Đăng ký người dùng mới.
+    Đăng ký một người dùng mới.
 
-    :param user: Thông tin người dùng cần đăng ký.
-    :param db: Phiên làm việc với cơ sở dữ liệu.
-    :return: Thông tin người dùng đã đăng ký.
+    Args:
+        user (schemas.UserCreate): Thông tin người dùng để tạo mới.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        models.User: Thông tin người dùng đã được tạo.
     """
-    if get_user_by_email(db, user.email):
-        raise HTTPException(status_code=400, detail="Email đã được đăng ký")
-    hashed_password = get_password_hash(user.password)
-    new_user = models.User(
-        username=user.username,
-        email=user.email,
-        full_name=user.full_name,
-        hashed_password=hashed_password,
-    )
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
-    return new_user
+    return services.user_service.create_user(db, user)
 
 
 @router.post("/login")
 def login(
     form_data: OAuth2PasswordRequestForm = Depends(),
-    db: Session = Depends(database.get_db)
+    db: Session = Depends(get_db),
 ) -> dict:
     """
-    Đăng nhập người dùng.
+    Đăng nhập người dùng và trả về mã thông báo truy cập.
 
-    :param form_data: Dữ liệu đăng nhập của người dùng.
-    :param db: Phiên làm việc với cơ sở dữ liệu.
-    :return: Token truy cập và loại token.
+    Args:
+        form_data (OAuth2PasswordRequestForm): Dữ liệu đăng nhập từ người dùng.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        dict: Mã thông báo truy cập và loại token.
     """
-    user = authenticate_user(db, form_data.username, form_data.password)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Email hoặc mật khẩu không đúng",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+    user = services.user_service.authenticate_user(
+        db, form_data.username, form_data.password
+    )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = jwt.encode(
-        {"sub": user.email, "exp": datetime.utcnow() + access_token_expires},
-        settings.SECRET_KEY,
-        algorithm=settings.ALGORITHM,
+    access_token = services.user_service.create_access_token(
+        data={"sub": user.username},
+        expires_delta=access_token_expires,
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
 
 @router.get("/me", response_model=schemas.User)
-def read_users_me(current_user: models.User = Depends(services.get_current_user)) -> models.User:
+def read_users_me(
+    current_user: models.User = Depends(services.auth.get_current_active_user),
+) -> models.User:
     """
-    Lấy thông tin người dùng hiện tại.
+    Lấy thông tin người dùng hiện tại đã đăng nhập.
 
-    :param current_user: Người dùng hiện tại.
-    :return: Thông tin người dùng hiện tại.
+    Args:
+        current_user (models.User): Người dùng hiện tại (được xác thực).
+
+    Returns:
+        models.User: Thông tin người dùng hiện tại.
     """
     return current_user
+
+
+@router.get("/{user_id}", response_model=schemas.User)
+def read_user(user_id: int, db: Session = Depends(get_db)) -> models.User:
+    """
+    Lấy thông tin người dùng theo ID.
+
+    Args:
+        user_id (int): ID của người dùng cần lấy thông tin.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Raises:
+        HTTPException: Nếu không tìm thấy người dùng với ID đã cho.
+
+    Returns:
+        models.User: Thông tin người dùng.
+    """
+    user = services.user_service.get_user(db, user_id)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Người dùng không tồn tại"
+        )
+    return user
+
+
+@router.get("/", response_model=List[schemas.User])
+def read_users(db: Session = Depends(get_db)) -> List[models.User]:
+    """
+    Lấy danh sách tất cả người dùng.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        List[models.User]: Danh sách người dùng.
+    """
+    return services.user_service.get_users(db)
+
+
+@router.put("/{user_id}", response_model=schemas.User)
+def update_user(
+    user_id: int, user: schemas.UserUpdate, db: Session = Depends(get_db)
+) -> models.User:
+    """
+    Cập nhật thông tin người dùng.
+
+    Args:
+        user_id (int): ID của người dùng cần cập nhật.
+        user (schemas.UserUpdate): Thông tin cần cập nhật.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        models.User: Thông tin người dùng sau khi cập nhật.
+    """
+    return services.user_service.update_user(db, user_id, user)
+
+
+@router.delete("/{user_id}", response_model=dict)
+def delete_user(user_id: int, db: Session = Depends(get_db)) -> dict:
+    """
+    Xóa người dùng khỏi hệ thống.
+
+    Args:
+        user_id (int): ID của người dùng cần xóa.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        dict: Thông báo xác nhận xóa thành công.
+    """
+    return services.user_service.delete_user(db, user_id)

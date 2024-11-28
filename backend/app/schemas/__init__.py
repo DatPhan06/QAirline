@@ -1,4 +1,4 @@
-from .user import User, UserCreate  
+from .user import User, UserCreate, UserUpdate
 from .flight import Flight, FlightCreate 
 from .booked_tiket import BookedTicketBase, BookedTicketCreate, BookedTicketUpdate, BookedTicket
 from .airport import AirportBase, AirportCreate, Airport
