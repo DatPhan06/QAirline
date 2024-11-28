@@ -6,3 +6,5 @@ from .airports import router as airports_router
 from .news import router as news_router
 from .notifications import router as notification_router
 from .promotions import router as promotion_router
+from .tickets import router as tickets_router
+
