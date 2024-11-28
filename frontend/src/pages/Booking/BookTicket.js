@@ -77,23 +77,23 @@ const BookTicket = () => {
       return;
     }
 
-    const departure_airport_id = airports.find(
-      (airport) => airport.city === departure_airport
-    )?.airport_id;
+    // const departure_airport_iata = airports.find(
+    //   (airport) => airport.city === departure_airport
+    // )?.iata_code;
     
-    const arrival_airport_id = airports.find(
-      (airport) => airport.city === arrival_airport
-    )?.airport_id;
+    // const arrival_airport_iata = airports.find(
+    //   (airport) => airport.city === arrival_airport
+    // )?.iata_code;
     
     // Tìm chuyến bay khớp
     var filter_flights = flights.filter((flight) =>
-        flight.departure_airport === departure_airport_id &&
-        flight.arrival_airport === arrival_airport_id &&
+        flight.departure_airport.city === departure_airport &&
+        flight.arrival_airport.city === arrival_airport &&
         flight.departure_time.split('T')[0] === departure_time
     );
     setMatchingFlight(filter_flights);
 
-    if (!matchingFlight) {
+    if (filter_flights.length == 0) {
       alert("Không tìm thấy chuyến bay phù hợp.");
       return;
     }
