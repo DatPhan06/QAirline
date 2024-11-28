@@ -15,6 +15,13 @@ def create_notification(
 ):
     """
     Tạo thông báo mới.
+
+    Args:
+        notification (schemas.NotificationCreate): Thông tin thông báo cần tạo.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        schemas.Notification: Thông báo vừa được tạo.
     """
     return services.notification_service.create_notification(db, notification)
 
@@ -25,6 +32,16 @@ def read_notification(
 ):
     """
     Lấy thông tin thông báo theo ID.
+
+    Args:
+        notification_id (int): ID của thông báo cần lấy.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        schemas.Notification: Thông báo với ID tương ứng.
+    
+    Raises:
+        HTTPException: Nếu thông báo không được tìm thấy (404).
     """
     notification = services.notification_service.get_notification(db, notification_id)
     if not notification:
@@ -36,6 +53,12 @@ def read_notification(
 def read_notifications(db: Session = Depends(database.get_db)):
     """
     Lấy danh sách tất cả thông báo.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        list[schemas.Notification]: Danh sách các thông báo.
     """
     return services.notification_service.get_notifications(db)
 
@@ -48,6 +71,17 @@ def update_notification(
 ):
     """
     Cập nhật thông báo theo ID.
+
+    Args:
+        notification_id (int): ID của thông báo cần cập nhật.
+        notification_update (schemas.NotificationCreate): Thông tin cập nhật thông báo.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        schemas.Notification: Thông báo đã được cập nhật.
+    
+    Raises:
+        HTTPException: Nếu thông báo không được tìm thấy (404).
     """
     updated_notification = services.notification_service.update_notification(
         db, notification_id, notification_update
@@ -63,8 +97,18 @@ def delete_notification(
 ):
     """
     Xóa thông báo theo ID.
+
+    Args:
+        notification_id (int): ID của thông báo cần xóa.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        dict: Thông báo xác nhận việc xóa thành công.
+    
+    Raises:
+        HTTPException: Nếu thông báo không được tìm thấy (404).
     """
     success = services.notification_service.delete_notification(db, notification_id)
     if not success:
         raise HTTPException(status_code=404, detail="Notification not found")
-    return {"message": "Notification deleted successfully"}
+    return {"message": success}

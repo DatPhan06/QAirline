@@ -84,4 +84,6 @@ def delete_news(news_id: int, db: Session = Depends(database.get_db)) -> dict:
         dict: Kết quả xóa.
     """
     success = services.news_service.delete_news(db, news_id)
-    return {"success": success}
+    if not success:
+        raise HTTPException(status_code=404, detail="News not found")
+    return {"message": success}
