@@ -1,8 +1,15 @@
-# models/booked_ticket.py
-from sqlalchemy import Column, Integer, ForeignKey, String, DateTime, DECIMAL
-from sqlalchemy.orm import relationship
 from datetime import datetime, timezone
-from app.base import Base
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Float,
+    DateTime,
+    ForeignKey,
+)
+from sqlalchemy.orm import relationship
+
+from ..base import Base
 
 class BookedTicket(Base):
     """
@@ -31,7 +38,7 @@ class BookedTicket(Base):
     flight_id = Column(Integer, ForeignKey("flights.flight_id"), nullable=False)
     seat_id = Column(Integer, ForeignKey("seats.seat_id"), nullable=False)
     ticket_id = Column(Integer, ForeignKey("tickets.ticket_id"), nullable=False)
-    price = Column(DECIMAL(10, 2), nullable=False)
+    price = Column(Float, nullable=False)
     booking_time = Column(DateTime, default=datetime.now(timezone.utc))
     status = Column(String(50), default="booked")  # Trạng thái: 'booked', 'canceled', 'checked-in', v.v.
     created_at = Column(DateTime, default=datetime.now(timezone.utc))
