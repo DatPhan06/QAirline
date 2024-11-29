@@ -123,7 +123,7 @@ def create_user(db: Session, user: schemas.UserCreate) -> models.User:
     db.refresh(db_user)
     return db_user
 
-def authenticate_user(db: Session, username: str, password: str) -> models.User:
+def authenticate_user(db: Session, login_input: str, password: str) -> models.User:
     """
     Xác thực người dùng khi đăng nhập.
 
@@ -138,17 +138,14 @@ def authenticate_user(db: Session, username: str, password: str) -> models.User:
     Returns:
         models.User: Đối tượng người dùng đã được xác thực.
     """
-    user = get_user_by_username(db, username)
-    if not user:
+    if "@" in login_input:
+        user = get_user_by_email(db, login_input)
+    else:
+        user = get_user_by_username(db, login_input)
+    if not user or not verify_password(password, user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Tên đăng nhập hoặc mật khẩu không đúng",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    if not verify_password(password, user.hashed_password):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Tên đăng nhập hoặc mật khẩu không đúng",
+            detail="Tên đăng nhập, email hoặc mật khẩu không chính xác",
             headers={"WWW-Authenticate": "Bearer"},
         )
     return user
