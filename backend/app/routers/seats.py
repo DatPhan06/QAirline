@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import List, Optional
+from typing import List
 from app import models, schemas, services
 from app.database import get_db
 
@@ -18,6 +18,13 @@ def create_seat(
 ) -> models.Seat:
     """
     Tạo một ghế mới.
+
+    Args:
+        seat (schemas.SeatCreate): Thông tin ghế cần tạo.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        models.Seat: Thông tin ghế vừa được tạo.
     """
     return services.seat_service.create_seat(db, seat)
 
@@ -28,6 +35,16 @@ def get_seat(
 ) -> models.Seat:
     """
     Lấy thông tin ghế theo ID.
+
+    Args:
+        seat_id (int): ID của ghế cần lấy thông tin.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Raises:
+        HTTPException: Nếu ghế không tồn tại.
+
+    Returns:
+        models.Seat: Thông tin ghế.
     """
     seat = services.seat_service.get_seat(db, seat_id)
     if not seat:
@@ -40,6 +57,12 @@ def get_seats(
 ) -> List[models.Seat]:
     """
     Lấy danh sách tất cả ghế.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        List[models.Seat]: Danh sách tất cả ghế.
     """
     return services.seat_service.get_seats(db)
 
@@ -51,6 +74,17 @@ def update_seat(
 ) -> models.Seat:
     """
     Cập nhật thông tin ghế.
+
+    Args:
+        seat_id (int): ID của ghế cần cập nhật.
+        seat_update (schemas.SeatUpdate): Thông tin cập nhật ghế.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Raises:
+        HTTPException: Nếu ghế không tồn tại.
+
+    Returns:
+        models.Seat: Thông tin ghế sau khi cập nhật.
     """
     seat = services.seat_service.update_seat(db, seat_id, seat_update)
     if not seat:
@@ -64,6 +98,16 @@ def delete_seat(
 ) -> models.Seat:
     """
     Xóa ghế.
+
+    Args:
+        seat_id (int): ID của ghế cần xóa.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Raises:
+        HTTPException: Nếu ghế không tồn tại.
+
+    Returns:
+        models.Seat: Thông tin ghế vừa bị xóa.
     """
     seat = services.seat_service.delete_seat(db, seat_id)
     if not seat:
