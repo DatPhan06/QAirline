@@ -1,0 +1,25 @@
+/* frontend/src/pages/Booking/ManageTicket.module.css */
+
+.manageTicketPage {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.bookingList {
+  list-style: none;
+  padding: 0;
+}
+
+.bookingItem {
+  border-bottom: 1px solid #ccc;
+  padding: 15px 0;
+}
+
+.cancelButton {
+  padding: 8px 12px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}

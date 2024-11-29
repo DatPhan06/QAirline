@@ -29,6 +29,7 @@ app.add_middleware(
 app.include_router(flights_router)
 app.include_router(bookings_router)
 app.include_router(users_router)
+app.include_router(bookings_router)
 app.include_router(general_info_router)
 app.include_router(airports_router)
 app.include_router(news_router)
