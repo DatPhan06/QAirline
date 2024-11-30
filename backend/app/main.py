@@ -34,6 +34,7 @@ app.include_router(airports_router)
 app.include_router(news_router)
 app.include_router(notification_router)
 app.include_router(promotion_router)
+app.include_router(flight_log_router)
 
 # Tạo các bảng trong cơ sở dữ liệu
 Base.metadata.create_all(bind=engine)
