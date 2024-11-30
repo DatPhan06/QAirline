@@ -10,6 +10,7 @@ from ..config import settings
 from ..database import get_db
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/login")
+oauth2_scheme_admin = OAuth2PasswordBearer(tokenUrl="/admins/login")
 
 
 def get_current_user(
@@ -46,6 +47,31 @@ def get_current_user(
     if user is None:
         raise credentials_exception
     return user
+
+def get_current_admin(
+    token: str = Depends(oauth2_scheme_admin), db: Session = Depends(get_db)
+) -> models.Admin:
+    """
+    Lấy thông tin admin hiện tại từ token xác thực.
+    """
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Không thể xác thực thông tin",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(
+            token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
+        )
+        username: str = payload.get("sub")
+        if username is None:
+            raise credentials_exception
+    except JWTError:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token không hợp lệ.")
+    admin = db.query(models.Admin).filter(models.Admin.username == username).first()
+    if admin is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Admin không tồn tại.")
+    return admin
 
 
 def get_current_active_user(

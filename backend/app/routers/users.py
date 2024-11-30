@@ -14,8 +14,6 @@ router = APIRouter(
     tags=["users"],
 )
 
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
-
 
 @router.post("/register", response_model=schemas.User)
 def register(user: schemas.UserCreate, db: Session = Depends(get_db)) -> models.User:
@@ -50,7 +48,7 @@ def login(
     user = services.user_service.authenticate_user(
         db, form_data.username, form_data.password
     )
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = services.user_service.create_access_token(
         data={"sub": user.username},
         expires_delta=access_token_expires,
