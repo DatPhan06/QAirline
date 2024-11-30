@@ -19,6 +19,13 @@ router = APIRouter(
 def register_admin(admin: schemas.AdminCreate, db: Session = Depends(get_db)) -> schemas.Admin:
     """
     Đăng ký admin mới.
+
+    Args:
+        admin (schemas.AdminCreate): Thông tin admin mới.
+        db (Session): Kết nối cơ sở dữ liệu.
+
+    Returns:
+        schemas.Admin: Đối tượng admin đã được tạo.
     """
     return services.admin_service.create_admin(db, admin)
 
@@ -29,7 +36,14 @@ def login_admin(
     db: Session = Depends(get_db),
 ) -> dict:
     """
-    Đăng nhập admin, trả về mã thông báo truy cập.
+    Đăng nhập admin, trả về mã thông báo truy cập (JWT).
+
+    Args:
+        form_data (OAuth2PasswordRequestForm): Dữ liệu tên đăng nhập và mật khẩu.
+        db (Session): Kết nối cơ sở dữ liệu.
+
+    Returns:
+        dict: Mã thông báo truy cập (JWT) và loại mã thông báo (bearer).
     """
     admin = services.admin_service.authenticate_admin(
         db, form_data.username, form_data.password
@@ -49,6 +63,12 @@ def get_current_admin_info(
 ) -> schemas.Admin:
     """
     Lấy thông tin admin hiện tại từ token xác thực.
+
+    Args:
+        current_admin (models.Admin): Admin hiện tại từ middleware xác thực.
+
+    Returns:
+        schemas.Admin: Thông tin của admin hiện tại.
     """
     return current_admin
 
@@ -57,6 +77,16 @@ def get_current_admin_info(
 def get_admin(admin_id: int, db: Session = Depends(get_db)) -> schemas.Admin:
     """
     Lấy thông tin admin theo ID.
+
+    Args:
+        admin_id (int): ID của admin cần lấy thông tin.
+        db (Session): Kết nối cơ sở dữ liệu.
+
+    Raises:
+        HTTPException: Nếu không tìm thấy admin với ID cung cấp.
+
+    Returns:
+        schemas.Admin: Đối tượng admin với thông tin chi tiết.
     """
     admin = services.admin_service.get_admin_by_id(db, admin_id)
     if not admin:
@@ -70,6 +100,12 @@ def get_admin(admin_id: int, db: Session = Depends(get_db)) -> schemas.Admin:
 def get_all_admins(db: Session = Depends(get_db)) -> List[schemas.Admin]:
     """
     Lấy danh sách tất cả các admin.
+
+    Args:
+        db (Session): Kết nối cơ sở dữ liệu.
+
+    Returns:
+        List[schemas.Admin]: Danh sách tất cả các admin.
     """
     return services.admin_service.get_admins(db)
 
@@ -80,6 +116,17 @@ def update_admin(
 ) -> schemas.Admin:
     """
     Cập nhật thông tin admin.
+
+    Args:
+        admin_id (int): ID của admin cần cập nhật.
+        admin_update (schemas.AdminUpdate): Các thay đổi cần cập nhật.
+        db (Session): Kết nối cơ sở dữ liệu.
+
+    Raises:
+        HTTPException: Nếu không tìm thấy admin với ID cung cấp.
+
+    Returns:
+        schemas.Admin: Đối tượng admin đã được cập nhật.
     """
     updated_admin = services.admin_service.update_admin(db, admin_id, admin_update)
     if not updated_admin:
@@ -91,8 +138,18 @@ def update_admin(
 def delete_admin(admin_id: int, db: Session = Depends(get_db)) -> dict:
     """
     Xóa admin theo ID.
+
+    Args:
+        admin_id (int): ID của admin cần xóa.
+        db (Session): Kết nối cơ sở dữ liệu.
+
+    Raises:
+        HTTPException: Nếu không tìm thấy admin với ID cung cấp.
+
+    Returns:
+        dict: Thông báo xóa admin thành công.
     """
     success = services.admin_service.delete_admin(db, admin_id)
     if not success:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Admin not found")
-    return {"message": success}
+    return success
