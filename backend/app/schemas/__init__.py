@@ -10,3 +10,4 @@ from .news import NewsBase, NewsCreate, News
 from .notification import NotificationBase, NotificationCreate, Notification
 from .promotion import PromotionBase, PromotionCreate, Promotion
 from .flight_log import FlightLogBase, FlightLogCreate, FlightLog
+from .admin import AdminBase, AdminCreate, AdminUpdate, Admin
