@@ -9,3 +9,4 @@ from .airport_service import *
 from .news_service import *
 from .notification_service import *
 from .promotion_service import *
+from .flight_log_service import *

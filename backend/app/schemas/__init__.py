@@ -9,3 +9,4 @@ from .general_info import GeneralInfo, GeneralInfoBase, GeneralInfoCreate, Gener
 from .news import NewsBase, NewsCreate, News
 from .notification import NotificationBase, NotificationCreate, Notification
 from .promotion import PromotionBase, PromotionCreate, Promotion
+from .flight_log import FlightLogBase, FlightLogCreate, FlightLog
