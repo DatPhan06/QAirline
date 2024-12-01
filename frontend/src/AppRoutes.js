@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
+import PrivateAdminRoute from "./components/PrivateAdminRoute";
 
 import Home from "./pages/Home";
 
@@ -39,6 +40,14 @@ import Setting from "./pages/Account/Setting";
 import Logout from "./pages/Account/Logout";
 import SignIn from "./pages/Account/SignIn";
 import SignUp from "./pages/Account/SignUp";
+
+// Admin pages
+import AdminLogin from "./pages/Admin/Admin";
+import PostInfo from "./pages/Admin/PostInfo";
+import ManageAirplanes from "./pages/Admin/ManageAirplanes";
+import ManageFlights from "./pages/Admin/ManageFlights";
+import ViewBookings from "./pages/Admin/ViewBookings";
+import UpdateFlightTime from "./pages/Admin/UpdateFlightTime";
 
 function AppRoutes() {
   return (
@@ -145,6 +154,49 @@ function AppRoutes() {
       <Route path="/account/logout" element={<Logout />} />
       <Route path="/account/signin" element={<SignIn />} />
       <Route path="/account/signup" element={<SignUp />} />
+
+      {/* Admin */}
+      <Route path="/admin" element={<AdminLogin />} />
+      <Route
+        path="/admin/post-info"
+        element={
+          <PrivateAdminRoute>
+            <PostInfo />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/manage-airplanes"
+        element={
+          <PrivateAdminRoute>
+            <ManageAirplanes />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/manage-flights"
+        element={
+          <PrivateAdminRoute>
+            <ManageFlights />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/view-bookings"
+        element={
+          <PrivateAdminRoute>
+            <ViewBookings />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/update-flight-time"
+        element={
+          <PrivateAdminRoute>
+            <UpdateFlightTime />
+          </PrivateAdminRoute>
+        }
+      />
     </Routes>
   );
 }

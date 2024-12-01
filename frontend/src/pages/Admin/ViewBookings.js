@@ -1,0 +1,44 @@
+import React, { useEffect, useState } from "react";
+import { getAllAdmins } from "../../services/adminService";
+import AdminSidebar from "../../components/AdminSidebar";
+import styles from "./Admin.module.css";
+
+const ViewBookings = () => {
+  const [bookings, setBookings] = useState([]);
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const data = await getAllAdmins();
+        setBookings(data);
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      }
+    };
+
+    fetchBookings();
+  }, []);
+
+  return (
+    <div className={styles.adminContainer}>
+      <AdminSidebar />
+      <div className={styles.container}>
+        <h1>View Bookings</h1>
+        <ul>
+          {bookings.map((booking) => (
+            <li key={booking.id}>
+              <p>Booking ID: {booking.id}</p>
+              <p>User ID: {booking.userId}</p>
+              <p>Flight ID: {booking.flightId}</p>
+              <p>Seat ID: {booking.seatId}</p>
+              <p>Price: {booking.price}</p>
+              <p>Status: {booking.status}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default ViewBookings;
