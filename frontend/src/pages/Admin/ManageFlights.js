@@ -28,81 +28,84 @@ const ManageFlights = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <h1>Manage Flights</h1>
-      <form onSubmit={handleSubmit}>
-        {/* Add input fields for each flight data attribute */}
-        <label>
-          Flight Number:
-          <input
-            type="text"
-            name="flightNumber"
-            value={flightData.flightNumber}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Airplane ID:
-          <input
-            type="number"
-            name="airplaneId"
-            value={flightData.airplaneId}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Departure Airport ID:
-          <input
-            type="number"
-            name="departureAirportId"
-            value={flightData.departureAirportId}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Arrival Airport ID:
-          <input
-            type="number"
-            name="arrivalAirportId"
-            value={flightData.arrivalAirportId}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Departure Time:
-          <input
-            type="datetime-local"
-            name="departureTime"
-            value={flightData.departureTime}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Arrival Time:
-          <input
-            type="datetime-local"
-            name="arrivalTime"
-            value={flightData.arrivalTime}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Status:
-          <input
-            type="text"
-            name="status"
-            value={flightData.status}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
+    <div className={styles.adminContainer}>
+      <AdminSidebar />
+      <div className={styles.container}>
+        <h1>Manage Flights</h1>
+        <form onSubmit={handleSubmit}>
+          {/* Add input fields for each flight data attribute */}
+          <label>
+            Flight Number:
+            <input
+              type="text"
+              name="flightNumber"
+              value={flightData.flightNumber}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Airplane ID:
+            <input
+              type="number"
+              name="airplaneId"
+              value={flightData.airplaneId}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Departure Airport ID:
+            <input
+              type="number"
+              name="departureAirportId"
+              value={flightData.departureAirportId}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Arrival Airport ID:
+            <input
+              type="number"
+              name="arrivalAirportId"
+              value={flightData.arrivalAirportId}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Departure Time:
+            <input
+              type="datetime-local"
+              name="departureTime"
+              value={flightData.departureTime}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Arrival Time:
+            <input
+              type="datetime-local"
+              name="arrivalTime"
+              value={flightData.arrivalTime}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Status:
+            <input
+              type="text"
+              name="status"
+              value={flightData.status}
+              onChange={handleChange}
+            />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
   );
 };

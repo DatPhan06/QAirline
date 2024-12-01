@@ -40,6 +40,14 @@ import Logout from "./pages/Account/Logout";
 import SignIn from "./pages/Account/SignIn";
 import SignUp from "./pages/Account/SignUp";
 
+// Admin pages
+import AdminLogin from "./pages/Admin/Admin";
+import PostInfo from "./pages/Admin/PostInfo";
+import ManageAirplanes from "./pages/Admin/ManageAirplanes";
+import ManageFlights from "./pages/Admin/ManageFlights";
+import ViewBookings from "./pages/Admin/ViewBookings";
+import UpdateFlightTime from "./pages/Admin/UpdateFlightTime";
+
 function AppRoutes() {
   return (
     <Routes>
@@ -145,6 +153,14 @@ function AppRoutes() {
       <Route path="/account/logout" element={<Logout />} />
       <Route path="/account/signin" element={<SignIn />} />
       <Route path="/account/signup" element={<SignUp />} />
+
+      {/* Admin */}
+      <Route path="/admin" element={<AdminLogin />} />
+      <Route path="/admin/post-info" element={<PostInfo />} />
+      <Route path="/admin/manage-airplanes" element={<ManageAirplanes />} />
+      <Route path="/admin/manage-flights" element={<ManageFlights />} />
+      <Route path="/admin/view-bookings" element={<ViewBookings />} />
+      <Route path="/admin/update-flight-time" element={<UpdateFlightTime />} />
     </Routes>
   );
 }

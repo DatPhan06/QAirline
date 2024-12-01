@@ -19,29 +19,32 @@ const UpdateFlightTime = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <h1>Update Flight Time</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Flight ID:
-          <input
-            type="number"
-            value={flightId}
-            onChange={(e) => setFlightId(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          New Departure Time:
-          <input
-            type="datetime-local"
-            value={newDepartureTime}
-            onChange={(e) => setNewDepartureTime(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Update</button>
-      </form>
+    <div className={styles.adminContainer}>
+      <AdminSidebar />
+      <div className={styles.container}>
+        <h1>Update Flight Time</h1>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Flight ID:
+            <input
+              type="number"
+              value={flightId}
+              onChange={(e) => setFlightId(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            New Departure Time:
+            <input
+              type="datetime-local"
+              value={newDepartureTime}
+              onChange={(e) => setNewDepartureTime(e.target.value)}
+              required
+            />
+          </label>
+          <button type="submit">Update</button>
+        </form>
+      </div>
     </div>
   );
 };

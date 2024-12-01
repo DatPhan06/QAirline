@@ -1,20 +1,36 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
 import AppRoutes from "./AppRoutes";
 
 import "./styles/global.css";
 import "./styles/variables.css";
 
 function App() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
+  return (
+    <>
+      {!isAdminRoute && <Navbar />}
+      <AppRoutes />
+      {!isAdminRoute && <Footer />}
+    </>
+  );
+}
+
+function AppWrapper() {
   return (
     <Router>
-      <Navbar />
-      <AppRoutes />
-      <Footer/>
+      <App />
     </Router>
   );
 }
 
-export default App;
+export default AppWrapper;

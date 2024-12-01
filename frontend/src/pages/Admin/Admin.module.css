@@ -34,3 +34,13 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.adminContainer {
+  display: flex;
+}
+
+.content {
+  margin-left: 250px; /* Same width as the sidebar */
+  padding: 20px;
+  width: calc(100% - 250px);
+}
