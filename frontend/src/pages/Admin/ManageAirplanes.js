@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import { createAdmin } from "../../services/adminService";
+import { createAirplane } from "../../services/airplaneService";
 import AdminSidebar from "../../components/AdminSidebar";
+import AirplaneList from "../../components/AirplaneList";
 import styles from "./Admin.module.css";
 
 const ManageAirplanes = () => {
   const [airplaneData, setAirplaneData] = useState({
-    airplaneId: "",
     model: "",
-    capacity: "",
+    manufacturer: "",
+    seat_capacity: "",
+    range_km: "",
+    year_of_manufacture: "",
+    maintenance_status: "",
+    status: "",
   });
 
   const handleChange = (e) => {
@@ -17,7 +22,7 @@ const ManageAirplanes = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createAdmin(airplaneData);
+      await createAirplane(airplaneData);
       alert("Airplane data submitted successfully!");
     } catch (error) {
       console.error("Error submitting airplane data:", error);
@@ -26,42 +31,94 @@ const ManageAirplanes = () => {
 
   return (
     <div className={styles.adminContainer}>
-      <AdminSidebar />
-      <div className={styles.container}>
-        <h1>Manage Airplanes</h1>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Airplane ID:
-            <input
-              type="text"
-              name="airplaneId"
-              value={airplaneData.airplaneId}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Model:
-            <input
-              type="text"
-              name="model"
-              value={airplaneData.model}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Capacity:
-            <input
-              type="number"
-              name="capacity"
-              value={airplaneData.capacity}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
+      <div className={styles.sidebar}>
+        <AdminSidebar />
+      </div>
+      <div className={styles.mainContent}>
+        <div className={styles.formContainer}>
+          <h1>Manage Airplanes</h1>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.formGroup}>
+              <label>Model:</label>
+              <input
+                type="text"
+                name="model"
+                value={airplaneData.model}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Manufacturer:</label>
+              <input
+                type="text"
+                name="manufacturer"
+                value={airplaneData.manufacturer}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Seat Capacity:</label>
+              <input
+                type="number"
+                name="seat_capacity"
+                value={airplaneData.seat_capacity}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Range (km):</label>
+              <input
+                type="number"
+                name="range_km"
+                value={airplaneData.range_km}
+                onChange={handleChange}
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Year of Manufacture:</label>
+              <input
+                type="number"
+                name="year_of_manufacture"
+                value={airplaneData.year_of_manufacture}
+                onChange={handleChange}
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Maintenance Status:</label>
+              <input
+                type="text"
+                name="maintenance_status"
+                value={airplaneData.maintenance_status}
+                onChange={handleChange}
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Status:</label>
+              <input
+                type="text"
+                name="status"
+                value={airplaneData.status}
+                onChange={handleChange}
+                className={styles.input}
+              />
+            </div>
+            <button type="submit" className={styles.submitButton}>
+              Submit
+            </button>
+          </form>
+        </div>
+        <div className={styles.listContainer}>
+          <AirplaneList />
+        </div>
       </div>
     </div>
   );

@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import { createAdmin } from "../../services/adminService";
+import { createFlight } from "../../services/flightService";
 import AdminSidebar from "../../components/AdminSidebar";
 import FlightList from "../../components/FlightList";
 import styles from "./Admin.module.css";
 
 const ManageFlights = () => {
   const [flightData, setFlightData] = useState({
-    flightNumber: "",
-    airplaneId: "",
-    departureAirportId: "",
-    arrivalAirportId: "",
-    departureTime: "",
-    arrivalTime: "",
+    flight_number: "",
+    airplane_id: "",
+    departure_airport_id: "",
+    arrival_airport_id: "",
+    departure_time: "",
+    arrival_time: "",
+    flight_duration: "",
     status: "",
+    available_seats: "",
+    price: "",
   });
 
   const handleChange = (e) => {
@@ -22,7 +25,7 @@ const ManageFlights = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createAdmin(flightData);
+      await createFlight(flightData);
       alert("Flight data submitted successfully!");
     } catch (error) {
       console.error("Error submitting flight data:", error);
@@ -31,83 +34,131 @@ const ManageFlights = () => {
 
   return (
     <div className={styles.adminContainer}>
-      <AdminSidebar />
-      <div className={styles.container}>
-        <h1>Manage Flights</h1>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Flight Number:
-            <input
-              type="text"
-              name="flightNumber"
-              value={flightData.flightNumber}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Airplane ID:
-            <input
-              type="number"
-              name="airplaneId"
-              value={flightData.airplaneId}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Departure Airport ID:
-            <input
-              type="number"
-              name="departureAirportId"
-              value={flightData.departureAirportId}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Arrival Airport ID:
-            <input
-              type="number"
-              name="arrivalAirportId"
-              value={flightData.arrivalAirportId}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Departure Time:
-            <input
-              type="datetime-local"
-              name="departureTime"
-              value={flightData.departureTime}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Arrival Time:
-            <input
-              type="datetime-local"
-              name="arrivalTime"
-              value={flightData.arrivalTime}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Status:
-            <input
-              type="text"
-              name="status"
-              value={flightData.status}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
-        <FlightList />
+      <div className={styles.sidebar}>
+        <AdminSidebar />
+      </div>
+      <div className={styles.mainContent}>
+        <div className={styles.formContainer}>
+          <h1>Manage Flights</h1>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.formGroup}>
+              <label>Flight Number:</label>
+              <input
+                type="text"
+                name="flight_number"
+                value={flightData.flight_number}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Airplane ID:</label>
+              <input
+                type="number"
+                name="airplane_id"
+                value={flightData.airplane_id}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Departure Airport ID:</label>
+              <input
+                type="number"
+                name="departure_airport_id"
+                value={flightData.departure_airport_id}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Arrival Airport ID:</label>
+              <input
+                type="number"
+                name="arrival_airport_id"
+                value={flightData.arrival_airport_id}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Departure Time:</label>
+              <input
+                type="datetime-local"
+                name="departure_time"
+                value={flightData.departure_time}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Arrival Time:</label>
+              <input
+                type="datetime-local"
+                name="arrival_time"
+                value={flightData.arrival_time}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Flight Duration (HH:MM:SS):</label>
+              <input
+                type="text"
+                name="flight_duration"
+                value={flightData.flight_duration}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Status:</label>
+              <input
+                type="text"
+                name="status"
+                value={flightData.status}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Available Seats:</label>
+              <input
+                type="number"
+                name="available_seats"
+                value={flightData.available_seats}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Price:</label>
+              <input
+                type="number"
+                name="price"
+                value={flightData.price}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <button type="submit" className={styles.submitButton}>
+              Submit
+            </button>
+          </form>
+        </div>
+        <div className={styles.listContainer}>
+          <FlightList />
+        </div>
       </div>
     </div>
   );
