@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import AdminSidebar from "../../components/AdminSidebar";
+import FlightList from "../../components/FlightList";
 import styles from "./Admin.module.css";
 
 const ManageFlights = () => {
@@ -105,6 +107,7 @@ const ManageFlights = () => {
           </label>
           <button type="submit">Submit</button>
         </form>
+        <FlightList />
       </div>
     </div>
   );
