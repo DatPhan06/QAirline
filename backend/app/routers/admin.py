@@ -10,8 +10,8 @@ from ..config import settings
 from ..database import get_db
 
 router = APIRouter(
-    prefix="/admins",
-    tags=["admins"],
+    prefix="/admin",
+    tags=["admin"],
 )
 
 
