@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { loginAdmin } from "../../services/adminService";
 import styles from "./AdminLogin.module.css";
 
 const AdminLogin = () => {
@@ -14,21 +14,9 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const params = new URLSearchParams();
-    params.append("username", formData.username);
-    params.append("password", formData.password);
-
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/admin/login`,
-        params,
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      );
-      localStorage.setItem("adminToken", response.data.access_token);
+      const response = await loginAdmin(formData.username, formData.password);
+      localStorage.setItem("adminToken", response.access_token);
       alert("Đăng nhập thành công!");
       navigate("/admin/manage-flights");
     } catch (error) {

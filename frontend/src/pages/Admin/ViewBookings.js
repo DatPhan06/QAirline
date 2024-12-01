@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { getAllAdmins } from "../../services/adminService";
 import AdminSidebar from "../../components/AdminSidebar";
 import styles from "./Admin.module.css";
 
@@ -9,8 +9,8 @@ const ViewBookings = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await axios.get("/api/bookings");
-        setBookings(response.data);
+        const data = await getAllAdmins();
+        setBookings(data);
       } catch (error) {
         console.error("Error fetching bookings:", error);
       }

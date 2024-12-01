@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { updateAdmin } from "../../services/adminService";
 import AdminSidebar from "../../components/AdminSidebar";
 import styles from "./Admin.module.css";
 
@@ -10,9 +10,7 @@ const UpdateFlightTime = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/flights/${flightId}`, {
-        departureTime: newDepartureTime,
-      });
+      await updateAdmin(flightId, { departureTime: newDepartureTime });
       alert("Flight departure time updated successfully!");
     } catch (error) {
       console.error("Error updating flight departure time:", error);

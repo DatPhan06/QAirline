@@ -1,50 +1,65 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { createAdmin } from "../../services/adminService";
 import AdminSidebar from "../../components/AdminSidebar";
 import styles from "./Admin.module.css";
 
-const ManageFlights = () => {
-  const [flightData, setFlightData] = useState({
-    flightNumber: "",
+const ManageAirplanes = () => {
+  const [airplaneData, setAirplaneData] = useState({
     airplaneId: "",
-    departureAirportId: "",
-    arrivalAirportId: "",
-    departureTime: "",
-    arrivalTime: "",
-    status: "",
+    model: "",
+    capacity: "",
   });
 
   const handleChange = (e) => {
-    setFlightData({ ...flightData, [e.target.name]: e.target.value });
+    setAirplaneData({ ...airplaneData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/flights", flightData);
-      alert("Flight data submitted successfully!");
+      await createAdmin(airplaneData);
+      alert("Airplane data submitted successfully!");
     } catch (error) {
-      console.error("Error submitting flight data:", error);
+      console.error("Error submitting airplane data:", error);
     }
   };
 
   return (
     <div className={styles.adminContainer}>
       <AdminSidebar />
-      <div className={styles.content}>
-        <h1>Manage Flights</h1>
+      <div className={styles.container}>
+        <h1>Manage Airplanes</h1>
         <form onSubmit={handleSubmit}>
           <label>
-            Flight Number:
+            Airplane ID:
             <input
               type="text"
-              name="flightNumber"
-              value={flightData.flightNumber}
+              name="airplaneId"
+              value={airplaneData.airplaneId}
               onChange={handleChange}
               required
             />
           </label>
-          {/* Add other input fields here */}
+          <label>
+            Model:
+            <input
+              type="text"
+              name="model"
+              value={airplaneData.model}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Capacity:
+            <input
+              type="number"
+              name="capacity"
+              value={airplaneData.capacity}
+              onChange={handleChange}
+              required
+            />
+          </label>
           <button type="submit">Submit</button>
         </form>
       </div>
@@ -52,4 +67,4 @@ const ManageFlights = () => {
   );
 };
 
-export default ManageFlights;
+export default ManageAirplanes;

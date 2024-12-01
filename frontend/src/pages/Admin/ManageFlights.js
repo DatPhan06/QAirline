@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { createAdmin } from "../../services/adminService";
 import AdminSidebar from "../../components/AdminSidebar";
 import FlightList from "../../components/FlightList";
 import styles from "./Admin.module.css";
@@ -22,7 +22,7 @@ const ManageFlights = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/flights", flightData);
+      await createAdmin(flightData);
       alert("Flight data submitted successfully!");
     } catch (error) {
       console.error("Error submitting flight data:", error);
@@ -35,7 +35,6 @@ const ManageFlights = () => {
       <div className={styles.container}>
         <h1>Manage Flights</h1>
         <form onSubmit={handleSubmit}>
-          {/* Add input fields for each flight data attribute */}
           <label>
             Flight Number:
             <input
@@ -103,6 +102,7 @@ const ManageFlights = () => {
               name="status"
               value={flightData.status}
               onChange={handleChange}
+              required
             />
           </label>
           <button type="submit">Submit</button>
