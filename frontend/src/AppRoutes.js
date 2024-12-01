@@ -156,7 +156,7 @@ function AppRoutes() {
       <Route path="/account/signup" element={<SignUp />} />
 
       {/* Admin */}
-      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin" element={<AdminLogin />} />
       <Route
         path="/admin/post-info"
         element={
