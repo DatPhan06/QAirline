@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
+import PrivateAdminRoute from "./components/PrivateAdminRoute";
 
 import Home from "./pages/Home";
 
@@ -155,12 +156,47 @@ function AppRoutes() {
       <Route path="/account/signup" element={<SignUp />} />
 
       {/* Admin */}
-      <Route path="/admin" element={<AdminLogin />} />
-      <Route path="/admin/post-info" element={<PostInfo />} />
-      <Route path="/admin/manage-airplanes" element={<ManageAirplanes />} />
-      <Route path="/admin/manage-flights" element={<ManageFlights />} />
-      <Route path="/admin/view-bookings" element={<ViewBookings />} />
-      <Route path="/admin/update-flight-time" element={<UpdateFlightTime />} />
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route
+        path="/admin/post-info"
+        element={
+          <PrivateAdminRoute>
+            <PostInfo />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/manage-airplanes"
+        element={
+          <PrivateAdminRoute>
+            <ManageAirplanes />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/manage-flights"
+        element={
+          <PrivateAdminRoute>
+            <ManageFlights />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/view-bookings"
+        element={
+          <PrivateAdminRoute>
+            <ViewBookings />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/update-flight-time"
+        element={
+          <PrivateAdminRoute>
+            <UpdateFlightTime />
+          </PrivateAdminRoute>
+        }
+      />
     </Routes>
   );
 }

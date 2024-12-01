@@ -12,6 +12,8 @@ from ..database import get_db
 router = APIRouter(
     prefix="/admin",
     tags=["admin"],
+    dependencies=[Depends(services.auth.get_current_admin)]
+
 )
 
 
