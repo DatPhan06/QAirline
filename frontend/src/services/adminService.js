@@ -33,6 +33,10 @@ export const registerAdmin = async (adminData) => {
 export const loginAdmin = async (loginData) => {
   try {
     const response = await axiosInstance.post("/admins/login", loginData);
+    const { access_token } = response.data;
+    if (access_token) {
+      localStorage.setItem("adminToken", access_token);
+    }
     return response.data;
   } catch (error) {
     console.error("Error logging in admin:", error);
@@ -76,7 +80,10 @@ export const getAdminById = async (adminId) => {
 // Hàm cập nhật thông tin admin
 export const updateAdmin = async (adminId, updateData) => {
   try {
-    const response = await axiosInstance.put(`/admins/${adminId}`, updateData);
+    const response = await axiosInstance.put(
+      `/admins/${adminId}`, 
+      updateData
+    );
     return response.data;
   } catch (error) {
     console.error("Error updating admin:", error);
