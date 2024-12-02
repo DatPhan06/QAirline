@@ -10,12 +10,12 @@ from ..config import settings
 from ..database import get_db
 
 router = APIRouter(
-    prefix="/admins",
-    tags=["admins"],
+    prefix="/admin",
+    tags=["admin"]
 )
 
 
-@router.post("/register", response_model=schemas.Admin, status_code=status.HTTP_201_CREATED)
+@router.post("/register", response_model=schemas.Admin, status_code=status.HTTP_201_CREATED, dependencies=[Depends(services.auth.get_current_admin)])
 def register_admin(admin: schemas.AdminCreate, db: Session = Depends(get_db)) -> schemas.Admin:
     """
     Đăng ký admin mới.
@@ -57,7 +57,7 @@ def login_admin(
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.get("/me", response_model=schemas.Admin)
+@router.get("/me", response_model=schemas.Admin, dependencies=[Depends(services.auth.get_current_admin)])
 def get_current_admin_info(
     current_admin: models.Admin = Depends(services.auth.get_current_admin)
 ) -> schemas.Admin:
@@ -73,7 +73,7 @@ def get_current_admin_info(
     return current_admin
 
 
-@router.get("/{admin_id}", response_model=schemas.Admin)
+@router.get("/{admin_id}", response_model=schemas.Admin, dependencies=[Depends(services.auth.get_current_admin)])
 def get_admin(admin_id: int, db: Session = Depends(get_db)) -> schemas.Admin:
     """
     Lấy thông tin admin theo ID.
@@ -96,7 +96,7 @@ def get_admin(admin_id: int, db: Session = Depends(get_db)) -> schemas.Admin:
     return admin
 
 
-@router.get("/", response_model=List[schemas.Admin])
+@router.get("/", response_model=List[schemas.Admin], dependencies=[Depends(services.auth.get_current_admin)])
 def get_all_admins(db: Session = Depends(get_db)) -> List[schemas.Admin]:
     """
     Lấy danh sách tất cả các admin.
@@ -110,7 +110,7 @@ def get_all_admins(db: Session = Depends(get_db)) -> List[schemas.Admin]:
     return services.admin_service.get_admins(db)
 
 
-@router.put("/{admin_id}", response_model=schemas.Admin)
+@router.put("/{admin_id}", response_model=schemas.Admin, dependencies=[Depends(services.auth.get_current_admin)])
 def update_admin(
     admin_id: int, admin_update: schemas.AdminUpdate, db: Session = Depends(get_db)
 ) -> schemas.Admin:
@@ -134,7 +134,7 @@ def update_admin(
     return updated_admin
 
 
-@router.delete("/{admin_id}", response_model=dict)
+@router.delete("/{admin_id}", response_model=dict, dependencies=[Depends(services.auth.get_current_admin)])
 def delete_admin(admin_id: int, db: Session = Depends(get_db)) -> dict:
     """
     Xóa admin theo ID.

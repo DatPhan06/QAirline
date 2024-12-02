@@ -10,6 +10,6 @@ from .notifications import router as notification_router
 from .promotions import router as promotion_router
 from .tickets import router as tickets_router
 from .flight_logs import router as flight_log_router
-from .admins import router as admin_router
+from .admin import router as admin_router
 from .airplanes import router as airplane_router
 

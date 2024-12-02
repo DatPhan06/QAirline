@@ -10,7 +10,7 @@ from ..config import settings
 from ..database import get_db
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/login")
-oauth2_scheme_admin = OAuth2PasswordBearer(tokenUrl="/admins/login")
+oauth2_scheme_admin = OAuth2PasswordBearer(tokenUrl="/admin/login")
 
 
 def get_current_user(
