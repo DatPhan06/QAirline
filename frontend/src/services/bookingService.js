@@ -6,14 +6,16 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
+  withCredentials: true, // Ensure cookies are sent with requests
 });
 
-// Thêm interceptor để tự động đính kèm token vào header
+// Add interceptor to automatically attach token to headers
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token"); // Lấy token từ localStorage
+    const token =
+      localStorage.getItem("adminToken") || localStorage.getItem("token"); // Get token from localStorage
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`; // Đính kèm token vào header
+      config.headers.Authorization = `Bearer ${token}`; // Attach token to headers
     }
     return config;
   },

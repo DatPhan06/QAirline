@@ -113,3 +113,15 @@ def delete_booking(db: Session, booking: models.BookedTicket) -> None:
     """
     db.delete(booking)
     db.commit()
+
+def get_all_bookings(db: Session) -> List[models.BookedTicket]:
+    """
+    Lấy danh sách tất cả vé đã đặt.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        List[models.BookedTicket]: Danh sách tất cả vé đã đặt.
+    """
+    return db.query(models.BookedTicket).all()

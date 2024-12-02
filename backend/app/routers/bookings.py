@@ -1,11 +1,11 @@
-from typing import List
+from typing import List, Union
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from .. import models, schemas, services
 from ..database import get_db
-from ..services.auth import get_current_active_user
+from ..services.auth import get_current_active_user, get_current_admin, get_current_user_or_admin
 
 
 router = APIRouter(
@@ -68,7 +68,7 @@ def get_booking(
 @router.get("/", response_model=List[schemas.BookedTicket])
 def get_bookings(
     db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_active_user),
+    current_user: Union[models.User, models.Admin] = Depends(get_current_user_or_admin),
 ) -> List[models.BookedTicket]:
     """
     Lấy danh sách tất cả vé đã đặt của người dùng hiện tại.
@@ -80,6 +80,8 @@ def get_bookings(
     Returns:
         List[models.BookedTicket]: Danh sách vé đã đặt.
     """
+    if isinstance(current_user, models.Admin):
+        return services.booking_service.get_all_bookings(db)
     return services.booking_service.get_bookings_by_user(db, current_user.user_id)
 
 @router.put("/{booking_id}", response_model=schemas.BookedTicket)
