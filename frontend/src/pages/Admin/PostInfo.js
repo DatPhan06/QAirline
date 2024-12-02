@@ -23,17 +23,39 @@ import {
   updateNotification,
   deleteNotification,
 } from "../../services/notificationService";
+import { getCurrentAdmin } from "../../services/adminService";
 import AdminSidebar from "../../components/AdminSidebar";
 import styles from "./PostInfo.module.css";
 
 const PostInfo = () => {
   const [activeSection, setActiveSection] = useState("generalInfo");
   const [data, setData] = useState([]);
-  const [formData, setFormData] = useState({ title: "", content: "" });
+  const [formData, setFormData] = useState({
+    title: "",
+    content: "",
+    author_id: 0,
+  });
+  const [currentAdmin, setCurrentAdmin] = useState(null);
 
   useEffect(() => {
     fetchData();
   }, [activeSection]);
+
+  useEffect(() => {
+    const fetchCurrentAdmin = async () => {
+      try {
+        const adminData = await getCurrentAdmin();
+        setCurrentAdmin(adminData);
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          author_id: adminData.admin_id,
+        }));
+      } catch (error) {
+        console.error("Error fetching current admin:", error);
+      }
+    };
+    fetchCurrentAdmin();
+  }, []);
 
   const fetchData = async () => {
     try {
@@ -62,93 +84,174 @@ const PostInfo = () => {
 
   const handleSectionChange = (section) => {
     setActiveSection(section);
-    setFormData({ title: "", content: "", id: null });
+    setFormData({
+      title: "",
+      content: "",
+      author_id: currentAdmin ? currentAdmin.admin_id : 0,
+    });
   };
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleCreate = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!currentAdmin) {
+      alert("Vui lòng đăng nhập trước khi đăng bài.");
+      return;
+    }
+
+    const dataToSubmit = {
+      ...formData,
+      author_id: currentAdmin.admin_id,
+    };
+
     try {
       switch (activeSection) {
         case "generalInfo":
-          await createGeneralInfo(formData);
+          await createGeneralInfo(dataToSubmit);
           break;
         case "news":
-          await createNews(formData);
+          await createNews(dataToSubmit);
           break;
         case "promotions":
-          await createPromotion(formData);
+          await createPromotion(dataToSubmit);
           break;
         case "notifications":
-          await createNotification(formData);
+          await createNotification(dataToSubmit);
           break;
         default:
           break;
       }
       alert("Data posted successfully!");
       fetchData();
-      setFormData({ title: "", content: "" });
+      setFormData({ title: "", content: "", author_id: currentAdmin.admin_id });
     } catch (error) {
       console.error("Error posting data:", error);
     }
   };
 
-  const handleEdit = (item) => {
-    setFormData({ title: item.title, content: item.content, id: item.id });
-  };
-
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    try {
-      switch (activeSection) {
-        case "generalInfo":
-          await updateGeneralInfo(formData.id, formData);
-          break;
-        case "news":
-          await updateNews(formData.id, formData);
-          break;
-        case "promotions":
-          await updatePromotion(formData.id, formData);
-          break;
-        case "notifications":
-          await updateNotification(formData.id, formData);
-          break;
-        default:
-          break;
-      }
-      alert("Data updated successfully!");
-      fetchData();
-      setFormData({ title: "", content: "", id: null });
-    } catch (error) {
-      console.error("Error updating data:", error);
-    }
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      switch (activeSection) {
-        case "generalInfo":
-          await deleteGeneralInfo(id);
-          break;
-        case "news":
-          await deleteNews(id);
-          break;
-        case "promotions":
-          await deletePromotion(id);
-          break;
-        case "notifications":
-          await deleteNotification(id);
-          break;
-        default:
-          break;
-      }
-      alert("Data deleted successfully!");
-      fetchData();
-    } catch (error) {
-      console.error("Error deleting data:", error);
+  const renderForm = () => {
+    switch (activeSection) {
+      case "generalInfo":
+        return (
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.formGroup}>
+              <label>Title:</label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Content:</label>
+              <textarea
+                name="content"
+                value={formData.content}
+                onChange={handleInputChange}
+                required
+                className={styles.textarea}
+              />
+            </div>
+            <button type="submit" className={styles.submitButton}>
+              Create General Info
+            </button>
+          </form>
+        );
+      case "news":
+        return (
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.formGroup}>
+              <label>Title:</label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Content:</label>
+              <textarea
+                name="content"
+                value={formData.content}
+                onChange={handleInputChange}
+                required
+                className={styles.textarea}
+              />
+            </div>
+            <button type="submit" className={styles.submitButton}>
+              Create News
+            </button>
+          </form>
+        );
+      case "promotions":
+        return (
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.formGroup}>
+              <label>Title:</label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Content:</label>
+              <textarea
+                name="content"
+                value={formData.content}
+                onChange={handleInputChange}
+                required
+                className={styles.textarea}
+              />
+            </div>
+            <button type="submit" className={styles.submitButton}>
+              Create Promotion
+            </button>
+          </form>
+        );
+      case "notifications":
+        return (
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.formGroup}>
+              <label>Title:</label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Content:</label>
+              <textarea
+                name="content"
+                value={formData.content}
+                onChange={handleInputChange}
+                required
+                className={styles.textarea}
+              />
+            </div>
+            <button type="submit" className={styles.submitButton}>
+              Create Notification
+            </button>
+          </form>
+        );
+      default:
+        return null;
     }
   };
 
@@ -189,35 +292,9 @@ const PostInfo = () => {
             Notifications
           </button>
         </div>
-        <form
-          onSubmit={formData.id ? handleUpdate : handleCreate}
-          className={styles.form}
-        >
-          <div className={styles.formGroup}>
-            <label>Title:</label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleInputChange}
-              required
-              className={styles.input}
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label>Content:</label>
-            <textarea
-              name="content"
-              value={formData.content}
-              onChange={handleInputChange}
-              required
-              className={styles.textarea}
-            />
-          </div>
-          <button type="submit" className={styles.submitButton}>
-            {formData.id ? "Update" : "Create"}
-          </button>
-        </form>
+
+        {renderForm()}
+
         <div className={styles.dataList}>
           <h2>
             {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}{" "}
