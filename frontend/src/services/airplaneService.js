@@ -6,41 +6,19 @@ const axiosInstance = axios.create({
   baseURL: API_URL,
 });
 
-// Add interceptor to automatically attach token to headers
+// Thêm interceptor để tự động đính kèm token vào header
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("adminToken"); // Get token from localStorage
+    const token = localStorage.getItem("adminToken"); // Lấy token của admin từ localStorage
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`; // Attach token to headers
+      config.headers.Authorization = `Bearer ${token}`; // Đính kèm token vào header
     }
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-// Get all airplanes
-export const getAirplanes = async () => {
-  try {
-    const response = await axiosInstance.get("/airplanes/");
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching airplanes:", error);
-    throw error;
-  }
-};
-
-// Get airplane by ID
-export const getAirplaneById = async (airplaneId) => {
-  try {
-    const response = await axiosInstance.get(`/airplanes/${airplaneId}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching airplane:", error);
-    throw error;
-  }
-};
-
-// Create a new airplane
+// Hàm tạo máy bay mới
 export const createAirplane = async (airplaneData) => {
   try {
     const response = await axiosInstance.post("/airplanes/", airplaneData);
@@ -51,12 +29,34 @@ export const createAirplane = async (airplaneData) => {
   }
 };
 
-// Update an airplane
-export const updateAirplane = async (airplaneId, airplaneData) => {
+// Hàm lấy thông tin máy bay theo ID
+export const getAirplaneById = async (airplaneId) => {
+  try {
+    const response = await axiosInstance.get(`/airplanes/${airplaneId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching airplane:", error);
+    throw error;
+  }
+};
+
+// Hàm lấy danh sách tất cả máy bay
+export const getAirplanes = async () => {
+  try {
+    const response = await axiosInstance.get("/airplanes/");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching airplanes:", error);
+    throw error;
+  }
+};
+
+// Hàm cập nhật thông tin máy bay
+export const updateAirplane = async (airplaneId, updateData) => {
   try {
     const response = await axiosInstance.put(
-      `/airplanes/${airplaneId}`,
-      airplaneData
+        `/airplanes/${airplaneId}`, 
+        updateData
     );
     return response.data;
   } catch (error) {
@@ -65,7 +65,7 @@ export const updateAirplane = async (airplaneId, airplaneData) => {
   }
 };
 
-// Delete an airplane
+// Hàm xóa máy bay
 export const deleteAirplane = async (airplaneId) => {
   try {
     const response = await axiosInstance.delete(`/airplanes/${airplaneId}`);
