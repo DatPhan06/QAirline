@@ -383,11 +383,11 @@
 }
 
 input{
-  background-color: transparent !important; /* Nền trong suốt */
-  border: none !important; /* Xóa viền */
+  background-color: transparent; /* Nền trong suốt */
+  border: none; /* Xóa viền */
 }
 
 input:focus {
-  outline: none !important; /* Đảm bảo không có viền khi input được focus */
-  box-shadow: none !important; /* Xóa bất kỳ hiệu ứng shadow nào khi focus */
+  outline: none; /* Đảm bảo không có viền khi input được focus */
+  box-shadow: none; /* Xóa bất kỳ hiệu ứng shadow nào khi focus */
 }
