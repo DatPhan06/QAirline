@@ -1,0 +1,130 @@
+.adminContainer {
+  display: flex;
+}
+
+.adminSidebar {
+  width: 250px; /* Set the width of the sidebar */
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
+}
+
+.sectionTabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.sectionTabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.sectionTabs button {
+  flex: 1;
+  padding: 12px;
+  margin-right: 10px;
+  background-color: #e1e1e1;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sectionTabs button:last-child {
+  margin-right: 0;
+}
+
+.sectionTabs button.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  max-width: 800px;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.formGroup textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+.submitButton {
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.dataList {
+  max-width: 800px;
+}
+
+.dataList ul {
+  list-style: none;
+  padding: 0;
+}
+
+.dataList li {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.dataList h3 {
+  margin-top: 0;
+}
+
+.dataList p {
+  margin-bottom: 10px;
+}
+
+.dataList button {
+  padding: 8px 12px;
+  margin-right: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dataList button:last-child {
+  margin-right: 0;
+}
+
+.dataList button:hover {
+  opacity: 0.9;
+}
+
+.dataList .deleteButton {
+  background-color: #dc3545;
+}
