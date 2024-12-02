@@ -93,6 +93,7 @@
     "chrome-trace-event": "^1.0.4",
     "ci-info": "^3.9.0",
     "cjs-module-lexer": "^1.4.1",
+    "classnames": "^2.5.1",
     "clean-css": "^5.3.3",
     "cliui": "^7.0.4",
     "co": "^4.6.0",
