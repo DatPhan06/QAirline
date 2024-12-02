@@ -21,7 +21,7 @@ axiosInstance.interceptors.request.use(
 // Hàm đăng ký admin mới
 export const registerAdmin = async (adminData) => {
   try {
-    const response = await axiosInstance.post("/admins/register", adminData);
+    const response = await axiosInstance.post("/admin/register", adminData);
     return response.data;
   } catch (error) {
     console.error("Error registering admin:", error);
@@ -30,16 +30,22 @@ export const registerAdmin = async (adminData) => {
 };
 
 // Hàm đăng nhập admin
-export const loginAdmin = async (loginData) => {
+export const loginAdmin = async (username, password) => {
+  const params = new URLSearchParams();
+  params.append("username", username);
+  params.append("password", password);
   try {
-    const response = await axiosInstance.post("/admins/login", loginData);
-    const { access_token } = response.data;
-    if (access_token) {
-      localStorage.setItem("adminToken", access_token);
-    }
+    const response = await axiosInstance.post("/admin/login",
+      params, 
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
     return response.data;
   } catch (error) {
-    console.error("Error logging in admin:", error);
+    console.error("Error during admin login:", error);
     throw error;
   }
 };
@@ -47,7 +53,7 @@ export const loginAdmin = async (loginData) => {
 // Hàm lấy thông tin admin hiện tại
 export const getCurrentAdmin = async () => {
   try {
-    const response = await axiosInstance.get("/admins/me");
+    const response = await axiosInstance.get("/admin/me");
     return response.data;
   } catch (error) {
     console.error("Error fetching current admin:", error);
@@ -58,7 +64,7 @@ export const getCurrentAdmin = async () => {
 // Hàm lấy danh sách tất cả admin
 export const getAdmins = async () => {
   try {
-    const response = await axiosInstance.get("/admins/");
+    const response = await axiosInstance.get("/admin/");
     return response.data;
   } catch (error) {
     console.error("Error fetching admins:", error);
@@ -69,7 +75,7 @@ export const getAdmins = async () => {
 // Hàm lấy thông tin admin theo ID
 export const getAdminById = async (adminId) => {
   try {
-    const response = await axiosInstance.get(`/admins/${adminId}`);
+    const response = await axiosInstance.get(`/admin/${adminId}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching admin:", error);
@@ -81,7 +87,7 @@ export const getAdminById = async (adminId) => {
 export const updateAdmin = async (adminId, updateData) => {
   try {
     const response = await axiosInstance.put(
-      `/admins/${adminId}`, 
+      `/admin/${adminId}`, 
       updateData
     );
     return response.data;
@@ -94,7 +100,7 @@ export const updateAdmin = async (adminId, updateData) => {
 // Hàm xóa admin
 export const deleteAdmin = async (adminId) => {
   try {
-    const response = await axiosInstance.delete(`/admins/${adminId}`);
+    const response = await axiosInstance.delete(`/admin/${adminId}`);
     return response.data;
   } catch (error) {
     console.error("Error deleting admin:", error);

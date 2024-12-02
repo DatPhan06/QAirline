@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createAdmin } from "../../services/adminService";
+import { registerAdmin } from "../../services/adminService";
 import AdminSidebar from "../../components/AdminSidebar";
 import styles from "./Admin.module.css";
 
@@ -10,7 +10,7 @@ const PostInfo = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createAdmin({ title, content });
+      await registerAdmin({ title, content });
       alert("Information posted successfully!");
     } catch (error) {
       console.error("Error posting information:", error);

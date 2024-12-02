@@ -30,16 +30,22 @@ export const registerUser = async (userData) => {
 };
 
 // Hàm đăng nhập người dùng
-export const loginUser = async (loginData) => {
+export const loginUser = async (username, password) => {
+  const params = new URLSearchParams();
+  params.append("username", username);
+  params.append("password", password);
   try {
-    const response = await axiosInstance.post("/users/login", loginData);
-    const { access_token } = response.data;
-    if (access_token) {
-      localStorage.setItem("userToken", access_token);
-    }
+    const response = await axiosInstance.post("/users/login", 
+      params, 
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
     return response.data;
   } catch (error) {
-    console.error("Error logging in user:", error);
+    console.error("Error during user login:", error);
     throw error;
   }
 };

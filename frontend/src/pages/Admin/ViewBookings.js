@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllAdmins } from "../../services/adminService";
+import { getAdmins } from "../../services/adminService";
 import AdminSidebar from "../../components/AdminSidebar";
 import styles from "./Admin.module.css";
 
@@ -9,7 +9,7 @@ const ViewBookings = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const data = await getAllAdmins();
+        const data = await getAdmins();
         setBookings(data);
       } catch (error) {
         console.error("Error fetching bookings:", error);
