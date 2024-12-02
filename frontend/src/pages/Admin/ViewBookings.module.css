@@ -1,0 +1,99 @@
+/* ViewBookings.module.css */
+
+.adminContainer {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  background-color: #f4f7fc;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #003f82;
+  color: #fff;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #003f82;
+  margin-bottom: 20px;
+}
+
+.statsContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.statCard {
+  flex: 1;
+  background-color: #f9fafc;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  margin: 0 10px;
+}
+
+.statCard h2 {
+  font-size: 1.5rem;
+  color: #003f82;
+  margin-bottom: 10px;
+}
+
+.statCard p {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.listContainer {
+  background-color: #f9fafc;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.bookingList {
+  list-style: none;
+  padding: 0;
+}
+
+.bookingItem {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.bookingItem p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.bookingItem p strong {
+  color: #003f82;
+}
+
+@media (max-width: 768px) {
+  .statsContainer {
+    flex-direction: column;
+  }
+
+  .statCard {
+    margin: 10px 0;
+  }
+}

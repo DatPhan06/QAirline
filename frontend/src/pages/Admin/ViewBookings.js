@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getBookings } from "../../services/bookingService";
 import AdminSidebar from "../../components/AdminSidebar";
-import styles from "./Admin.module.css";
+import styles from "./ViewBookings.module.css";
 
 const ViewBookings = () => {
   const [bookings, setBookings] = useState([]);
