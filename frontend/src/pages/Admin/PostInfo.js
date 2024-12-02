@@ -30,12 +30,10 @@ import styles from "./PostInfo.module.css";
 const PostInfo = () => {
   const [activeSection, setActiveSection] = useState("generalInfo");
   const [data, setData] = useState([]);
-  const [formData, setFormData] = useState({
-    title: "",
-    content: "",
-    author_id: 0,
-  });
+  const [formData, setFormData] = useState({});
   const [currentAdmin, setCurrentAdmin] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editId, setEditId] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -74,7 +72,7 @@ const PostInfo = () => {
           result = await getNotifications();
           break;
         default:
-          break;
+          result = [];
       }
       setData(result);
     } catch (error) {
@@ -84,11 +82,9 @@ const PostInfo = () => {
 
   const handleSectionChange = (section) => {
     setActiveSection(section);
-    setFormData({
-      title: "",
-      content: "",
-      author_id: currentAdmin ? currentAdmin.admin_id : 0,
-    });
+    setFormData({});
+    setIsEditing(false);
+    setEditId(null);
   };
 
   const handleInputChange = (e) => {
@@ -102,153 +98,178 @@ const PostInfo = () => {
       return;
     }
 
+    const handleEdit = (item) => {
+      setFormData(item);
+      setIsEditing(true);
+      setEditId(item.id);
+    };
+
     const dataToSubmit = {
       ...formData,
       author_id: currentAdmin.admin_id,
     };
 
     try {
-      switch (activeSection) {
-        case "generalInfo":
-          await createGeneralInfo(dataToSubmit);
-          break;
-        case "news":
-          await createNews(dataToSubmit);
-          break;
-        case "promotions":
-          await createPromotion(dataToSubmit);
-          break;
-        case "notifications":
-          await createNotification(dataToSubmit);
-          break;
-        default:
-          break;
+      if (isEditing) {
+        switch (activeSection) {
+          case "generalInfo":
+            await updateGeneralInfo(editId, dataToSubmit);
+            break;
+          case "news":
+            await updateNews(editId, dataToSubmit);
+            break;
+          case "promotions":
+            await updatePromotion(editId, dataToSubmit);
+            break;
+          case "notifications":
+            await updateNotification(editId, dataToSubmit);
+            break;
+          default:
+            break;
+        }
+      } else {
+        switch (activeSection) {
+          case "generalInfo":
+            await createGeneralInfo(dataToSubmit);
+            break;
+          case "news":
+            await createNews(dataToSubmit);
+            break;
+          case "promotions":
+            await createPromotion(dataToSubmit);
+            break;
+          case "notifications":
+            await createNotification(dataToSubmit);
+            break;
+          default:
+            break;
+        }
       }
       alert("Data posted successfully!");
       fetchData();
-      setFormData({ title: "", content: "", author_id: currentAdmin.admin_id });
+      setFormData({});
+      setIsEditing(false);
+      setEditId(null);
     } catch (error) {
       console.error("Error posting data:", error);
     }
   };
 
-  const renderForm = () => {
+  const renderFormFields = () => {
     switch (activeSection) {
       case "generalInfo":
         return (
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.formGroup}>
-              <label>Title:</label>
-              <input
-                type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleInputChange}
-                required
-                className={styles.input}
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label>Content:</label>
-              <textarea
-                name="content"
-                value={formData.content}
-                onChange={handleInputChange}
-                required
-                className={styles.textarea}
-              />
-            </div>
-            <button type="submit" className={styles.submitButton}>
-              Create General Info
-            </button>
-          </form>
+          <>
+            <input
+              type="text"
+              name="title"
+              placeholder="Title"
+              value={formData.title || ""}
+              onChange={handleInputChange}
+            />
+            <textarea
+              name="content"
+              placeholder="Content"
+              value={formData.content || ""}
+              onChange={handleInputChange}
+            />
+          </>
         );
       case "news":
         return (
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.formGroup}>
-              <label>Title:</label>
-              <input
-                type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleInputChange}
-                required
-                className={styles.input}
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label>Content:</label>
-              <textarea
-                name="content"
-                value={formData.content}
-                onChange={handleInputChange}
-                required
-                className={styles.textarea}
-              />
-            </div>
-            <button type="submit" className={styles.submitButton}>
-              Create News
-            </button>
-          </form>
+          <>
+            <input
+              type="text"
+              name="title"
+              placeholder="Title"
+              value={formData.title || ""}
+              onChange={handleInputChange}
+            />
+            <textarea
+              name="content"
+              placeholder="Content"
+              value={formData.content || ""}
+              onChange={handleInputChange}
+            />
+          </>
         );
       case "promotions":
         return (
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.formGroup}>
-              <label>Title:</label>
-              <input
-                type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleInputChange}
-                required
-                className={styles.input}
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label>Content:</label>
-              <textarea
-                name="content"
-                value={formData.content}
-                onChange={handleInputChange}
-                required
-                className={styles.textarea}
-              />
-            </div>
-            <button type="submit" className={styles.submitButton}>
-              Create Promotion
-            </button>
-          </form>
+          <>
+            <input
+              type="text"
+              name="title"
+              placeholder="Title"
+              value={formData.title || ""}
+              onChange={handleInputChange}
+            />
+            <textarea
+              name="description"
+              placeholder="Description"
+              value={formData.description || ""}
+              onChange={handleInputChange}
+            />
+            <input
+              type="number"
+              name="discount_percentage"
+              placeholder="Discount Percentage"
+              value={formData.discount_percentage || ""}
+              onChange={handleInputChange}
+            />
+            <input
+              type="date"
+              name="start_date"
+              placeholder="Start Date"
+              value={formData.start_date || ""}
+              onChange={handleInputChange}
+            />
+            <input
+              type="date"
+              name="end_date"
+              placeholder="End Date"
+              value={formData.end_date || ""}
+              onChange={handleInputChange}
+            />
+          </>
         );
       case "notifications":
         return (
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.formGroup}>
-              <label>Title:</label>
-              <input
-                type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleInputChange}
-                required
-                className={styles.input}
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label>Content:</label>
-              <textarea
-                name="content"
-                value={formData.content}
-                onChange={handleInputChange}
-                required
-                className={styles.textarea}
-              />
-            </div>
-            <button type="submit" className={styles.submitButton}>
-              Create Notification
-            </button>
-          </form>
+          <>
+            <input
+              type="text"
+              name="title"
+              placeholder="Title"
+              value={formData.title || ""}
+              onChange={handleInputChange}
+            />
+            <textarea
+              name="content"
+              placeholder="Content"
+              value={formData.content || ""}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              name="type"
+              placeholder="Type"
+              value={formData.type || ""}
+              onChange={handleInputChange}
+            />
+            <input
+              type="number"
+              name="user_id"
+              placeholder="User ID"
+              value={formData.user_id || ""}
+              onChange={handleInputChange}
+            />
+            <input
+              type="number"
+              name="flight_id"
+              placeholder="Flight ID"
+              value={formData.flight_id || ""}
+              onChange={handleInputChange}
+            />
+          </>
         );
       default:
         return null;
@@ -293,7 +314,12 @@ const PostInfo = () => {
           </button>
         </div>
 
-        {renderForm()}
+        <form onSubmit={handleSubmit}>
+          {renderFormFields()}
+          <button type="submit">
+            {isEditing ? "Update" : "Add"} {activeSection}
+          </button>
+        </form>
 
         <div className={styles.dataList}>
           <h2>
@@ -305,6 +331,21 @@ const PostInfo = () => {
               <li key={item.id}>
                 <h3>{item.title}</h3>
                 <p>{item.content}</p>
+                {activeSection === "notifications" && (
+                  <>
+                    <p>Type: {item.type}</p>
+                    <p>User ID: {item.user_id}</p>
+                    <p>Flight ID: {item.flight_id}</p>
+                  </>
+                )}
+                {activeSection === "promotions" && (
+                  <>
+                    <p>Description: {item.description}</p>
+                    <p>Discount: {item.discount_percentage}%</p>
+                    <p>Start Date: {item.start_date}</p>
+                    <p>End Date: {item.end_date}</p>
+                  </>
+                )}
                 <button onClick={() => handleEdit(item)}>Edit</button>
                 <button onClick={() => handleDelete(item.id)}>Delete</button>
               </li>

@@ -1,130 +1,113 @@
 .adminContainer {
   display: flex;
+  flex-direction: row;
+  min-height: 100vh;
 }
 
 .adminSidebar {
-  width: 250px; /* Set the width of the sidebar */
+  width: 250px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .mainContent {
   flex: 1;
   padding: 20px;
+  background-color: #fff;
 }
 
 .sectionTabs {
   display: flex;
-  margin-bottom: 20px;
-}
-
-.sectionTabs {
-  display: flex;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
 .sectionTabs button {
-  flex: 1;
-  padding: 12px;
-  margin-right: 10px;
-  background-color: #e1e1e1;
+  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.sectionTabs button:last-child {
-  margin-right: 0;
-}
-
-.sectionTabs button.active {
   background-color: #007bff;
   color: #fff;
-}
-
-.form {
-  background-color: #f9f9f9;
-  padding: 20px;
+  cursor: pointer;
   border-radius: 5px;
-  margin-bottom: 30px;
-  max-width: 800px;
+  transition: background-color 0.3s ease;
 }
 
-.formGroup {
-  margin-bottom: 15px;
+.sectionTabs button.active,
+.sectionTabs button:hover {
+  background-color: #0056b3;
 }
 
-.formGroup label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.formGroup input,
-.formGroup textarea {
-  width: 100%;
+form input,
+form textarea {
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 500px;
 }
 
-.formGroup textarea {
-  resize: vertical;
-  height: 100px;
-}
-
-.submitButton {
-  padding: 12px 20px;
+form button {
+  padding: 10px 20px;
+  border: none;
   background-color: #28a745;
   color: #fff;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
-  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #218838;
 }
 
 .dataList {
-  max-width: 800px;
+  margin-top: 20px;
+}
+
+.dataList h2 {
+  margin-bottom: 10px;
 }
 
 .dataList ul {
-  list-style: none;
+  list-style-type: none;
   padding: 0;
 }
 
 .dataList li {
-  background-color: #fff;
   padding: 15px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-.dataList h3 {
-  margin-top: 0;
-}
-
-.dataList p {
   margin-bottom: 10px;
+  background-color: #f9f9f9;
 }
 
-.dataList button {
-  padding: 8px 12px;
-  margin-right: 10px;
+.dataList li h3 {
+  margin: 0 0 10px 0;
+}
+
+.dataList li p {
+  margin: 5px 0;
+}
+
+.dataList li button {
+  padding: 5px 10px;
+  border: none;
   background-color: #007bff;
   color: #fff;
-  border: none;
-  border-radius: 4px;
   cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-right: 5px;
 }
 
-.dataList button:last-child {
-  margin-right: 0;
-}
-
-.dataList button:hover {
-  opacity: 0.9;
-}
-
-.dataList .deleteButton {
-  background-color: #dc3545;
+.dataList li button:hover {
+  background-color: #0056b3;
 }
