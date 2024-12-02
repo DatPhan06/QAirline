@@ -1,0 +1,113 @@
+.adminContainer {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
+
+.adminSidebar {
+  width: 250px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.sectionTabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.sectionTabs button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.sectionTabs button.active,
+.sectionTabs button:hover {
+  background-color: #0056b3;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+form input,
+form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 500px;
+}
+
+form button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #28a745;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #218838;
+}
+
+.dataList {
+  margin-top: 20px;
+}
+
+.dataList h2 {
+  margin-bottom: 10px;
+}
+
+.dataList ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.dataList li {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.dataList li h3 {
+  margin: 0 0 10px 0;
+}
+
+.dataList li p {
+  margin: 5px 0;
+}
+
+.dataList li button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-right: 5px;
+}
+
+.dataList li button:hover {
+  background-color: #0056b3;
+}
