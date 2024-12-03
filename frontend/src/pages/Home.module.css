@@ -1,90 +1,385 @@
-
-/* Hero Section */
-.hero {
+.landing-page,
+.landing-page * {
+  box-sizing: border-box;
+}
+.landing-page {
+  background: #fafbfc;
+  height: 3528px;
   position: relative;
-  width: 100vw;
-  height: 560px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  overflow: hidden;
+}
+.rectangle-31 {
+  background: linear-gradient(to left, #d9d9d9, #8b8787);
+  width: 100%;
+  height: 629px;
+  position: absolute;
+  object-fit: cover;
+}
+.frame-38 {
+  background: var(--neutrals, #ffffff);
+  border-radius: 16px;
+  padding: 16px 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 1220px;
+  position: absolute;
+  left:165px;
+  top: 532px;
+  box-shadow: 0px 4px 16px 0px rgba(141, 211, 187, 0.15);
+}
+.line-4 {
+  margin-top: -4px;
+  border-style: solid;
+  border-color: var(--mint-green, #8dd3bb);
+  border-width: 4px 0 0 0;
+  flex-shrink: 0;
+  width: 100px;
+  height: 0px;
+  position: absolute;
+  left: 33px;
+  top: 79px;
+}
+.frame-2608739 {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-2608738 {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-2608721 {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.airplane {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.chuy-n-bay {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-semibold-16px-font-family,
+    "Montserrat-SemiBold",
+    sans-serif
+  );
+  font-size: var(--montserrat-semibold-16px-font-size, 16px);
+  font-weight: var(--montserrat-semibold-16px-font-weight, 600);
+  position: relative;
+}
+.line-1 {
+  border-style: solid;
+  border-color: #d7e2ee;
+  border-width: 1px 0 0 0;
+  flex-shrink: 0;
+  width: 48px;
+  height: 0px;
+  position: relative;
+  transform-origin: 0 0;
+  transform: rotate(90deg) scale(1, 1);
+  margin-bottom: 5px;
+}
+.frame-40 {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 1184px;
+  position: relative;
+}
+.text-field {
+  border-radius: 4px 4px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 339px;
+  height: 56px;
+  position: relative;
+}
+.text-field2 {
+  background: #ffffff;
+  border-radius: 4px;
+  border-style: solid;
+  border-color: #79747e;
+  border-width: 1px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.state-layer {
+  border-radius: 4px 4px 0px 0px;
+  padding: 4px 0px 4px 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: center;
+  flex: 1;
+  height: 40px;
+  position: relative;
+}
+.input-text {
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.input-text2 {
+  color: #1c1b1f;
+  text-align: left;
+  font-family: var(
+    --montserrat-regular-16px-font-family,
+    "Montserrat-Regular",
+    sans-serif
+  );
+  font-size: var(--montserrat-regular-16px-font-size, 16px);
+  font-weight: var(--montserrat-regular-16px-font-weight, 400);
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  transition: background-image 0.5s ease-in-out;
+  justify-content: flex-start;
 }
-
-.hero::before {
-  content: "";
+.label-text {
+  background: var(--neutrals-white, #ffffff);
+  padding: 0px 4px 0px 4px;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: inherit; /* Sao chép hình nền từ .hero */
-  filter: blur(3px); /* Làm mờ lớp phủ */
-  z-index: 1; /* Đặt dưới nội dung chính */
+  left: -4px;
+  top: -16px;
 }
-
-/* Đảm bảo nội dung nằm trên lớp phủ */
-.hero > * {
+.label-text2 {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-regular-14px-font-family,
+    "Montserrat-Regular",
+    sans-serif
+  );
+  font-size: var(--montserrat-regular-14px-font-size, 14px);
+  font-weight: var(--montserrat-regular-14px-font-weight, 400);
   position: relative;
-  z-index: 2;
+}
+.trailing-icon {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  position: relative;
+}
+.text-field3 {
+  border-radius: 4px 4px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 359px;
+  height: 56px;
+  position: relative;
+}
+.text-field4 {
+  border-radius: 4px 4px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 330px;
+  height: 56px;
+  position: relative;
+}
+.state-layer2 {
+  border-radius: 4px 4px 0px 0px;
+  padding: 8px 0px 8px 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 210px;
+  position: relative;
+}
+.label-text3 {
+  color: #1c1b1f;
+  text-align: left;
+  font-family: var(
+    --montserrat-regular-14px-font-family,
+    "Montserrat-Regular",
+    sans-serif
+  );
+  font-size: var(--montserrat-regular-14px-font-size, 14px);
+  font-weight: var(--montserrat-regular-14px-font-weight, 400);
+  position: relative;
+}
+.text-field5 {
+  border-radius: 4px 4px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 140px;
+  height: 56px;
+  position: relative;
+}
+.frame-46 {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: center;
+  justify-content: flex-end;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.button {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.style-layer {
+  background: var(--mint-green, #8dd3bb);
+  border-radius: 4px;
+  padding: 8px 16px 8px 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 48px;
+  position: relative;
+}
+.paper-plane {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  overflow: visible;
+}
+.button2 {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-medium-14px-font-family,
+    "Montserrat-Medium",
+    sans-serif
+  );
+  font-size: var(--montserrat-medium-14px-font-size, 14px);
+  font-weight: var(--montserrat-medium-14px-font-weight, 500);
+  position: relative;
 }
 
-/*Title header*/
-
-/* Hero Overlay */
-.heroOverlay {
+.frame-2608753 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start; /* Căn các phần tử ở bên trái */
+  justify-content: flex-start;
   position: absolute;
-  top: 30%;
-  left: 0;
-  transform: translateY(-50%);
-  text-align: center;
-
-  border-radius: 30px; /* Bo góc mềm mại hơn */
-  color: #fff;
-  z-index: 2;
-  max-width: 50%; /* Giới hạn chiều rộng */
-  transition: all 0.4s ease; /* Hiệu ứng mượt khi xuất hiện */
+  left: 199px;
+  top: 150px;
+  width: 100%; /* Đảm bảo phần tử này chiếm toàn bộ chiều rộng */
 }
 
-
-/* Description Box */
-.descriptionBox {
-  opacity: 0.9; /* Làm mờ nhạt để tạo sự tinh tế */
-  margin-left: 80px;
+.frame-2608752 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start; /* Căn các phần tử con ở bên trái */
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  width: 100%; /* Đảm bảo các phần tử trong này chiếm toàn bộ chiều rộng */
 }
 
-/* Location Title */
-.locationTitle {
-  font-size: 86px; /* Phông chữ to và nổi bật */
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #282623; /* Màu vàng pastel nổi bật */
-  font-family: "Dancing Script", cursive; /* Font chữ kiểu viết tay */
-  text-shadow: 3px 3px 10px rgba(142, 140, 140, 0.6); /* Hiệu ứng bóng mờ tinh tế */
-  letter-spacing: 2px; /* Tăng khoảng cách giữa các ký tự */
-  transition: all 0.4s ease; /* Hiệu ứng mượt khi hiển thị */
+.helping-others,
+.live-travel,
+.special-offers-to-suit-your-plan {
+  color: var(--neutrals, #ffffff);
+  text-align: left; /* Đảm bảo các chữ căn trái */
+  font-family: "TradeGothicLtExtended-Bold", sans-serif;
+  position: relative;
 }
 
-/* Location Description */
-.locationDescription {
-  font-family: "Dancing Script", cursive;
-  font-size: 20px;
-  line-height: 1.8; /* Tăng khoảng cách dòng để dễ đọc */
-  margin-bottom: 25px;
-  color: #393434;
-  text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5); /* Bóng mờ nhẹ hơn */
-  transition: transform 0.4s ease, opacity 0.4s ease; /* Hiệu ứng khi hiển thị */
+.live-travel {
+  font-size: 80px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-.locationDescription:hover {  
-  transform: scale(1.02); /* Phóng to nhẹ khi hover */
-  opacity: 1; /* Hiển thị rõ hơn */
+.special-offers-to-suit-your-plan {
+  font-family: var(--montserrat-semibold-20px-font-family, "Montserrat-SemiBold", sans-serif);
+  font-size: var(--montserrat-semibold-20px-font-size, 20px);
+  font-weight: var(--montserrat-semibold-20px-font-weight, 600);
 }
 
-/* CTA Button */
+.button-container {
+  margin-left: 900px; /* Đẩy nút về phía bên phải */
+}
+
 .bookBtn {
   background: linear-gradient(to right, #1e90ff, #00bfff); /* Gradient xanh dương sáng */
   padding: 20px 40px; /* Tăng kích thước nút */
@@ -102,7 +397,6 @@
   box-shadow: 0px 10px 25px rgba(30, 144, 255, 0.4); /* Bóng mờ lớn hơn */
   letter-spacing: 2px; /* Khoảng cách giữa các chữ */
 }
-
 /* Hiệu ứng ánh sáng di chuyển */
 .bookBtn::before {
   content: "";
@@ -111,7 +405,7 @@
   left: -100%;
   width: 200%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.4); /* Ánh sáng trắng nhẹ */
+  background: rgba(148, 178, 255, 0.4); /* Ánh sáng trắng nhẹ */
   transform: skewX(-45deg);
   transition: all 0.5s ease;
 }
@@ -142,7 +436,7 @@
   width: calc(100% + 40px);
   height: calc(100% + 40px);
   border-radius: 50px;
-  background: rgba(255, 255, 255, 0.2); /* Ánh sáng trắng nhạt */
+  background: rgba(189, 188, 188, 0.2); /* Ánh sáng trắng nhạt */
   opacity: 0;
   transition: all 0.6s ease;
 }
@@ -152,394 +446,1088 @@
   transform: scale(1.2); /* Mở rộng vòng sáng */
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .bookBtn {
-    padding: 15px 30px; /* Giảm kích thước nút trên màn hình nhỏ */
-    font-size: 18px;
-  }
-}
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .heroOverlay {
-    padding: 20px 40px;
-  }
-
-  .locationTitle {
-    font-size: 32px;
-  }
-
-  .locationDescription {
-    font-size: 16px;
-  }
-}
-
-
-/* Navigation Dots */
-.dotsContainer {
+.frame-79 {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+  justify-content: flex-start;
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 104px;
+  top: 892px;
+}
+.frame-47 {
   display: flex;
-  gap: 10px;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.dot:hover {
-  background-color: #fff;
-}
-
-.activeDot {
-  background-color: #42a5f5;
-  transform: scale(1.2);
-  box-shadow: 0px 4px 10px rgba(66, 165, 245, 0.5);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .hero {
-    height: 400px;
-  }
-
-  .heroOverlay {
-    padding: 20px 30px;
-  }
-
-  .heroOverlay h1 {
-    font-size: 28px;
-  }
-
-  .dot {
-    width: 10px;
-    height: 10px;
-  }
-}
-
-
-
-/* Flight List Section */
-.flightListSection {
-  position: absolute; /* Đặt vị trí tuyệt đối để dễ canh chỉnh */
-  top: 45%; /* Căn giữa theo chiều dọc */
-  right: 165px; /* Đưa về sát mép phải */
-  transform: translateY(-50%); /* Căn giữa theo chiều dọc bằng transform */
-  gap: 30px;
-  width: 45%;
-  z-index: 1; /* Nội dung phía trên overlay */
-}
-
-
-/* Flight Info Section */
-.flightInfoSection {
-  background-color: #f9fafc;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin: 40px auto;
-  max-width: 1200px;
-  text-align: center;
-}
-
-/* General Styling */
-body {
-  font-family: "Roboto", sans-serif;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-  color: #333;
-  background-color: #f8f9fc;
-}
-
-/* Info Banner Section */
-.infoBanner {
-  display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  gap: 24px;
   align-items: center;
-  background: url('../assets/images/travel.jpg') no-repeat center center;
-  background-size: cover;
-  padding: 20px 40px;
-  border-radius: 12px;
-  margin: 20px auto;
-  color: #fff;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 1232px;
   position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 1200px;
 }
-
-.infoBanner::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 12px;
-  z-index: 0;
-}
-
-.infoContent {
-  position: relative;
-  z-index: 1;
-  max-width: 70%;
-}
-
-.infoContent h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-.infoContent p {
-  font-size: 1em;
-}
-
-.infoBtn {
-  position: relative;
-  z-index: 1;
-  background-color: #007bc7;
-  color: #fff;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.infoBtn:hover {
-  background-color: #005a9e;
-}
-
-/* News Section */
-.newsSection {
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
-  padding: 15px 30px;
-  max-width: 1200px;
-}
-
-.newsContent {
+.frame-19 {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+}
+.i-m-n-y-u-th-ch {
+  color: #000000;
+  text-align: left;
+  font-family: var(
+    --montserrat-semibold-32px-font-family,
+    "Montserrat-SemiBold",
+    sans-serif
+  );
+  font-size: var(--montserrat-semibold-32px-font-size, 32px);
+  font-weight: var(--montserrat-semibold-32px-font-weight, 600);
+  position: relative;
+  align-self: stretch;
+  height: 36px;
+  left: 61px;
+}
+.search-flights-places-hire-to-our-most-popular-destinations {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-regular-16px-font-family,
+    "Montserrat-Regular",
+    sans-serif
+  );
+  font-size: var(--montserrat-regular-16px-font-size, 16px);
+  font-weight: var(--montserrat-regular-16px-font-weight, 400);
+  opacity: 0.75;
+  position: relative;
+  align-self: stretch;
+  left: 61px;
+}
+.frame-2 {
+  border-radius: 4px;
+  border-style: solid;
+  border-color: var(--mint-green, #8dd3bb);
+  border-width: 1px;
+  padding: 8px 16px 8px 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
   align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.newsTitle {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #005a9e;
-}
-
-.newsLink {
-  color: #333;
-  text-decoration: none;
-  font-size: 1em;
-  transition: color 0.3s ease;
-  flex-grow: 1;
-  max-width: 50%;
-}
-
-.newsLink:hover {
-  color: #007bc7;
-}
-
-.newsControls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.newsControls span {
-  font-size: 0.9em;
-  color: #666;
-}
-
-.controlBtn {
-  background: none;
-  border: none;
-  font-size: 1.2em;
-  color: #005a9e;
-  cursor: pointer;
-}
-
-.controlBtn:hover {
-  color: #007bc7;
-}
-
-.newsMore {
-  background-color: #007bc7;
-  color: #fff;
-  font-weight: bold;
-  padding: 8px 15px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.newsMore:hover {
-  background-color: #005a9e;
-}
-
-/* .module.css */
-.exploreServices {
-  padding: 15px 40px;
-  max-width: 1200px;
-  background: url('../assets/images/airplanee.png') center/cover no-repeat; /* Đặt ảnh nền */
-  position: relative;
-  text-align: center;
-  border-top: 5px solid #f4c542; /* Màu vàng */
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  margin: 0 auto; /* Căn giữa phần dịch vụ */
-  margin-top : 50px;
-  margin-bottom : 30px;
-}
-
-/* Làm mờ ảnh nền */
-.exploreServices::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* Lớp màu mờ */
-  z-index: 1;
-}
-
-/* Căn giữa phần nội dung và giảm chiều rộng */
-.exploreServices > * {
-  position: relative;
-  z-index: 2; /* Đảm bảo các phần tử này nằm trên lớp nền */
-  max-width: 1000px; /* Giới hạn chiều rộng */
-  margin: 0 auto;
-}
-
-/* Tiêu đề */
-.sectionTitle {
-  font-size: 32px;
-  font-weight: 700;
-  color: #fff; /* Màu trắng để nổi bật trên nền ảnh */
-  margin-bottom: 30px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-/* Bố cục thẻ dịch vụ */
-.serviceGridWrapper {
-  display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 20px;
-}
-
-.serviceGrid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-}
-
-/* Cải thiện thiết kế thẻ dịch vụ */
-.serviceCard {
-  background: #fff;
-  border-radius: 16px; /* Bo tròn góc nhiều hơn để tạo vẻ mềm mại */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng đổ bóng tinh tế */
-  text-align: center;
-  padding: 35px 25px;
-  width: 280px; /* Chiều rộng cố định cho mỗi card */
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  overflow: hidden;
+  flex-shrink: 0;
+  height: 40px;
   position: relative;
-  z-index: 2;
 }
-
-/* Thêm hiệu ứng nâng cao khi hover */
-.serviceCard:hover {
-  transform: translateY(-15px); /* Di chuyển lên một chút khi hover */
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Bóng đổ mạnh hơn khi hover */
-  background-color: #f7f7f7; /* Chuyển nền sang màu sáng hơn khi hover */
+.frame-2608773 {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  left: 61px;
 }
-
-/* Ảnh dịch vụ */
-.serviceImage {
-  width: 100%;
-  height: 180px;
+.frame-194 {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 1232px;
+  position: relative;
+}
+.frame-192 {
+  background: var(--neutrals, #ffffff);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  position: relative;
+  box-shadow: var(
+    --cards-shadow-box-shadow,
+    0px 4px 16px 0px rgba(17, 34, 17, 0.05)
+  );
+}
+.frame-74 {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 90px;
+  height: 90px;
+  position: relative;
+}
+.rectangle-3 {
+  border-radius: 8px;
+  align-self: stretch;
+  flex: 1;
+  position: relative;
   object-fit: cover;
-  border-radius: 12px; /* Bo tròn góc ảnh */
-  margin-bottom: 20px;
-  transition: transform 0.3s ease;
 }
-
-.serviceCard:hover .serviceImage {
-  transform: scale(1.1); /* Phóng to ảnh khi hover vào thẻ */
+.frame-196 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+  position: relative;
 }
-
-/* Tiêu đề dịch vụ */
-.serviceTitle {
-  font-size: 24px;
-  font-weight: 700;
-  color: #2c3e50; /* Màu xanh dương đậm cho tiêu đề */
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 1px; /* Tăng khoảng cách chữ cho tiêu đề */
-  transition: color 0.3s ease;
+.istanbul-turkey {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-semibold-16px-font-family,
+    "Montserrat-SemiBold",
+    sans-serif
+  );
+  font-size: var(--montserrat-semibold-16px-font-size, 16px);
+  font-weight: var(--montserrat-semibold-16px-font-weight, 600);
+  opacity: 0.7;
+  position: relative;
+  align-self: stretch;
 }
-
-.serviceCard:hover .serviceTitle {
-  color: #f4c542; /* Màu vàng khi hover */
+.frame-2608766 {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
 }
-
-/* Mô tả dịch vụ */
-.serviceDescription {
-  font-size: 16px;
-  color: #7f8c8d; /* Màu xám nhạt cho mô tả */
-  line-height: 1.5;
-  margin-bottom: 25px;
-  font-family: 'Arial', sans-serif; /* Cải thiện font chữ */
-  transition: color 0.3s ease;
+.flights {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-medium-14px-font-family,
+    "Montserrat-Medium",
+    sans-serif
+  );
+  font-size: var(--montserrat-medium-14px-font-size, 14px);
+  font-weight: var(--montserrat-medium-14px-font-weight, 500);
+  position: relative;
 }
-
-.serviceCard:hover .serviceDescription {
-  color: #34495e; /* Màu xám đậm khi hover */
+.div {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-medium-14px-font-family,
+    "Montserrat-Medium",
+    sans-serif
+  );
+  font-size: var(--montserrat-medium-14px-font-size, 14px);
+  font-weight: var(--montserrat-medium-14px-font-weight, 500);
+  position: relative;
 }
-
-/* Hiệu ứng viền và nền */
-.serviceCard::before {
-  content: '';
+.hotels {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-medium-14px-font-family,
+    "Montserrat-Medium",
+    sans-serif
+  );
+  font-size: var(--montserrat-medium-14px-font-size, 14px);
+  font-weight: var(--montserrat-medium-14px-font-weight, 500);
+  position: relative;
+}
+.resorts {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-medium-14px-font-family,
+    "Montserrat-Medium",
+    sans-serif
+  );
+  font-size: var(--montserrat-medium-14px-font-size, 14px);
+  font-weight: var(--montserrat-medium-14px-font-weight, 500);
+  position: relative;
+}
+.frame-195 {
+  background: var(--neutrals, #ffffff);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  position: relative;
+  box-shadow: var(
+    --cards-shadow-box-shadow,
+    0px 4px 16px 0px rgba(17, 34, 17, 0.05)
+  );
+}
+.frame-197 {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 90px;
+  height: 90px;
+  position: relative;
+}
+.sydney-australia {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-semibold-16px-font-family,
+    "Montserrat-SemiBold",
+    sans-serif
+  );
+  font-size: var(--montserrat-semibold-16px-font-size, 16px);
+  font-weight: var(--montserrat-semibold-16px-font-weight, 600);
+  opacity: 0.7;
+  position: relative;
+  align-self: stretch;
+}
+.frame-1962 {
+  background: var(--neutrals, #ffffff);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  position: relative;
+  box-shadow: var(
+    --cards-shadow-box-shadow,
+    0px 4px 16px 0px rgba(17, 34, 17, 0.05)
+  );
+}
+.rectangle-4 {
+  border-radius: 8px;
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+  object-fit: cover;
+}
+.baku-azerbaijan {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-semibold-16px-font-family,
+    "Montserrat-SemiBold",
+    sans-serif
+  );
+  font-size: var(--montserrat-semibold-16px-font-size, 16px);
+  font-weight: var(--montserrat-semibold-16px-font-weight, 600);
+  opacity: 0.7;
+  position: relative;
+  align-self: stretch;
+}
+.frame-1963 {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 1232px;
+  position: relative;
+}
+.mal-maldives {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-semibold-16px-font-family,
+    "Montserrat-SemiBold",
+    sans-serif
+  );
+  font-size: var(--montserrat-semibold-16px-font-size, 16px);
+  font-weight: var(--montserrat-semibold-16px-font-weight, 600);
+  opacity: 0.7;
+  position: relative;
+  align-self: stretch;
+}
+.paris-france {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-semibold-16px-font-family,
+    "Montserrat-SemiBold",
+    sans-serif
+  );
+  font-size: var(--montserrat-semibold-16px-font-size, 16px);
+  font-weight: var(--montserrat-semibold-16px-font-weight, 600);
+  opacity: 0.7;
+  position: relative;
+  align-self: stretch;
+}
+.new-york-us {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-semibold-16px-font-family,
+    "Montserrat-SemiBold",
+    sans-serif
+  );
+  font-size: var(--montserrat-semibold-16px-font-size, 16px);
+  font-weight: var(--montserrat-semibold-16px-font-weight, 600);
+  opacity: 0.7;
+  position: relative;
+  align-self: stretch;
+}
+.frame-1972 {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 1232px;
+  position: relative;
+}
+.london-uk {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-semibold-16px-font-family,
+    "Montserrat-SemiBold",
+    sans-serif
+  );
+  font-size: var(--montserrat-semibold-16px-font-size, 16px);
+  font-weight: var(--montserrat-semibold-16px-font-weight, 600);
+  opacity: 0.7;
+  position: relative;
+  align-self: stretch;
+}
+.frame-198 {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 90px;
+  height: 90px;
+  position: relative;
+}
+.tokyo-japan {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-semibold-16px-font-family,
+    "Montserrat-SemiBold",
+    sans-serif
+  );
+  font-size: var(--montserrat-semibold-16px-font-size, 16px);
+  font-weight: var(--montserrat-semibold-16px-font-weight, 600);
+  opacity: 0.7;
+  position: relative;
+  align-self: stretch;
+}
+.dubai-uae {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-semibold-16px-font-family,
+    "Montserrat-SemiBold",
+    sans-serif
+  );
+  font-size: var(--montserrat-semibold-16px-font-size, 16px);
+  font-weight: var(--montserrat-semibold-16px-font-weight, 600);
+  opacity: 0.7;
+  position: relative;
+  align-self: stretch;
+}
+.frame-2608775 {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+  justify-content: flex-start;
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.05); /* Một lớp bóng nhẹ tạo chiều sâu */
-  z-index: 1;
+  left: 104px;
+  bottom: 663px;
 }
-
-/* Cải thiện giao diện cho các card khi nhìn trên màn hình nhỏ */
-@media (max-width: 768px) {
-  .serviceGridWrapper {
-    gap: 20px;
-  }
-
-  .serviceCard {
-    width: 100%;
-    max-width: 350px; /* Tăng chiều rộng cho các card khi màn hình nhỏ */
-  }
+.frame-2608770 {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 1232px;
+  position: relative;
+}
+.reviews {
+  color: #000000;
+  text-align: left;
+  font-family: var(
+    --montserrat-semibold-32px-font-family,
+    "Montserrat-SemiBold",
+    sans-serif
+  );
+  font-size: var(--montserrat-semibold-32px-font-size, 32px);
+  font-weight: var(--montserrat-semibold-32px-font-weight, 600);
+  position: relative;
+  align-self: stretch;
+  height: 36px;
+}
+.what-people-says-about-golobe-facilities {
+  color: #000000;
+  text-align: left;
+  font-family: var(
+    --montserrat-regular-16px-font-family,
+    "Montserrat-Regular",
+    sans-serif
+  );
+  font-size: var(--montserrat-regular-16px-font-size, 16px);
+  font-weight: var(--montserrat-regular-16px-font-weight, 400);
+  position: relative;
+  width: 851px;
+}
+.frame-2608774 {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-2608767 {
+  flex-shrink: 0;
+  width: 450px;
+  height: 608px;
+  position: relative;
+}
+.rectangle-37 {
+  background: rgba(141, 211, 187, 0.4);
+  border-radius: 20px;
+  width: 425px;
+  height: 586px;
+  position: absolute;
+  left: 25px;
+  top: 22px;
+}
+.frame-2608764 {
+  background: var(--neutrals, #ffffff);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  left: -1px;
+  top: 0px;
+  box-shadow: 2px 4px 16px 0px rgba(17, 34, 17, 0.1);
+}
+.frame-2608763 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 377px;
+  position: relative;
+}
+.frame-2608756 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.a-real-sense-of-community-nurtured {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --tradegothic-bold-24px-font-family,
+    "TradeGothicLtExtended-Bold",
+    sans-serif
+  );
+  font-size: var(--tradegothic-bold-24px-font-size, 24px);
+  font-weight: var(--tradegothic-bold-24px-font-weight, 700);
+  position: relative;
+  align-self: stretch;
+  height: 80px;
+}
+.frame-2608757 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.really-appreciate-the-help-and-support-from-the-staff-during-these-tough-times-shoutout-to-katie-for-helping-me-always-even-when-i-was-out-of-the-country-and-always-available-when-needed {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-medium-14px-font-family,
+    "Montserrat-Medium",
+    sans-serif
+  );
+  font-size: var(--montserrat-medium-14px-font-size, 14px);
+  font-weight: var(--montserrat-medium-14px-font-weight, 500);
+  opacity: 0.5;
+  position: relative;
+  align-self: stretch;
+  height: 37px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.view-more {
+  color: var(--blackish-green, #112211);
+  text-align: right;
+  font-family: var(
+    --tradegothic-bold-14px-font-family,
+    "TradeGothicLtExtended-Bold",
+    sans-serif
+  );
+  font-size: var(--tradegothic-bold-14px-font-size, 14px);
+  font-weight: var(--tradegothic-bold-14px-font-weight, 700);
+  position: relative;
+  align-self: stretch;
+}
+.frame-2608762 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-2608758 {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.ion-star {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.ion-star2 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.ion-star3 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.ion-star4 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.ion-star5 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.frame-2608759 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-2608761 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.olga {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --tradegothic-bold-14px-font-family,
+    "TradeGothicLtExtended-Bold",
+    sans-serif
+  );
+  font-size: var(--tradegothic-bold-14px-font-size, 14px);
+  font-weight: var(--tradegothic-bold-14px-font-weight, 700);
+  position: relative;
+  align-self: stretch;
+}
+.weave-studios-kai-tak {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-medium-12px-font-family,
+    "Montserrat-Medium",
+    sans-serif
+  );
+  font-size: var(--montserrat-medium-12px-font-size, 12px);
+  font-weight: var(--montserrat-medium-12px-font-weight, 500);
+  opacity: 0.5;
+  position: relative;
+  align-self: stretch;
+}
+.frame-2608760 {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.flat-color-icons-google {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.google {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --tradegothic-bold-12px-font-family,
+    "TradeGothicLtExtended-Bold",
+    sans-serif
+  );
+  font-size: var(--tradegothic-bold-12px-font-size, 12px);
+  font-weight: var(--tradegothic-bold-12px-font-weight, 700);
+  opacity: 0.4;
+  position: relative;
+  flex: 1;
+}
+.rectangle-36 {
+  border-radius: 8px;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 200px;
+  position: relative;
+  object-fit: cover;
+}
+.frame-2608771 {
+  flex-shrink: 0;
+  width: 449px;
+  height: 610px;
+  position: relative;
+}
+.rectangle-38 {
+  background: rgba(141, 211, 187, 0.4);
+  border-radius: 20px;
+  width: 425px;
+  height: 586px;
+  position: absolute;
+  left: 24px;
+  top: 24px;
+}
+.frame-26087642 {
+  background: var(--neutrals, #ffffff);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  box-shadow: 2px 4px 16px 0px rgba(17, 34, 17, 0.1);
+}
+.the-facilities-are-superb-clean-slick-bright {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --tradegothic-bold-24px-font-family,
+    "TradeGothicLtExtended-Bold",
+    sans-serif
+  );
+  font-size: var(--tradegothic-bold-24px-font-size, 24px);
+  font-weight: var(--tradegothic-bold-24px-font-weight, 700);
+  position: relative;
+  align-self: stretch;
+  height: 80px;
+}
+.a-real-sense-of-community-nurtured-really-appreciate-the-help-and-support-from-the-staff-during-these-tough-times-shoutout-to-katie-for-helping-me-always-even-when-i-was-out-of-the-country-and-always-available-when-needed-view-more-olga-weave-studios-kai-tak-google {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-medium-14px-font-family,
+    "Montserrat-Medium",
+    sans-serif
+  );
+  font-size: var(--montserrat-medium-14px-font-size, 14px);
+  font-weight: var(--montserrat-medium-14px-font-weight, 500);
+  opacity: 0.5;
+  position: relative;
+  align-self: stretch;
+  height: 37px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.view-more2 {
+  color: var(--blackish-green, #112211);
+  text-align: right;
+  font-family: var(
+    --tradegothic-bold-16px-font-family,
+    "TradeGothicLtExtended-Bold",
+    sans-serif
+  );
+  font-size: var(--tradegothic-bold-16px-font-size, 16px);
+  font-weight: var(--tradegothic-bold-16px-font-weight, 700);
+  position: relative;
+  align-self: stretch;
+}
+.ion-star6 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.ion-star7 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.ion-star8 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.ion-star9 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.ion-star10 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.thomas {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --tradegothic-bold-14px-font-family,
+    "TradeGothicLtExtended-Bold",
+    sans-serif
+  );
+  font-size: var(--tradegothic-bold-14px-font-size, 14px);
+  font-weight: var(--tradegothic-bold-14px-font-weight, 700);
+  position: relative;
+  align-self: stretch;
+}
+.weave-studios-olympic {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-medium-12px-font-family,
+    "Montserrat-Medium",
+    sans-serif
+  );
+  font-size: var(--montserrat-medium-12px-font-size, 12px);
+  font-weight: var(--montserrat-medium-12px-font-weight, 500);
+  opacity: 0.5;
+  position: relative;
+  align-self: stretch;
+}
+.flat-color-icons-google2 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.frame-2608772 {
+  flex-shrink: 0;
+  width: 449px;
+  height: 610px;
+  position: relative;
+}
+.ion-star11 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.ion-star12 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.ion-star13 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.ion-star14 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.ion-star15 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.eliot {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --tradegothic-bold-14px-font-family,
+    "TradeGothicLtExtended-Bold",
+    sans-serif
+  );
+  font-size: var(--tradegothic-bold-14px-font-size, 14px);
+  font-weight: var(--tradegothic-bold-14px-font-weight, 700);
+  position: relative;
+  align-self: stretch;
+}
+.flat-color-icons-google3 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.frame-2608781 {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 1232px;
+  position: absolute;
+  left: 169px;
+  top: 1514px;
+}
+.frame-2608787 {
+  flex-shrink: 0;
+  width: 604px;
+  height: 559px;
+  position: relative;
+  box-shadow: var(
+    --cards-shadow-box-shadow,
+    0px 4px 16px 0px rgba(17, 34, 17, 0.05)
+  );
+}
+.rectangle-40 {
+  border-radius: 20px;
+  width: 604px;
+  height: 559px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  object-fit: cover;
+}
+.frame-2608785 {
+  width: 604px;
+  height: 280px;
+  position: absolute;
+  left: 0px;
+  top: 279px;
+}
+.rectangle-32 {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(18, 18, 18, 0.75) 48.67416024208069%
+  );
+  border-radius: 0px 0px 24px 24px;
+  width: 604px;
+  height: 280px;
+  position: absolute;
+  left: 604px;
+  top: 0px;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(-1, 1);
+}
+.frame-2608784 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  left: 114px;
+  top: 93px;
+}
+.frame-2608786 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.flights2 {
+  color: var(--neutrals, #ffffff);
+  text-align: center;
+  font-family: var(
+    --tradegothic-bold-40px-font-family,
+    "TradeGothicLtExtended-Bold",
+    sans-serif
+  );
+  font-size: var(--tradegothic-bold-40px-font-size, 40px);
+  font-weight: var(--tradegothic-bold-40px-font-weight, 700);
+  position: relative;
+  width: 389px;
+}
+.search-flights-places-hire-to-our-most-popular-destinations2 {
+  color: var(--neutrals, #ffffff);
+  text-align: center;
+  font-family: var(
+    --montserrat-regular-16px-font-family,
+    "Montserrat-Regular",
+    sans-serif
+  );
+  font-size: var(--montserrat-regular-16px-font-size, 16px);
+  font-weight: var(--montserrat-regular-16px-font-weight, 400);
+  position: relative;
+  width: 389px;
+}
+.paper-plane2 {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  overflow: visible;
+}
+.frame-2608788 {
+  flex-shrink: 0;
+  width: 604px;
+  height: 559px;
+  position: relative;
+  box-shadow: var(
+    --cards-shadow-box-shadow,
+    0px 4px 16px 0px rgba(17, 34, 17, 0.05)
+  );
+}
+.rectangle-41 {
+  border-radius: 20px;
+  width: 603.5px;
+  height: 559px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  object-fit: cover;
+}
+.frame-26087862 {
+  width: 604px;
+  height: 280px;
+  position: absolute;
+  left: 0px;
+  top: 279px;
+}
+.rectangle-322 {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(18, 18, 18, 0.75) 48.67416024208069%
+  );
+  border-radius: 0px 0px 20px 20px;
+  width: 604px;
+  height: 280px;
+  position: absolute;
+  left: 604px;
+  top: 0px;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(-1, 1);
+}
+.hotels2 {
+  color: var(--neutrals, #ffffff);
+  text-align: center;
+  font-family: var(
+    --tradegothic-bold-40px-font-family,
+    "TradeGothicLtExtended-Bold",
+    sans-serif
+  );
+  font-size: var(--tradegothic-bold-40px-font-size, 40px);
+  font-weight: var(--tradegothic-bold-40px-font-weight, 700);
+  position: relative;
+  width: 389px;
+}
+.search-hotels-places-hire-to-our-most-popular-destinations {
+  color: var(--neutrals, #ffffff);
+  text-align: center;
+  font-family: var(
+    --montserrat-regular-16px-font-family,
+    "Montserrat-Regular",
+    sans-serif
+  );
+  font-size: var(--montserrat-regular-16px-font-size, 16px);
+  font-weight: var(--montserrat-regular-16px-font-weight, 400);
+  position: relative;
+  width: 389px;
+}
+.paper-plane3 {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  overflow: visible;
 }
