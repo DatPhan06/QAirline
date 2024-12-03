@@ -39,12 +39,17 @@ const TicketSchedule = () => {
                 ]
               }
             >
-              Search Flights &amp; Places Hire to our most popular destinations
+              Tìm kiếm chuyến bay &amp; thuê khách sạn tại những điểm đến phổ
+              biến nhất của chúng tôi.
             </div>
           </div>
           <div className={styles["button"]}>
             <div className={styles["frame-2"]}>
-              <div className={styles["button2"]}>See more places</div>
+              <Link to="/explore/destinations">
+                <button className={styles["button2"]}>
+                  Khám phá các địa điểm khác
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -63,11 +68,11 @@ const TicketSchedule = () => {
                   Hà Nội, Việt Nam
                 </div>
                 <div className={styles["frame-2608766"]}>
-                  <div className={styles["flights"]}>Flights</div>
+                  <div className={styles["flights"]}>Chuyến bay</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["hotels"]}>Hotels</div>
+                  <div className={styles["hotels"]}>Khách sạn</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["resorts"]}>Resorts</div>
+                  <div className={styles["resorts"]}>Khu nghỉ dưỡng</div>
                 </div>
               </div>
             </div>
@@ -76,15 +81,13 @@ const TicketSchedule = () => {
                 <img className={styles["rectangle-3"]} src="rectangle-31.png" />
               </div>
               <div className={styles["frame-196"]}>
-                <div className={styles["sydney-australia"]}>
-                  Sydney, Australia
-                </div>
+                <div className={styles["sydney-australia"]}>Sydney, Úc</div>
                 <div className={styles["frame-2608766"]}>
-                  <div className={styles["flights"]}>Flights</div>
+                  <div className={styles["flights"]}>Chuyến bay</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["hotels"]}>Hotels</div>
+                  <div className={styles["hotels"]}>Khách sạn</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["resorts"]}>Resorts</div>
+                  <div className={styles["resorts"]}>Khu nghỉ dưỡng</div>
                 </div>
               </div>
             </div>
@@ -97,11 +100,11 @@ const TicketSchedule = () => {
                   Baku, Azerbaijan
                 </div>
                 <div className={styles["frame-2608766"]}>
-                  <div className={styles["flights"]}>Flights</div>
+                  <div className={styles["flights"]}>Chuyến bay</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["hotels"]}>Hotels</div>
+                  <div className={styles["hotels"]}>Khách sạn</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["resorts"]}>Resorts</div>
+                  <div className={styles["resorts"]}>Khu nghỉ dưỡng</div>
                 </div>
               </div>
             </div>
@@ -114,11 +117,11 @@ const TicketSchedule = () => {
               <div className={styles["frame-196"]}>
                 <div className={styles["mal-maldives"]}>Malé, Maldives</div>
                 <div className={styles["frame-2608766"]}>
-                  <div className={styles["flights"]}>Flights</div>
+                  <div className={styles["flights"]}>Chuyến bay</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["hotels"]}>Hotels</div>
+                  <div className={styles["hotels"]}>Khách sạn</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["resorts"]}>Resorts</div>
+                  <div className={styles["resorts"]}>Khu nghỉ dưỡng</div>
                 </div>
               </div>
             </div>
@@ -127,13 +130,13 @@ const TicketSchedule = () => {
                 <img className={styles["rectangle-3"]} src="rectangle-32.png" />
               </div>
               <div className={styles["frame-196"]}>
-                <div className={styles["paris-france"]}>Paris, France</div>
+                <div className={styles["paris-france"]}>Paris, Pháp</div>
                 <div className={styles["frame-2608766"]}>
-                  <div className={styles["flights"]}>Flights</div>
+                  <div className={styles["flights"]}>Chuyến bay</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["hotels"]}>Hotels</div>
+                  <div className={styles["hotels"]}>Khách sạn</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["resorts"]}>Resorts</div>
+                  <div className={styles["resorts"]}>Khu nghỉ dưỡng</div>
                 </div>
               </div>
             </div>
@@ -142,13 +145,13 @@ const TicketSchedule = () => {
                 <img className={styles["rectangle-4"]} src="rectangle-42.png" />
               </div>
               <div className={styles["frame-196"]}>
-                <div className={styles["new-york-us"]}>New York, US</div>
+                <div className={styles["new-york-us"]}>New York, Mỹ</div>
                 <div className={styles["frame-2608766"]}>
-                  <div className={styles["flights"]}>Flights</div>
+                  <div className={styles["flights"]}>Chuyến bay</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["hotels"]}>Hotels</div>
+                  <div className={styles["hotels"]}>Khách sạn</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["resorts"]}>Resorts</div>
+                  <div className={styles["resorts"]}>Khu nghỉ dưỡng</div>
                 </div>
               </div>
             </div>
@@ -159,13 +162,13 @@ const TicketSchedule = () => {
                 <img className={styles["rectangle-3"]} src="rectangle-33.png" />
               </div>
               <div className={styles["frame-196"]}>
-                <div className={styles["london-uk"]}>London, UK</div>
+                <div className={styles["london-uk"]}>London, Anh</div>
                 <div className={styles["frame-2608766"]}>
-                  <div className={styles["flights"]}>Flights</div>
+                  <div className={styles["flights"]}>Chuyến bay</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["hotels"]}>Hotels</div>
+                  <div className={styles["hotels"]}>Khách sạn</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["resorts"]}>Resorts</div>
+                  <div className={styles["resorts"]}>Khu nghỉ dưỡng</div>
                 </div>
               </div>
             </div>
@@ -174,13 +177,13 @@ const TicketSchedule = () => {
                 <img className={styles["rectangle-3"]} src="rectangle-34.png" />
               </div>
               <div className={styles["frame-196"]}>
-                <div className={styles["tokyo-japan"]}>Tokyo, Japan</div>
+                <div className={styles["tokyo-japan"]}>Tokyo, Nhật Bản</div>
                 <div className={styles["frame-2608766"]}>
-                  <div className={styles["flights"]}>Flights</div>
+                  <div className={styles["flights"]}>Chuyến bay</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["hotels"]}>Hotels</div>
+                  <div className={styles["hotels"]}>Khách sạn</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["resorts"]}>Resorts</div>
+                  <div className={styles["resorts"]}>Khu nghỉ dưỡng</div>
                 </div>
               </div>
             </div>
@@ -191,17 +194,18 @@ const TicketSchedule = () => {
               <div className={styles["frame-196"]}>
                 <div className={styles["dubai-uae"]}>Dubai, UAE</div>
                 <div className={styles["frame-2608766"]}>
-                  <div className={styles["flights"]}>Flights</div>
+                  <div className={styles["flights"]}>Chuyến bay</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["hotels"]}>Hotels</div>
+                  <div className={styles["hotels"]}>Khách sạn</div>
                   <div className={styles["div"]}>•</div>
-                  <div className={styles["resorts"]}>Resorts</div>
+                  <div className={styles["resorts"]}>Khu nghỉ dưỡng</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <div className={styles["frame-2608775"]}>
         <div className={styles["frame-2608770"]}>
           <div className={styles["frame-19"]}>

@@ -64,6 +64,30 @@
   flex-shrink: 0;
   position: relative;
 }
+.button2 {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-medium-14px-font-family,
+    "Montserrat-Medium",
+    sans-serif
+  );
+  font-size: var(--montserrat-medium-14px-font-size, 14px);
+  font-weight: var(--montserrat-medium-14px-font-weight, 500);
+  position: relative;
+  display: inline-block; /* Để Link trông giống như một nút */
+  padding: 10px 20px; /* Thêm khoảng cách bên trong */
+  background-color: #f0f0f0; /* Màu nền */
+  border: 1px solid #ccc; /* Viền */
+  border-radius: 5px; /* Bo góc */
+  text-decoration: none; /* Xóa gạch chân */
+  transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền */
+}
+
+.button2:hover {
+  background-color: #e0e0e0; /* Màu nền khi hover */
+}
+
 .state-layer {
   border-radius: 4px 4px 0px 0px;
   padding: 4px 0px 4px 16px;
