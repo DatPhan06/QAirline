@@ -22,3 +22,36 @@
 .promotionItem p {
   margin: 5px 0;
 }
+
+.style-layer {
+  background: var(--mint-green, #8dd3bb);
+  border-radius: 4px;
+  padding: 8px 16px 8px 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 48px;
+  position: relative;
+}
+.paper-plane {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  overflow: visible;
+}
+.button2 {
+  color: var(--blackish-green, #112211);
+  text-align: left;
+  font-family: var(
+    --montserrat-medium-14px-font-family,
+    "Montserrat-Medium",
+    sans-serif
+  );
+  font-size: var(--montserrat-medium-14px-font-size, 14px);
+  font-weight: var(--montserrat-medium-14px-font-weight, 500);
+  position: relative;
+}
