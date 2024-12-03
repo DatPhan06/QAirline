@@ -15,79 +15,6 @@
   position: absolute;
   object-fit: cover;
 }
-.frame-38 {
-  background: var(--neutrals, #ffffff);
-  border-radius: 16px;
-  padding: 16px 32px 32px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 1220px;
-  position: absolute;
-  left:165px;
-  top: 532px;
-  box-shadow: 0px 4px 16px 0px rgba(141, 211, 187, 0.15);
-}
-.line-4 {
-  margin-top: -4px;
-  border-style: solid;
-  border-color: var(--mint-green, #8dd3bb);
-  border-width: 4px 0 0 0;
-  flex-shrink: 0;
-  width: 100px;
-  height: 0px;
-  position: absolute;
-  left: 33px;
-  top: 79px;
-}
-.frame-2608739 {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.frame-2608738 {
-  display: flex;
-  flex-direction: row;
-  gap: 32px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.frame-2608721 {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.airplane {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  position: relative;
-  overflow: visible;
-}
-.chuy-n-bay {
-  color: var(--blackish-green, #112211);
-  text-align: left;
-  font-family: var(
-    --montserrat-semibold-16px-font-family,
-    "Montserrat-SemiBold",
-    sans-serif
-  );
-  font-size: var(--montserrat-semibold-16px-font-size, 16px);
-  font-weight: var(--montserrat-semibold-16px-font-weight, 600);
-  position: relative;
-}
 .line-1 {
   border-style: solid;
   border-color: #d7e2ee;
@@ -299,37 +226,13 @@
   flex-shrink: 0;
   position: relative;
 }
-.style-layer {
-  background: var(--mint-green, #8dd3bb);
-  border-radius: 4px;
-  padding: 8px 16px 8px 16px;
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  height: 48px;
-  position: relative;
-}
+
 .paper-plane {
   flex-shrink: 0;
   width: 16px;
   height: 16px;
   position: relative;
   overflow: visible;
-}
-.button2 {
-  color: var(--blackish-green, #112211);
-  text-align: left;
-  font-family: var(
-    --montserrat-medium-14px-font-family,
-    "Montserrat-Medium",
-    sans-serif
-  );
-  font-size: var(--montserrat-medium-14px-font-size, 14px);
-  font-weight: var(--montserrat-medium-14px-font-weight, 500);
-  position: relative;
 }
 
 .frame-2608753 {
@@ -371,7 +274,11 @@
 }
 
 .special-offers-to-suit-your-plan {
-  font-family: var(--montserrat-semibold-20px-font-family, "Montserrat-SemiBold", sans-serif);
+  font-family: var(
+    --montserrat-semibold-20px-font-family,
+    "Montserrat-SemiBold",
+    sans-serif
+  );
   font-size: var(--montserrat-semibold-20px-font-size, 20px);
   font-weight: var(--montserrat-semibold-20px-font-weight, 600);
 }
@@ -381,7 +288,11 @@
 }
 
 .bookBtn {
-  background: linear-gradient(to right, #1e90ff, #00bfff); /* Gradient xanh dương sáng */
+  background: linear-gradient(
+    to right,
+    #1e90ff,
+    #00bfff
+  ); /* Gradient xanh dương sáng */
   padding: 20px 40px; /* Tăng kích thước nút */
   color: #fff;
   font-family: "Rokkit", Arial, sans-serif;
@@ -418,7 +329,11 @@
 .bookBtn:hover {
   transform: scale(1.1); /* Phóng to khi hover */
   box-shadow: 0px 15px 30px rgba(30, 144, 255, 0.6); /* Bóng mờ mạnh hơn */
-  background: linear-gradient(to right, #4682b4, #5f9ea0); /* Gradient đậm hơn */
+  background: linear-gradient(
+    to right,
+    #4682b4,
+    #5f9ea0
+  ); /* Gradient đậm hơn */
 }
 
 /* Hiệu ứng nhấn nút */
@@ -445,7 +360,6 @@
   opacity: 1;
   transform: scale(1.2); /* Mở rộng vòng sáng */
 }
-
 
 .frame-79 {
   display: flex;
