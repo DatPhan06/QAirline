@@ -1,0 +1,12 @@
+/* PromotionDetail.module.css */
+.promotionDetailContainer {
+  padding: 20px;
+}
+
+.promotionDetailContainer h1 {
+  margin-bottom: 20px;
+}
+
+.promotionDetailContainer p {
+  margin: 10px 0;
+}

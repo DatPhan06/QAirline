@@ -26,6 +26,7 @@ import Explore from "./pages/Explore/Explore";
 import Destinations from "./pages/Explore/Destinations";
 import Offers from "./pages/Explore/Offers";
 import FlightExperience from "./pages/Explore/FlightExperience";
+import PromotionDetail from "./pages/Explore/PromotionDetail";
 
 // QAirline pages
 import QAirline from "./pages/QAirline/QAirline";
@@ -133,6 +134,7 @@ function AppRoutes() {
       <Route path="/explore/destinations" element={<Destinations />} />
       <Route path="/explore/offers" element={<Offers />} />
       <Route path="/explore/flight-experience" element={<FlightExperience />} />
+      <Route path="/explore/offers/:id" element={<PromotionDetail />} />
 
       {/* QAirline */}
       <Route path="/qairline" element={<QAirline />} />
