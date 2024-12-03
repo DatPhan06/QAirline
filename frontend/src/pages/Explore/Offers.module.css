@@ -1,0 +1,24 @@
+/* Offers.module.css */
+.offersContainer {
+  padding: 20px;
+}
+
+.promotionsList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.promotionItem {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.promotionItem h3 {
+  margin: 0 0 10px 0;
+}
+
+.promotionItem p {
+  margin: 5px 0;
+}
