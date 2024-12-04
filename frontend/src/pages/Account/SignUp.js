@@ -44,17 +44,16 @@ function SignUp() {
       backgroundPosition: "center", // Đảm bảo hình ảnh được căn giữa
       }}
     >
-      <div className={styles["ellipse-1"]}></div>
-      <div className={styles["ellipse-2"]}></div>
       <div className={styles["frame-2"]}>
         <div className={styles["frame-5"]}>
           <div className={styles["frame-4"]}>
             <div className={styles["upper-section"]}>
               <div className={styles["login-text"]}>
-                <div className={styles["ng-k-ngay"]}>Đăng ký ngay!</div>
+                <div className={styles["ng-k-ngay"]}>ĐĂNG KÝ NGAY !</div>
                 <div className={styles["just-some-details-to-get-you-in"]}>
                   Just some details to get you in!
                 </div>
+                <br></br>
               </div>
               <div className={styles.credentials}>
                 <div className={styles.username}>
