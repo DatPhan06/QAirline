@@ -1,0 +1,12 @@
+/* FlightDetail.module.css */
+.seatList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.seatItem {
+  margin: 5px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

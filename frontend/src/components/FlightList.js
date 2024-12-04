@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./FlightList.module.css";
 
-const FlightList = ({ flights }) => {
+// FlightList.js
+const FlightList = ({ flights, onFlightClick }) => {
   return (
     <div className={styles.flightListContainer}>
       {flights.length === 0 ? (
@@ -11,7 +13,11 @@ const FlightList = ({ flights }) => {
           <h2 className={styles.sectionTitle}>VUI TỪNG CHUYẾN BAY</h2>
           <ul className={styles.flightList}>
             {flights.map((flight) => (
-              <li key={flight.flight_id} className={styles.flightCard}>
+              <li
+                key={flight.flight_id}
+                className={styles.flightCard}
+                onClick={() => onFlightClick(flight)}
+              >
                 <div className={styles.flightHeader}>
                   <span className={styles.flightNumber}>
                     {flight.flight_number}
@@ -28,14 +34,7 @@ const FlightList = ({ flights }) => {
                     {new Date(flight.arrival_time).toLocaleString()}
                   </p>
                 </div>
-                <div className={styles.flightRow}>
-                  <p className={styles.flightDetails}>
-                    <span>Thời gian bay:</span> {flight.flight_duration} phút
-                  </p>
-                  <p className={styles.flightDetails}>
-                    <span>Giá vé:</span> {flight.price.toLocaleString()} VND
-                  </p>
-                </div>
+                {/* Các thông tin khác */}
               </li>
             ))}
           </ul>

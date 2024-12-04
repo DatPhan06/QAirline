@@ -3,6 +3,18 @@
   box-sizing: border-box;
 }
 
+/* FlightList.module.css */
+
+.flightLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.flightLink:hover {
+  text-decoration: none;
+}
+
 .flightListContainer {
   background: linear-gradient(
     145deg,

@@ -5,6 +5,7 @@ import FlightList from "../../components/FlightList";
 import { getFlights } from "../../services/flightService";
 import { getAirports } from "../../services/airportService";
 import { getCurrentUser } from "../../services/userService";
+import FlightDetail from "../../components/FlightDetail"; // Import component FlightDetail
 
 const BookTicket = () => {
   const [departure_airport, setDeparture_airport] = useState("");
@@ -18,6 +19,8 @@ const BookTicket = () => {
   const [airports, setAirports] = useState([]);
   const [user, setUser] = useState(null);
   const [showMatchingFlights, setShowMatchingFlights] = useState(false);
+  const [selectedFlight, setSelectedFlight] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -201,14 +204,19 @@ const BookTicket = () => {
 
       {/* FlightList nằm riêng ngoài khung đặt vé */}
       <div className={styles.flightSchedule}>
-        {showMatchingFlights ? (
+        {selectedFlight ? (
+          <FlightDetail flight={selectedFlight} />
+        ) : showMatchingFlights ? (
           matchingFlight.length > 0 ? (
-            <FlightList flights={matchingFlight} />
+            <FlightList
+              flights={matchingFlight}
+              onFlightClick={setSelectedFlight}
+            />
           ) : (
             <p>Không có chuyến bay phù hợp.</p>
           )
         ) : (
-          <FlightList flights={flights} />
+          <FlightList flights={flights} onFlightClick={setSelectedFlight} />
         )}
       </div>
     </div>
