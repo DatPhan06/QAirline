@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from './SignUp.module.css';
+import { registerUser, reigsterUser } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 
 function SignUp() {
@@ -17,15 +18,7 @@ function SignUp() {
     e.preventDefault();
 
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/users/register`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      await registerUser(formData);
       alert("Đăng ký thành công!");
       navigate("/account/signin");
     } catch (error) {
