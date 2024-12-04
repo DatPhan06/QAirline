@@ -3,15 +3,21 @@
   box-sizing: border-box;
 }
 
-
 .flightListContainer {
-  background: linear-gradient(145deg, #ffffff, #fbfbfb); /* Hiệu ứng gradient nền sáng hơn */
+  background: linear-gradient(
+    145deg,
+    #ffffff,
+    #fbfbfb
+  ); /* Hiệu ứng gradient nền sáng hơn */
   border-radius: 20px; /* Bo góc lớn hơn */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1), inset 0 -5px 10px rgba(0, 0, 0, 0.05); /* Bóng mờ nổi bật hơn */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1),
+    inset 0 -5px 10px rgba(0, 0, 0, 0.05); /* Bóng mờ nổi bật hơn */
   padding: 30px;
   width: 100%;
+  max-width: 1400px; /* Tăng chiều rộng tối đa */
   margin: 20px auto; /* Căn giữa container với khoảng cách */
   font-family: "Arial", sans-serif;
+  overflow-x: auto; /* Thêm cuộn ngang nếu nội dung quá dài */
 }
 
 /* Section Title */
@@ -37,29 +43,37 @@
 
 /* Flight List */
 .flightList {
-
   width: 100%;
 }
 
 /* Flight Card */
 .flightCard {
-  width: 100%;
-  background: linear-gradient(145deg, #ffffff, #d9eaff); /* Nền gradient sáng hơn */
-  border-left: 6px solid #ffd54f; /* Dải màu vàng bên trái */
-  border-radius: 15px; /* Bo góc mềm mại */
-  padding: 20px 25px;
-  margin-bottom: 20px; /* Khoảng cách giữa các thẻ */
   display: flex;
-  flex-direction: row; /* Sắp xếp nội dung trên một dòng */
-  align-items: center; /* Căn giữa nội dung theo chiều dọc */
-  justify-content: space-between; /* Giãn cách đều các nội dung */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.8); /* Bóng nổi bật hơn */
+  flex-direction: column;
+  background: linear-gradient(
+    145deg,
+    #ffffff,
+    #d9eaff
+  ); /* Nền gradient sáng hơn */
+  border-left: 6px solid #ffd54f; /* Dải màu vàng bên trái */
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px 25px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8); /* Bóng nổi bật hơn */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng hover */
 }
 
+/* Flight Header */
+.flightHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
 .flightCard:hover {
   transform: scale(1.03); /* Phóng to nhẹ khi hover */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Bóng nổi rõ hơn khi hover */
 }
 
 /* Flight Number */
@@ -83,12 +97,35 @@
   color: #003f82; /* Xanh đậm cho nhãn */
 }
 
+.flightStatus {
+  font-size: 16px;
+  color: #28a745; /* Màu xanh cho trạng thái */
+}
+
 /* No Flights Message */
 .noFlights {
   text-align: center;
   font-size: 18px;
   color: #555555;
   margin-top: 20px;
+}
+
+/* Flight Rows */
+.flightRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flightDetails {
+  width: 48%;
+  font-size: 16px;
+  color: #555555;
+  margin-bottom: 10px;
+}
+
+.flightDetails span {
+  font-weight: bold;
+  color: #003f82;
 }
 
 /* Responsive Design */
@@ -121,7 +158,6 @@
 }
 
 .flightCard::before {
-  width: 100px;
   content: "";
   position: absolute;
   top: 0;

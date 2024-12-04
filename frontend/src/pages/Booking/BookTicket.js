@@ -1,36 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import styles from "./BookTicket.module.css";
 import FlightList from "../../components/FlightList";
-import { getFlights, getAirports } from "../../services/api";
-import styles from "./BookTicket.module.css"; // Import CSS Module
+import { getFlights } from "../../services/flightService";
+import { getAirports } from "../../services/airportService";
+import { getCurrentUser } from "../../services/userService";
 
 const BookTicket = () => {
-  const navigate = useNavigate();
-
-  const [tripType, setTripType] = useState("one-way");
   const [departure_airport, setDeparture_airport] = useState("");
   const [arrival_airport, setArrival_airport] = useState("");
   const [departure_time, setDeparture_time] = useState("");
   const [arrival_time, setArrival_time] = useState("");
+  const [tripType, setTripType] = useState("one-way");
   const [passengers, setPassengers] = useState(1);
   const [matchingFlight, setMatchingFlight] = useState([]);
   const [flights, setFlights] = useState([]);
   const [airports, setAirports] = useState([]);
-  const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(null);
+  const [showMatchingFlights, setShowMatchingFlights] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/users/me`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-        setUser(response.data);
+        const userData = await getCurrentUser();
+        setUser(userData);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -58,7 +52,7 @@ const BookTicket = () => {
         const response = await getAirports();
         setAirports(response);
       } catch (error) {
-        console.error("Error fetching flights:", error);
+        console.error("Error fetching airports:", error);
       }
     };
 
@@ -66,39 +60,23 @@ const BookTicket = () => {
   }, []);
 
   const airport_names = airports.map((airport) => airport.city);
-  // var matchingFlight = [];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!user) {
-      alert("Vui lòng đăng nhập trước khi đặt vé.");
-      navigate("/account/signin");
-      return;
-    }
-
-    // const departure_airport_iata = airports.find(
-    //   (airport) => airport.city === departure_airport
-    // )?.iata_code;
-    
-    // const arrival_airport_iata = airports.find(
-    //   (airport) => airport.city === arrival_airport
-    // )?.iata_code;
-    
-    // Tìm chuyến bay khớp
-    var filter_flights = flights.filter((flight) =>
+    const filter_flights = flights.filter(
+      (flight) =>
         flight.departure_airport.city === departure_airport &&
         flight.arrival_airport.city === arrival_airport &&
-        flight.departure_time.split('T')[0] === departure_time
+        flight.departure_time.split("T")[0] === departure_time
     );
     setMatchingFlight(filter_flights);
+    setShowMatchingFlights(true);
 
-    if (filter_flights.length == 0) {
+    if (filter_flights.length === 0) {
       alert("Không tìm thấy chuyến bay phù hợp.");
-      return;
     }
-  }
-
+  };
 
   return (
     <div className={styles.pageContainer}>
@@ -146,9 +124,9 @@ const BookTicket = () => {
               >
                 <option value="">-- Chọn sân bay --</option>
                 {airport_names.map((city) => (
-              <option key={city} value={city}>
-                {city}
-              </option>
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
                 ))}
               </select>
             </div>
@@ -162,11 +140,11 @@ const BookTicket = () => {
               >
                 <option value="">-- Chọn sân bay --</option>
                 {airport_names
-              .filter((city) => city !== departure_airport)
-              .map((city) => (
-                <option key={city} value={city}>
-                  {city}
-                </option>
+                  .filter((city) => city !== departure_airport)
+                  .map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
                   ))}
               </select>
             </div>
@@ -219,35 +197,19 @@ const BookTicket = () => {
             </button>
           </div>
         </form>
-
-        {/* Kết quả tìm kiếm */}
-        <div className={styles.results}>
-        <h2>Kết quả tìm kiếm</h2>
-        {matchingFlight.length > 0 ? (
-          <ul>
-            {matchingFlight.map((flight) => (
-              <li key={flight.flight_id} className={styles.flightItem}>
-                <h3 className={styles.flightTitle}>Chuyến bay: {flight.flight_number}</h3>
-                <strong>Khởi hành:</strong> {departure_airport} -{" "}
-                {new Date(flight.departure_time).toLocaleString()} <br />
-                <strong>Điểm đến:</strong> {arrival_airport} -{" "}
-                {new Date(flight.arrival_time).toLocaleString()} <br />
-                <strong>Thời gian bay:</strong> {flight.flight_duration} <br />
-                <strong>Giá vé:</strong> {flight.price.toLocaleString()} VND <br />
-                <strong>Ghế trống:</strong> {flight.available_seats} <br />
-                <strong>Trạng thái:</strong> {flight.status} <br /><br />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Không có chuyến bay phù hợp.</p>
-        )}
-        </div>
       </div>
 
       {/* FlightList nằm riêng ngoài khung đặt vé */}
       <div className={styles.flightSchedule}>
-        <FlightList flights={flights} />
+        {showMatchingFlights ? (
+          matchingFlight.length > 0 ? (
+            <FlightList flights={matchingFlight} />
+          ) : (
+            <p>Không có chuyến bay phù hợp.</p>
+          )
+        ) : (
+          <FlightList flights={flights} />
+        )}
       </div>
     </div>
   );

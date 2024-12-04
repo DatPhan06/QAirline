@@ -1,50 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { getFlights } from "../services/api";
+import React from "react";
 import styles from "./FlightList.module.css";
 
-/**
- * Component hiển thị danh sách các chuyến bay.
- * Sử dụng hook useEffect để gọi API lấy dữ liệu chuyến bay khi component được render.
- */
-const FlightList = () => {
-  const [flights, setFlights] = useState([]);
-
-  useEffect(() => {
-    const fetchFlights = async () => {
-      try {
-        const data = await getFlights();
-        setFlights(data.slice(0, 3)); // Lấy 3 chuyến bay đầu tiên
-      } catch (error) {
-        console.error("Lỗi khi lấy dữ liệu chuyến bay:", error);
-      }
-    };
-
-    fetchFlights();
-  }, []);
-
+const FlightList = ({ flights }) => {
   return (
     <div className={styles.flightListContainer}>
       {flights.length === 0 ? (
         <p className={styles.noFlights}>Hiện tại không có chuyến bay nào.</p>
       ) : (
         <>
-          <h2 className={styles.sectionTitle}>VUI TỪNG CHUYẾN BAY</h2>{" "}
-          {/* Tiêu đề chỉ xuất hiện một lần */}
+          <h2 className={styles.sectionTitle}>VUI TỪNG CHUYẾN BAY</h2>
           <ul className={styles.flightList}>
             {flights.map((flight) => (
               <li key={flight.flight_id} className={styles.flightCard}>
-                <span className={styles.flightNumber}>
-                  {flight.flight_number}
-                </span>
-                <p className={styles.flightDetails}>
-                  <span>Departure:</span> {flight.departure_airport.iata_code}
-                </p>
-                <p className={styles.flightDetails}>
-                  <span>Destination:</span> {flight.arrival_airport.iata_code}
-                </p>
-                <p className={styles.flightDetails}>
-                  <span>Duration:</span> {flight.flight_duration} minutes
-                </p>
+                <div className={styles.flightHeader}>
+                  <span className={styles.flightNumber}>
+                    {flight.flight_number}
+                  </span>
+                  <span className={styles.flightStatus}>{flight.status}</span>
+                </div>
+                <div className={styles.flightRow}>
+                  <p className={styles.flightDetails}>
+                    <span>Khởi hành:</span> {flight.departure_airport.iata_code}{" "}
+                    - {new Date(flight.departure_time).toLocaleString()}
+                  </p>
+                  <p className={styles.flightDetails}>
+                    <span>Điểm đến:</span> {flight.arrival_airport.iata_code} -{" "}
+                    {new Date(flight.arrival_time).toLocaleString()}
+                  </p>
+                </div>
+                <div className={styles.flightRow}>
+                  <p className={styles.flightDetails}>
+                    <span>Thời gian bay:</span> {flight.flight_duration} phút
+                  </p>
+                  <p className={styles.flightDetails}>
+                    <span>Giá vé:</span> {flight.price.toLocaleString()} VND
+                  </p>
+                </div>
               </li>
             ))}
           </ul>
