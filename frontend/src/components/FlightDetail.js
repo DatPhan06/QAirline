@@ -1,8 +1,28 @@
 // FlightDetail.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./FlightDetail.module.css";
+import { getAirplaneById } from "../services/airplaneService"; // Import hàm lấy thông tin máy bay
 
 const FlightDetail = ({ flight }) => {
+  const [airplane, setAirplane] = useState(null);
+
+  useEffect(() => {
+    const fetchAirplaneDetails = async () => {
+      try {
+        const data = await getAirplaneById(flight.airplane_id);
+        setAirplane(data);
+      } catch (error) {
+        console.error("Error fetching airplane details:", error);
+      }
+    };
+
+    fetchAirplaneDetails();
+  }, [flight.airplane_id]);
+
+  if (!airplane) {
+    return <p>Đang tải thông tin máy bay...</p>;
+  }
+
   return (
     <div className={styles.flightDetailContainer}>
       <h1>Chi tiết chuyến bay</h1>
@@ -15,23 +35,23 @@ const FlightDetail = ({ flight }) => {
       <p>Thời gian đến: {new Date(flight.arrival_time).toLocaleString()}</p>
 
       {/* Hiển thị thông tin máy bay nếu có */}
-      {flight.airplane && (
+      {airplane && (
         <>
           <h2>Thông tin máy bay</h2>
-          <p>Mô hình: {flight.airplane.model}</p>
-          <p>Nhà sản xuất: {flight.airplane.manufacturer}</p>
-          <p>Sức chứa: {flight.airplane.seat_capacity}</p>
+          <p>Mô hình: {airplane.model}</p>
+          <p>Nhà sản xuất: {airplane.manufacturer}</p>
+          <p>Sức chứa: {airplane.seat_capacity}</p>
 
           {/* Hiển thị danh sách ghế */}
-          <h2>Danh sách chỗ ngồi</h2>
+          {/* <h2>Danh sách chỗ ngồi</h2>
           <ul className={styles.seatList}>
-            {flight.airplane.seats.map((seat) => (
+            {airplane.seats.map((seat) => (
               <li key={seat.seat_id} className={styles.seatItem}>
                 Ghế số: {seat.seat_number}, Loại ghế: {seat.seat_class}, Trạng
                 thái: {seat.status}
               </li>
             ))}
-          </ul>
+          </ul> */}
         </>
       )}
 

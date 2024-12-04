@@ -34,7 +34,14 @@ const FlightList = ({ flights, onFlightClick }) => {
                     {new Date(flight.arrival_time).toLocaleString()}
                   </p>
                 </div>
-                {/* Các thông tin khác */}
+                <div className={styles.flightRow}>
+                  <p className={styles.flightDetails}>
+                    <span>Thời gian bay:</span> {flight.flight_duration} phút
+                  </p>
+                  <p className={styles.flightDetails}>
+                    <span>Giá vé:</span> {flight.price.toLocaleString()} VND
+                  </p>
+                </div>{" "}
               </li>
             ))}
           </ul>
