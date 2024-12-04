@@ -4,56 +4,77 @@ import styles from "./Booking.module.css"; // Import CSS Module
 
 const Booking = () => {
   return (
-    <div className={styles.bookingPage}>
-      <div className={styles.bookingSections}>
-        <Link to="/booking/book-ticket" className={styles.section}>
-          <h2>Mua Vé</h2>
-          <p>Chọn chuyến bay và đặt vé dễ dàng.</p>
-        </Link>
-        <Link to="/booking/payment-guide" className={styles.section}>
-          <h2>Hướng Dẫn Thanh Toán & Mua Vé</h2>
-          <p>Các bước đơn giản để mua vé và thanh toán an toàn.</p>
-        </Link>
-        <Link to="/booking/cancel-ticket" className={styles.section}>
-          <h2>Đổi & Hủy Vé</h2>
-          <p>Xử lý các thay đổi hoặc hủy vé nhanh chóng.</p>
-        </Link>
-        <Link to="/booking/manage-ticket" className={styles.section}>
-          <h2>Quản Lý Vé</h2>
-          <p>Theo dõi và quản lý thông tin vé của bạn.</p>
-        </Link>
-      </div>
-
-      <div className={styles.chooseQAirline}>
-        <h2>Hãy chọn QAirline - Vui từng chuyến bay cùng bạn</h2>
-        <div className={styles.reasons}>
-          <div className={styles.reason}>
-            <div className={styles.reasonContent}>
-              <h3>Giá cả cạnh tranh</h3>
-              <p>Chúng tôi cam kết mang đến giá vé hợp lý với chất lượng dịch vụ hàng đầu.</p>
+    <div className={styles["homepage-01"]}>
+      
+        <div className={styles.section1}>
+            <div className={styles.imageContainer}>
+              <img
+                className={styles.rectangle2}
+                src="/images/backa.jpg"
+                alt="Background"
+              />
             </div>
-          </div>
-          <div className={styles.reason}>
-            <div className={styles.reasonContent}>
-              <h3>Chất lượng dịch vụ</h3>
-              <p>Đội ngũ nhân viên tận tâm và chuyên nghiệp, sẵn sàng phục vụ bạn 24/7.</p>
-            </div>
-          </div>
-          <div className={styles.reason}>
-            <div className={styles.reasonContent}>
-              <h3>Đường bay đa dạng</h3>
-              <p>Kết nối với hàng trăm điểm đến trong nước và quốc tế.</p>
-            </div>
-          </div>
-          <div className={styles.reason}>
-            <div className={styles.reasonContent}>
-              <h3>Ưu đãi hấp dẫn</h3>
-              <p>Nhận ngay ưu đãi đặc biệt và tích lũy điểm thưởng sau mỗi chuyến bay.</p>
-            </div>
-          </div>
+        <img className={styles["arrow-1"]} src="/images/arrow1.svg" />
+        <div className={styles["tr-i-nghi-m-t-v-c-ng-q-airline"]}>
+          Trải nghiệm đặt vé cùng QAirline
         </div>
-      </div>
+        <div
+          className={styles["h-y-ng-m-nh-n-th-gi-i-i-u-tuy-t-v-i-h-n-b-t-c-gi-c-m-n-o-ray-bradbury"]}
+        >
+          “Hãy ngắm nhìn thế giới. Điều đó tuyệt vời hơn bất cứ giấc mơ nào” – Ray
+          Bradbury
+        </div>
     </div>
+
+    <div className={styles.section2}>
+        <img className={styles["rectangle-12"]} src="/images/rec12.png" />
+        <img className={styles["arrow-3"]} src="/images/arrow1.svg" />
+        <div className={styles["why-choose-us"]}>Why choose us?</div>
+        <img className={styles["rectangle-8"]} src="/images/airwayfilm.jpg" />
+        <div className={styles["ellipse-1"]}></div>
+        <div className={styles["ellipse-5"]}></div>
+        <div className={styles["ellipse-2"]}></div>
+        <div className={styles["ellipse-6"]}></div>
+        <div className={styles["gi-c-c-nh-tranh"]}>Giá cả cạnh tranh</div>
+        <div className={styles["ng-bay-a-d-ng"]}>Đường bay đa dạng</div>
+        <div className={styles["ch-t-l-ng-d-ch-v-t-t"]}>Chất lượng dịch vụ tốt</div>
+        <div className={styles["u-i-h-p-d-n"]}>Ưu đãi hấp dẫn</div>
+    </div>
+
+    <div className={styles.section3}> 
+        <div className={styles["c-c-d-ch-v-d-nh-cho-qu-kh-ch"]}>Các dịch vụ dành cho quý khách</div>
+        <img className={styles["arrow-4"]} src="/images/arrow4.png" />
+        <div className={styles.imageLinkWrapper}>
+            <img className={styles.rectangle13} src="/images/seat2.jpg" alt="Seat" />
+            <Link to="/booking/book-ticket" className={styles.link}>
+                <div className={styles.ellipse}>ĐẶT VÉ</div>
+            </Link>
+        </div>
+
+        <div className={styles.imageLinkWrapper}>
+            <img className={styles.rectangle9} src="/images/table.jpg" alt="Table" />
+            <Link to="/booking/manage-ticket" className={styles.link}>
+                <div className={styles.ellipse}>Quản lý vé</div>
+            </Link>
+        </div>
+
+        <div className={styles.imageLinkWrapper}>
+            <img className={styles.rectangle11} src="/images/guide.jpg" alt="Guide" />
+            <Link to="/booking/payment-guide" className={styles.link}>
+                <div className={styles.ellipse}>Hướng dẫn mua vé &amp; thanh toán</div>
+            </Link>
+        </div>
+
+        <div className={styles.imageLinkWrapper}>
+            <img className={styles.rectangle10} src="/images/ticket.jpg" alt="Ticket" />
+            <Link to="/booking/cancel-ticket" className={styles.link}>
+                <div className={styles.ellipse}>Đổi &amp; Hủy vé</div>
+            </Link>
+        </div>
+    </div>
+</div>
+
+    
   );
 };
 

@@ -1,87 +1,285 @@
-/* Booking.module.css */
-.bookingPage {
-  font-family: 'Arial', sans-serif;
-  padding: 50px;
-  color: #333;
+/* Import các font từ Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Londrina+Sketch&family=Rokkitt:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Áp dụng các font cho các lớp */
+.homepage-01,
+.homepage-01 * {
+  box-sizing: border-box;
+  font-family: 'Libre Bodoni', serif;
+}
+.homepage-01 {
+  background: #ffffff;
+  height: 2628px;
+  position: relative;
+  overflow: hidden;
 }
 
-.bookingSections {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  margin-bottom: 60px;
+/* Section 1 */
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: auto;
 }
 
-.section {
-  background-color: #ffffff;
-  border: none;
-  padding: 50px;
-  flex: 1;
-  min-width: 300px;
-  text-align: center;
-  text-decoration: none;
-  color: #333;
-  border-radius: 16px;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+.rectangle2 {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: left; /* Căn chỉnh ảnh về phía bên trái */
+  display: block;
 }
 
-.section:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+.imageContainer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(25, 27, 29, 0.31); /* Lớp phủ mờ */
+  pointer-events: none; /* Đảm bảo overlay không chặn các sự kiện chuột */
+  border-radius: 20px;  /* Giữ cho lớp phủ phù hợp với border-radius của .frame2 */
 }
 
-.section h2 {
-  color: #b59f3b;
-  margin-bottom: 20px;
-  font-size: 1.8em;
+.group-9 {
+  position: absolute;
+  inset: 0;
 }
-
-.section p {
-  font-size: 1.1em;
-  color: #666;
+.arrow-1 {
+  width: 101px;
+  height: 10px;
+  position: absolute;
+  left: 134px;
+  top: 575px;
+  overflow: visible;
 }
-
-.chooseQAirline {
-  background-image: none;
-  color: #333;
-  text-align: center;
-}
-
-.chooseQAirline h2 {
-  font-size: 2.4em;
-  margin-bottom: 40px;
-  color: #b59f3b;
-}
-
-.reasons {
-  font-style: italic;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: center;
-}
-
-.reason {
-  background-color: transparent;
-  padding: 40px;
-  width: 300px;
+.tr-i-nghi-m-t-v-c-ng-q-airline {
+  color: #f1f1f1;
   text-align: left;
-  border-left: 4px solid #b59f3b;
-  transition: transform 0.4s ease;
+  font-family: 'Libre Bodoni', serif;
+  font-size: 48px;
+  font-weight: 400;
+  position: absolute;
+  left: 128px;
+  top: 262px;
+  width: 517px;
+  height: 120px;
+}
+.h-y-ng-m-nh-n-th-gi-i-i-u-tuy-t-v-i-h-n-b-t-c-gi-c-m-n-o-ray-bradbury {
+  color: #f1f1f1;
+  text-align: left;
+  font-family: 'Libre Bodoni', serif;
+  font-size: 18px;
+  line-height: 170.19%;
+  font-weight: 500;
+  position: absolute;
+  left: 134px;
+  top: 432px;
+  width: 718px;
 }
 
-.reason:hover {
-  transform: translateX(10px);
+/*Section 2*/
+.rectangle-12 {
+  width: 1919px;
+  height: 595px;
+  position: absolute;
+  left: 1px;
+  top: 818px;
+  overflow: visible;
+}
+.arrow-3 {
+  width: 101px;
+  height: 10px;
+  position: absolute;
+  left: 134px;
+  top: 1053px;
+  overflow: visible;
+}
+.why-choose-us {
+  color: #f1f1f1;
+  text-align: left;
+  font-family: 'Libre Bodoni', serif;
+  font-size: 48px;
+  font-weight: 400;
+  position: absolute;
+  left: 128px;
+  top: 946px;
+  width: 517px;
+  height: 120px;
+}
+.rectangle-8 {
+  width: 428px;
+  height: 330px;
+  position: absolute;
+  left: 1046px;
+  top: 932px;
+  object-fit: cover;
+}
+.ellipse-1 {
+  background: #f1f1f1;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  left: 119px;
+  top: 1193px;
+}
+.ellipse-5 {
+  background: #f1f1f1;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  left: 515px;
+  top: 1193px;
+}
+.ellipse-2 {
+  background: #f1f1f1;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  left: 119px;
+  top: 1241px;
+}
+.ellipse-6 {
+  background: #f1f1f1;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  left: 515px;
+  top: 1241px;
+}
+.gi-c-c-nh-tranh {
+  color: #f1f1f1;
+  text-align: left;
+  font-family: 'Libre Bodoni', serif;
+  font-size: 24px;
+  font-weight: 400;
+  position: absolute;
+  left: 166px;
+  top: 1186px;
+}
+.ng-bay-a-d-ng {
+  color: #f1f1f1;
+  text-align: left;
+  font-family: 'Libre Bodoni', serif;
+  font-size: 24px;
+  font-weight: 400;
+  position: absolute;
+  left: 558px;
+  top: 1186px;
+}
+.ch-t-l-ng-d-ch-v-t-t {
+  color: #f1f1f1;
+  text-align: left;
+  font-family: 'Libre Bodoni', serif;
+  font-size: 24px;
+  font-weight: 400;
+  position: absolute;
+  left: 166px;
+  top: 1235px;
+}
+.u-i-h-p-d-n {
+  color: #f1f1f1;
+  text-align: left;
+  font-family: 'Libre Bodoni', serif;
+  font-size: 24px;
+  font-weight: 400;
+  position: absolute;
+  left: 558px;
+  top: 1234px;
 }
 
-.reasonContent h3 {
-  color: #b59f3b;
-  font-size: 1.6em;
-  margin-bottom: 20px;
+/*Section 3*/
+.c-c-d-ch-v-d-nh-cho-qu-kh-ch {
+  color: #191b1d;
+  text-align: center;
+  font-family: 'Libre Bodoni', serif;
+  font-size: 48px;
+  font-weight: 400;
+  position: absolute;
+  left: 476px;
+  top: 1541px;
+  width: 606px;
+  height: 120px;
+}
+.arrow-4 {
+  width: 101px;
+  height: 10px;
+  position: absolute;
+  left: 706px;
+  top: 1695px;
+  overflow: visible;
+}
+.imageLinkWrapper {
+  position: relative; /* Quan trọng để các phần tử con với position: absolute dựa trên này */
+  width: 300px; /* Điều chỉnh kích thước phù hợp với hình ảnh */
+  height: 200px; 
+  margin-top: 20px;
 }
 
-.reasonContent p {
-  font-size: 1.1em;
-  color: #666;
+.imageLinkWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Đảm bảo hình ảnh phủ đầy khung mà không bị méo */
+  display: block;
 }
+
+.link {
+  text-decoration: none;
+}
+
+.ellipse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6); /* Nền bán trong suốt để dễ đọc chữ */
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 50px; /* Tạo hình ellipse */
+  text-align: center;
+  transition: background 0.3s ease;
+  z-index: 1; /* Đảm bảo ellipse nằm trên hình ảnh */
+}
+
+.ellipse:hover {
+  background: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+.rectangle-13 {
+  width: 693px;
+  height: 690px;
+  /* position: absolute;
+  left: 53px;
+  top: 1761px; */
+  object-fit: cover;
+}
+.rectangle-9 {
+  width: 311px;
+  height: 330px;
+  /* position: absolute;
+  left: 792px;
+  top: 1761px; */
+  object-fit: cover;
+}
+.rectangle-11 {
+  width: 667px;
+  height: 330px;
+  /* position: absolute;
+  left: 792px;
+  top: 2136px; */
+  object-fit: cover;
+}
+.rectangle-10 {
+  width: 314px;
+  /* height: 330px;
+  position: absolute;
+  left: 1145px;
+  top: 1761px; */
+  object-fit: cover;
+}
+
