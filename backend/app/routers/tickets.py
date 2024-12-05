@@ -115,3 +115,4 @@ def delete_ticket(ticket_id: int, db: Session = Depends(get_db)) -> dict:
             status_code=status.HTTP_404_NOT_FOUND, detail="Vé không tồn tại"
         )
     return {"detail": "Xóa vé thành công"}
+

@@ -99,3 +99,20 @@ def delete_ticket(db: Session, ticket_id: int) -> bool:
     db.delete(db_ticket)
     db.commit()
     return True
+
+def get_ticket_by_flight_and_seat(db: Session, flight_id: int, seat_id: int) -> Optional[models.Ticket]:
+    """
+    Lấy thông tin vé theo flight_id và seat_id.
+
+    Args:
+        db (Session): Database session
+        flight_id (int): ID của chuyến bay
+        seat_id (int): ID của ghế
+
+    Returns:
+        Optional[models.Ticket]: Ticket object if found, None otherwise
+    """
+    return db.query(models.Ticket).filter(
+        models.Ticket.flight_id == flight_id,
+        models.Ticket.seat_id == seat_id
+    ).first()
