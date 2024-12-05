@@ -166,27 +166,47 @@ const DocumentRequirements = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Trang Yêu Cầu Giấy Tờ</h1>
-      <div className={styles.sections}>
-        {sections.map((section) => (
-          <div key={section.id} className={styles.card}>
-            <h2 className={styles.cardTitle}>{section.title}</h2>
-            <button
-              className={styles.viewButton}
-              onClick={() => openSection(section.id)}
-            >
-              Xem Chi Tiết
-            </button>
-          </div>
-        ))}
-      </div>
+      {/* Header */}
+      <header className={styles.header}>
+        <div className={styles.logoContainer}>
+          <img src=".images/ylogo.png" alt="QAirline Logo" className={styles.logo} />
+        </div>
+        <nav className={styles.nav}>
+          <ul>
+            <li><a href="/">Trang Chủ</a></li>
+            <li><a href="/about">Giới Thiệu</a></li>
+            <li><a href="/contact">Liên Hệ</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      {/* Nội dung chính */}
+      <main>
+        <h1 className={styles.title}>Trang Yêu Cầu Giấy Tờ</h1>
+        <p className={styles.description}>
+          Chào mừng bạn đến với QAirline. Vui lòng chọn một mục bên dưới để xem chi tiết yêu cầu giấy tờ cần thiết cho chuyến bay của bạn.
+        </p>
+        <div className={styles.sections}>
+          {sections.map((section) => (
+            <div key={section.id} className={styles.card}>
+              <h2 className={styles.cardTitle}>{section.title}</h2>
+              <button
+                className={styles.viewButton}
+                onClick={() => openSection(section.id)}
+              >
+                Xem Chi Tiết
+              </button>
+            </div>
+          ))}
+        </div>
+      </main>
 
       {/* Overlay và Modal */}
       {activeSection !== null && (
         <div className={styles.overlay} onClick={closeSection}>
           <div
             className={styles.modal}
-            onClick={(e) => e.stopPropagation()} // Ngăn không cho overlay đóng khi nhấp vào modal
+            onClick={(e) => e.stopPropagation()}
           >
             <button className={styles.closeButton} onClick={closeSection}>
               &times;
