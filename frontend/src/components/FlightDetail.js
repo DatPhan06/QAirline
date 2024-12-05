@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { getSeatsByAirplaneId } from "../services/seatService";
 import { createBooking } from "../services/bookingService";
+import { getTicketByFlightAndSeat } from "../services/ticketService";
 import styles from "./FlightDetail.module.css";
 
 const FlightDetail = ({ flight }) => {
@@ -28,23 +29,39 @@ const FlightDetail = ({ flight }) => {
   }, [flight]);
 
   const handleSeatSelection = async (seat) => {
-    try {
-      setIsLoading(true);
-      setBookingError(null);
+    const confirmBooking = window.confirm(
+      `Bạn có muốn đặt ghế số ${seat.seat_number} không?`
+    );
 
-      await createBooking({
-        flight_id: flight.flight_id,
-        seat_id: seat.seat_id,
-        ticket_id: 1,
-        price: 1000000,
-      });
+    if (confirmBooking) {
+      try {
+        setIsLoading(true);
+        setBookingError(null);
 
-      window.location.reload();
-    } catch (error) {
-      setBookingError("Không thể đặt chỗ. Vui lòng thử lại sau.");
-      console.error("Booking error:", error);
-    } finally {
-      setIsLoading(false);
+        // Get ticket info first
+        const ticket = await getTicketByFlightAndSeat(
+          flight.flight_id,
+          seat.seat_id
+        );
+
+        if (!ticket) {
+          throw new Error("Không tìm thấy thông tin vé");
+        }
+
+        await createBooking({
+          flight_id: flight.flight_id,
+          seat_id: seat.seat_id,
+          ticket_id: ticket.ticket_id,
+          price: ticket.price,
+        });
+
+        window.location.reload();
+      } catch (error) {
+        setBookingError("Không thể đặt chỗ. Vui lòng thử lại sau.");
+        console.error("Booking error:", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
