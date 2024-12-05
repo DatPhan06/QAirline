@@ -1,159 +1,244 @@
-/* Container chính */
+/* DocumentRequirements.module.css */
+
 .container {
-    background-color: #f9f9f9;
-    padding: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    /* Thêm padding-top để tránh bị chèn bởi NavBar */
-    padding-top: 100px; /* Giá trị này nên bằng chiều cao của NavBar */
-  }
-  
-  .title {
-    text-align: center;
-    font-size: 36px;
-    color: #2c3e50;
-    font-weight: 700;
-    margin-bottom: 40px;
-    letter-spacing: 1px;
-  }
-  
-  /* Các section */
-  .sections {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-  }
-  
-  .card {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    padding: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .cardTitle {
-    font-size: 24px;
-    color: #34495e;
-    font-weight: 600;
-    margin-bottom: 15px;
-  }
-  
-  .viewButton {
-    background-color: #2980b9;
-    color: white;
-    font-size: 16px;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .viewButton:hover {
-    background-color: #3498db;
-  }
-  
-  /* Modal - Overlay */
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Roboto', sans-serif;
+  color: #2c3e50;
+  background-color: #f5f7fa;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  background-color: #fff;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  max-height: 50px;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav a:hover {
+  color: #2980b9;
+}
+
+/* Nội dung chính */
+main {
+  flex: 1;
+  padding: 40px 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 3em;
+  margin-bottom: 20px;
+  color: #34495e;
+}
+
+.description {
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 50px;
+  color: #7f8c8d;
+}
+
+.sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  padding: 25px 20px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.cardTitle {
+  font-size: 1.6em;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.viewButton {
+  background-color: #2980b9;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.viewButton:hover {
+  background-color: #1c5980;
+}
+
+/* Footer */
+.footer {
+  background-color: #34495e;
+  color: #ecf0f1;
+  padding: 20px 40px;
+}
+
+.footerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footerLinks {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.footerLinks a {
+  text-decoration: none;
+  color: #ecf0f1;
+  transition: color 0.3s;
+}
+
+.footerLinks a:hover {
+  color: #bdc3c7;
+}
+
+/* Overlay và Modal */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(44, 62, 80, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #fff;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90%;
+  overflow-y: auto;
+  border-radius: 10px;
+  position: relative;
+  padding: 40px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: transparent;
+  border: none;
+  font-size: 2em;
+  color: #7f8c8d;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.closeButton:hover {
+  color: #2c3e50;
+}
+
+.content {
+  font-size: 1.1em;
+  color: #2c3e50;
+}
+
+.content h2 {
+  font-size: 2em;
+  margin-bottom: 30px;
+  color: #2980b9;
+}
+
+.content p {
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.content ul,
+.content ol {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.content li {
+  margin-bottom: 10px;
+}
+
+.content a {
+  color: #e74c3c;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.content a:hover {
+  color: #c0392b;
+}
+
+@media (max-width: 768px) {
   .modal {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 900px;
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow-y: auto;
-    max-height: 80vh;
+    padding: 20px;
   }
-  
-  .closeButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 30px;
-    background: none;
-    border: none;
-    color: #34495e;
-    cursor: pointer;
-    transition: color 0.3s ease;
-  }
-  
-  .closeButton:hover {
-    color: #e74c3c;
-  }
-  
-  /* Nội dung trong modal */
-  .content {
-    font-size: 16px;
-    color: #7f8c8d;
-    line-height: 1.6;
-    max-height: 70vh;
-    overflow-y: auto;
-  }
-  
+
   .content h2 {
-    font-size: 28px;
-    color: #2c3e50;
-    margin-bottom: 20px;
+    font-size: 1.5em;
   }
-  
-  .content p {
-    font-size: 16px;
-    margin-bottom: 15px;
+
+  .card {
+    width: 100%;
   }
-  
-  .content ul {
-    list-style-type: square;
-    margin-left: 20px;
+
+  .footerContent {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
-  
-  .content ol {
-    margin-left: 20px;
+
+  .footerLinks {
+    margin-top: 10px;
   }
-  
-  .content a {
-    color: #2980b9;
-    text-decoration: none;
-  }
-  
-  .content a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .container {
-      padding: 20px;
-    }
-  
-    .sections {
-      grid-template-columns: 1fr;
-    }
-  
-    .modal {
-      width: 90%;
-      max-height: 90vh;
-    }
-  }
-  
+}
