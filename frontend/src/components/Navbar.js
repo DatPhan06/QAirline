@@ -10,6 +10,9 @@ import styles from "./Navbar.module.css";
  * @returns {JSX.Element} Thành phần Navbar.
  */
 const Navbar = () => {
+  const token = localStorage.getItem("token");
+  const isLoggedIn = !!token;
+
   return (
     <nav className={styles.nav}>
       <ul className={styles.navList}>
@@ -152,31 +155,43 @@ const Navbar = () => {
             />
           </Link>
           <ul className={styles.subMenu}>
-            <li className={styles.subMenuItem}>
-              <Link to="/account/profile" className={styles.subMenuLink}>
-                Hồ Sơ
-              </Link>
-            </li>
-            <li className={styles.subMenuItem}>
-              <Link to="/account/settings" className={styles.subMenuLink}>
-                Cài Đặt
-              </Link>
-            </li>
-            <li className={styles.subMenuItem}>
-              <Link to="/account/signin" className={styles.subMenuLink}>
-                Đăng Nhập
-              </Link>
-            </li>
-            <li className={styles.subMenuItem}>
-              <Link to="/account/signup" className={styles.subMenuLink}>
-                Đăng Ký
-              </Link>
-            </li>
-            <li className={styles.subMenuItem}>
-              <Link to="/account/logout" className={styles.subMenuLink}>
-                Đăng Xuất
-              </Link>
-            </li>
+            {isLoggedIn ? (
+              <>
+                <li className={styles.subMenuItem}>
+                  <Link to="/account/profile" className={styles.subMenuLink}>
+                    Hồ Sơ
+                  </Link>
+                </li>
+                <li className={styles.subMenuItem}>
+                  <Link to="/account/settings" className={styles.subMenuLink}>
+                    Cài Đặt
+                  </Link>
+                </li>
+                <li className={styles.subMenuItem}>
+                  <Link to="/account/logout" className={styles.subMenuLink}>
+                    Đăng Xuất
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className={styles.subMenuItem}>
+                  <Link to="/account/signin" className={styles.subMenuLink}>
+                    Đăng Nhập
+                  </Link>
+                </li>
+                <li className={styles.subMenuItem}>
+                  <Link to="/account/signup" className={styles.subMenuLink}>
+                    Đăng Ký
+                  </Link>
+                </li>
+                <li className={styles.subMenuItem}>
+                  <Link to="/account/settings" className={styles.subMenuLink}>
+                    Cài Đặt
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </li>
       </ul>

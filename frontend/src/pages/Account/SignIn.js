@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { loginUser } from "../../services/userService";
 import styles from "./SignIn.module.css";
 
 function SignIn() {
@@ -23,21 +24,9 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const params = new URLSearchParams();
-    params.append("username", formData.username);
-    params.append("password", formData.password);
-
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/users/login`,
-        params,
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      );
-      localStorage.setItem("token", response.data.access_token);
+      const response = await loginUser(formData.username, formData.password);
+      localStorage.setItem("token", response.access_token);
       alert("Đăng nhập thành công!");
       navigate("/account/profile");
     } catch (error) {
