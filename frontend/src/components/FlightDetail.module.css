@@ -93,3 +93,25 @@
   transform: translateY(-3px);
   box-shadow: 0 6px 15px rgba(183, 149, 11, 0.3);
 }
+
+.seatItem {
+  cursor: pointer;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.available:hover {
+  background-color: #e8f4fd;
+}
+
+.occupied {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.error {
+  color: red;
+  margin: 10px 0;
+}

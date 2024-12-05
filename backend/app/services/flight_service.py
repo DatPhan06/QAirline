@@ -32,9 +32,7 @@ def get_flight(db: Session, flight_id: int) -> models.Flight:
     Returns:
         models.Flight: Đối tượng chuyến bay nếu tìm thấy, ngược lại là None.
     """
-    return db.query(models.Flight).options(
-            joinedload(models.Flight.airplane).joinedload(models.Airplane.seats)
-        ).filter(models.Flight.flight_id == flight_id).first()
+    return db.query(models.Flight).filter(models.Flight.flight_id == flight_id).first()
 
 def get_flights(db: Session) -> List[models.Flight]:
     """
@@ -46,10 +44,7 @@ def get_flights(db: Session) -> List[models.Flight]:
     Returns:
         list[models.Flight]: Danh sách các chuyến bay.
     """
-    flights = db.query(models.Flight).options(
-        joinedload(models.Flight.departure_airport),
-        joinedload(models.Flight.arrival_airport)
-    ).all()
+    flights = db.query(models.Flight).all()
     return flights
     
 def update_flight(db: Session, db_flight: models.Flight, flight: schemas.FlightCreate) -> models.Flight:

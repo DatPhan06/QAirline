@@ -36,4 +36,4 @@ class Airplane(Base):
 
     # Relationships
     seats = relationship("Seat", back_populates="airplane")  # Airplane has many seats
-    flights = relationship("Flight", back_populates="airplane")  # Airplane serves many flights
+    flights = relationship("Flight",foreign_keys="[Flight.airplane_id]", back_populates="airplane")  # Airplane serves many flights
