@@ -12,8 +12,7 @@ const axiosInstance = axios.create({
 // Add interceptor to automatically attach token to headers
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token =
-      localStorage.getItem("adminToken") || localStorage.getItem("token"); // Get token from localStorage
+    const token = localStorage.getItem("token"); // Get token from localStorage
     if (token) {
       config.headers.Authorization = `Bearer ${token}`; // Attach token to headers
     }
@@ -25,10 +24,17 @@ axiosInstance.interceptors.request.use(
 // Hàm tạo đặt vé mới
 export const createBooking = async (bookingData) => {
   try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("Vui lòng đăng nhập để đặt vé");
+    }
+
     const response = await axiosInstance.post("/bookings/", bookingData);
     return response.data;
   } catch (error) {
-    console.error("Error creating booking:", error);
+    if (error.response?.status === 401) {
+      throw new Error("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại");
+    }
     throw error;
   }
 };

@@ -1,261 +1,260 @@
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap");
 
 /* Reset CSS */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Cài đặt phông chữ và nền */
 body {
-    font-family: 'Montserrat', sans-serif;
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-    padding: 0;
+  font-family: "Montserrat", sans-serif;
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 0;
 }
 
 /* Container trang */
 .pageContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Khoảng cách giữa khung đặt vé và danh sách chuyến bay */
+  padding: 20px;
 }
 
 /* Container chính */
 .container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    border: 1px solid #7F8C8D; /* Màu xám trung tính */
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #7f8c8d; /* Màu xám trung tính */
 }
 
 /* Tiêu đề */
 .headingcontainer {
-    text-align: center;
-    margin-bottom: 40px;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .heading {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    color: #B7950B; /* Màu vàng sang trọng */
-    position: relative;
-    display: inline-block;
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  color: #b7950b; /* Màu vàng sang trọng */
+  position: relative;
+  display: inline-block;
 }
 
 .heading::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 5px;
-    background-color: #7F8C8D; /* Màu xám trung tính */
-    margin: 15px auto 0;
-    border-radius: 5px;
-    transition: width 0.3s ease;
+  content: "";
+  display: block;
+  width: 60px;
+  height: 5px;
+  background-color: #7f8c8d; /* Màu xám trung tính */
+  margin: 15px auto 0;
+  border-radius: 5px;
+  transition: width 0.3s ease;
 }
 
 .heading:hover::after {
-    width: 100px;
-    background-color: #B7950B; /* Màu vàng sang trọng */
+  width: 100px;
+  background-color: #b7950b; /* Màu vàng sang trọng */
 }
 
 /* Form */
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 .tripType {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
 
 .radio {
-    margin-right: 10px;
-    cursor: pointer;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 /* Container cho điểm đi và điểm đến */
 .formRow {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .selectContainer {
-    flex: 1;
-    min-width: 200px;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Container cho ngày đi và ngày về */
 .dateRow {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .dateContainer {
-    flex: 1;
-    min-width: 200px;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Label cho các ô input */
 .label {
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #333; /* Màu chữ chính */
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333; /* Màu chữ chính */
 }
 
 /* Style chung cho các ô input và select */
 .input,
 .select {
-    padding: 12px 15px;
-    border: 1px solid #7F8C8D; /* Màu xám trung tính */
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #fff;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-    color: #333; /* Màu chữ chính */
+  padding: 12px 15px;
+  border: 1px solid #7f8c8d; /* Màu xám trung tính */
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  color: #333; /* Màu chữ chính */
 }
 
 .input:focus,
 .select:focus {
-    border-color: #B7950B; /* Màu vàng sang trọng */
-    outline: none;
-    box-shadow: 0 0 10px rgba(183, 149, 11, 0.3);
+  border-color: #b7950b; /* Màu vàng sang trọng */
+  outline: none;
+  box-shadow: 0 0 10px rgba(183, 149, 11, 0.3);
 }
 
 /* Số hành khách */
 .passengerContainer {
-    flex: 1;
-    min-width: 200px;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Nút tìm chuyến bay */
 .submitButton {
-    background-color: #B7950B; /* Màu vàng sang trọng */
-    color: #fff;
-    padding: 14px 28px;
-    border: none;
-    border-radius: 12px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
-    max-width: 240px;
-    margin: 0 auto;
+  background-color: #b7950b; /* Màu vàng sang trọng */
+  color: #fff;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 240px;
+  margin: 0 auto;
 }
 
 .submitButton:hover {
-    background-color: #A37C07;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(183, 149, 11, 0.3);
+  background-color: #a37c07;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(183, 149, 11, 0.3);
 }
 
 /* Kết quả tìm kiếm */
 .results {
-    margin-top: 20px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+  margin-top: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .results h2 {
-    font-size: 1.8rem;
-    color: #B7950B; /* Màu vàng sang trọng */
-    font-weight: 600;
-    margin-bottom: 30px;
-    text-align: center;
+  font-size: 1.8rem;
+  color: #b7950b; /* Màu vàng sang trọng */
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
 .flightItem {
-    padding: 25px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    border: 1px solid #7F8C8D; /* Màu xám trung tính */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border: 1px solid #7f8c8d; /* Màu xám trung tính */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .flightItem:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .flightTitle {
-    font-size: 1.5rem;
-    color: #B7950B; /* Màu vàng sang trọng */
-    font-weight: 600;
-    margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #b7950b; /* Màu vàng sang trọng */
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .flightItem strong {
-    color: #333; /* Màu chữ chính */
+  color: #333; /* Màu chữ chính */
 }
 
 .flightItem p {
-    margin: 10px 0;
-    line-height: 1.6;
+  margin: 10px 0;
+  line-height: 1.6;
 }
 
 /* Flight Schedule */
 .flightSchedule {
-    max-width: 800px;
-    width: 100%;
-    margin: 50px auto;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    border: 1px solid #7F8C8D; /* Màu xám trung tính */
+  max-width: 1200px; /* Tăng chiều rộng tối đa */
+  width: 100%;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #7f8c8d; /* Màu xám trung tính */
 }
 
 .flightSchedule h2 {
-    font-size: 2rem;
-    color: #B7950B; /* Màu vàng sang trọng */
-    font-weight: 600;
-    margin-bottom: 30px;
-    text-align: center;
+  font-size: 2rem;
+  color: #b7950b; /* Màu vàng sang trọng */
+  font-weight: 600;
+  text-align: center;
 }
-
 /* Nếu không có chuyến bay */
 .results p {
-    font-size: 1.1rem;
-    color: #7F8C8D; /* Màu xám trung tính */
-    font-style: italic;
-    text-align: center;
+  font-size: 1.1rem;
+  color: #7f8c8d; /* Màu xám trung tính */
+  font-style: italic;
+  text-align: center;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .formRow,
-    .dateRow {
-        flex-direction: column;
-    }
+  .formRow,
+  .dateRow {
+    flex-direction: column;
+  }
 
-    .formRow > div,
-    .dateRow > div {
-        width: 100%;
-    }
+  .formRow > div,
+  .dateRow > div {
+    width: 100%;
+  }
 
-    .heading {
-        font-size: 2.5rem;
-    }
+  .heading {
+    font-size: 2.5rem;
+  }
 }

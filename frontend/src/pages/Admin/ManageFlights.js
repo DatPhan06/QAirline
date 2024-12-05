@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { createFlight } from "../../services/flightService";
+import React, { useState, useEffect } from "react";
+import { createFlight, getFlights } from "../../services/flightService";
 import AdminSidebar from "../../components/AdminSidebar";
 import FlightList from "../../components/FlightList";
 import styles from "./Admin.module.css";
@@ -18,6 +18,21 @@ const ManageFlights = () => {
     price: "",
   });
 
+  const [flights, setFlights] = useState([]);
+
+  useEffect(() => {
+    const fetchFlights = async () => {
+      try {
+        const response = await getFlights();
+        setFlights(response);
+      } catch (error) {
+        console.error("Error fetching flights:", error);
+      }
+    };
+
+    fetchFlights();
+  }, []);
+
   const handleChange = (e) => {
     setFlightData({ ...flightData, [e.target.name]: e.target.value });
   };
@@ -27,6 +42,9 @@ const ManageFlights = () => {
     try {
       await createFlight(flightData);
       alert("Flight data submitted successfully!");
+      // Fetch the updated list of flights
+      const response = await getFlights();
+      setFlights(response);
     } catch (error) {
       console.error("Error submitting flight data:", error);
     }
@@ -157,7 +175,7 @@ const ManageFlights = () => {
           </form>
         </div>
         <div className={styles.listContainer}>
-          <FlightList />
+          <FlightList flights={flights} onFlightClick={() => {}} />
         </div>
       </div>
     </div>

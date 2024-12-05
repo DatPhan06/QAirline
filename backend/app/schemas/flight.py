@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from datetime import date, datetime, time, timedelta
 from typing import Optional
 from .airport import Airport  # Import schema Airport
+from .airplane import Airplane  # Import schema Airplane
 
 
 class FlightBase(BaseModel):
@@ -46,6 +47,7 @@ class Flight(FlightBase):
     flight_id: int
     created_at: datetime
     updated_at: datetime
+    airplane: Airplane
     departure_airport: Airport
     arrival_airport: Airport
 

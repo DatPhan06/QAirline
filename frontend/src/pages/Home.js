@@ -17,7 +17,7 @@ const TicketSchedule = () => {
       <div className={styles["frame-2608753"]}>
         <div className={styles["frame-2608752"]}>
           <div className={styles["helping-others"]}></div>
-          <div className={styles["live-travel"]}>Live &amp; Travel</div>
+          <div className={styles["live-travel"]}>Live &amp; Travel </div>
         </div>
         <div className={styles["special-offers-to-suit-your-plan"]}>
           Hãy cùng QAirline, vui từng chuyến bay!

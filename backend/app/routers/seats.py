@@ -113,3 +113,13 @@ def delete_seat(
     if not seat:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Ghế không tồn tại")
     return seat
+
+@router.get("/airplane/{airplane_id}", response_model=List[schemas.Seat])
+def get_seats_by_airplane_id(
+    airplane_id: int,
+    db: Session = Depends(get_db),
+) -> List[models.Seat]:
+    seats = services.seat_service.get_seats_by_airplane_id(db, airplane_id)
+    if not seats:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No seats found for this airplane")
+    return seats

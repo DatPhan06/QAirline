@@ -55,8 +55,8 @@ export const getFlights = async () => {
 export const updateFlight = async (flightId, updateData) => {
   try {
     const response = await axiosInstance.put(
-        `/flights/${flightId}`, 
-        updateData
+      `/flights/${flightId}`,
+      updateData
     );
     return response.data;
   } catch (error) {

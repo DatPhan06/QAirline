@@ -107,3 +107,6 @@ def delete_seat(db: Session, seat_id: int) -> Optional[models.Seat]:
     db.delete(seat)  # Xóa ghế khỏi cơ sở dữ liệu
     db.commit()  # Lưu thay đổi vào cơ sở dữ liệu
     return seat
+
+def get_seats_by_airplane_id(db: Session, airplane_id: int) -> List[models.Seat]:
+    return db.query(models.Seat).filter(models.Seat.airplane_id == airplane_id).all()

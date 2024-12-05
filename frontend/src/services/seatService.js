@@ -29,6 +29,17 @@ export const createSeat = async (seatData) => {
   }
 };
 
+// Hàm lấy danh sách chỗ ngồi theo máy bay
+export const getSeatsByAirplaneId = async (airplaneId) => {
+  try {
+    const response = await axiosInstance.get(`/seats/airplane/${airplaneId}/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching seats by airplane:", error);
+    throw error;
+  }
+};
+
 // Hàm lấy thông tin ghế theo ID
 export const getSeatById = async (seatId) => {
   try {
@@ -54,10 +65,7 @@ export const getSeats = async () => {
 // Hàm cập nhật ghế
 export const updateSeat = async (seatId, updateData) => {
   try {
-    const response = await axiosInstance.put(
-        `/seats/${seatId}`, 
-        updateData
-    );
+    const response = await axiosInstance.put(`/seats/${seatId}`, updateData);
     return response.data;
   } catch (error) {
     console.error("Error updating seat:", error);
