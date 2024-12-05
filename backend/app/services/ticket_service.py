@@ -2,6 +2,7 @@
 
 from typing import List, Optional
 from sqlalchemy.orm import Session
+from fastapi import HTTPException
 
 from .. import models, schemas
 
@@ -116,3 +117,44 @@ def get_ticket_by_flight_and_seat(db: Session, flight_id: int, seat_id: int) -> 
         models.Ticket.flight_id == flight_id,
         models.Ticket.seat_id == seat_id
     ).first()
+
+def create_tickets_for_flight(db: Session, flight_id: int) -> List[models.Ticket]:
+    """
+    Tạo vé cho tất cả các ghế của một chuyến bay.
+
+    Args:
+        db (Session): Database session
+        flight_id (int): ID của chuyến bay
+
+    Returns:
+        List[models.Ticket]: Danh sách các vé được tạo
+    """
+    # Get flight info
+    flight = db.query(models.Flight).get(flight_id)
+    if not flight:
+        raise HTTPException(status_code=404, detail="Flight not found")
+
+    # Get all seats for the airplane
+    seats = db.query(models.Seat).filter(
+        models.Seat.airplane_id == flight.airplane_id
+    ).all()
+
+    tickets = []
+    for seat in seats:
+        # Set price based on seat class
+        price = flight.price
+        if seat.seat_class.lower() == "business":
+            price *= 2  # Business class costs twice as much
+
+        ticket = models.Ticket(
+            flight_id=flight_id,
+            seat_id=seat.seat_id,
+            class_type=seat.seat_class,
+            price=price,
+            status="available"
+        )
+        db.add(ticket)
+        tickets.append(ticket)
+
+    db.commit()
+    return tickets

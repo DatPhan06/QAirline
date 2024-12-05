@@ -55,8 +55,8 @@ export const getTickets = async () => {
 export const updateTicket = async (ticketId, updateData) => {
   try {
     const response = await axiosInstance.put(
-        `/tickets/${ticketId}`, 
-        updateData
+      `/tickets/${ticketId}`,
+      updateData
     );
     return response.data;
   } catch (error) {
@@ -72,6 +72,32 @@ export const deleteTicket = async (ticketId) => {
     return response.data;
   } catch (error) {
     console.error("Error deleting ticket:", error);
+    throw error;
+  }
+};
+
+// Hàm lấy vé theo flight_id và seat_id
+export const getTicketByFlightAndSeat = async (flightId, seatId) => {
+  try {
+    const response = await axiosInstance.get(
+      `/tickets/flight/${flightId}/seat/${seatId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching ticket by flight and seat:", error);
+    throw error;
+  }
+};
+
+// Hàm tạo tất cả vé cho một chuyến bay
+export const createTicketsForFlight = async (flightId) => {
+  try {
+    const response = await axiosInstance.post(
+      `/tickets/flight/${flightId}/create-all`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error creating tickets for flight:", error);
     throw error;
   }
 };

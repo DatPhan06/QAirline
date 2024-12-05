@@ -116,3 +116,41 @@ def delete_ticket(ticket_id: int, db: Session = Depends(get_db)) -> dict:
         )
     return {"detail": "Xóa vé thành công"}
 
+@router.get("/flight/{flight_id}/seat/{seat_id}", response_model=schemas.Ticket)
+def get_ticket_by_flight_and_seat(
+    flight_id: int,
+    seat_id: int,
+    db: Session = Depends(get_db)
+) -> models.Ticket:
+    """
+    Lấy thông tin vé theo flight_id và seat_id.
+
+    Args:
+        flight_id (int): ID của chuyến bay
+        seat_id (int): ID của ghế
+        db (Session): Database session
+
+    Returns:
+        models.Ticket: Thông tin vé
+    """
+    ticket = services.ticket_service.get_ticket_by_flight_and_seat(db, flight_id, seat_id)
+    if not ticket:
+        raise HTTPException(status_code=404, detail="Ticket not found")
+    return ticket
+
+@router.post("/flight/{flight_id}/create-all", response_model=List[schemas.Ticket])
+def create_tickets_for_flight(
+    flight_id: int,
+    db: Session = Depends(get_db)
+) -> List[models.Ticket]:
+    """
+    Tạo vé cho tất cả các ghế của một chuyến bay.
+
+    Args:
+        flight_id (int): ID của chuyến bay
+        db (Session): Database session
+
+    Returns:
+        List[models.Ticket]: Danh sách các vé được tạo
+    """
+    return services.ticket_service.create_tickets_for_flight(db, flight_id)
