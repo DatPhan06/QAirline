@@ -6,6 +6,8 @@
     margin: 0 auto;
     border-radius: 8px;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    /* Thêm padding-top để tránh bị chèn bởi NavBar */
+    padding-top: 100px; /* Giá trị này nên bằng chiều cao của NavBar */
   }
   
   .title {
