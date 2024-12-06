@@ -1,0 +1,54 @@
+/* frontend/src/pages/Booking/ConfirmationPage.module.css */
+
+.confirmationContainer {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: "Montserrat", sans-serif;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #003f82;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.flightInfo {
+  margin-bottom: 20px;
+}
+
+.flightInfo h2 {
+  font-size: 1.8rem;
+  color: #b7950b;
+  margin-bottom: 10px;
+}
+
+.flightInfo p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.homeButton {
+  background-color: #b7950b;
+  color: #fff;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+.homeButton:hover {
+  background-color: #a37c07;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(183, 149, 11, 0.3);
+}
