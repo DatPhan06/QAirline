@@ -115,3 +115,53 @@
   color: red;
   margin: 10px 0;
 }
+
+/* Style for the seat class dropdown */
+.selectClass {
+  margin: 20px 0;
+  padding: 10px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style for the seat list */
+.seatList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+/* Style for individual seat items */
+.seatItem {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  width: calc(
+    20% - 10px
+  ); /* Adjust the percentage to control the number of items per row */
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.seatItem.available:hover {
+  background-color: #e0f7fa;
+  transform: translateY(-3px);
+}
+
+.seatItem.occupied {
+  background-color: #eeeeee;
+  cursor: not-allowed;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}

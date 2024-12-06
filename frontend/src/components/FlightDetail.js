@@ -7,6 +7,9 @@ import styles from "./FlightDetail.module.css";
 
 const FlightDetail = ({ flight }) => {
   const [seats, setSeats] = useState([]);
+  const [seatClasses, setSeatClasses] = useState([]);
+  const [selectedClass, setSelectedClass] = useState("");
+  const [filteredSeats, setFilteredSeats] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [bookingError, setBookingError] = useState(null);
 
@@ -18,6 +21,12 @@ const FlightDetail = ({ flight }) => {
             flight.airplane.airplane_id
           );
           setSeats(seatsData);
+
+          // Get unique seat classes
+          const classes = [
+            ...new Set(seatsData.map((seat) => seat.seat_class)),
+          ];
+          setSeatClasses(classes);
         }
       } catch (error) {
         console.error("Error fetching seats:", error);
@@ -27,6 +36,18 @@ const FlightDetail = ({ flight }) => {
 
     fetchSeats();
   }, [flight]);
+
+  useEffect(() => {
+    // Filter seats based on selected class
+    if (selectedClass) {
+      const filtered = seats.filter(
+        (seat) => seat.seat_class === selectedClass
+      );
+      setFilteredSeats(filtered);
+    } else {
+      setFilteredSeats(seats);
+    }
+  }, [selectedClass, seats]);
 
   const handleSeatSelection = async (seat) => {
     const confirmBooking = window.confirm(
@@ -85,25 +106,48 @@ const FlightDetail = ({ flight }) => {
       <p>Nhà sản xuất: {flight.airplane.manufacturer}</p>
       <p>Sức chứa: {flight.airplane.seat_capacity}</p>
 
-      <h2>Danh sách chỗ ngồi</h2>
-      {isLoading && <p>Đang xử lý đặt chỗ...</p>}
-      {bookingError && <p className={styles.error}>{bookingError}</p>}
-      <ul className={styles.seatList}>
-        {seats.map((seat) => (
-          <li
-            key={seat.seat_id}
-            className={`${styles.seatItem} ${
-              seat.status === "Available" ? styles.available : styles.occupied
-            }`}
-            onClick={() =>
-              seat.status === "Available" && handleSeatSelection(seat)
-            }
-          >
-            Ghế số: {seat.seat_number}, Loại ghế: {seat.seat_class}, Trạng thái:{" "}
-            {seat.status}
-          </li>
+      <h2>Chọn hạng ghế</h2>
+      <select
+        className={styles.selectClass}
+        value={selectedClass}
+        onChange={(e) => setSelectedClass(e.target.value)}
+      >
+        <option value="">Tất cả các hạng ghế</option>
+        {seatClasses.map((seatClass) => (
+          <option key={seatClass} value={seatClass}>
+            {seatClass}
+          </option>
         ))}
-      </ul>
+      </select>
+
+      {filteredSeats.length > 0 && (
+        <>
+          <h2>
+            Danh sách chỗ ngồi{" "}
+            {selectedClass ? `(${selectedClass})` : "(Tất cả hạng ghế)"}
+          </h2>
+          {isLoading && <p>Đang xử lý đặt chỗ...</p>}
+          {bookingError && <p className={styles.error}>{bookingError}</p>}
+          <ul className={styles.seatList}>
+            {filteredSeats.map((seat) => (
+              <li
+                key={seat.seat_id}
+                className={`${styles.seatItem} ${
+                  seat.status === "Available"
+                    ? styles.available
+                    : styles.occupied
+                }`}
+                onClick={() =>
+                  seat.status === "Available" && handleSeatSelection(seat)
+                }
+              >
+                Ghế số: {seat.seat_number}, Hạng ghế: {seat.seat_class}, Trạng
+                thái: {seat.status}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
 
       <button onClick={() => window.location.reload()}>
         Quay lại danh sách
