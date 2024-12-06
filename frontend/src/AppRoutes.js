@@ -11,6 +11,7 @@ import BookTicket from "./pages/Booking/BookTicket";
 import ManageTicket from "./pages/Booking/ManageTicket";
 import PaymentGuide from "./pages/Booking/PaymentGuide";
 import CancelTicket from "./pages/Booking/CancelTicket";
+import PaymentPage from "./pages/Booking/PaymentPage";
 
 // Info pages
 import Info from "./pages/Info/Info";
@@ -77,6 +78,7 @@ function AppRoutes() {
       />
       <Route path="/booking/payment-guide" element={<PaymentGuide />} />
       <Route path="/booking/cancel-ticket" element={<CancelTicket />} />
+      <Route path="/booking/payment" element={<PaymentPage />} />
 
       {/* Info */}
       <Route path="/info" element={<Info />} />

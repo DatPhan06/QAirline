@@ -1,5 +1,6 @@
 // FlightDetail.js
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getSeatsByAirplaneId } from "../services/seatService";
 import { createBooking } from "../services/bookingService";
 import { getTicketByFlightAndSeat } from "../services/ticketService";
@@ -12,6 +13,8 @@ const FlightDetail = ({ flight }) => {
   const [filteredSeats, setFilteredSeats] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [bookingError, setBookingError] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSeats = async () => {
@@ -56,32 +59,10 @@ const FlightDetail = ({ flight }) => {
 
     if (confirmBooking) {
       try {
-        setIsLoading(true);
-        setBookingError(null);
-
-        // Get ticket info first
-        const ticket = await getTicketByFlightAndSeat(
-          flight.flight_id,
-          seat.seat_id
-        );
-
-        if (!ticket) {
-          throw new Error("Không tìm thấy thông tin vé");
-        }
-
-        await createBooking({
-          flight_id: flight.flight_id,
-          seat_id: seat.seat_id,
-          ticket_id: ticket.ticket_id,
-          price: ticket.price,
-        });
-
-        window.location.reload();
+        navigate("/booking/payment", { state: { flight, seat } });
       } catch (error) {
-        setBookingError("Không thể đặt chỗ. Vui lòng thử lại sau.");
-        console.error("Booking error:", error);
-      } finally {
-        setIsLoading(false);
+        console.error("Error creating booking:", error);
+        setBookingError("Đã xảy ra lỗi khi đặt chỗ");
       }
     }
   };
@@ -137,9 +118,7 @@ const FlightDetail = ({ flight }) => {
                     ? styles.available
                     : styles.occupied
                 }`}
-                onClick={() =>
-                  seat.status === "Available" && handleSeatSelection(seat)
-                }
+                onClick={() => handleSeatSelection(seat)}
               >
                 Ghế số: {seat.seat_number}, Hạng ghế: {seat.seat_class}, Trạng
                 thái: {seat.status}
