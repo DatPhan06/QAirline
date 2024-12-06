@@ -1,159 +1,414 @@
 /* src/components/FlightExperience/FlightExperience.module.css */
 
-/* Font chữ */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
+/* Blue-Gray Color Palette */
 .flightExperience {
-  font-family: 'Roboto', sans-serif;
-  max-width: 1000px;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: #f9fbfd;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-  animation: fadeInPage 1s ease forwards;
+  padding: 80px 60px;
+  background-color: #f7f9fc; /* Light Blue-Gray Background */
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #2c3e50; /* Dark Blue-Gray Text */
 }
 
-.header {
+.headerSection {
   text-align: center;
-  margin-bottom: 50px;
-  font-size: 2.5rem;
-  color: #1e3d59;
-  position: relative;
-  display: inline-block;
+  margin-bottom: 80px;
 }
 
-.header::after {
+.headerTitle {
+  font-size: 3.5rem;
+  color: #2c3e50; /* Dark Blue-Gray */
+  margin-bottom: 15px;
+  position: relative;
+  font-weight: 700;
+}
+
+.headerTitle::after {
   content: '';
-  width: 80px;
-  height: 5px;
-  background-color: #1e90ff;
-  position: absolute;
-  left: 50%;
-  bottom: -15px;
-  transform: translateX(-50%);
-  border-radius: 2px;
+  width: 120px;
+  height: 6px;
+  background-color: #3498db; /* Bright Blue Accent */
+  display: block;
+  margin: 15px auto 0;
+  border-radius: 3px;
+}
+
+.headerSubtitle {
+  font-size: 1.3rem;
+  color: #7f8c8d; /* Light Gray Text */
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.featuredSection,
+.newsSection,
+.subscribeSection {
+  margin-bottom: 80px;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  color: #2c3e50; /* Dark Blue-Gray */
+  margin-bottom: 25px;
+  border-bottom: 3px solid #3498db; /* Bright Blue Accent */
+  display: inline-block;
+  padding-bottom: 8px;
+  font-weight: 600;
+}
+
+.featuredList,
+.newsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+}
+
+.newsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.categoryButton {
+  padding: 10px 20px;
+  background-color: #ecf0f1; /* Light Gray */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #2c3e50; /* Dark Blue-Gray */
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle Shadow */
+}
+
+.categoryButton:hover {
+  background-color: #3498db; /* Bright Blue */
+  color: #ffffff; /* White Text */
+  transform: translateY(-2px);
+}
+
+.activeCategory {
+  background-color: #3498db; /* Bright Blue */
+  color: #ffffff; /* White Text */
+  transform: translateY(-2px);
+}
+
+.newsItem {
+  background-color: #ffffff; /* White Background */
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle Shadow */
+  overflow: hidden;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: fadeInUp 0.6s forwards;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.newsItem:hover {
+  transform: translateY(0);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Enhanced Shadow on Hover */
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.newsItem:hover .image {
+  transform: scale(1.05); /* Image Zoom on Hover */
+}
+
+.content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.title {
+  font-size: 1.8rem;
+  color: #2c3e50; /* Dark Blue-Gray */
+  margin-bottom: 15px;
+  transition: color 0.3s;
+  font-weight: 600;
+}
+
+.newsItem:hover .title {
+  color: #3498db; /* Bright Blue on Hover */
+}
+
+.description {
+  font-size: 1rem;
+  color: #7f8c8d; /* Light Gray Text */
+  margin-bottom: 20px;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.date {
+  font-size: 0.9rem;
+  color: #95a5a6; /* Medium Gray */
+  align-self: flex-end;
 }
 
 .loading {
   text-align: center;
-  color: #7f8c8d;
-  font-size: 1.5rem;
-  padding: 60px 0;
+  font-size: 1.4rem;
+  color: #7f8c8d; /* Light Gray Text */
 }
 
-/* Hiệu ứng fadeInPage cho component chính */
-@keyframes fadeInPage {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Component con NewsItem */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.newsItem {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 40px;
-  padding: 25px;
-  background-color: #ffffff;
+.subscribeSection {
+  text-align: center;
+  background-color: #ffffff; /* White Background */
+  padding: 50px 30px;
   border-radius: 15px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
-  opacity: 0;
-  animation: fadeIn 0.7s forwards;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle Shadow */
+  max-width: 600px;
+  margin: 0 auto;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.newsItem:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(30, 144, 255, 0.4);
-}
-
-.image {
-  width: 200px;
-  height: 130px;
-  object-fit: cover;
-  margin-right: 30px;
-  border-radius: 10px;
-  flex-shrink: 0;
-}
-
-.content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.title {
-  font-size: 1.6rem;
-  margin: 0 0 12px 0;
-  color: #1e3d59;
-  transition: color 0.3s ease;
-}
-
-.title:hover {
-  color: #1e90ff;
-}
-
-.description {
-  font-size: 1.1rem;
-  color: #7f8c8d;
+.subscribeText {
+  font-size: 1.2rem;
+  color: #2c3e50; /* Dark Blue-Gray */
+  margin-bottom: 25px;
   line-height: 1.6;
 }
 
-.date {
-  font-size: 0.95rem;
-  color: #95a5a6;
-  margin-top: 15px;
-  align-self: flex-end;
+.subscribeForm {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+.subscribeInput {
+  padding: 14px 25px;
+  width: 320px;
+  max-width: 100%;
+  border: 2px solid #3498db; /* Bright Blue Border */
+  border-radius: 30px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.subscribeInput:focus {
+  outline: none;
+  border-color: #2980b9; /* Darker Blue on Focus */
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.5); /* Blue Glow */
+}
+
+.subscribeButton {
+  padding: 14px 35px;
+  background-color: #3498db; /* Bright Blue */
+  border: none;
+  border-radius: 30px;
+  color: #ffffff; /* White Text */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle Shadow */
+}
+
+.subscribeButton:hover {
+  background-color: #2980b9; /* Darker Blue on Hover */
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Enhanced Shadow on Hover */
+}
+
+.successMessage {
+  color: #27ae60; /* Green for Success */
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.errorMessage {
+  color: #c0392b; /* Red for Error */
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+/* Hiệu ứng fade-in lên */
+@keyframes fadeInUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design Enhancements */
+
+@media (max-width: 1200px) {
   .flightExperience {
-    margin: 20px;
-    padding: 20px;
+    padding: 70px 50px;
   }
 
-  .header {
-    font-size: 2rem;
+  .headerTitle {
+    font-size: 3rem;
+  }
+
+  .sectionTitle {
+    font-size: 2.3rem;
+  }
+
+  .featuredList,
+  .newsList {
+    gap: 35px;
   }
 
   .newsItem {
+    transform: translateY(20px);
+  }
+
+  .imageWrapper {
+    height: 220px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
+
+  .subscribeForm {
     flex-direction: column;
     align-items: center;
-    text-align: center;
   }
 
-  .image {
+  .subscribeInput {
     width: 100%;
-    height: auto;
-    margin-right: 0;
-    margin-bottom: 20px;
-    border-radius: 12px;
+    max-width: 280px;
   }
 
-  .content {
-    align-items: center;
+  .subscribeButton {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 992px) {
+  .flightExperience {
+    padding: 60px 40px;
   }
 
-  .date {
-    align-self: center;
+  .headerTitle {
+    font-size: 2.8rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .imageWrapper {
+    height: 200px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+
+  .subscribeInput {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .subscribeButton {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .flightExperience {
+    padding: 50px 30px;
+  }
+
+  .headerTitle {
+    font-size: 2.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.8rem;
+  }
+
+  .imageWrapper {
+    height: 180px;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+  }
+
+  .subscribeInput {
+    width: 100%;
+    max-width: 220px;
+  }
+
+  .subscribeButton {
+    width: 100%;
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 576px) {
+  .flightExperience {
+    padding: 40px 20px;
+  }
+
+  .headerTitle {
+    font-size: 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.6rem;
+  }
+
+  .imageWrapper {
+    height: 160px;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .description {
+    font-size: 0.8rem;
+  }
+
+  .subscribeInput {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .subscribeButton {
+    width: 100%;
+    max-width: 200px;
   }
 }

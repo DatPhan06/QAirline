@@ -7,27 +7,19 @@ const Booking = () => {
     <div className={styles["homepage-01"]}>
       
         <div className={styles.section1}>
-            <div className={styles.imageContainer}>
-              <img
-                className={styles.rectangle2}
-                src="/images/backa.jpg"
-                alt="Background"
-              />
+            <img className={styles["arrow-1"]} src="/images/arrow1.svg" />
+            <div className={styles["tr-i-nghi-m-t-v-c-ng-q-airline"]}>
+              Trải nghiệm đặt vé cùng QAirline
             </div>
-        <img className={styles["arrow-1"]} src="/images/arrow1.svg" />
-        <div className={styles["tr-i-nghi-m-t-v-c-ng-q-airline"]}>
-          Trải nghiệm đặt vé cùng QAirline
+            <div
+              className={styles["h-y-ng-m-nh-n-th-gi-i-i-u-tuy-t-v-i-h-n-b-t-c-gi-c-m-n-o-ray-bradbury"]}
+            >
+              “Hãy ngắm nhìn thế giới. Điều đó tuyệt vời hơn bất cứ giấc mơ nào” – Ray
+              Bradbury
+            </div>
         </div>
-        <div
-          className={styles["h-y-ng-m-nh-n-th-gi-i-i-u-tuy-t-v-i-h-n-b-t-c-gi-c-m-n-o-ray-bradbury"]}
-        >
-          “Hãy ngắm nhìn thế giới. Điều đó tuyệt vời hơn bất cứ giấc mơ nào” – Ray
-          Bradbury
-        </div>
-    </div>
 
     <div className={styles.section2}>
-        <img className={styles["rectangle-12"]} src="/images/rec12.png" />
         <img className={styles["arrow-3"]} src="/images/arrow1.svg" />
         <div className={styles["why-choose-us"]}>Why choose us?</div>
         <img className={styles["rectangle-8"]} src="/images/airwayfilm.jpg" />
@@ -42,35 +34,62 @@ const Booking = () => {
     </div>
 
     <div className={styles.section3}> 
-        <div className={styles["c-c-d-ch-v-d-nh-cho-qu-kh-ch"]}>Các dịch vụ dành cho quý khách</div>
-        <img className={styles["arrow-4"]} src="/images/arrow4.png" />
-        <div className={styles.imageLinkWrapper}>
-            <img className={styles.rectangle13} src="/images/seat2.jpg" alt="Seat" />
-            <Link to="/booking/book-ticket" className={styles.link}>
-                <div className={styles.ellipse}>ĐẶT VÉ</div>
-            </Link>
-        </div>
+      <div className={styles["c-c-d-ch-v-d-nh-cho-qu-kh-ch"]}>
+        Các dịch vụ dành cho quý khách
+      </div>
+      <img 
+        className={styles["arrow-4"]} 
+        src="/images/arrow4.png" 
+        alt="Arrow" 
+        loading="lazy" 
+      />
 
+      <div className={styles.imageLinkGrid}>
         <div className={styles.imageLinkWrapper}>
-            <img className={styles.rectangle9} src="/images/table.jpg" alt="Table" />
-            <Link to="/booking/manage-ticket" className={styles.link}>
-                <div className={styles.ellipse}>Quản lý vé</div>
-            </Link>
+          <img 
+            className={styles.rectangle13} 
+            src="/images/seat2.jpg" 
+            alt="Seat" 
+            loading="lazy" 
+          />
+          <Link to="/booking/book-ticket" className={styles.link}>
+            <div className={styles.ellipse}>ĐẶT VÉ</div>
+          </Link>
         </div>
-
         <div className={styles.imageLinkWrapper}>
-            <img className={styles.rectangle11} src="/images/guide.jpg" alt="Guide" />
-            <Link to="/booking/payment-guide" className={styles.link}>
-                <div className={styles.ellipse}>Hướng dẫn mua vé &amp; thanh toán</div>
-            </Link>
+          <img 
+            className={styles.rectangle9} 
+            src="/images/table.jpg" 
+            alt="Table" 
+            loading="lazy" 
+          />
+          <Link to="/booking/manage-ticket" className={styles.link}>
+            <div className={styles.ellipse}>Quản lý vé</div>
+          </Link>
         </div>
-
         <div className={styles.imageLinkWrapper}>
-            <img className={styles.rectangle10} src="/images/ticket.jpg" alt="Ticket" />
-            <Link to="/booking/cancel-ticket" className={styles.link}>
-                <div className={styles.ellipse}>Đổi &amp; Hủy vé</div>
-            </Link>
+          <img 
+            className={styles.rectangle11} 
+            src="/images/guide.jpg" 
+            alt="Guide" 
+            loading="lazy" 
+          />
+          <Link to="/booking/payment-guide" className={styles.link}>
+            <div className={styles.ellipse}>Hướng dẫn mua vé &amp; thanh toán</div>
+          </Link>
         </div>
+        <div className={styles.imageLinkWrapper}>
+          <img 
+            className={styles.rectangle10} 
+            src="/images/ticket.jpg" 
+            alt="Ticket" 
+            loading="lazy" 
+          />
+          <Link to="/booking/cancel-ticket" className={styles.link}>
+            <div className={styles.ellipse}>Đổi &amp; Hủy vé</div>
+          </Link>
+        </div>
+      </div>
     </div>
 </div>
 
