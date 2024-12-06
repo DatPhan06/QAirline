@@ -101,3 +101,14 @@ export const createTicketsForFlight = async (flightId) => {
     throw error;
   }
 };
+
+// Hàm lấy tất cả vé theo flight_id
+export const getTicketsByFlightId = async (flightId) => {
+  try {
+    const response = await axiosInstance.get(`/tickets/flight/${flightId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching tickets by flight:", error);
+    throw error;
+  }
+};

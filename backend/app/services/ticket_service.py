@@ -158,3 +158,16 @@ def create_tickets_for_flight(db: Session, flight_id: int) -> List[models.Ticket
 
     db.commit()
     return tickets
+
+def get_tickets_by_flight_id(db: Session, flight_id: int) -> List[models.Ticket]:
+    """
+    Lấy danh sách vé theo ID của chuyến bay.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+        flight_id (int): ID của chuyến bay.
+
+    Returns:
+        List[models.Ticket]: Danh sách vé của chuyến bay.
+    """
+    return db.query(models.Ticket).filter(models.Ticket.flight_id == flight_id).all()

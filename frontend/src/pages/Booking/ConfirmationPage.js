@@ -7,9 +7,9 @@ import styles from "./ConfirmationPage.module.css";
 const ConfirmationPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { flight, seat } = location.state || {};
+  const { flight, ticket } = location.state || {};
 
-  if (!flight || !seat) {
+  if (!flight || !ticket) {
     return <p>Không có thông tin đặt vé. Vui lòng thử lại.</p>;
   }
 
@@ -39,10 +39,11 @@ const ConfirmationPage = () => {
           {new Date(flight.arrival_time).toLocaleString()}
         </p>
         <p>
-          <strong>Ghế:</strong> {seat.seat_number} ({seat.seat_class})
+          <strong>Ghế:</strong> {ticket.seat.seat_number} (
+          {ticket.seat.seat_class})
         </p>
         <p>
-          <strong>Giá vé:</strong> {flight.price.toLocaleString()} VND
+          <strong>Giá vé:</strong> {ticket.price.toLocaleString()} VND
         </p>
       </div>
 

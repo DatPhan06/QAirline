@@ -1,40 +1,38 @@
-/* frontend/src/pages/Booking/ConfirmationPage.module.css */
+/* ConfirmationPage.module.css */
 
+/* Container chính cho trang xác nhận */
 .confirmationContainer {
-  max-width: 600px;
-  margin: 50px auto;
+  background: #ffffff; /* Nền trắng */
+  border-radius: 20px; /* Bo góc */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Bóng mờ */
   padding: 30px;
-  background-color: #fff;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  font-family: "Montserrat", sans-serif;
+  max-width: 800px; /* Chiều rộng tối đa */
+  margin: 100px auto; /* Căn giữa và thêm khoảng cách từ navbar */
+  font-family: "Arial", sans-serif; /* Phông chữ */
 }
 
-.title {
+/* Tiêu đề chính */
+.confirmationContainer h1 {
   font-size: 2.5rem;
-  color: #003f82;
+  color: #003f82; /* Màu xanh đậm */
   text-align: center;
   margin-bottom: 20px;
 }
 
-.flightInfo {
-  margin-bottom: 20px;
-}
-
-.flightInfo h2 {
-  font-size: 1.8rem;
-  color: #b7950b;
-  margin-bottom: 10px;
-}
-
-.flightInfo p {
+/* Thông tin chuyến bay */
+.confirmationContainer p {
   font-size: 1.2rem;
-  color: #555;
+  color: #555555; /* Màu chữ chính */
   margin-bottom: 10px;
 }
 
+.confirmationContainer p strong {
+  color: #333; /* Màu chữ đậm */
+}
+
+/* Nút về trang chủ */
 .homeButton {
-  background-color: #b7950b;
+  background-color: #b7950b; /* Màu vàng sang trọng */
   color: #fff;
   padding: 14px 28px;
   border: none;
@@ -44,11 +42,59 @@
   cursor: pointer;
   transition: all 0.3s ease;
   display: block;
-  margin: 0 auto;
+  margin: 20px auto; /* Thêm khoảng cách phía trên */
 }
 
 .homeButton:hover {
   background-color: #a37c07;
   transform: translateY(-3px);
   box-shadow: 0 6px 15px rgba(183, 149, 11, 0.3);
+}
+
+/* Navbar styles matching the Emirates design */
+.nav {
+  position: fixed; /* Giữ cố định navbar */
+  top: 0; /* Cố định ở đầu trang */
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  z-index: 1000; /* Đảm bảo navbar nằm trên các phần tử khác */
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333333; /* Dark background */
+  padding: 8px 16px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.navList {
+  display: flex;
+  justify-content: space-between; /* Even spacing between items */
+  align-items: center;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navLink {
+  color: rgb(231, 225, 225); /* White text */
+  text-decoration: none;
+  padding: 8px 16px;
+  transition: color 0.3s ease;
+}
+
+.navLink:hover {
+  color: #ffd54f; /* Gold color for hover effect */
+}
+
+.logo {
+  max-width: 150px; /* Đảm bảo kích thước logo hợp lý */
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1); /* Phóng to nhẹ khi hover */
 }

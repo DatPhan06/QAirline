@@ -26,6 +26,6 @@ class Ticket(Base):
     status = Column(String(50), default="available")  # Trạng thái vé: 'available', 'sold out', v.v.
 
     # Relationships
-    flight = relationship("Flight", back_populates="ticket_types")
-    seat = relationship("Seat", back_populates="tickets")
+    flight = relationship("Flight",  foreign_keys=[flight_id], back_populates="ticket_types")
+    seat = relationship("Seat",  foreign_keys=[seat_id], back_populates="tickets")
     booked_tickets = relationship("BookedTicket", back_populates="ticket_type")

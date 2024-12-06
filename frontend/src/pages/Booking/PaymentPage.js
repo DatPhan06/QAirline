@@ -1,3 +1,4 @@
+// PaymentPage.js
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./PaymentPage.module.css";
@@ -5,7 +6,11 @@ import styles from "./PaymentPage.module.css";
 const PaymentPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { flight, seat } = location.state;
+  const { flight, ticket } = location.state;
+
+  if (!ticket) {
+    return <p>Thông tin vé không hợp lệ. Vui lòng thử lại.</p>;
+  }
 
   // State cho form
   const [name, setName] = useState("");
@@ -31,7 +36,7 @@ const PaymentPage = () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Chuyển đến trang xác nhận
-      navigate("/booking/confirmation", { state: { flight, seat } });
+      navigate("/booking/confirmation", { state: { flight, ticket } });
     } catch (error) {
       console.error("Error processing payment:", error);
       setPaymentError("Đã xảy ra lỗi trong quá trình thanh toán.");
@@ -66,10 +71,11 @@ const PaymentPage = () => {
           {new Date(flight.arrival_time).toLocaleString()}
         </p>
         <p>
-          <strong>Ghế:</strong> {seat.seat_number} ({seat.seat_class})
+          <strong>Ghế:</strong> {ticket.seat.seat_number} (
+          {ticket.seat.seat_class})
         </p>
         <p>
-          <strong>Giá vé:</strong> {flight.price.toLocaleString()} VND
+          <strong>Giá vé:</strong> {ticket.price.toLocaleString()} VND
         </p>
       </div>
 

@@ -3,6 +3,8 @@
 from typing import Optional
 from decimal import Decimal
 from pydantic import BaseModel
+from app.schemas.seat import Seat
+
 
 
 class TicketBase(BaseModel):
@@ -58,6 +60,8 @@ class Ticket(TicketBase):
 
     ticket_id: int
     status: str
+    seat: Seat  # Include seat information
+
 
     class Config:
         orm_mode = True
