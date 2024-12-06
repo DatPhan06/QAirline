@@ -1,6 +1,8 @@
 // PaymentPage.js
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { updateTicketStatus } from "../../services/ticketService"; // Import the updateTicketStatus function
+import { createBooking } from "../../services/bookingService"; // Import the createBooking function
 import styles from "./PaymentPage.module.css";
 
 const PaymentPage = () => {
@@ -34,6 +36,18 @@ const PaymentPage = () => {
     try {
       // Giả lập quá trình thanh toán
       await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // Cập nhật trạng thái vé
+      await updateTicketStatus(ticket.ticket_id, "sold");
+
+      // Tạo booking mới
+      const bookingData = {
+        flight_id: flight.flight_id,
+        seat_id: ticket.seat.seat_id,
+        ticket_id: ticket.ticket_id,
+        price: ticket.price,
+      };
+      await createBooking(bookingData);
 
       // Chuyển đến trang xác nhận
       navigate("/booking/confirmation", { state: { flight, ticket } });

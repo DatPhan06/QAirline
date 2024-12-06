@@ -112,3 +112,16 @@ export const getTicketsByFlightId = async (flightId) => {
     throw error;
   }
 };
+
+// Hàm cập nhật trạng thái vé
+export const updateTicketStatus = async (ticketId, status) => {
+  try {
+    const response = await axiosInstance.put(`/tickets/${ticketId}`, {
+      status,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating ticket status:", error);
+    throw error;
+  }
+};
