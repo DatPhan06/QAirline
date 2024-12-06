@@ -1,0 +1,23 @@
+.slideshowContainer {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Chiều cao toàn màn hình, bạn có thể điều chỉnh */
+    overflow: hidden;
+  }
+  
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90vh;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 0;
+  }
+  
+  .active {
+    opacity: 1;
+  }
+  

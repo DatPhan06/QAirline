@@ -25,10 +25,7 @@
   gap: 32px;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 1220px;
-  position: absolute;
-  left: 165px;
-  top: 532px;
+  width: 1200px;
   box-shadow: 0px 4px 16px 0px rgba(141, 211, 187, 0.15);
 }
 .line-4 {
