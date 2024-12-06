@@ -154,3 +154,20 @@ def create_tickets_for_flight(
         List[models.Ticket]: Danh sách các vé được tạo
     """
     return services.ticket_service.create_tickets_for_flight(db, flight_id)
+
+@router.get("/flight/{flight_id}", response_model=List[schemas.Ticket])
+def get_tickets_by_flight_id(flight_id: int, db: Session = Depends(get_db)) -> List[models.Ticket]:
+    """
+    Lấy danh sách vé theo ID của chuyến bay.
+
+    Args:
+        flight_id (int): ID của chuyến bay.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        List[models.Ticket]: Danh sách vé của chuyến bay.
+    """
+    tickets = services.ticket_service.get_tickets_by_flight_id(db, flight_id)
+    if not tickets:
+        raise HTTPException(status_code=404, detail="Không tìm thấy vé cho chuyến bay này")
+    return tickets

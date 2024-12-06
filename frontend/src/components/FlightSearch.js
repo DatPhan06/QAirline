@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./FlightSearch.module.css";
 import { getAirports } from "../services/airportService"; // Import service
+import { getFlights } from "../services/flightService"; // Add this import
+import FlightList from "./FlightList"; // Import FlightList component
 
 const FlightSearch = () => {
   const [departure, setDeparture] = useState("");
   const [arrival, setArrival] = useState("");
   const [date, setDate] = useState("");
   const [airports, setAirports] = useState([]); // State lưu danh sách sân bay
+  const [flights, setFlights] = useState([]); // Add this state
+  const [selectedFlight, setSelectedFlight] = useState(null); // Add this state
 
   const navigate = useNavigate();
 
@@ -15,8 +19,12 @@ const FlightSearch = () => {
   useEffect(() => {
     const fetchAirports = async () => {
       try {
-        const data = await getAirports();
-        setAirports(data);
+        const [airportsData, flightsData] = await Promise.all([
+          getAirports(),
+          getFlights(),
+        ]);
+        setAirports(airportsData);
+        setFlights(flightsData);
       } catch (error) {
         console.error("Lỗi khi lấy danh sách sân bay:", error);
       }
@@ -26,11 +34,37 @@ const FlightSearch = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // Chuyển đến trang booking với các tham số tìm kiếm
+
+    // Validate required fields
+    if (!departure || !arrival || !date) {
+      alert("Vui lòng điền đầy đủ thông tin tìm kiếm");
+      return;
+    }
+
+    // Filter flights based on search criteria
+    const filteredFlights = flights.filter(
+      (flight) =>
+        flight.departure_airport.city === departure &&
+        flight.arrival_airport.city === arrival &&
+        flight.departure_time.split("T")[0] === date
+    );
+
+    setFlights(filteredFlights);
+
+    if (filteredFlights.length === 0) {
+      alert("Không tìm thấy chuyến bay phù hợp.");
+    }
+  };
+
+  // Add new function to handle flight selection
+  const handleFlightSelect = (selectedFlight) => {
     navigate("/booking/book-ticket", {
-      state: { departure, arrival, date },
+      state: {
+        flight: selectedFlight,
+      },
     });
   };
+
   return (
     <div className={styles["frame-38"]}>
       <div className={styles["line-4"]}></div>
@@ -124,7 +158,6 @@ const FlightSearch = () => {
           </div>
           <div className={styles["text-field5"]}></div>
         </div>
-        {/* </form>{" "} */}
       </div>
       <div className={styles["frame-46"]}>
         <button
@@ -142,6 +175,7 @@ const FlightSearch = () => {
           </div>
         </button>
       </div>
+      <FlightList flights={flights} onFlightClick={handleFlightSelect} />
     </div>
   );
 };
