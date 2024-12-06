@@ -1,0 +1,64 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+h1, h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.benefits ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.benefits ul li {
+  margin: 10px 0;
+}
+
+.ticketSelection {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.ticketButton {
+  padding: 10px 20px;
+  border: 2px solid #007bff;
+  color: #007bff;
+  background: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.ticketButton.active {
+  background: #007bff;
+  color: white;
+}
+
+.ticketDetails table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.ticketDetails th, .ticketDetails td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.ticketDetails th {
+  background: #007bff;
+  color: white;
+}
+
+.notes p {
+  text-align: center;
+}

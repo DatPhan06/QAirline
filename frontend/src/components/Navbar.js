@@ -44,8 +44,8 @@ const Navbar = () => {
               </Link>
             </li>
             <li className={styles.subMenuItem}>
-              <Link to="/booking/cancell-ticket" className={styles.subMenuLink}>
-                Đổi vé & Hủy vé
+              <Link to="/booking/cancel-ticket" className={styles.subMenuLink}>
+                Điều kiện giá vé
               </Link>
             </li>
           </ul>
