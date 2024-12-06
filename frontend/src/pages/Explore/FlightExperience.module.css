@@ -1,0 +1,159 @@
+/* src/components/FlightExperience/FlightExperience.module.css */
+
+/* Font chữ */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+.flightExperience {
+  font-family: 'Roboto', sans-serif;
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f9fbfd;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  animation: fadeInPage 1s ease forwards;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 2.5rem;
+  color: #1e3d59;
+  position: relative;
+  display: inline-block;
+}
+
+.header::after {
+  content: '';
+  width: 80px;
+  height: 5px;
+  background-color: #1e90ff;
+  position: absolute;
+  left: 50%;
+  bottom: -15px;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.loading {
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 1.5rem;
+  padding: 60px 0;
+}
+
+/* Hiệu ứng fadeInPage cho component chính */
+@keyframes fadeInPage {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Component con NewsItem */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.newsItem {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 40px;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+  opacity: 0;
+  animation: fadeIn 0.7s forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.newsItem:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(30, 144, 255, 0.4);
+}
+
+.image {
+  width: 200px;
+  height: 130px;
+  object-fit: cover;
+  margin-right: 30px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 1.6rem;
+  margin: 0 0 12px 0;
+  color: #1e3d59;
+  transition: color 0.3s ease;
+}
+
+.title:hover {
+  color: #1e90ff;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  line-height: 1.6;
+}
+
+.date {
+  font-size: 0.95rem;
+  color: #95a5a6;
+  margin-top: 15px;
+  align-self: flex-end;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .flightExperience {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .header {
+    font-size: 2rem;
+  }
+
+  .newsItem {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+    margin-bottom: 20px;
+    border-radius: 12px;
+  }
+
+  .content {
+    align-items: center;
+  }
+
+  .date {
+    align-self: center;
+  }
+}
