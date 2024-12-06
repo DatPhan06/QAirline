@@ -1,64 +1,143 @@
+/* Container tổng thể */
 .container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7fa;
+  padding: 40px 60px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  font-family: 'Arial', sans-serif;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  padding-top: 120px;
 }
 
-h1, h2 {
-  text-align: center;
-  margin-bottom: 20px;
+/* Phần Lợi ích khi đặt vé */
+.benefits {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+}
+
+.benefits h1 {
+  font-size: 2.5rem;
   color: #333;
+  margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .benefits ul {
-  list-style-type: none;
-  padding: 0;
+  list-style-type: disc;
+  padding-left: 20px;
+  font-size: 1.1rem;
+  color: #555;
 }
 
-.benefits ul li {
-  margin: 10px 0;
+.benefits li {
+  margin-bottom: 10px;
+}
+
+.benefits li:hover {
+  color: #007bff; /* Đổi màu khi hover */
+}
+
+/* Phần Lựa chọn hạng vé */
+.ticketSelectionSection {
+  display: flex;
+  flex-direction: column;
 }
 
 .ticketSelection {
   display: flex;
+  gap: 20px;
   justify-content: center;
-  gap: 15px;
+  margin-bottom: 30px;
 }
 
 .ticketButton {
-  padding: 10px 20px;
-  border: 2px solid #007bff;
-  color: #007bff;
-  background: white;
-  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  flex: 1;
+  text-align: center;
+}
+
+.ticketButton:hover {
+  background-color: #0056b3;
 }
 
 .ticketButton.active {
-  background: #007bff;
-  color: white;
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
-.ticketDetails table {
+.ticketDetails {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.ticketTable {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  font-size: 1rem;
+  color: #333;
 }
 
-.ticketDetails th, .ticketDetails td {
-  border: 1px solid #ddd;
-  padding: 10px;
+.ticketTable th, .ticketTable td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-.ticketDetails th {
-  background: #007bff;
+.ticketTable th {
+  background-color: #007bff;
   color: white;
+  font-weight: 600;
+}
+
+.ticketTable tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Phần Lưu ý */
+.notes {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.notes h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600;
 }
 
 .notes p {
-  text-align: center;
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Thêm hiệu ứng cho các phần tử */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hiệu ứng fadeIn cho phần lợi ích, hạng vé và lưu ý */
+.benefits, .ticketSelectionSection, .notes {
+  animation: fadeIn 0.8s ease-in-out;
 }
