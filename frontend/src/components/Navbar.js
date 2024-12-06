@@ -59,7 +59,7 @@ const Navbar = () => {
           <ul className={styles.subMenu}>
             <li className={styles.subMenuItem}>
               <Link to="/info/ticket-schedule" className={styles.subMenuLink}>
-                Vé & Lịch Bay
+                Lịch Bay
               </Link>
             </li>
             <li className={styles.subMenuItem}>
@@ -74,7 +74,7 @@ const Navbar = () => {
             </li>
             <li className={styles.subMenuItem}>
               <Link to="/info/check-in" className={styles.subMenuLink}>
-                Thủ Tục
+                Hướng dẫn thủ Tục
               </Link>
             </li>
             <li className={styles.subMenuItem}>
@@ -87,7 +87,7 @@ const Navbar = () => {
             </li>
             <li className={styles.subMenuItem}>
               <Link to="/info/airport" className={styles.subMenuLink}>
-                Sân Bay
+                Thông tin sân Bay
               </Link>
             </li>
           </ul>
@@ -114,7 +114,7 @@ const Navbar = () => {
                 to="/explore/flight-experience"
                 className={styles.subMenuLink}
               >
-                Trải Nghiệm Bay
+                Tin tức
               </Link>
             </li>
           </ul>
