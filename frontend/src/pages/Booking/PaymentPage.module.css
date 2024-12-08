@@ -1,114 +1,186 @@
 /* PaymentPage.module.css */
 
-.paymentContainer {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  font-family: "Arial", sans-serif;
+/* Nền toàn trang */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+  font-family: "Roboto", sans-serif;
+  color: #333;
 }
 
-.title {
-  font-size: 2rem;
-  color: #003f82;
-  text-align: center;
-  margin-bottom: 30px;
+.container {
+  display: flex;
+  justify-content: center;   
+  align-items: center;        /* Căn giữa các cột theo chiều dọc */
+  gap: 40px;
+  animation: fadeIn 1.2s ease-in-out;
+  padding-top: 120px;
+  padding-bottom: 90px;
+  background-image:url("../../assets/images/guide.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
+/* Phần thông tin chuyến bay: Nổi bật, căn giữa theo chiều dọc */
 .flightInfo {
-  margin-bottom: 30px;
+  background: linear-gradient(135deg, #f2f2f2 0%, #e5e5e5 100%);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  max-width: 660px;
+  min-height: 400px;  /* Đảm bảo có đủ chiều cao để căn giữa */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* Căn giữa nội dung theo chiều dọc */
+  border-left: 5px solid #3498db;
+  animation: fadeIn 1.5s ease-in-out;
 }
 
 .flightInfo h2 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  color: #2c3e50;
   margin-bottom: 15px;
-  color: #b7950b;
+  text-align: center;
 }
 
 .flightInfo p {
+  margin: 8px 0;
+  color: #555;
   font-size: 1rem;
-  margin-bottom: 8px;
+  line-height: 1.5;
+  max-width: 450px;
 }
 
-.flightInfo p strong {
-  color: #333333;
+/* Phần thanh toán vé gọn và đẹp */
+.paymentFormContainer {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  animation: fadeIn 2s ease-in-out;
+  max-width: 400px;
+}
+
+.title {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
 }
 
 .paymentForm {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.paymentForm h2 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  color: #b7950b;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .formGroup {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.formGroup label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
+label {
+  font-size: 0.95rem;
+  color: #2c3e50;
+  font-weight: 500;
 }
 
-.formGroup input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #cccccc;
-  border-radius: 8px;
-  font-size: 1rem;
+/* Input: gọn gàng, hiện đại */
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #333;
+  background-color: #fafafa;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
 }
 
+input:hover {
+  border-color: #bbb;
+}
+
+input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 4px rgba(52, 152, 219, 0.3);
+  outline: none;
+}
+
+/* Nút thanh toán: nhỏ gọn, hiện đại */
 .payButton {
-  width: 100%;
-  padding: 15px;
-  background-color: #b7950b;
-  color: #ffffff;
+  background-color: #3498db;
+  color: white;
+  padding: 12px;
   border: none;
-  border-radius: 8px;
-  font-size: 1.2rem;
+  border-radius: 6px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.payButton:hover {
-  background-color: #a37c07;
-}
-
-.error {
-  color: red;
-  margin-bottom: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-weight: 500;
   text-align: center;
 }
 
-/* Responsive Design */
+.payButton:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+}
+
+.payButton:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 0.95rem;
+  margin-top: 10px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Hiệu ứng fadeIn */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive cho màn hình nhỏ */
 @media (max-width: 768px) {
-  .paymentContainer {
-    padding: 20px;
+  .container {
+    flex-direction: column;
+    margin: 20px;
+    align-items: center;
+  }
+
+  .flightInfo,
+  .paymentFormContainer {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .flightInfo {
+    min-height: auto;
+    margin-bottom: 20px;
+    border-left: 0;
+    border-top: 5px solid #3498db; /* Đổi kiểu viền cho mobile */
   }
 
   .title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
-  .flightInfo h2,
-  .paymentForm h2 {
-    font-size: 1.2rem;
-  }
-
-  .formGroup input {
-    padding: 10px;
-  }
-
-  .payButton {
-    padding: 12px;
-    font-size: 1rem;
+  .paymentForm {
+    gap: 15px;
   }
 }
