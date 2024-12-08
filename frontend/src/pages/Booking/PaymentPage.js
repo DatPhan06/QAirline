@@ -60,94 +60,75 @@ const PaymentPage = () => {
   };
 
   return (
-    <div className={styles.paymentContainer}>
-      <h1 className={styles.title}>Thanh toán vé</h1>
-
+    <div className={styles.container}>
       <div className={styles.flightInfo}>
         <h2>Thông tin chuyến bay</h2>
-        <p>
-          <strong>Chuyến bay:</strong> {flight.flight_number}
-        </p>
-        <p>
-          <strong>Điểm khởi hành:</strong> {flight.departure_airport.name} -{" "}
-          {flight.departure_airport.city}
-        </p>
-        <p>
-          <strong>Điểm đến:</strong> {flight.arrival_airport.name} -{" "}
-          {flight.arrival_airport.city}
-        </p>
-        <p>
-          <strong>Thời gian khởi hành:</strong>{" "}
-          {new Date(flight.departure_time).toLocaleString()}
-        </p>
-        <p>
-          <strong>Thời gian đến:</strong>{" "}
-          {new Date(flight.arrival_time).toLocaleString()}
-        </p>
-        <p>
-          <strong>Ghế:</strong> {ticket.seat.seat_number} (
-          {ticket.seat.seat_class})
-        </p>
-        <p>
-          <strong>Giá vé:</strong> {ticket.price.toLocaleString()} VND
-        </p>
+        <p><strong>Chuyến bay:</strong> {flight.flight_number}</p>
+        <p><strong>Điểm khởi hành:</strong> {flight.departure_airport.name} - {flight.departure_airport.city}</p>
+        <p><strong>Điểm đến:</strong> {flight.arrival_airport.name} - {flight.arrival_airport.city}</p>
+        <p><strong>Thời gian khởi hành:</strong> {new Date(flight.departure_time).toLocaleString()}</p>
+        <p><strong>Thời gian đến:</strong> {new Date(flight.arrival_time).toLocaleString()}</p>
+        <p><strong>Ghế:</strong> {ticket.seat.seat_number} ({ticket.seat.seat_class})</p>
+        <p><strong>Giá vé:</strong> {ticket.price.toLocaleString()} VND</p>
       </div>
 
-      <form className={styles.paymentForm} onSubmit={handlePayment}>
-        <h2>Thông tin thanh toán</h2>
+      <div className={styles.paymentFormContainer}>
+        <h1 className={styles.title}>Thanh toán vé</h1>
+        <form className={styles.paymentForm} onSubmit={handlePayment}>
+          <h2>Thông tin thanh toán</h2>
 
-        {paymentError && <p className={styles.error}>{paymentError}</p>}
+          {paymentError && <p className={styles.error}>{paymentError}</p>}
 
-        <div className={styles.formGroup}>
-          <label htmlFor="name">Họ và tên:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Nhập họ và tên"
-          />
-        </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="name">Họ và tên:</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Nhập họ và tên"
+            />
+          </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Nhập email"
-          />
-        </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Nhập email"
+            />
+          </div>
 
-        {/* Thông tin thanh toán - giả lập */}
-        <div className={styles.formGroup}>
-          <label htmlFor="cardNumber">Số thẻ tín dụng:</label>
-          <input
-            type="text"
-            id="cardNumber"
-            placeholder="XXXX-XXXX-XXXX-XXXX"
-          />
-        </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="cardNumber">Số thẻ tín dụng:</label>
+            <input
+              type="text"
+              id="cardNumber"
+              placeholder="XXXX-XXXX-XXXX-XXXX"
+            />
+          </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="expiryDate">Ngày hết hạn:</label>
-          <input type="text" id="expiryDate" placeholder="MM/YY" />
-        </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="expiryDate">Ngày hết hạn:</label>
+            <input type="text" id="expiryDate" placeholder="MM/YY" />
+          </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="cvv">CVV:</label>
-          <input type="text" id="cvv" placeholder="XXX" />
-        </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="cvv">CVV:</label>
+            <input type="text" id="cvv" placeholder="XXX" />
+          </div>
 
-        <button
-          type="submit"
-          className={styles.payButton}
-          disabled={isProcessing}
-        >
-          {isProcessing ? "Đang xử lý..." : "Thanh toán"}
-        </button>
-      </form>
+          <button
+            type="submit"
+            className={styles.payButton}
+            disabled={isProcessing}
+          >
+            {isProcessing ? "Đang xử lý..." : "Thanh toán"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
