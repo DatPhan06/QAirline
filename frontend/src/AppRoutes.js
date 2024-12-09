@@ -52,6 +52,9 @@ import ManageFlights from "./pages/Admin/ManageFlights";
 import ViewBookings from "./pages/Admin/ViewBookings";
 import UpdateFlightTime from "./pages/Admin/UpdateFlightTime";
 
+// OAuth2 callback page
+import OAuth2Callback from './pages/OAuth2Callback';
+
 function AppRoutes() {
   return (
     <Routes>
@@ -160,6 +163,7 @@ function AppRoutes() {
       <Route path="/account/logout" element={<Logout />} />
       <Route path="/account/signin" element={<SignIn />} />
       <Route path="/account/signup" element={<SignUp />} />
+      <Route path="/oauth2/callback" element={<OAuth2Callback />} />
 
       {/* Admin */}
       <Route path="/admin" element={<AdminLogin />} />
