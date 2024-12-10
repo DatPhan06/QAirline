@@ -35,6 +35,7 @@ const PostInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -51,6 +52,10 @@ const PostInfo = () => {
     };
     fetchCurrentAdmin();
   }, []);
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   const fetchData = async () => {
     try {
@@ -125,6 +130,15 @@ const PostInfo = () => {
       console.error("Lỗi khi xóa:", error);
     }
   };
+
+  const filteredData = data.filter((item) => {
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      item.title?.toLowerCase().includes(searchLower) ||
+      item.content?.toLowerCase().includes(searchLower) ||
+      item.description?.toLowerCase().includes(searchLower)
+    );
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -341,6 +355,25 @@ const PostInfo = () => {
           </button>
         </div>
 
+        {/* Add search bar here */}
+        <div className={styles.searchContainer}>
+          <input
+            type="text"
+            placeholder={`Tìm kiếm ${
+              activeSection === "generalInfo"
+                ? "thông tin chung"
+                : activeSection === "news"
+                ? "tin tức"
+                : activeSection === "promotions"
+                ? "khuyến mãi"
+                : "thông báo"
+            }...`}
+            value={searchTerm}
+            onChange={handleSearch}
+            className={styles.searchInput}
+          />
+        </div>
+
         <button
           className={styles.createButton}
           onClick={() => setShowModal(true)}
@@ -369,7 +402,7 @@ const PostInfo = () => {
             </div>
           </div>
         )}
-        {data.map((item) => (
+        {filteredData.map((item) => (
           <div key={item.id} className={styles.itemCard}>
             <div className={styles.itemHeader}>
               <h3>{item.title}</h3>
