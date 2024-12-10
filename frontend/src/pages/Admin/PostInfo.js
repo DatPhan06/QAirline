@@ -96,7 +96,23 @@ const PostInfo = () => {
   const handleEdit = (item) => {
     setFormData(item);
     setIsEditing(true);
-    setEditId(item.id);
+    // Set editId based on active section
+    switch (activeSection) {
+      case "generalInfo":
+        setEditId(item.info_id);
+        break;
+      case "news":
+        setEditId(item.news_id);
+        break;
+      case "promotions":
+        setEditId(item.promotion_id);
+        break;
+      case "notifications":
+        setEditId(item.notification_id);
+        break;
+      default:
+        break;
+    }
     setShowModal(true);
   };
 
@@ -107,25 +123,25 @@ const PostInfo = () => {
     setEditId(null);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (item) => {
     try {
       switch (activeSection) {
         case "generalInfo":
-          await deleteGeneralInfo(id);
+          await deleteGeneralInfo(item.info_id);
           break;
         case "news":
-          await deleteNews(id);
+          await deleteNews(item.news_id);
           break;
         case "promotions":
-          await deletePromotion(id);
+          await deletePromotion(item.promotion_id);
           break;
         case "notifications":
-          await deleteNotification(id);
+          await deleteNotification(item.notification_id);
           break;
         default:
           break;
       }
-      fetchData();
+      fetchData(); // Refresh data after deletion
     } catch (error) {
       console.error("Lỗi khi xóa:", error);
     }
@@ -199,117 +215,160 @@ const PostInfo = () => {
     switch (activeSection) {
       case "generalInfo":
         return (
-          <>
-            <input
-              type="text"
-              name="title"
-              placeholder="Tiêu đề"
-              value={formData.title || ""}
-              onChange={handleInputChange}
-            />
-            <textarea
-              name="content"
-              placeholder="Nội dung"
-              value={formData.content || ""}
-              onChange={handleInputChange}
-            />
-          </>
+          <div className={styles.formGroup}>
+            <div className={styles.inputGroup}>
+              <label>Tiêu đề:</label>
+              <input
+                type="text"
+                name="title"
+                placeholder="Nhập tiêu đề"
+                value={formData.title || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Nội dung:</label>
+              <textarea
+                name="content"
+                placeholder="Nhập nội dung"
+                value={formData.content || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
         );
+
       case "news":
         return (
-          <>
-            <input
-              type="text"
-              name="title"
-              placeholder="Tiêu đề"
-              value={formData.title || ""}
-              onChange={handleInputChange}
-            />
-            <textarea
-              name="content"
-              placeholder="Nội dung"
-              value={formData.content || ""}
-              onChange={handleInputChange}
-            />
-          </>
+          <div className={styles.formGroup}>
+            <div className={styles.inputGroup}>
+              <label>Tiêu đề tin tức:</label>
+              <input
+                type="text"
+                name="title"
+                placeholder="Nhập tiêu đề tin tức"
+                value={formData.title || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Nội dung tin tức:</label>
+              <textarea
+                name="content"
+                placeholder="Nhập nội dung tin tức"
+                value={formData.content || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
         );
+
       case "promotions":
         return (
-          <>
-            <input
-              type="text"
-              name="title"
-              placeholder="Tiêu đề"
-              value={formData.title || ""}
-              onChange={handleInputChange}
-            />
-            <textarea
-              name="description"
-              placeholder="Mô tả"
-              value={formData.description || ""}
-              onChange={handleInputChange}
-            />
-            <input
-              type="number"
-              name="discount_percentage"
-              placeholder="Phần trăm giảm giá"
-              value={formData.discount_percentage || ""}
-              onChange={handleInputChange}
-            />
-            <input
-              type="date"
-              name="start_date"
-              placeholder="Ngày bắt đầu"
-              value={formData.start_date || ""}
-              onChange={handleInputChange}
-            />
-            <input
-              type="date"
-              name="end_date"
-              placeholder="Ngày kết thúc"
-              value={formData.end_date || ""}
-              onChange={handleInputChange}
-            />
-          </>
+          <div className={styles.formGroup}>
+            <div className={styles.inputGroup}>
+              <label>Tiêu đề khuyến mãi:</label>
+              <input
+                type="text"
+                name="title"
+                placeholder="Nhập tiêu đề khuyến mãi"
+                value={formData.title || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Mô tả khuyến mãi:</label>
+              <textarea
+                name="description"
+                placeholder="Nhập mô tả khuyến mãi"
+                value={formData.description || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Phần trăm giảm giá (%):</label>
+              <input
+                type="number"
+                name="discount_percentage"
+                placeholder="Nhập phần trăm giảm giá"
+                value={formData.discount_percentage || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Ngày bắt đầu:</label>
+              <input
+                type="date"
+                name="start_date"
+                value={formData.start_date || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Ngày kết thúc:</label>
+              <input
+                type="date"
+                name="end_date"
+                value={formData.end_date || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
         );
+
       case "notifications":
         return (
-          <>
-            <input
-              type="text"
-              name="title"
-              placeholder="Tiêu đề"
-              value={formData.title || ""}
-              onChange={handleInputChange}
-            />
-            <textarea
-              name="content"
-              placeholder="Nội dung"
-              value={formData.content || ""}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              name="type"
-              placeholder="Loại"
-              value={formData.type || ""}
-              onChange={handleInputChange}
-            />
-            <input
-              type="number"
-              name="user_id"
-              placeholder="ID người dùng"
-              value={formData.user_id || ""}
-              onChange={handleInputChange}
-            />
-            <input
-              type="number"
-              name="flight_id"
-              placeholder="ID chuyến bay"
-              value={formData.flight_id || ""}
-              onChange={handleInputChange}
-            />
-          </>
+          <div className={styles.formGroup}>
+            <div className={styles.inputGroup}>
+              <label>Tiêu đề thông báo:</label>
+              <input
+                type="text"
+                name="title"
+                placeholder="Nhập tiêu đề thông báo"
+                value={formData.title || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Nội dung thông báo:</label>
+              <textarea
+                name="content"
+                placeholder="Nhập nội dung thông báo"
+                value={formData.content || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Loại thông báo:</label>
+              <input
+                type="text"
+                name="type"
+                placeholder="Nhập loại thông báo"
+                value={formData.type || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>ID người dùng:</label>
+              <input
+                type="number"
+                name="user_id"
+                placeholder="Nhập ID người dùng"
+                value={formData.user_id || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>ID chuyến bay:</label>
+              <input
+                type="number"
+                name="flight_id"
+                placeholder="Nhập ID chuyến bay"
+                value={formData.flight_id || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
         );
       default:
         return null;
@@ -403,7 +462,19 @@ const PostInfo = () => {
           </div>
         )}
         {filteredData.map((item) => (
-          <div key={item.id} className={styles.itemCard}>
+          <div
+            key={
+              activeSection === "generalInfo"
+                ? item.info_id
+                : activeSection === "news"
+                ? item.news_id
+                : activeSection === "promotions"
+                ? item.promotion_id
+                : item.notification_id
+            }
+            className={styles.itemCard}
+          >
+            {" "}
             <div className={styles.itemHeader}>
               <h3>{item.title}</h3>
               <div className={styles.actions}>
@@ -415,7 +486,7 @@ const PostInfo = () => {
                 </button>
                 <button
                   className={styles.deleteButton}
-                  onClick={() => handleDelete(item.id)}
+                  onClick={() => handleDelete(item)}
                 >
                   Xóa
                 </button>
@@ -431,6 +502,12 @@ const PostInfo = () => {
                     <strong>Ngày tạo:</strong>{" "}
                     {new Date(item.created_at).toLocaleString()}
                   </p>
+                  <p>
+                    <strong>Ngày sửa đổi:</strong>{" "}
+                    {item.updated_at
+                      ? new Date(item.updated_at).toLocaleString()
+                      : "Chưa có cập nhật"}
+                  </p>
                 </>
               )}
 
@@ -445,6 +522,12 @@ const PostInfo = () => {
                   <p>
                     <strong>Ngày đăng:</strong>{" "}
                     {new Date(item.created_at).toLocaleString()}
+                  </p>
+                  <p>
+                    <strong>Ngày sửa đổi:</strong>{" "}
+                    {item.updated_at
+                      ? new Date(item.updated_at).toLocaleString()
+                      : "Chưa có cập nhật"}
                   </p>
                 </>
               )}
