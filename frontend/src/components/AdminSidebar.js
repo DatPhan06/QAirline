@@ -5,22 +5,24 @@ import styles from "./AdminSidebar.module.css";
 const AdminSidebar = () => {
   return (
     <div className={styles.sidebar}>
-      <h2>Admin Menu</h2>
+      <h2>Menu Quản Trị</h2>
       <ul>
         <li>
-          <Link to="/admin/post-info">Post Information</Link>
+          <Link to="/admin/post-info">Đăng thông tin</Link>
         </li>
         <li>
-          <Link to="/admin/manage-airplanes">Manage Airplanes</Link>
+          <Link to="/admin/manage-airplanes">Quản Lý Máy Bay</Link>
         </li>
         <li>
-          <Link to="/admin/manage-flights">Manage Flights</Link>
+          <Link to="/admin/manage-flights">Quản Lý Chuyến Bay</Link>
         </li>
         <li>
-          <Link to="/admin/view-bookings">View Bookings</Link>
+          <Link to="/admin/view-bookings">
+            Xem Và Thống Kê Đặt Vé Của Khách Hàng
+          </Link>
         </li>
         <li>
-          <Link to="/admin/update-flight-time">Update Flight Time</Link>
+          <Link to="/admin/update-flight-time">Cập Nhật Lịch Bay</Link>
         </li>
       </ul>
     </div>

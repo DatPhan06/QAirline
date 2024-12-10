@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  createGeneralInfo,
   getGeneralInfo,
+  createGeneralInfo,
   updateGeneralInfo,
   deleteGeneralInfo,
 } from "../../services/generalInfoService";
 import {
-  createNews,
   getNews,
+  createNews,
   updateNews,
   deleteNews,
 } from "../../services/newsService";
 import {
-  createPromotion,
   getPromotions,
+  createPromotion,
   updatePromotion,
   deletePromotion,
 } from "../../services/promotionService";
 import {
-  createNotification,
   getNotifications,
+  createNotification,
   updateNotification,
   deleteNotification,
 } from "../../services/notificationService";
@@ -34,6 +34,8 @@ const PostInfo = () => {
   const [currentAdmin, setCurrentAdmin] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -44,16 +46,16 @@ const PostInfo = () => {
       try {
         const adminData = await getCurrentAdmin();
         setCurrentAdmin(adminData);
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          author_id: adminData.admin_id,
-        }));
       } catch (error) {
-        console.error("Error fetching current admin:", error);
+        console.error("Lỗi khi tải thông tin admin hiện tại:", error);
       }
     };
     fetchCurrentAdmin();
   }, []);
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   const fetchData = async () => {
     try {
@@ -76,7 +78,7 @@ const PostInfo = () => {
       }
       setData(result);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Lỗi khi tải dữ liệu:", error);
     }
   };
 
@@ -91,18 +93,75 @@ const PostInfo = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleEdit = (item) => {
+    setFormData(item);
+    setIsEditing(true);
+    // Set editId based on active section
+    switch (activeSection) {
+      case "generalInfo":
+        setEditId(item.info_id);
+        break;
+      case "news":
+        setEditId(item.news_id);
+        break;
+      case "promotions":
+        setEditId(item.promotion_id);
+        break;
+      case "notifications":
+        setEditId(item.notification_id);
+        break;
+      default:
+        break;
+    }
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setFormData({});
+    setIsEditing(false);
+    setEditId(null);
+  };
+
+  const handleDelete = async (item) => {
+    try {
+      switch (activeSection) {
+        case "generalInfo":
+          await deleteGeneralInfo(item.info_id);
+          break;
+        case "news":
+          await deleteNews(item.news_id);
+          break;
+        case "promotions":
+          await deletePromotion(item.promotion_id);
+          break;
+        case "notifications":
+          await deleteNotification(item.notification_id);
+          break;
+        default:
+          break;
+      }
+      fetchData(); // Refresh data after deletion
+    } catch (error) {
+      console.error("Lỗi khi xóa:", error);
+    }
+  };
+
+  const filteredData = data.filter((item) => {
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      item.title?.toLowerCase().includes(searchLower) ||
+      item.content?.toLowerCase().includes(searchLower) ||
+      item.description?.toLowerCase().includes(searchLower)
+    );
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!currentAdmin) {
       alert("Vui lòng đăng nhập trước khi đăng bài.");
       return;
     }
-
-    const handleEdit = (item) => {
-      setFormData(item);
-      setIsEditing(true);
-      setEditId(item.id);
-    };
 
     const dataToSubmit = {
       ...formData,
@@ -145,13 +204,10 @@ const PostInfo = () => {
             break;
         }
       }
-      alert("Data posted successfully!");
       fetchData();
-      setFormData({});
-      setIsEditing(false);
-      setEditId(null);
+      handleCloseModal();
     } catch (error) {
-      console.error("Error posting data:", error);
+      console.error("Lỗi khi gửi dữ liệu:", error);
     }
   };
 
@@ -159,117 +215,160 @@ const PostInfo = () => {
     switch (activeSection) {
       case "generalInfo":
         return (
-          <>
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              value={formData.title || ""}
-              onChange={handleInputChange}
-            />
-            <textarea
-              name="content"
-              placeholder="Content"
-              value={formData.content || ""}
-              onChange={handleInputChange}
-            />
-          </>
+          <div className={styles.formGroup}>
+            <div className={styles.inputGroup}>
+              <label>Tiêu đề:</label>
+              <input
+                type="text"
+                name="title"
+                placeholder="Nhập tiêu đề"
+                value={formData.title || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Nội dung:</label>
+              <textarea
+                name="content"
+                placeholder="Nhập nội dung"
+                value={formData.content || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
         );
+
       case "news":
         return (
-          <>
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              value={formData.title || ""}
-              onChange={handleInputChange}
-            />
-            <textarea
-              name="content"
-              placeholder="Content"
-              value={formData.content || ""}
-              onChange={handleInputChange}
-            />
-          </>
+          <div className={styles.formGroup}>
+            <div className={styles.inputGroup}>
+              <label>Tiêu đề tin tức:</label>
+              <input
+                type="text"
+                name="title"
+                placeholder="Nhập tiêu đề tin tức"
+                value={formData.title || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Nội dung tin tức:</label>
+              <textarea
+                name="content"
+                placeholder="Nhập nội dung tin tức"
+                value={formData.content || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
         );
+
       case "promotions":
         return (
-          <>
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              value={formData.title || ""}
-              onChange={handleInputChange}
-            />
-            <textarea
-              name="description"
-              placeholder="Description"
-              value={formData.description || ""}
-              onChange={handleInputChange}
-            />
-            <input
-              type="number"
-              name="discount_percentage"
-              placeholder="Discount Percentage"
-              value={formData.discount_percentage || ""}
-              onChange={handleInputChange}
-            />
-            <input
-              type="date"
-              name="start_date"
-              placeholder="Start Date"
-              value={formData.start_date || ""}
-              onChange={handleInputChange}
-            />
-            <input
-              type="date"
-              name="end_date"
-              placeholder="End Date"
-              value={formData.end_date || ""}
-              onChange={handleInputChange}
-            />
-          </>
+          <div className={styles.formGroup}>
+            <div className={styles.inputGroup}>
+              <label>Tiêu đề khuyến mãi:</label>
+              <input
+                type="text"
+                name="title"
+                placeholder="Nhập tiêu đề khuyến mãi"
+                value={formData.title || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Mô tả khuyến mãi:</label>
+              <textarea
+                name="description"
+                placeholder="Nhập mô tả khuyến mãi"
+                value={formData.description || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Phần trăm giảm giá (%):</label>
+              <input
+                type="number"
+                name="discount_percentage"
+                placeholder="Nhập phần trăm giảm giá"
+                value={formData.discount_percentage || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Ngày bắt đầu:</label>
+              <input
+                type="date"
+                name="start_date"
+                value={formData.start_date || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Ngày kết thúc:</label>
+              <input
+                type="date"
+                name="end_date"
+                value={formData.end_date || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
         );
+
       case "notifications":
         return (
-          <>
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              value={formData.title || ""}
-              onChange={handleInputChange}
-            />
-            <textarea
-              name="content"
-              placeholder="Content"
-              value={formData.content || ""}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              name="type"
-              placeholder="Type"
-              value={formData.type || ""}
-              onChange={handleInputChange}
-            />
-            <input
-              type="number"
-              name="user_id"
-              placeholder="User ID"
-              value={formData.user_id || ""}
-              onChange={handleInputChange}
-            />
-            <input
-              type="number"
-              name="flight_id"
-              placeholder="Flight ID"
-              value={formData.flight_id || ""}
-              onChange={handleInputChange}
-            />
-          </>
+          <div className={styles.formGroup}>
+            <div className={styles.inputGroup}>
+              <label>Tiêu đề thông báo:</label>
+              <input
+                type="text"
+                name="title"
+                placeholder="Nhập tiêu đề thông báo"
+                value={formData.title || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Nội dung thông báo:</label>
+              <textarea
+                name="content"
+                placeholder="Nhập nội dung thông báo"
+                value={formData.content || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>Loại thông báo:</label>
+              <input
+                type="text"
+                name="type"
+                placeholder="Nhập loại thông báo"
+                value={formData.type || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>ID người dùng:</label>
+              <input
+                type="number"
+                name="user_id"
+                placeholder="Nhập ID người dùng"
+                value={formData.user_id || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>ID chuyến bay:</label>
+              <input
+                type="number"
+                name="flight_id"
+                placeholder="Nhập ID chuyến bay"
+                value={formData.flight_id || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
         );
       default:
         return null;
@@ -281,8 +380,9 @@ const PostInfo = () => {
       <div className={styles.adminSidebar}>
         <AdminSidebar />
       </div>
+
       <div className={styles.mainContent}>
-        <h1>Manage Information</h1>
+        <h1>Quản lý thông tin</h1>
         <div className={styles.sectionTabs}>
           <button
             className={`${
@@ -290,19 +390,19 @@ const PostInfo = () => {
             }`}
             onClick={() => handleSectionChange("generalInfo")}
           >
-            General Info
+            Thông tin chung
           </button>
           <button
             className={`${activeSection === "news" ? styles.active : ""}`}
             onClick={() => handleSectionChange("news")}
           >
-            News
+            Tin tức
           </button>
           <button
             className={`${activeSection === "promotions" ? styles.active : ""}`}
             onClick={() => handleSectionChange("promotions")}
           >
-            Promotions
+            Khuyến mãi
           </button>
           <button
             className={`${
@@ -310,48 +410,166 @@ const PostInfo = () => {
             }`}
             onClick={() => handleSectionChange("notifications")}
           >
-            Notifications
+            Thông báo
           </button>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          {renderFormFields()}
-          <button type="submit">
-            {isEditing ? "Update" : "Add"} {activeSection}
-          </button>
-        </form>
-
-        <div className={styles.dataList}>
-          <h2>
-            {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}{" "}
-            List
-          </h2>
-          <ul>
-            {data.map((item) => (
-              <li key={item.id}>
-                <h3>{item.title}</h3>
-                <p>{item.content}</p>
-                {activeSection === "notifications" && (
-                  <>
-                    <p>Type: {item.type}</p>
-                    <p>User ID: {item.user_id}</p>
-                    <p>Flight ID: {item.flight_id}</p>
-                  </>
-                )}
-                {activeSection === "promotions" && (
-                  <>
-                    <p>Description: {item.description}</p>
-                    <p>Discount: {item.discount_percentage}%</p>
-                    <p>Start Date: {item.start_date}</p>
-                    <p>End Date: {item.end_date}</p>
-                  </>
-                )}
-                <button onClick={() => handleEdit(item)}>Edit</button>
-                <button onClick={() => handleDelete(item.id)}>Delete</button>
-              </li>
-            ))}
-          </ul>
+        {/* Add search bar here */}
+        <div className={styles.searchContainer}>
+          <input
+            type="text"
+            placeholder={`Tìm kiếm ${
+              activeSection === "generalInfo"
+                ? "thông tin chung"
+                : activeSection === "news"
+                ? "tin tức"
+                : activeSection === "promotions"
+                ? "khuyến mãi"
+                : "thông báo"
+            }...`}
+            value={searchTerm}
+            onChange={handleSearch}
+            className={styles.searchInput}
+          />
         </div>
+
+        <button
+          className={styles.createButton}
+          onClick={() => setShowModal(true)}
+        >
+          Thêm mới{" "}
+          {activeSection === "generalInfo"
+            ? "Thông tin chung"
+            : activeSection === "news"
+            ? "Tin tức"
+            : activeSection === "promotions"
+            ? "Khuyến mãi"
+            : "Thông báo"}
+        </button>
+        {showModal && (
+          <div className={styles.modal}>
+            <div className={styles.modalContent}>
+              <span className={styles.closeButton} onClick={handleCloseModal}>
+                &times;
+              </span>
+              <form onSubmit={handleSubmit}>
+                {renderFormFields()}
+                <button type="submit">
+                  {isEditing ? "Cập nhật" : "Đăng bài"}
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+        {filteredData.map((item) => (
+          <div
+            key={
+              activeSection === "generalInfo"
+                ? item.info_id
+                : activeSection === "news"
+                ? item.news_id
+                : activeSection === "promotions"
+                ? item.promotion_id
+                : item.notification_id
+            }
+            className={styles.itemCard}
+          >
+            {" "}
+            <div className={styles.itemHeader}>
+              <h3>{item.title}</h3>
+              <div className={styles.actions}>
+                <button
+                  className={styles.editButton}
+                  onClick={() => handleEdit(item)}
+                >
+                  Sửa
+                </button>
+                <button
+                  className={styles.deleteButton}
+                  onClick={() => handleDelete(item)}
+                >
+                  Xóa
+                </button>
+              </div>
+            </div>
+            <div className={styles.itemContent}>
+              {activeSection === "generalInfo" && (
+                <>
+                  <p>
+                    <strong>Nội dung:</strong> {item.content}
+                  </p>
+                  <p>
+                    <strong>Ngày tạo:</strong>{" "}
+                    {new Date(item.created_at).toLocaleString()}
+                  </p>
+                  <p>
+                    <strong>Ngày sửa đổi:</strong>{" "}
+                    {item.updated_at
+                      ? new Date(item.updated_at).toLocaleString()
+                      : "Chưa có cập nhật"}
+                  </p>
+                </>
+              )}
+
+              {activeSection === "news" && (
+                <>
+                  <p>
+                    <strong>Nội dung:</strong> {item.content}
+                  </p>
+                  <p>
+                    <strong>Tác giả:</strong> {item.author_id}
+                  </p>
+                  <p>
+                    <strong>Ngày đăng:</strong>{" "}
+                    {new Date(item.created_at).toLocaleString()}
+                  </p>
+                  <p>
+                    <strong>Ngày sửa đổi:</strong>{" "}
+                    {item.updated_at
+                      ? new Date(item.updated_at).toLocaleString()
+                      : "Chưa có cập nhật"}
+                  </p>
+                </>
+              )}
+
+              {activeSection === "promotions" && (
+                <>
+                  <p>
+                    <strong>Mô tả:</strong> {item.description}
+                  </p>
+                  <p>
+                    <strong>Giảm giá:</strong> {item.discount_percentage}%
+                  </p>
+                  <p>
+                    <strong>Thời gian:</strong>{" "}
+                    {new Date(item.start_date).toLocaleDateString()} -{" "}
+                    {new Date(item.end_date).toLocaleDateString()}
+                  </p>
+                </>
+              )}
+              {activeSection === "notifications" && (
+                <>
+                  <p>
+                    <strong>Nội dung:</strong> {item.content}
+                  </p>
+                  <p>
+                    <strong>Loại:</strong> {item.type}
+                  </p>
+                  {item.user_id && (
+                    <p>
+                      <strong>Người dùng:</strong> {item.user_id}
+                    </p>
+                  )}
+                  {item.flight_id && (
+                    <p>
+                      <strong>Chuyến bay:</strong> {item.flight_id}
+                    </p>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

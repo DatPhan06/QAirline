@@ -41,7 +41,7 @@ const PrivateAdminRoute = ({ children }) => {
     return <div>Loading...</div>;
   }
 
-  return isAuthenticated ? children : <Navigate to="/admin/login" />;
+  return isAuthenticated ? children : <Navigate to="/admin" />;
 };
 
 export default PrivateAdminRoute;

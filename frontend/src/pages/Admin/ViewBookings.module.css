@@ -1,99 +1,256 @@
-/* ViewBookings.module.css */
-
+/* Container chính */
 .adminContainer {
   display: flex;
-  flex-direction: row;
   min-height: 100vh;
-  background-color: #f4f7fc;
+  background-color: #f5f7fa;
 }
 
+/* Sidebar */
 .sidebar {
-  width: 250px;
-  background-color: #003f82;
+  width: 260px;
+  background-color: #2c3e50;
+  padding: 30px 20px;
   color: #fff;
-  padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
+/* Main content */
 .mainContent {
   flex: 1;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  margin: 20px;
+  padding: 40px;
+  display: flex;
+  gap: 30px;
 }
 
-h1 {
-  text-align: center;
-  font-size: 2.5rem;
-  color: #003f82;
-  margin-bottom: 20px;
+/* Cột bên trái - Thông tin thống kê */
+.leftColumn {
+  flex: 0 0 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
+/* Tiêu đề trang */
+.mainContent h1 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Container thống kê */
 .statsContainer {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 20px;
 }
 
+/* Card thống kê */
 .statCard {
-  flex: 1;
-  background-color: #f9fafc;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  text-align: center;
-  margin: 0 10px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .statCard h2 {
-  font-size: 1.5rem;
-  color: #003f82;
-  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
 }
 
 .statCard p {
+  font-size: 2rem;
+  color: #3498db;
+  font-weight: 600;
+}
+
+/* Container biểu đồ */
+.chartContainer {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.chartContainer h2 {
   font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+/* Cột bên phải - Bảng danh sách */
+.rightColumn {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Container bảng đặt vé */
+.bookingsListContainer {
+  width: 100%;
+}
+
+.bookingsListContainer h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+/* Bảng đặt vé */
+.bookingsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.bookingsTable th,
+.bookingsTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.bookingsTable th {
+  background-color: #f8f9fa;
+  color: #2c3e50;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tableRow {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tableRow:hover {
+  background-color: #f8f9fa;
+}
+
+/* Modal cho chi tiết đặt vé */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+  color: #e74c3c;
+}
+
+.modalDetails {
+  margin-top: 20px;
+}
+
+.modalDetails p {
+  margin: 10px 0;
+  font-size: 1rem;
   color: #333;
 }
 
-.listContainer {
-  background-color: #f9fafc;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+.modalDetails p strong {
+  color: #2c3e50;
+  margin-right: 10px;
 }
 
-.bookingList {
-  list-style: none;
-  padding: 0;
-}
-
-.bookingItem {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 10px;
-}
-
-.bookingItem p {
-  margin: 5px 0;
-  font-size: 1rem;
-  color: #555;
-}
-
-.bookingItem p strong {
-  color: #003f82;
-}
-
-@media (max-width: 768px) {
-  .statsContainer {
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .mainContent {
     flex-direction: column;
   }
 
-  .statCard {
-    margin: 10px 0;
+  .leftColumn {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .chartContainer {
+    overflow-x: auto;
+  }
+}
+
+/* Add to ViewBookings.module.css */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 20px 0;
+}
+
+.pageButton {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background: white;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.pageButton:hover {
+  background-color: #f5f5f5;
+  border-color: #3498db;
+}
+
+.activePage {
+  background-color: #3498db;
+  color: white;
+  border-color: #3498db;
+}
+
+.activePage:hover {
+  background-color: #2980b9;
+}
+
+@media (max-width: 768px) {
+  .adminContainer {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .mainContent {
+    padding: 20px;
+  }
+
+  .bookingsTable {
+    display: block;
+    overflow-x: auto;
   }
 }

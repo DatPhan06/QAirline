@@ -637,6 +637,7 @@
     "read-cache": "^1.0.0",
     "readable-stream": "^3.6.2",
     "readdirp": "^3.6.0",
+    "recharts": "^2.14.1",
     "recursive-readdir": "^2.2.3",
     "redent": "^3.0.0",
     "reflect.getprototypeof": "^1.0.6",

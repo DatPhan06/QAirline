@@ -2,6 +2,8 @@ from typing import List, Union
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from sqlalchemy import func
+
 
 from .. import models, schemas, services
 from ..database import get_db
@@ -12,6 +14,50 @@ router = APIRouter(
     prefix="/bookings",
     tags=["bookings"],
 )
+
+# backend/app/routers/bookings.py
+
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from sqlalchemy import func
+from .. import models, schemas, database, services
+from ..services.auth import get_current_admin
+
+router = APIRouter(
+    prefix="/bookings",
+    tags=["bookings"],
+)
+
+@router.get("/stats/overview")
+def get_booking_stats(
+    db: Session = Depends(get_db),
+    current_admin: models.Admin = Depends(get_current_admin),
+):
+    total_bookings = db.query(models.BookedTicket).count()
+    total_revenue = db.query(func.sum(models.BookedTicket.price)).scalar() or 0
+
+    bookings_by_user = (
+        db.query(models.User.username, func.count(models.BookedTicket.booked_ticket_id).label('bookings'))
+        .join(models.BookedTicket, models.BookedTicket.user_id == models.User.user_id)
+        .group_by(models.User.username)
+        .all()
+    )
+    bookings_by_user = [{"username": username, "bookings": bookings} for username, bookings in bookings_by_user]
+
+    bookings_by_flight = (
+        db.query(models.Flight.flight_number, func.count(models.BookedTicket.booked_ticket_id).label('bookings'))
+        .join(models.BookedTicket, models.BookedTicket.flight_id == models.Flight.flight_id)
+        .group_by(models.Flight.flight_number)
+        .all()
+    )
+    bookings_by_flight = [{"flightNumber": flight_number, "bookings": bookings} for flight_number, bookings in bookings_by_flight]
+
+    return {
+        "totalBookings": total_bookings,
+        "totalRevenue": total_revenue,
+        "bookingsByUser": bookings_by_user,
+        "bookingsByFlight": bookings_by_flight,
+    }
 
 @router.post("/", response_model=schemas.BookedTicket)
 def create_booking(

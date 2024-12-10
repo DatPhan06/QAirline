@@ -9,17 +9,32 @@ const axiosInstance = axios.create({
   withCredentials: true, // Ensure cookies are sent with requests
 });
 
-// Add interceptor to automatically attach token to headers
+// Update interceptor to handle both user and admin tokens
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token"); // Get token from localStorage
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`; // Attach token to headers
+    const userToken = localStorage.getItem("token");
+    const adminToken = localStorage.getItem("adminToken");
+
+    if (adminToken) {
+      config.headers.Authorization = `Bearer ${adminToken}`;
+    } else if (userToken) {
+      config.headers.Authorization = `Bearer ${userToken}`;
     }
     return config;
   },
   (error) => Promise.reject(error)
 );
+
+// Hàm lấy thống kê đặt vé
+export const getBookingStats = async () => {
+  try {
+    const response = await axiosInstance.get("/bookings/stats/overview");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching booking stats:", error);
+    throw error;
+  }
+};
 
 // Hàm tạo đặt vé mới
 export const createBooking = async (bookingData) => {
