@@ -19,6 +19,12 @@ FRONTEND_URL = os.getenv("FRONTEND_URL")
 
 @router.get("/google/login")
 async def google_login():
+    """
+    Tạo URL để người dùng đăng nhập bằng Google OAuth2 và chuyển hướng họ đến đó.
+
+    Returns:
+        RedirectResponse: Phản hồi chuyển hướng người dùng đến trang đăng nhập Google.
+    """
     authorization_url = (
         "https://accounts.google.com/o/oauth2/v2/auth"
         "?client_id={client_id}"
@@ -35,6 +41,19 @@ async def google_login():
 
 @router.get("/google/callback")
 async def google_callback(request: Request, db: Session = Depends(get_db)):
+    """
+    Xử lý phản hồi từ Google sau khi người dùng đăng nhập, tạo hoặc cập nhật người dùng trong cơ sở dữ liệu.
+
+    Args:
+        request (Request): Yêu cầu HTTP nhận được từ Google, chứa mã ủy quyền.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Raises:
+        HTTPException: Nếu không có mã ủy quyền trong yêu cầu.
+
+    Returns:
+        RedirectResponse: Phản hồi chuyển hướng người dùng về frontend với token xác thực.
+    """
     code = request.query_params.get("code")
     if not code:
         raise HTTPException(status_code=400, detail="Code not provided")
@@ -57,7 +76,6 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
         headers = {"Authorization": f"Bearer {access_token}"}
         userinfo_response = await client.get(userinfo_url, headers=headers)
         userinfo = userinfo_response.json()
-        # print(userinfo)
 
     email = userinfo.get("email")
     full_name = userinfo.get("name")
