@@ -20,6 +20,7 @@ const ViewBookings = () => {
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState(""); // Thêm state cho tìm kiếm
 
   const bookingsPerPage = 10; // Số đặt vé trên mỗi trang
 
@@ -49,11 +50,19 @@ const ViewBookings = () => {
   if (!stats) {
     return <p>Đang tải dữ liệu thống kê...</p>;
   }
+  // Lọc danh sách đặt vé dựa trên tìm kiếm
+  const filteredBookings = bookings.filter(
+    (booking) =>
+      booking.booked_ticket_id.toString().includes(searchQuery) ||
+      booking.user_id.toString().includes(searchQuery) ||
+      booking.flight_id.toString().includes(searchQuery) ||
+      booking.status.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   // Tính toán các đặt vé cho trang hiện tại
   const indexOfLastBooking = currentPage * bookingsPerPage;
   const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
-  const currentBookings = bookings.slice(
+  const currentBookings = filteredBookings.slice(
     indexOfFirstBooking,
     indexOfLastBooking
   );
@@ -64,6 +73,11 @@ const ViewBookings = () => {
   // Hàm xử lý chuyển trang
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+  // Hàm xử lý khi nhập tìm kiếm
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1); // Quay về trang 1 khi thay đổi tìm kiếm
   };
 
   // Sử dụng tên thuộc tính đúng từ API
@@ -155,7 +169,17 @@ const ViewBookings = () => {
         <div className={styles.rightColumn}>
           <div className={styles.bookingsListContainer}>
             <h2>Danh Sách Đặt Vé</h2>
-            {bookings.length === 0 ? (
+            {/* Thanh tìm kiếm */}
+            <div className={styles.searchContainer}>
+              <input
+                type="text"
+                placeholder="Tìm kiếm đặt vé..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className={styles.searchInput}
+              />
+            </div>
+            {filteredBookings.length === 0 ? (
               <p>Không có đặt vé nào.</p>
             ) : (
               <div>
@@ -192,7 +216,11 @@ const ViewBookings = () => {
                 </table>
                 <div className={styles.pagination}>
                   {Array.from(
-                    { length: Math.ceil(bookings.length / bookingsPerPage) },
+                    {
+                      length: Math.ceil(
+                        filteredBookings.length / bookingsPerPage
+                      ),
+                    },
                     (_, i) => i + 1
                   ).map((number) => (
                     <button
