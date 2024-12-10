@@ -1,331 +1,108 @@
-.landing-page,
-.landing-page * {
-  box-sizing: border-box;
-}
-.landing-page {
-  background: #fafbfc;
-  height: 3528px;
+.flightSearchContainer {
   position: relative;
-  overflow: hidden;
+  z-index: 2; /* Cao hơn slideshow để hiển thị phía trên */
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 1000px;
+  width: 90%;
+  margin: 0 auto;
+  transform: translateY(-50%); /* Đẩy form lên trên để đè lên slideshow */
 }
 
-.rectangle-31 {
-  background: linear-gradient(to left, #d9d9d9, #8b8787);
+.title {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Thanh form chính */
+.searchForm {
+  display: flex; /* Sử dụng flex cho layout */
+  align-items: center;
+  gap: 15px;
   width: 100%;
-  height: 629px;
-  position: absolute;
-  object-fit: cover;
+  padding: 10px 20px;
+  background-color: #f9f7f3;
 }
-.frame-38 {
-  background: var(--neutrals, #ffffff);
-  border-radius: 16px;
-  padding: 16px 32px 32px 32px;
+
+.fromToContainer, .dateContainer {
+  display: flex;
+  flex: 1; /* Tự động chia không gian */
+  align-items: center;
+  gap: 15px;
+}
+
+.dateContainer {
+  justify-content: flex-start; /* Căn chỉnh nội dung trong container */
+}
+
+.formGroup {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 1200px;
-  box-shadow: 0px 4px 16px 0px rgba(141, 211, 187, 0.15);
-}
-.line-4 {
-  margin-top: -4px;
-  border-style: solid;
-  border-color: var(--mint-green, #8dd3bb);
-  border-width: 4px 0 0 0;
-  flex-shrink: 0;
-  width: 100px;
-  height: 0px;
-  position: absolute;
-  left: 33px;
-  top: 79px;
-}
-.frame-2608739 {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
   position: relative;
+  max-width: 200px;
 }
-.frame-2608738 {
-  display: flex;
-  flex-direction: row;
-  gap: 32px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.frame-2608721 {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.airplane {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  position: relative;
-  overflow: visible;
-}
-.chuy-n-bay {
-  color: var(--blackish-green, #112211);
-  text-align: left;
-  font-family: var(
-    --montserrat-semibold-16px-font-family,
-    "Montserrat-SemiBold",
-    sans-serif
-  );
-  font-size: var(--montserrat-semibold-16px-font-size, 16px);
-  font-weight: var(--montserrat-semibold-16px-font-weight, 600);
-  position: relative;
-}
-.line-1 {
-  border-style: solid;
-  border-color: #d7e2ee;
-  border-width: 1px 0 0 0;
-  flex-shrink: 0;
-  width: 48px;
-  height: 0px;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(90deg) scale(1, 1);
+
+.label {
+  font-size: 14px;
+  color: #6e6e6e;
   margin-bottom: 5px;
 }
-.frame-40 {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  width: 1184px;
-  position: relative;
+
+/* Style select và input giống như ảnh: gạch dưới, không viền nổi */
+.select, .input {
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid #ccc;
+  padding: 5px 0;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  min-width: 150px;
+  flex: 1; /* Tự động giãn chiều rộng */
+  max-width: 150px; /* Kiểm soát chiều rộng tối đa */
 }
-.text-field {
-  border-radius: 4px 4px 0px 0px;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  width: 339px;
-  height: 56px;
-  position: relative;
+
+.select:focus, .input:focus {
+  border-bottom-color: #999;
 }
-.text-field2 {
-  background: #ffffff;
-  border-radius: 4px;
-  border-style: solid;
-  border-color: #79747e;
-  border-width: 1px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+
+/* Icon chuyển hướng giữa Từ và Đến */
+.arrowIcon {
+  font-size: 20px;
+  color: #6e6e6e;
+  flex-shrink: 0; /* Đảm bảo icon không bị co lại */
 }
-.state-layer {
-  border-radius: 4px 4px 0px 0px;
-  padding: 4px 0px 4px 16px;
-  display: flex;
-  flex-direction: row;
-  gap: 0px;
-  align-items: center;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+
+/* Nút tìm kiếm */
+.searchButton {
+  background-color: #1a8098; 
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
 }
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  align-items: flex-start;
-  justify-content: center;
-  flex: 1;
-  height: 40px;
-  position: relative;
+
+.searchButton:hover {
+  background-color: #166b82;
 }
-.input-text {
-  display: flex;
-  flex-direction: row;
-  gap: 0px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.input-text2 {
-  color: #1c1b1f;
-  text-align: left;
-  font-family: var(
-    --montserrat-regular-16px-font-family,
-    "Montserrat-Regular",
-    sans-serif
-  );
-  font-size: var(--montserrat-regular-16px-font-size, 16px);
-  font-weight: var(--montserrat-regular-16px-font-weight, 400);
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.label-text {
-  background: var(--neutrals-white, #ffffff);
-  padding: 0px 4px 0px 4px;
-  display: flex;
-  flex-direction: row;
-  gap: 0px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: absolute;
-  left: -4px;
-  top: -16px;
-}
-.label-text2 {
-  color: var(--blackish-green, #112211);
-  text-align: left;
-  font-family: var(
-    --montserrat-regular-14px-font-family,
-    "Montserrat-Regular",
-    sans-serif
-  );
-  font-size: var(--montserrat-regular-14px-font-size, 14px);
-  font-weight: var(--montserrat-regular-14px-font-weight, 400);
-  position: relative;
-}
-.trailing-icon {
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  position: relative;
-}
-.text-field3 {
-  border-radius: 4px 4px 0px 0px;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  width: 359px;
-  height: 56px;
-  position: relative;
-}
-.text-field4 {
-  border-radius: 4px 4px 0px 0px;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  width: 330px;
-  height: 56px;
-  position: relative;
-}
-.state-layer2 {
-  border-radius: 4px 4px 0px 0px;
-  padding: 8px 0px 8px 16px;
-  display: flex;
-  flex-direction: row;
-  gap: 0px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  width: 210px;
-  position: relative;
-}
-.label-text3 {
-  color: #1c1b1f;
-  text-align: left;
-  font-family: var(
-    --montserrat-regular-14px-font-family,
-    "Montserrat-Regular",
-    sans-serif
-  );
-  font-size: var(--montserrat-regular-14px-font-size, 14px);
-  font-weight: var(--montserrat-regular-14px-font-weight, 400);
-  position: relative;
-}
-.text-field5 {
-  border-radius: 4px 4px 0px 0px;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  width: 140px;
-  height: 56px;
-  position: relative;
-}
-.frame-46 {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  align-items: center;
-  justify-content: flex-end;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
-}
-.button {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.style-layer {
-  background: var(--mint-green, #8dd3bb);
-  border-radius: 4px;
-  padding: 8px 16px 8px 16px;
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  height: 48px;
-  position: relative;
-}
-.paper-plane {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  overflow: visible;
-}
-.button2 {
-  color: var(--blackish-green, #112211);
-  text-align: left;
-  font-family: var(
-    --montserrat-medium-14px-font-family,
-    "Montserrat-Medium",
-    sans-serif
-  );
-  font-size: var(--montserrat-medium-14px-font-size, 14px);
-  font-weight: var(--montserrat-medium-14px-font-weight, 500);
-  position: relative;
+
+/* Responsive */
+@media (max-width: 768px) {
+  .searchForm {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .fromToContainer,
+  .dateContainer {
+    width: 100%;
+    gap: 10px;
+  }
 }

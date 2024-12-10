@@ -15,6 +15,7 @@ const Navbar = () => {
 
   return (
     <nav className={styles.nav}>
+      
       <ul className={styles.navList}>
         <li className={styles.navItem}>
           <Link to="/">
@@ -147,12 +148,12 @@ const Navbar = () => {
         {/* Mục Tài Khoản */}
         <li className={`${styles.navItem} ${styles.account}`}>
           <Link to="/account" className={styles.navLink}>
-            Tài Khoản
             <img
-              src="https://via.placeholder.com/30"
+              src="/images/user.png"
               alt="Avatar"
               className={styles.avatar}
             />
+            Tài khoản
           </Link>
           <ul className={styles.subMenu}>
             {isLoggedIn ? (

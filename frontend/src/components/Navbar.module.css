@@ -1,149 +1,182 @@
-/* Navbar styles matching the Emirates design */
-
+/* Navbar.module.css */
 .nav {
-  position: fixed; /* Giữ cố định navbar */
-  top: 0; /* Cố định ở đầu trang */
-  width: 100%; /* Chiếm toàn bộ chiều rộng */
-  z-index: 1000; /* Đảm bảo navbar nằm trên các phần tử khác */
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333333; /* Dark background */
-  padding: 8px 16px;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  position: sticky; /* Thay đổi từ fixed sang sticky */
+  top: 0; /* Đặt top: 0 để navbar dính vào đỉnh khi cuộn tới */
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: white;
+  /* background-color: #333333;  */
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+  padding: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .navList {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between; /* Even spacing between items */
   align-items: center;
-  width: 100%;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  justify-content: center;
+  padding: 0 40px; /* Tăng padding hai bên */
+  height: 75px;
+}
+
+/* Logo container */
+.navItem:first-child {
+  margin-right: auto; /* Đẩy logo sang trái */
+  padding-right: 30px;
+}
+
+/* Account container - giả sử là phần tử cuối */
+.navItem:last-child {
+  margin-left: auto; /* Đẩy tài khoản sang phải */
+  padding-left: 30px;
+}
+
+/* Các menu items ở giữa */
+.navItem:not(:first-child):not(:last-child) {
+  padding: 0 15px;
 }
 
 .navItem {
   position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
 }
 
 .navLink {
-  color: rgb(231, 225, 225); /* White text */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  /* color: #ffffff; */
   text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 12px; /* Giảm kích thước chữ */
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  padding: 8px 12px;
+  transition: all 0.3s ease;
+  position: relative;
   text-transform: uppercase;
-  padding: 10px 20px; /* Adjusted padding for consistent spacing */
-  display: block;
-  transition: color 0.3s ease, background-color 0.3s ease;
-  border-radius: 4px;
-  margin-right: 50px;
+}
+
+/* Hiệu ứng hover cho navLink */
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #d71920, #ff4d4d);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.navLink:hover::after {
+  width: 100%;
 }
 
 .navLink:hover {
-  color: white;
-  background-color: #d71920; /* Emirates red */
+  color: #ff4d4d;
+  transform: translateY(-2px);
 }
 
+/* Logo styling */
 .logo {
-  height: 50px;
-  margin-right: 120px; /* Push logo to the left */
-  margin-left: 130px;
+  height: 45px; /* Logo lớn hơn */
+  margin-right: 30px;
+  transition: all 0.4s ease;
 }
 
-/* Submenu styles */
+.logo:hover {
+  transform: scale(1.08);
+  filter: brightness(1.2);
+}
+
+/* Submenu styling with improved effects */
 .subMenu {
-  display: none;
   position: absolute;
   top: 100%;
-  width: 100%;
-  left: 0;
-  background-color: #444444; /* Slightly lighter than the navbar */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  list-style: none;
-  padding: 10px 10px;
-  z-index: 1000;
-  border-radius: 4px;
-}
-
-.subMenuItem {
-  margin: 0;
-}
-
-.subMenuLink {
-  color: white;
-  text-decoration: none;
-  font-size: 12px;
-  padding: 10px 20px;
-  display: block;
-  transition: background-color 0.3s ease;
-  border-radius: 4px;
-}
-
-.subMenuLink:hover {
-  background-color: #555555;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(51, 51, 51, 0.98);
+  backdrop-filter: blur(10px);
+  min-width: 200px;
+  padding: 15px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.5);
 }
 
 .navItem:hover .subMenu {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
-/* Account styles */
-.account {
-  display: flex;
-  align-items: center;
-  margin-left: auto; /* Push account section to the right */
-  margin-right: 45px;
+.subMenuItem {
+  list-style: none;
+}
+
+.subMenuLink {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 25px;
+  display: block;
+  font-size: 11px; /* Giảm kích thước chữ submenu */
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.subMenuLink:hover {
+  background: rgba(215, 25, 32, 0.1);
+  color: #ff4d4d;
+  padding-left: 30px;
 }
 
 .avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-left: 1px;
+  width: 32px; /* Kích thước nhỏ cho avatar */
+  height: 32px;
+  border-radius: 50%; /* Bo tròn */
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
+  margin-left: 8px; /* Khoảng cách với text */
+  border: 1px solid #ffffff; /* Viền trắng */
+  transition: transform 0.3s ease;
 }
 
-/* Button styles */
-.button {
-  background-color: #d71920; /* Emirates red */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
+.avatar:hover {
+  transform: scale(1.1); /* Hiệu ứng hover phóng to nhẹ */
   cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.button:hover {
-  background-color: #b8161c; /* Darker red on hover */
-  transform: scale(1.05);
+/* Điều chỉnh container chứa avatar */
+.navItem:last-child {
+  margin-left: auto;
+  padding-left: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Khoảng cách giữa text và avatar */
 }
 
-.button:active {
-  background-color: #9c1419; /* Even darker red when pressed */
-  transform: scale(1);
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .nav {
-    flex-wrap: wrap;
-  }
-
+@media (max-width: 1024px) {
   .navList {
-    flex-direction: column;
-    width: 100%;
+    gap: 15px;
   }
-
-  .navItem {
-    margin-left: 0;
+  
+  .navLink {
+    font-size: 11px;
+    padding: 6px 8px;
   }
-
-  .subMenu {
-    position: static;
-    box-shadow: none;
-    border-radius: 0;
+  
+  .logo {
+    height: 40px;
+    margin-right: 20px;
   }
 }

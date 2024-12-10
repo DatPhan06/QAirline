@@ -6,9 +6,9 @@ import Slideshow from "../components/SlideShow";
 
 const Home = () => {
   const slideshowImages = [
-    "/images/poster1.png",
-    "/images/vietnam.png",
-    "/images/thailand.png",
+    "/images/hanoi.jpeg",
+    "/images/bangkok.jpg",
+    "/images/airwayover.jpg",
   ];
 
   return (
