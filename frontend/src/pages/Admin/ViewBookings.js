@@ -82,135 +82,140 @@ const ViewBookings = () => {
         <AdminSidebar />
       </div>
       <div className={styles.mainContent}>
-        <h1>Thống kê đặt vé</h1>
+        <div className={styles.leftColumn}>
+          <h1>Thống kê đặt vé</h1>
 
-        <div className={styles.statsContainer}>
-          <div className={styles.statCard}>
-            <h2>Tổng số đặt vé</h2>
-            <p>{stats.totalBookings ?? 0}</p>
-          </div>
-          <div className={styles.statCard}>
-            <h2>Tổng doanh thu</h2>
-            <p>{stats.totalRevenue?.toLocaleString() || "0"} VND</p>
-          </div>
-        </div>
-
-        <div className={styles.chartContainer}>
-          <h2>Đặt vé theo người dùng</h2>
-          <BarChart width={600} height={300} data={userData}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="bookings" fill="#8884d8" />
-          </BarChart>
-        </div>
-
-        <div className={styles.chartContainer}>
-          <h2>Đặt vé theo chuyến bay</h2>
-          <PieChart width={600} height={400}>
-            <Pie
-              data={flightData}
-              dataKey="bookings"
-              nameKey="name"
-              cx="50%"
-              cy="50%"
-              outerRadius={150}
-              fill="#82ca9d"
-              label
-            >
-              {flightData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={"#" + (((1 << 24) * Math.random()) | 0).toString(16)}
-                />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-          </PieChart>
-        </div>
-        <div className={styles.bookingsListContainer}>
-          <h2>Danh Sách Đặt Vé</h2>
-          {bookings.length === 0 ? (
-            <p>Không có đặt vé nào.</p>
-          ) : (
-            <table className={styles.bookingsTable}>
-              <thead>
-                <tr>
-                  <th>ID Đặt Vé</th>
-                  <th>User ID</th>
-                  <th>Flight ID</th>
-                  <th>Giá</th>
-                  <th>Trạng Thái</th>
-                  <th>Ngày Đặt</th>
-                </tr>
-              </thead>
-              <tbody>
-                {bookings.map((booking) => (
-                  <tr
-                    key={booking.booked_ticket_id}
-                    onClick={() => handleRowClick(booking)}
-                    className={styles.tableRow}
-                  >
-                    {" "}
-                    <td>{booking.booked_ticket_id}</td>
-                    <td>{booking.user_id}</td>
-                    <td>{booking.flight_id}</td>
-                    <td>{booking.price.toLocaleString()} VND</td>
-                    <td>{booking.status}</td>
-                    <td>
-                      {new Date(booking.booking_time).toLocaleDateString()}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-
-        {/* Cửa sổ Modal hiển thị chi tiết đặt vé */}
-        {isModalOpen && selectedBooking && (
-          <div className={styles.modalOverlay} onClick={closeModal}>
-            <div
-              className={styles.modalContent}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <span className={styles.closeButton} onClick={closeModal}>
-                &times;
-              </span>
-              <h2>Chi Tiết Đặt Vé</h2>
-              <div className={styles.modalDetails}>
-                <p>
-                  <strong>ID Đặt Vé:</strong> {selectedBooking.booked_ticket_id}
-                </p>
-                <p>
-                  <strong>User ID:</strong> {selectedBooking.user_id}
-                </p>
-                <p>
-                  <strong>Flight ID:</strong> {selectedBooking.flight_id}
-                </p>
-                <p>
-                  <strong>Số Ghế:</strong> {selectedBooking.seat_id}
-                </p>
-                <p>
-                  <strong>Ticket ID:</strong> {selectedBooking.ticket_id}
-                </p>
-                <p>
-                  <strong>Giá:</strong> {selectedBooking.price.toLocaleString()}{" "}
-                  VND
-                </p>
-                <p>
-                  <strong>Trạng Thái:</strong> {selectedBooking.status}
-                </p>
-                <p>
-                  <strong>Ngày Đặt:</strong>{" "}
-                  {new Date(selectedBooking.booking_time).toLocaleString()}
-                </p>
-              </div>
+          <div className={styles.statsContainer}>
+            <div className={styles.statCard}>
+              <h2>Tổng số đặt vé</h2>
+              <p>{stats.totalBookings ?? 0}</p>
+            </div>
+            <div className={styles.statCard}>
+              <h2>Tổng doanh thu</h2>
+              <p>{stats.totalRevenue?.toLocaleString() || "0"} VND</p>
             </div>
           </div>
-        )}
+
+          <div className={styles.chartContainer}>
+            <h2>Đặt vé theo người dùng</h2>
+            <BarChart width={600} height={300} data={userData}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="bookings" fill="#8884d8" />
+            </BarChart>
+          </div>
+
+          <div className={styles.chartContainer}>
+            <h2>Đặt vé theo chuyến bay</h2>
+            <PieChart width={600} height={400}>
+              <Pie
+                data={flightData}
+                dataKey="bookings"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                outerRadius={150}
+                fill="#82ca9d"
+                label
+              >
+                {flightData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={"#" + (((1 << 24) * Math.random()) | 0).toString(16)}
+                  />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
+          </div>
+        </div>
+        <div className={styles.rightColumn}>
+          <div className={styles.bookingsListContainer}>
+            <h2>Danh Sách Đặt Vé</h2>
+            {bookings.length === 0 ? (
+              <p>Không có đặt vé nào.</p>
+            ) : (
+              <table className={styles.bookingsTable}>
+                <thead>
+                  <tr>
+                    <th>ID Đặt Vé</th>
+                    <th>User ID</th>
+                    <th>Flight ID</th>
+                    <th>Giá</th>
+                    <th>Trạng Thái</th>
+                    <th>Ngày Đặt</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {bookings.map((booking) => (
+                    <tr
+                      key={booking.booked_ticket_id}
+                      onClick={() => handleRowClick(booking)}
+                      className={styles.tableRow}
+                    >
+                      {" "}
+                      <td>{booking.booked_ticket_id}</td>
+                      <td>{booking.user_id}</td>
+                      <td>{booking.flight_id}</td>
+                      <td>{booking.price.toLocaleString()} VND</td>
+                      <td>{booking.status}</td>
+                      <td>
+                        {new Date(booking.booking_time).toLocaleDateString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+
+          {/* Cửa sổ Modal hiển thị chi tiết đặt vé */}
+          {isModalOpen && selectedBooking && (
+            <div className={styles.modalOverlay} onClick={closeModal}>
+              <div
+                className={styles.modalContent}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <span className={styles.closeButton} onClick={closeModal}>
+                  &times;
+                </span>
+                <h2>Chi Tiết Đặt Vé</h2>
+                <div className={styles.modalDetails}>
+                  <p>
+                    <strong>ID Đặt Vé:</strong>{" "}
+                    {selectedBooking.booked_ticket_id}
+                  </p>
+                  <p>
+                    <strong>User ID:</strong> {selectedBooking.user_id}
+                  </p>
+                  <p>
+                    <strong>Flight ID:</strong> {selectedBooking.flight_id}
+                  </p>
+                  <p>
+                    <strong>Số Ghế:</strong> {selectedBooking.seat_id}
+                  </p>
+                  <p>
+                    <strong>Ticket ID:</strong> {selectedBooking.ticket_id}
+                  </p>
+                  <p>
+                    <strong>Giá:</strong>{" "}
+                    {selectedBooking.price.toLocaleString()} VND
+                  </p>
+                  <p>
+                    <strong>Trạng Thái:</strong> {selectedBooking.status}
+                  </p>
+                  <p>
+                    <strong>Ngày Đặt:</strong>{" "}
+                    {new Date(selectedBooking.booking_time).toLocaleString()}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
