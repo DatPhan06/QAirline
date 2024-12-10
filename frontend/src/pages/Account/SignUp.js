@@ -27,6 +27,10 @@ function SignUp() {
     }
   };
 
+  const handleGoogleLogin = () => {
+    window.location.href = "http://localhost:8000/auth/google/login";
+  };
+
   return (
     <div
       className={styles.signup}
@@ -111,7 +115,13 @@ function SignUp() {
                 <div className={styles["line-2"]}></div>
               </div>
               <div className={styles["frame-3"]}>
-                <img className={styles["devicon-google"]} src="/images/google.svg" />
+              <img
+                className={styles.deviconGoogle}
+                src="/images/google.svg"
+                alt="Google"
+                onClick={handleGoogleLogin}
+                style={{ cursor: "pointer" }}
+              />
                 <img className={styles["logos-facebook"]} src="/images/fb.svg" />
                 <img className={styles["bi-github"]} src="/images/github.svg" />
               </div>
