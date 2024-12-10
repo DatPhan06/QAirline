@@ -8,6 +8,7 @@ import {
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AppRoutes from "./AppRoutes";
+import Banner from "./components/Banner";
 
 import "./styles/global.css";
 import "./styles/variables.css";
@@ -18,7 +19,12 @@ function App() {
 
   return (
     <>
-      {!isAdminRoute && <Navbar />}
+      {!isAdminRoute && (
+        <>
+          <Banner />
+          <Navbar />
+        </>
+      )}
       <AppRoutes />
       {!isAdminRoute && <Footer />}
     </>

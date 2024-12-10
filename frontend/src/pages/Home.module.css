@@ -1,367 +1,257 @@
-.landing-page,
-.landing-page * {
-  box-sizing: border-box;
-}
+/* Home.module.css */
+
+/* General Styles */
 .landing-page {
-  background: #fafbfc;
   width: 100%;
-  min-height: 3000px;
-  position: relative;
-  overflow: hidden;
+  min-height: 100vh;
+  font-family: 'Arial, sans-serif';
+  background-color: #f5f5f5;
 }
 
-/*Section 1*/
+.contentContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Section 1: Background and Search Bar */
+.searchSection {
+  position: absolute;
+  bottom: -200px; /* Điều chỉnh để form search thò ra khỏi slideshow */
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
 .section1 {
   position: relative;
-  padding-top: 60px;
+  min-height: 100vh; /* Giảm chiều cao một chút */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 80px; /* Thêm margin để tạo khoảng trống cho phần đè lên */
+}
+
+/* Updated styles for .bookBtn */
+.bookBtn {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 15px 40px;
+  background: linear-gradient(45deg, #6b9cff, #4d75f9);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.bookBtn:hover {
+  background: linear-gradient(45deg, #f94d6a, #ff6b6b);
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Section 2: Destinations */
+.section2 {
+  padding: 60px 0;
+  background-color: #ffffff;
+}
+
+.locationHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.textHeader {
+  max-width: 800px;
+}
+
+.headerMain {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.headerDes {
+  font-size: 1.1rem;
+  color: #666666;
+}
+
+.buttonHeader2 {
+  margin-top: 20px;
+}
+
+.button2 {
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button2:hover {
+  background-color: #1976d2;
+}
+
+.locationInfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  /* Add your destination cards or images here */
+}
+
+/* Section 3: Flights & Hotels */
+.section3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 60px 0;
+  background-color: #f0f0f0;
+  justify-content: center;
+}
+
+.flightImg,
+.hotelImg {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.flightImg img,
+.hotelImg img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.rectangle-40,
+.rectangle-41 {
   width: 100%;
   height: auto;
 }
 
-.searchSection {
+.frame-2608785,
+.frame-26087862 {
   position: absolute;
-  top: 62%;
-  left: 11%;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
 }
 
-.bookBtncontainer {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: flex-start; /* Căn các phần tử ở bên trái */
-  justify-content: flex-start;
-  position: absolute;
-  top: 40%;
-  left: 75%;
-  width: 100%; /* Đảm bảo phần tử này chiếm toàn bộ chiều rộng */
+.rectangle-32,
+.rectangle-322 {
+  width: 100%;
+  height: 4px;
+  background-color: #ff5722;
+  margin-bottom: 10px;
 }
 
-.bookBtn {
-  background: linear-gradient(
-    to right,
-    #1e90ff,
-    #00bfff
-  ); /* Gradient xanh dương sáng */
-  padding: 20px 40px; /* Tăng kích thước nút */
-  color: #fff;
-  font-family: "Rokkit", Arial, sans-serif;
-  border: none;
-  border-radius: 50px; /* Bo góc tròn mềm mại */
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 22px; /* Tăng kích thước chữ */
-  text-transform: uppercase;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0px 10px 25px rgba(30, 144, 255, 0.4); /* Bóng mờ lớn hơn */
-  letter-spacing: 2px; /* Khoảng cách giữa các chữ */
-}
-/* Hiệu ứng ánh sáng di chuyển */
-.bookBtn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 200%;
-  height: 100%;
-  background: rgba(148, 178, 255, 0.4); /* Ánh sáng trắng nhẹ */
-  transform: skewX(-45deg);
-  transition: all 0.5s ease;
-}
-
-/* Hover Effect */
-.bookBtn:hover::before {
-  left: 100%; /* Hiệu ứng ánh sáng quét qua */
-}
-
-.bookBtn:hover {
-  transform: scale(1.1); /* Phóng to khi hover */
-  box-shadow: 0px 15px 30px rgba(30, 144, 255, 0.6); /* Bóng mờ mạnh hơn */
-  background: linear-gradient(
-    to right,
-    #4682b4,
-    #5f9ea0
-  ); /* Gradient đậm hơn */
-}
-
-/* Hiệu ứng nhấn nút */
-.bookBtn:active {
-  transform: scale(1); /* Thu nhỏ nhẹ lại khi nhấn */
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3); /* Giảm bóng */
-}
-
-/* Hiệu ứng nhấp nháy */
-.bookBtn::after {
-  content: "";
-  position: absolute;
-  top: -20px;
-  left: -20px;
-  width: calc(100% + 40px);
-  height: calc(100% + 40px);
-  border-radius: 50px;
-  background: rgba(189, 188, 188, 0.2); /* Ánh sáng trắng nhạt */
-  opacity: 0;
-  transition: all 0.6s ease;
-}
-
-.bookBtn:hover::after {
-  opacity: 1;
-  transform: scale(1.2); /* Mở rộng vòng sáng */
-}
-
-/*Section 2*/
-.section2 {
-  position: relative;
-  margin-top: 600px;
-  margin-left: 50px;
-}
-
-.locationHeader {
-  position: absolute;
-  top: 20%;
-}
-.textHeader {
-  position: absolute;
-  top: 20%;
-}
-.headerMain {
-  color: #000000;
-  text-align: left;
-  font-family: var(
-    --montserrat-semibold-32px-font-family,
-    "Montserrat-SemiBold",
-    sans-serif
-  );
-  font-size: var(--montserrat-semibold-32px-font-size, 32px);
-  font-weight: var(--montserrat-semibold-32px-font-weight, 600);
-  position: relative;
-  align-self: stretch;
-  height: 36px;
-  left: 61px;
-}
-.headerDes {
-  color: var(--blackish-green, #112211);
-  text-align: left;
-  font-family: var(
-    --montserrat-regular-16px-font-family,
-    "Montserrat-Regular",
-    sans-serif
-  );
-  font-size: var(--montserrat-regular-16px-font-size, 16px);
-  font-weight: var(--montserrat-regular-16px-font-weight, 400);
-  opacity: 0.75;
-  position: relative;
-  align-self: stretch;
-  left: 61px;
-}
-
-.buttonHeader2 {
-  position: absolute;
-  left: 70%;
-}
-
-.button2 {
-  color: var(--blackish-green, #112211);
-  text-align: left;
-  font-family: var(
-    --montserrat-medium-14px-font-family,
-    "Montserrat-Medium",
-    sans-serif
-  );
-  font-size: var(--montserrat-medium-14px-font-size, 14px);
-  font-weight: var(--montserrat-medium-14px-font-weight, 500);
-  position: relative;
-  display: inline-block; /* Để Link trông giống như một nút */
-  padding: 10px 20px; /* Thêm khoảng cách bên trong */
-  background-color: #f0f0f0; /* Màu nền */
-  border: 1px solid #ccc; /* Viền */
-  border-radius: 5px; /* Bo góc */
-  text-decoration: none; /* Xóa gạch chân */
-  transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền */
-}
-
-.button2:hover {
-  background-color: #e0e0e0; /* Màu nền khi hover */
-}
-
-/*Section 3*/
-
-.section3 {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 1232px;
-  position: absolute;
-  left: 169px;
-  top: 1514px;
-}
-.flightImg {
-  flex-shrink: 0;
-  width: 604px;
-  height: 559px;
-  position: relative;
-  box-shadow: var(
-    --cards-shadow-box-shadow,
-    0px 4px 16px 0px rgba(17, 34, 17, 0.05)
-  );
-}
-.rectangle-40 {
-  border-radius: 20px;
-  width: 604px;
-  height: 559px;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  object-fit: cover;
-}
-.frame-2608785 {
-  width: 604px;
-  height: 280px;
-  position: absolute;
-  left: 0px;
-  top: 279px;
-}
-.rectangle-32 {
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(18, 18, 18, 0.75) 48.67416024208069%
-  );
-  border-radius: 0px 0px 24px 24px;
-  width: 604px;
-  height: 280px;
-  position: absolute;
-  left: 604px;
-  top: 0px;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(-1, 1);
-}
 .frame-2608784 {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  align-items: center;
-  justify-content: flex-start;
-  position: absolute;
-  left: 114px;
-  top: 93px;
-}
-.frame-2608786 {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
   align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
 }
-.flights2 {
-  color: var(--neutrals, #ffffff);
-  text-align: center;
-  font-family: var(
-    --tradegothic-bold-40px-font-family,
-    "TradeGothicLtExtended-Bold",
-    sans-serif
-  );
-  font-size: var(--tradegothic-bold-40px-font-size, 40px);
-  font-weight: var(--tradegothic-bold-40px-font-weight, 700);
-  position: relative;
-  width: 389px;
+
+.frame-2608786 {
+  margin-bottom: 15px;
 }
-.search-flights {
-  color: var(--neutrals, #ffffff);
-  text-align: center;
-  font-family: var(
-    --montserrat-regular-16px-font-family,
-    "Montserrat-Regular",
-    sans-serif
-  );
-  font-size: var(--montserrat-regular-16px-font-size, 16px);
-  font-weight: var(--montserrat-regular-16px-font-weight, 400);
-  position: relative;
-  width: 389px;
-}
-.paper-plane2 {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  overflow: visible;
-}
-.hotelImg {
-  flex-shrink: 0;
-  width: 604px;
-  height: 559px;
-  position: relative;
-  box-shadow: var(
-    --cards-shadow-box-shadow,
-    0px 4px 16px 0px rgba(17, 34, 17, 0.05)
-  );
-}
-.rectangle-41 {
-  border-radius: 20px;
-  width: 603.5px;
-  height: 559px;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  object-fit: cover;
-}
-.frame-26087862 {
-  width: 604px;
-  height: 280px;
-  position: absolute;
-  left: 0px;
-  top: 279px;
-}
-.rectangle-322 {
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(18, 18, 18, 0.75) 48.67416024208069%
-  );
-  border-radius: 0px 0px 20px 20px;
-  width: 604px;
-  height: 280px;
-  position: absolute;
-  left: 604px;
-  top: 0px;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(-1, 1);
-}
+
+.flights2,
 .hotels2 {
-  color: var(--neutrals, #ffffff);
-  text-align: center;
-  font-family: var(
-    --tradegothic-bold-40px-font-family,
-    "TradeGothicLtExtended-Bold",
-    sans-serif
-  );
-  font-size: var(--tradegothic-bold-40px-font-size, 40px);
-  font-weight: var(--tradegothic-bold-40px-font-weight, 700);
-  position: relative;
-  width: 389px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
+
+.search-flights,
 .search-hotels {
-  color: var(--neutrals, #ffffff);
-  text-align: center;
-  font-family: var(
-    --montserrat-regular-16px-font-family,
-    "Montserrat-Regular",
-    sans-serif
-  );
-  font-size: var(--montserrat-regular-16px-font-size, 16px);
-  font-weight: var(--montserrat-regular-16px-font-weight, 400);
-  position: relative;
-  width: 389px;
+  font-size: 1rem;
+  color: #dddddd;
 }
+
+.button {
+  margin-top: 10px;
+}
+
+.style-layer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.style-layer img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.button2 {
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.button:hover .button2 {
+  color: #ffeb3b;
+}
+
+.paper-plane2,
 .paper-plane3 {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  overflow: visible;
+  width: 24px;
+  height: 24px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .section3 {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .searchSection {
+    width: 90%;
+  }
+
+  .headerMain {
+    font-size: 2rem;
+  }
+
+  .headerDes {
+    font-size: 1rem;
+  }
+
+  .bookBtn {
+    padding: 12px 25px;
+    font-size: 0.9rem;
+  }
+
+  .button2 {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
 }
