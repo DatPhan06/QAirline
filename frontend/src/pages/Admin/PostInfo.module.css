@@ -1,22 +1,84 @@
 .adminContainer {
   display: flex;
-  flex-direction: row;
   min-height: 100vh;
+  background-color: #f5f7fa;
+  font-family: "Roboto", sans-serif;
 }
 
+/* Sidebar menu bên trái */
 .adminSidebar {
-  width: 250px;
-  background-color: #f4f4f4;
+  width: 290px;
+  background-color: #d4d6d800;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  flex-shrink: 0;
 }
 
+/* Phần nội dung chính */
 .mainContent {
   flex: 1;
-  padding: 20px;
-  background-color: #fff;
+  padding: 30px;
+  overflow-x: hidden;
 }
 
+/* Layout 2 cột */
+.contentLayout {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* Phần form bên trái */
+.formSection {
+  flex: 0 0 35%;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 30px;
+  height: fit-content;
+}
+
+/* Input và Textarea */
+.formSection input,
+.formSection textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.formSection textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Nút submit */
+.submitButton {
+  width: 100%;
+  padding: 12px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submitButton:hover {
+  background: #2980b9;
+}
+
+/* Phần danh sách bên phải */
+.listSection {
+  flex: 0 0 65%;
+}
+
+/* Tabs */
 .sectionTabs {
   display: flex;
   gap: 10px;
@@ -26,88 +88,148 @@
 .sectionTabs button {
   padding: 10px 20px;
   border: none;
-  background-color: #007bff;
-  color: #fff;
+  border-radius: 8px;
+  background: #eee;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.sectionTabs button.active,
-.sectionTabs button:hover {
-  background-color: #0056b3;
+.sectionTabs button.active {
+  background: #3498db;
+  color: white;
 }
 
-form {
+/* Danh sách items */
+.itemList {
+  display: grid;
+  gap: 20px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Card item */
+.itemCard {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.itemCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.itemHeader {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.itemHeader h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #2c3e50;
+}
+
+/* Nút actions */
+.actions {
+  display: flex;
   gap: 10px;
-  margin-bottom: 20px;
 }
 
-form input,
-form textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  max-width: 500px;
-}
-
-form button {
-  padding: 10px 20px;
+.actions button {
+  padding: 8px 12px;
   border: none;
-  background-color: #28a745;
-  color: #fff;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-form button:hover {
-  background-color: #218838;
+.editButton {
+  background: #3498db;
+  color: white;
 }
 
-.dataList {
+.deleteButton {
+  background: #e74c3c;
+  color: white;
+}
+
+.actions button:hover {
+  opacity: 0.9;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
   margin-top: 20px;
 }
 
-.dataList h2 {
-  margin-bottom: 10px;
-}
-
-.dataList ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.dataList li {
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
-}
-
-.dataList li h3 {
-  margin: 0 0 10px 0;
-}
-
-.dataList li p {
-  margin: 5px 0;
-}
-
-.dataList li button {
-  padding: 5px 10px;
+.pageButton {
+  padding: 8px 12px;
   border: none;
-  background-color: #007bff;
-  color: #fff;
+  border-radius: 6px;
+  background: #eee;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  margin-right: 5px;
+  transition: all 0.3s ease;
 }
 
-.dataList li button:hover {
-  background-color: #0056b3;
+.pageButton.active {
+  background: #3498db;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .contentLayout {
+    flex-direction: column;
+  }
+
+  .formSection,
+  .listSection {
+    flex: 0 0 100%;
+  }
+
+  .formSection {
+    position: relative;
+    top: 0;
+  }
 }

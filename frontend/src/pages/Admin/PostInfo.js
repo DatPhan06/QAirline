@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  createGeneralInfo,
   getGeneralInfo,
+  createGeneralInfo,
   updateGeneralInfo,
   deleteGeneralInfo,
 } from "../../services/generalInfoService";
 import {
-  createNews,
   getNews,
+  createNews,
   updateNews,
   deleteNews,
 } from "../../services/newsService";
 import {
-  createPromotion,
   getPromotions,
+  createPromotion,
   updatePromotion,
   deletePromotion,
 } from "../../services/promotionService";
 import {
-  createNotification,
   getNotifications,
+  createNotification,
   updateNotification,
   deleteNotification,
 } from "../../services/notificationService";
@@ -34,6 +34,7 @@ const PostInfo = () => {
   const [currentAdmin, setCurrentAdmin] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -44,12 +45,8 @@ const PostInfo = () => {
       try {
         const adminData = await getCurrentAdmin();
         setCurrentAdmin(adminData);
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          author_id: adminData.admin_id,
-        }));
       } catch (error) {
-        console.error("Error fetching current admin:", error);
+        console.error("Lỗi khi tải thông tin admin hiện tại:", error);
       }
     };
     fetchCurrentAdmin();
@@ -76,7 +73,7 @@ const PostInfo = () => {
       }
       setData(result);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Lỗi khi tải dữ liệu:", error);
     }
   };
 
@@ -91,18 +88,50 @@ const PostInfo = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleEdit = (item) => {
+    setFormData(item);
+    setIsEditing(true);
+    setEditId(item.id);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setFormData({});
+    setIsEditing(false);
+    setEditId(null);
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      switch (activeSection) {
+        case "generalInfo":
+          await deleteGeneralInfo(id);
+          break;
+        case "news":
+          await deleteNews(id);
+          break;
+        case "promotions":
+          await deletePromotion(id);
+          break;
+        case "notifications":
+          await deleteNotification(id);
+          break;
+        default:
+          break;
+      }
+      fetchData();
+    } catch (error) {
+      console.error("Lỗi khi xóa:", error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!currentAdmin) {
       alert("Vui lòng đăng nhập trước khi đăng bài.");
       return;
     }
-
-    const handleEdit = (item) => {
-      setFormData(item);
-      setIsEditing(true);
-      setEditId(item.id);
-    };
 
     const dataToSubmit = {
       ...formData,
@@ -145,13 +174,10 @@ const PostInfo = () => {
             break;
         }
       }
-      alert("Data posted successfully!");
       fetchData();
-      setFormData({});
-      setIsEditing(false);
-      setEditId(null);
+      handleCloseModal();
     } catch (error) {
-      console.error("Error posting data:", error);
+      console.error("Lỗi khi gửi dữ liệu:", error);
     }
   };
 
@@ -163,13 +189,13 @@ const PostInfo = () => {
             <input
               type="text"
               name="title"
-              placeholder="Title"
+              placeholder="Tiêu đề"
               value={formData.title || ""}
               onChange={handleInputChange}
             />
             <textarea
               name="content"
-              placeholder="Content"
+              placeholder="Nội dung"
               value={formData.content || ""}
               onChange={handleInputChange}
             />
@@ -181,13 +207,13 @@ const PostInfo = () => {
             <input
               type="text"
               name="title"
-              placeholder="Title"
+              placeholder="Tiêu đề"
               value={formData.title || ""}
               onChange={handleInputChange}
             />
             <textarea
               name="content"
-              placeholder="Content"
+              placeholder="Nội dung"
               value={formData.content || ""}
               onChange={handleInputChange}
             />
@@ -199,34 +225,34 @@ const PostInfo = () => {
             <input
               type="text"
               name="title"
-              placeholder="Title"
+              placeholder="Tiêu đề"
               value={formData.title || ""}
               onChange={handleInputChange}
             />
             <textarea
               name="description"
-              placeholder="Description"
+              placeholder="Mô tả"
               value={formData.description || ""}
               onChange={handleInputChange}
             />
             <input
               type="number"
               name="discount_percentage"
-              placeholder="Discount Percentage"
+              placeholder="Phần trăm giảm giá"
               value={formData.discount_percentage || ""}
               onChange={handleInputChange}
             />
             <input
               type="date"
               name="start_date"
-              placeholder="Start Date"
+              placeholder="Ngày bắt đầu"
               value={formData.start_date || ""}
               onChange={handleInputChange}
             />
             <input
               type="date"
               name="end_date"
-              placeholder="End Date"
+              placeholder="Ngày kết thúc"
               value={formData.end_date || ""}
               onChange={handleInputChange}
             />
@@ -238,34 +264,34 @@ const PostInfo = () => {
             <input
               type="text"
               name="title"
-              placeholder="Title"
+              placeholder="Tiêu đề"
               value={formData.title || ""}
               onChange={handleInputChange}
             />
             <textarea
               name="content"
-              placeholder="Content"
+              placeholder="Nội dung"
               value={formData.content || ""}
               onChange={handleInputChange}
             />
             <input
               type="text"
               name="type"
-              placeholder="Type"
+              placeholder="Loại"
               value={formData.type || ""}
               onChange={handleInputChange}
             />
             <input
               type="number"
               name="user_id"
-              placeholder="User ID"
+              placeholder="ID người dùng"
               value={formData.user_id || ""}
               onChange={handleInputChange}
             />
             <input
               type="number"
               name="flight_id"
-              placeholder="Flight ID"
+              placeholder="ID chuyến bay"
               value={formData.flight_id || ""}
               onChange={handleInputChange}
             />
@@ -281,8 +307,9 @@ const PostInfo = () => {
       <div className={styles.adminSidebar}>
         <AdminSidebar />
       </div>
+
       <div className={styles.mainContent}>
-        <h1>Manage Information</h1>
+        <h1>Quản lý thông tin</h1>
         <div className={styles.sectionTabs}>
           <button
             className={`${
@@ -290,19 +317,19 @@ const PostInfo = () => {
             }`}
             onClick={() => handleSectionChange("generalInfo")}
           >
-            General Info
+            Thông tin chung
           </button>
           <button
             className={`${activeSection === "news" ? styles.active : ""}`}
             onClick={() => handleSectionChange("news")}
           >
-            News
+            Tin tức
           </button>
           <button
             className={`${activeSection === "promotions" ? styles.active : ""}`}
             onClick={() => handleSectionChange("promotions")}
           >
-            Promotions
+            Khuyến mãi
           </button>
           <button
             className={`${
@@ -310,48 +337,123 @@ const PostInfo = () => {
             }`}
             onClick={() => handleSectionChange("notifications")}
           >
-            Notifications
+            Thông báo
           </button>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          {renderFormFields()}
-          <button type="submit">
-            {isEditing ? "Update" : "Add"} {activeSection}
-          </button>
-        </form>
+        <button
+          className={styles.createButton}
+          onClick={() => setShowModal(true)}
+        >
+          Thêm mới{" "}
+          {activeSection === "generalInfo"
+            ? "Thông tin chung"
+            : activeSection === "news"
+            ? "Tin tức"
+            : activeSection === "promotions"
+            ? "Khuyến mãi"
+            : "Thông báo"}
+        </button>
+        {showModal && (
+          <div className={styles.modal}>
+            <div className={styles.modalContent}>
+              <span className={styles.closeButton} onClick={handleCloseModal}>
+                &times;
+              </span>
+              <form onSubmit={handleSubmit}>
+                {renderFormFields()}
+                <button type="submit">
+                  {isEditing ? "Cập nhật" : "Đăng bài"}
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+        {data.map((item) => (
+          <div key={item.id} className={styles.itemCard}>
+            <div className={styles.itemHeader}>
+              <h3>{item.title}</h3>
+              <div className={styles.actions}>
+                <button
+                  className={styles.editButton}
+                  onClick={() => handleEdit(item)}
+                >
+                  Sửa
+                </button>
+                <button
+                  className={styles.deleteButton}
+                  onClick={() => handleDelete(item.id)}
+                >
+                  Xóa
+                </button>
+              </div>
+            </div>
+            <div className={styles.itemContent}>
+              {activeSection === "generalInfo" && (
+                <>
+                  <p>
+                    <strong>Nội dung:</strong> {item.content}
+                  </p>
+                  <p>
+                    <strong>Ngày tạo:</strong>{" "}
+                    {new Date(item.created_at).toLocaleString()}
+                  </p>
+                </>
+              )}
 
-        <div className={styles.dataList}>
-          <h2>
-            {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}{" "}
-            List
-          </h2>
-          <ul>
-            {data.map((item) => (
-              <li key={item.id}>
-                <h3>{item.title}</h3>
-                <p>{item.content}</p>
-                {activeSection === "notifications" && (
-                  <>
-                    <p>Type: {item.type}</p>
-                    <p>User ID: {item.user_id}</p>
-                    <p>Flight ID: {item.flight_id}</p>
-                  </>
-                )}
-                {activeSection === "promotions" && (
-                  <>
-                    <p>Description: {item.description}</p>
-                    <p>Discount: {item.discount_percentage}%</p>
-                    <p>Start Date: {item.start_date}</p>
-                    <p>End Date: {item.end_date}</p>
-                  </>
-                )}
-                <button onClick={() => handleEdit(item)}>Edit</button>
-                <button onClick={() => handleDelete(item.id)}>Delete</button>
-              </li>
-            ))}
-          </ul>
-        </div>
+              {activeSection === "news" && (
+                <>
+                  <p>
+                    <strong>Nội dung:</strong> {item.content}
+                  </p>
+                  <p>
+                    <strong>Tác giả:</strong> {item.author_id}
+                  </p>
+                  <p>
+                    <strong>Ngày đăng:</strong>{" "}
+                    {new Date(item.created_at).toLocaleString()}
+                  </p>
+                </>
+              )}
+
+              {activeSection === "promotions" && (
+                <>
+                  <p>
+                    <strong>Mô tả:</strong> {item.description}
+                  </p>
+                  <p>
+                    <strong>Giảm giá:</strong> {item.discount_percentage}%
+                  </p>
+                  <p>
+                    <strong>Thời gian:</strong>{" "}
+                    {new Date(item.start_date).toLocaleDateString()} -{" "}
+                    {new Date(item.end_date).toLocaleDateString()}
+                  </p>
+                </>
+              )}
+              {activeSection === "notifications" && (
+                <>
+                  <p>
+                    <strong>Nội dung:</strong> {item.content}
+                  </p>
+                  <p>
+                    <strong>Loại:</strong> {item.type}
+                  </p>
+                  {item.user_id && (
+                    <p>
+                      <strong>Người dùng:</strong> {item.user_id}
+                    </p>
+                  )}
+                  {item.flight_id && (
+                    <p>
+                      <strong>Chuyến bay:</strong> {item.flight_id}
+                    </p>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
