@@ -19,6 +19,9 @@ const ViewBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const bookingsPerPage = 10; // Số đặt vé trên mỗi trang
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -46,6 +49,22 @@ const ViewBookings = () => {
   if (!stats) {
     return <p>Đang tải dữ liệu thống kê...</p>;
   }
+
+  // Tính toán các đặt vé cho trang hiện tại
+  const indexOfLastBooking = currentPage * bookingsPerPage;
+  const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
+  const currentBookings = bookings.slice(
+    indexOfFirstBooking,
+    indexOfLastBooking
+  );
+
+  // Tính tổng số trang
+  const totalPages = Math.ceil(bookings.length / bookingsPerPage);
+
+  // Hàm xử lý chuyển trang
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   // Sử dụng tên thuộc tính đúng từ API
   const userData =
@@ -132,43 +151,62 @@ const ViewBookings = () => {
             </PieChart>
           </div>
         </div>
+
         <div className={styles.rightColumn}>
           <div className={styles.bookingsListContainer}>
             <h2>Danh Sách Đặt Vé</h2>
             {bookings.length === 0 ? (
               <p>Không có đặt vé nào.</p>
             ) : (
-              <table className={styles.bookingsTable}>
-                <thead>
-                  <tr>
-                    <th>ID Đặt Vé</th>
-                    <th>User ID</th>
-                    <th>Flight ID</th>
-                    <th>Giá</th>
-                    <th>Trạng Thái</th>
-                    <th>Ngày Đặt</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {bookings.map((booking) => (
-                    <tr
-                      key={booking.booked_ticket_id}
-                      onClick={() => handleRowClick(booking)}
-                      className={styles.tableRow}
-                    >
-                      {" "}
-                      <td>{booking.booked_ticket_id}</td>
-                      <td>{booking.user_id}</td>
-                      <td>{booking.flight_id}</td>
-                      <td>{booking.price.toLocaleString()} VND</td>
-                      <td>{booking.status}</td>
-                      <td>
-                        {new Date(booking.booking_time).toLocaleDateString()}
-                      </td>
+              <div>
+                <table className={styles.bookingsTable}>
+                  <thead>
+                    <tr>
+                      <th>ID Đặt Vé</th>
+                      <th>User ID</th>
+                      <th>Flight ID</th>
+                      <th>Giá</th>
+                      <th>Trạng Thái</th>
+                      <th>Ngày Đặt</th>
                     </tr>
+                  </thead>
+                  <tbody>
+                    {currentBookings.map((booking) => (
+                      <tr
+                        key={booking.booked_ticket_id}
+                        onClick={() => handleRowClick(booking)}
+                        className={styles.tableRow}
+                      >
+                        {" "}
+                        <td>{booking.booked_ticket_id}</td>
+                        <td>{booking.user_id}</td>
+                        <td>{booking.flight_id}</td>
+                        <td>{booking.price.toLocaleString()} VND</td>
+                        <td>{booking.status}</td>
+                        <td>
+                          {new Date(booking.booking_time).toLocaleDateString()}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <div className={styles.pagination}>
+                  {Array.from(
+                    { length: Math.ceil(bookings.length / bookingsPerPage) },
+                    (_, i) => i + 1
+                  ).map((number) => (
+                    <button
+                      key={number}
+                      onClick={() => handlePageChange(number)}
+                      className={`${styles.pageButton} ${
+                        currentPage === number ? styles.activePage : ""
+                      }`}
+                    >
+                      {number}
+                    </button>
                   ))}
-                </tbody>
-              </table>
+                </div>
+              </div>
             )}
           </div>
 

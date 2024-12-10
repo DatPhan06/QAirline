@@ -200,6 +200,42 @@
   }
 }
 
+/* Add to ViewBookings.module.css */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 20px 0;
+}
+
+.pageButton {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background: white;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.pageButton:hover {
+  background-color: #f5f5f5;
+  border-color: #3498db;
+}
+
+.activePage {
+  background-color: #3498db;
+  color: white;
+  border-color: #3498db;
+}
+
+.activePage:hover {
+  background-color: #2980b9;
+}
+
 @media (max-width: 768px) {
   .adminContainer {
     flex-direction: column;
