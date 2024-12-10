@@ -17,7 +17,7 @@
 /* Section 1: Background and Search Bar */
 .searchSection {
   position: absolute;
-  bottom: -200px; /* Điều chỉnh để form search thò ra khỏi slideshow */
+  bottom: -130px; /* Điều chỉnh để form search thò ra khỏi slideshow */
   left: 0;
   right: 0;
   z-index: 2;
