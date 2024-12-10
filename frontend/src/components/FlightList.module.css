@@ -184,3 +184,30 @@
 .flightCard:hover::before {
   left: 100%;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pageButton {
+  border: none;
+  padding: 10px 15px;
+  margin: 0 5px;
+  background-color: #ffffff;
+  color: #003f82;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 5px;
+}
+
+.pageButton:hover {
+  background-color: #eef2f5;
+}
+
+.activePageButton {
+  background-color: #003f82;
+  color: #ffffff;
+}
