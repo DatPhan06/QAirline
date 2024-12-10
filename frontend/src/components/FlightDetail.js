@@ -23,7 +23,7 @@ const FlightDetail = ({ flight }) => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        if (flight?.flight_id) {
+        if (flight) {
           const ticketsData = await getTicketsByFlightId(flight.flight_id);
           setTickets(ticketsData);
 
@@ -36,6 +36,7 @@ const FlightDetail = ({ flight }) => {
       } catch (error) {
         console.error("Error fetching tickets:", error);
         setBookingError("Không thể tải thông tin vé");
+        setTickets([]); // Xóa danh sách vé hiện tại
       }
     };
 
@@ -80,21 +81,29 @@ const FlightDetail = ({ flight }) => {
   return (
     <div className={styles.flightDetailContainer}>
       <h1 className={styles.title}>Chi tiết chuyến bay</h1>
-      
+
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Thông tin chuyến bay</h2>
         <div className={styles.infoGrid}>
           <div>
-            <p><strong>Số hiệu:</strong> {flight.flight_number}</p>
-            <p><strong>Điểm khởi hành:</strong> {flight.departure_airport.name}</p>
-            <p><strong>Điểm đến:</strong> {flight.arrival_airport.name}</p>
+            <p>
+              <strong>Số hiệu:</strong> {flight.flight_number}
+            </p>
+            <p>
+              <strong>Điểm khởi hành:</strong> {flight.departure_airport.name}
+            </p>
+            <p>
+              <strong>Điểm đến:</strong> {flight.arrival_airport.name}
+            </p>
           </div>
           <div>
             <p>
-              <strong>Thời gian khởi hành:</strong> {new Date(flight.departure_time).toLocaleString()}
+              <strong>Thời gian khởi hành:</strong>{" "}
+              {new Date(flight.departure_time).toLocaleString()}
             </p>
             <p>
-              <strong>Thời gian đến:</strong> {new Date(flight.arrival_time).toLocaleString()}
+              <strong>Thời gian đến:</strong>{" "}
+              {new Date(flight.arrival_time).toLocaleString()}
             </p>
           </div>
         </div>
@@ -104,11 +113,17 @@ const FlightDetail = ({ flight }) => {
         <h2 className={styles.sectionTitle}>Thông tin máy bay</h2>
         <div className={styles.infoGrid}>
           <div>
-            <p><strong>Mô hình:</strong> {flight.airplane.model}</p>
-            <p><strong>Nhà sản xuất:</strong> {flight.airplane.manufacturer}</p>
+            <p>
+              <strong>Mô hình:</strong> {flight.airplane.model}
+            </p>
+            <p>
+              <strong>Nhà sản xuất:</strong> {flight.airplane.manufacturer}
+            </p>
           </div>
           <div>
-            <p><strong>Sức chứa:</strong> {flight.airplane.seat_capacity}</p>
+            <p>
+              <strong>Sức chứa:</strong> {flight.airplane.seat_capacity}
+            </p>
           </div>
         </div>
       </div>
@@ -132,7 +147,8 @@ const FlightDetail = ({ flight }) => {
       {filteredTickets.length > 0 && (
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>
-            Danh sách vé {selectedClass ? `(${selectedClass})` : "(Tất cả hạng vé)"}
+            Danh sách vé{" "}
+            {selectedClass ? `(${selectedClass})` : "(Tất cả hạng vé)"}
           </h2>
           {isLoading && <p className={styles.loading}>Đang xử lý đặt chỗ...</p>}
           {bookingError && <p className={styles.error}>{bookingError}</p>}
@@ -147,16 +163,25 @@ const FlightDetail = ({ flight }) => {
                 }`}
                 onClick={() => handleTicketSelection(ticket)}
               >
-                <span className={styles.seatNumber}>Ghế số: {ticket.seat.seat_number}</span>
-                <span className={styles.classType}>Hạng vé: {ticket.class_type}</span>
-                <span className={styles.status}>Trạng thái: {ticket.status}</span>
+                <span className={styles.seatNumber}>
+                  Ghế số: {ticket.seat.seat_number}
+                </span>
+                <span className={styles.classType}>
+                  Hạng vé: {ticket.class_type}
+                </span>
+                <span className={styles.status}>
+                  Trạng thái: {ticket.status}
+                </span>
               </li>
             ))}
           </ul>
         </div>
       )}
 
-      <button className={styles.backButton} onClick={() => window.location.reload()}>
+      <button
+        className={styles.backButton}
+        onClick={() => window.location.reload()}
+      >
         Quay lại danh sách
       </button>
     </div>

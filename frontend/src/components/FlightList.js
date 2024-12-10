@@ -1,9 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import styles from "./FlightList.module.css";
 
 // FlightList.js
 const FlightList = ({ flights, onFlightClick }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const flightsPerPage = 10;
+
+  // Tính toán các chuyến bay hiển thị trên trang hiện tại
+  const indexOfLastFlight = currentPage * flightsPerPage;
+  const indexOfFirstFlight = indexOfLastFlight - flightsPerPage;
+  const currentFlights = flights.slice(indexOfFirstFlight, indexOfLastFlight);
+
+  // Số trang tổng cộng
+  const totalPages = Math.ceil(flights.length / flightsPerPage);
+
+  // Hàm xử lý khi người dùng chuyển trang
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className={styles.flightListContainer}>
       {flights.length === 0 ? (
@@ -12,7 +25,7 @@ const FlightList = ({ flights, onFlightClick }) => {
         <>
           <h2 className={styles.sectionTitle}>VUI TỪNG CHUYẾN BAY</h2>
           <ul className={styles.flightList}>
-            {flights.map((flight) => (
+            {currentFlights.map((flight) => (
               <li
                 key={flight.flight_id}
                 className={styles.flightCard}
@@ -45,6 +58,20 @@ const FlightList = ({ flights, onFlightClick }) => {
               </li>
             ))}
           </ul>
+          {/* Điều hướng phân trang */}
+          <div className={styles.pagination}>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                className={`${styles.pageButton} ${
+                  currentPage === index + 1 ? styles.activePageButton : ""
+                }`}
+                onClick={() => paginate(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
         </>
       )}
     </div>
