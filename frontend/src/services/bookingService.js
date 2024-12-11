@@ -1,5 +1,3 @@
-// frontend/src/services/bookingService.js
-
 import axios from "axios";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -13,13 +11,9 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     const userToken = localStorage.getItem("token");
-    const adminToken = localStorage.getItem("adminToken");
 
-    if (adminToken) {
-      config.headers.Authorization = `Bearer ${adminToken}`;
-    } else if (userToken) {
-      config.headers.Authorization = `Bearer ${userToken}`;
-    }
+    config.headers.Authorization = `Bearer ${userToken}`;
+
     return config;
   },
   (error) => Promise.reject(error)

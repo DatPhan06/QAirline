@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getBookingStats, getBookings } from "../../services/bookingService";
+import { getBookingStats, getBookings } from "../../services/adminService";
 import {
   BarChart,
   Bar,

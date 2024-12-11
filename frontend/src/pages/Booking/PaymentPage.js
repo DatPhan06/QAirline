@@ -63,13 +63,32 @@ const PaymentPage = () => {
     <div className={styles.container}>
       <div className={styles.flightInfo}>
         <h2>Thông tin chuyến bay</h2>
-        <p><strong>Chuyến bay:</strong> {flight.flight_number}</p>
-        <p><strong>Điểm khởi hành:</strong> {flight.departure_airport.name} - {flight.departure_airport.city}</p>
-        <p><strong>Điểm đến:</strong> {flight.arrival_airport.name} - {flight.arrival_airport.city}</p>
-        <p><strong>Thời gian khởi hành:</strong> {new Date(flight.departure_time).toLocaleString()}</p>
-        <p><strong>Thời gian đến:</strong> {new Date(flight.arrival_time).toLocaleString()}</p>
-        <p><strong>Ghế:</strong> {ticket.seat.seat_number} ({ticket.seat.seat_class})</p>
-        <p><strong>Giá vé:</strong> {ticket.price.toLocaleString()} VND</p>
+        <p>
+          <strong>Chuyến bay:</strong> {flight.flight_number}
+        </p>
+        <p>
+          <strong>Điểm khởi hành:</strong> {flight.departure_airport.name} -{" "}
+          {flight.departure_airport.city}
+        </p>
+        <p>
+          <strong>Điểm đến:</strong> {flight.arrival_airport.name} -{" "}
+          {flight.arrival_airport.city}
+        </p>
+        <p>
+          <strong>Thời gian khởi hành:</strong>{" "}
+          {new Date(flight.departure_time).toLocaleString()}
+        </p>
+        <p>
+          <strong>Thời gian đến:</strong>{" "}
+          {new Date(flight.arrival_time).toLocaleString()}
+        </p>
+        <p>
+          <strong>Ghế:</strong> {ticket.seat.seat_number} (
+          {ticket.seat.seat_class})
+        </p>
+        <p>
+          <strong>Giá vé:</strong> {ticket.price.toLocaleString()} VND
+        </p>
       </div>
 
       <div className={styles.paymentFormContainer}>

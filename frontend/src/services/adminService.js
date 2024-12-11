@@ -35,14 +35,11 @@ export const loginAdmin = async (username, password) => {
   params.append("username", username);
   params.append("password", password);
   try {
-    const response = await axiosInstance.post("/admin/login",
-      params, 
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
-    );
+    const response = await axiosInstance.post("/admin/login", params, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error during admin login:", error);
@@ -86,10 +83,7 @@ export const getAdminById = async (adminId) => {
 // Hàm cập nhật thông tin admin
 export const updateAdmin = async (adminId, updateData) => {
   try {
-    const response = await axiosInstance.put(
-      `/admin/${adminId}`, 
-      updateData
-    );
+    const response = await axiosInstance.put(`/admin/${adminId}`, updateData);
     return response.data;
   } catch (error) {
     console.error("Error updating admin:", error);
@@ -104,6 +98,82 @@ export const deleteAdmin = async (adminId) => {
     return response.data;
   } catch (error) {
     console.error("Error deleting admin:", error);
+    throw error;
+  }
+};
+
+// Hàm lấy thống kê đặt vé
+export const getBookingStats = async () => {
+  try {
+    const response = await axiosInstance.get("/bookings/stats/overview");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching booking stats:", error);
+    throw error;
+  }
+};
+
+// Hàm tạo đặt vé mới
+export const createBooking = async (bookingData) => {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("Vui lòng đăng nhập để đặt vé");
+    }
+
+    const response = await axiosInstance.post("/bookings/", bookingData);
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 401) {
+      throw new Error("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại");
+    }
+    throw error;
+  }
+};
+
+// Hàm lấy danh sách vé đã đặt
+export const getBookings = async () => {
+  try {
+    const response = await axiosInstance.get("/bookings/");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    throw error;
+  }
+};
+
+// Hàm lấy thông tin vé đã đặt theo ID
+export const getBookingById = async (bookingId) => {
+  try {
+    const response = await axiosInstance.get(`/bookings/${bookingId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching booking:", error);
+    throw error;
+  }
+};
+
+// Hàm cập nhật vé đã đặt
+export const updateBooking = async (bookingId, updateData) => {
+  try {
+    const response = await axiosInstance.put(
+      `/bookings/${bookingId}`,
+      updateData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating booking:", error);
+    throw error;
+  }
+};
+
+// Hàm xóa vé đã đặt
+export const deleteBooking = async (bookingId) => {
+  try {
+    const response = await axiosInstance.delete(`/bookings/${bookingId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting booking:", error);
     throw error;
   }
 };
