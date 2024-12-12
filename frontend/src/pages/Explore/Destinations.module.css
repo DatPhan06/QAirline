@@ -1,0 +1,72 @@
+.destinationsContainer {
+    background: linear-gradient(to bottom right, #fdfcfb, #e2d9d3);
+    padding: 40px;
+    font-family: "Merriweather", serif;
+    color: #4a4a4a;
+  }
+  
+  .title {
+    font-size: 3rem;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #2c2c2c;
+    font-weight: 700;
+    letter-spacing: 2px;
+    position: relative;
+  }
+  
+  .title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #c7a26d;
+    margin: 20px auto 0;
+  }
+  
+  .locationsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+  
+  .locationCard {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .locationCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  .locationCard h2 {
+    font-size: 1.5rem;
+    color: #2c2c2c;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  
+  .country {
+    display: inline-block;
+    background: #c7a26d;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
+  .locationDetails p {
+    margin: 8px 0;
+    font-size: 1rem;
+  }
+  
+  .locationDetails p strong {
+    color: #c7a26d;
+    font-weight: 600;
+  }
+  

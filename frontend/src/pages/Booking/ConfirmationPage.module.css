@@ -1,100 +1,204 @@
-/* ConfirmationPage.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap');
 
-/* Container chính cho trang xác nhận */
+:root {
+  --primary-color: #a88a5a;
+  --secondary-color: #c8b28b;
+  --text-color: #333;
+  --subtext-color: #555;
+  --bg-light: #ffffff;
+  --bg-gradient-start: #fdfdfd;
+  --bg-gradient-end: #f9f9f9;
+}
+
 .confirmationContainer {
-  background: #ffffff; /* Nền trắng */
-  border-radius: 20px; /* Bo góc */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Bóng mờ */
-  padding: 30px;
-  max-width: 800px; /* Chiều rộng tối đa */
-  margin: 100px auto; /* Căn giữa và thêm khoảng cách từ navbar */
-  font-family: "Arial", sans-serif; /* Phông chữ */
+  font-family: "Merriweather", serif;
+  background: linear-gradient(to bottom, var(--bg-gradient-start), var(--bg-gradient-end));
+  padding: 40px;
+  max-width: 700px;
+  margin: 80px auto;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.7s ease both;
 }
 
-/* Tiêu đề chính */
-.confirmationContainer h1 {
-  font-size: 2.5rem;
-  color: #003f82; /* Màu xanh đậm */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title {
+  font-size: 2.4em;
+  font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
+  color: var(--text-color);
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+  font-family: "Playfair Display", serif;
+  position: relative;
+  animation: fadeInTitle 1s ease both;
 }
 
-/* Thông tin chuyến bay */
-.confirmationContainer p {
-  font-size: 1.2rem;
-  color: #555555; /* Màu chữ chính */
-  margin-bottom: 10px;
+@keyframes fadeInTitle {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) rotateX(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
 }
 
-.confirmationContainer p strong {
-  color: #333; /* Màu chữ đậm */
-}
-
-/* Nút về trang chủ */
-.homeButton {
-  background-color: #b7950b; /* Màu vàng sang trọng */
-  color: #fff;
-  padding: 14px 28px;
-  border: none;
-  border-radius: 12px;
-  font-size: 1.2rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.title::after {
+  content: "";
   display: block;
-  margin: 20px auto; /* Thêm khoảng cách phía trên */
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+  margin: 8px auto 0;
+  border-radius: 2px;
 }
 
-.homeButton:hover {
-  background-color: #a37c07;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(183, 149, 11, 0.3);
+.flightInfo {
+  background: var(--bg-light);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 30px 35px;
+  margin-bottom: 30px;
+  animation: fadeIn 1s ease both;
 }
 
-/* Navbar styles matching the Emirates design */
-.nav {
-  position: fixed; /* Giữ cố định navbar */
-  top: 0; /* Cố định ở đầu trang */
-  width: 100%; /* Chiếm toàn bộ chiều rộng */
-  z-index: 1000; /* Đảm bảo navbar nằm trên các phần tử khác */
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333333; /* Dark background */
-  padding: 8px 16px;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-}
-
-.navList {
-  display: flex;
-  justify-content: space-between; /* Even spacing between items */
-  align-items: center;
-  width: 100%;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.navItem {
+.flightInfo h2 {
+  font-size: 1.6em;
+  font-weight: 600;
+  color: #4a4a4a;
+  margin-bottom: 25px;
+  letter-spacing: 0.5px;
+  font-family: "Playfair Display", serif;
   position: relative;
 }
 
-.navLink {
-  color: rgb(231, 225, 225); /* White text */
-  text-decoration: none;
-  padding: 8px 16px;
-  transition: color 0.3s ease;
+.flightInfo h2::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+  margin: 10px 0 20px;
+  border-radius: 2px;
 }
 
-.navLink:hover {
-  color: #ffd54f; /* Gold color for hover effect */
+.flightInfo p {
+  font-size: 1.1em;
+  color: var(--subtext-color);
+  line-height: 1.7;
+  margin: 12px 0;
+  font-family: "Merriweather", serif;
 }
 
-.logo {
-  max-width: 150px; /* Đảm bảo kích thước logo hợp lý */
-  height: auto;
-  transition: transform 0.3s ease;
+.flightInfo p strong {
+  color: var(--text-color);
+  font-weight: 600;
 }
 
-.logo:hover {
-  transform: scale(1.1); /* Phóng to nhẹ khi hover */
+.thankYou {
+  font-size: 1.2em;
+  font-family: "Merriweather", serif;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.homeButton {
+  display: block;
+  text-align: center;
+  font-size: 1em;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--primary-color);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+  font-family: "Merriweather", serif;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.homeButton:hover {
+  background: var(--secondary-color);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .confirmationContainer {
+    padding: 20px;
+    margin: 40px auto;
+  }
+
+  .title {
+    font-size: 2em;
+    margin-bottom: 30px;
+  }
+
+  .flightInfo {
+    padding: 20px 25px;
+  }
+
+  .flightInfo h2 {
+    font-size: 1.4em;
+  }
+
+  .flightInfo p {
+    font-size: 1em;
+    margin: 10px 0;
+  }
+
+  .thankYou {
+    font-size: 1.1em;
+  }
+
+  .homeButton {
+    font-size: 0.9em;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8em;
+  }
+
+  .flightInfo {
+    padding: 15px 20px;
+  }
+
+  .flightInfo h2 {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+  }
+
+  .flightInfo p {
+    font-size: 0.95em;
+  }
+
+  .thankYou {
+    font-size: 1em;
+  }
+
+  .homeButton {
+    font-size: 0.85em;
+    padding: 10px 16px;
+  }
 }
