@@ -5,7 +5,6 @@ from .base import Base
 from .database import engine
 import os
 from dotenv import load_dotenv
-from app.routers import location 
 
 # Load biến môi trường từ file .env
 load_dotenv()
@@ -41,7 +40,7 @@ app.include_router(tickets_router)
 app.include_router(flight_log_router)
 app.include_router(admin_router)
 app.include_router(airplane_router)
-app.include_router(location.router) 
+app.include_router(location_router) 
 
 # Tạo các bảng trong cơ sở dữ liệu
 Base.metadata.create_all(bind=engine)
