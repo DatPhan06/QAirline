@@ -33,3 +33,4 @@ class Airport(Base):
     # Quan hệ
     departure_flights = relationship("Flight", foreign_keys="[Flight.departure_airport_id]", back_populates="departure_airport")
     arrival_flights = relationship("Flight", foreign_keys="[Flight.arrival_airport_id]", back_populates="arrival_airport")   
+    locations = relationship("Location", back_populates="airport")
