@@ -5,27 +5,27 @@ import styles from "./ManageTicket.module.css";
 const ManageTicket = () => {
   const [bookings, setBookings] = useState([]);
   const [filter, setFilter] = useState("all"); // 'all', 'successful', 'canceled'
-  const [isLoading, setIsLoading] = useState(true); // Thêm trạng thái tải dữ liệu
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Lấy dữ liệu vé 
+  // Fetch bookings data
   useEffect(() => {
     const fetchBookings = async () => {
       try {
         const data = await getBookings();
-        console.log("Fetched Bookings:", data); // Kiểm tra dữ liệu
+        console.log("Fetched Bookings:", data);
         setBookings(data);
       } catch (error) {
         console.error("Error fetching bookings:", error);
         alert("Không thể lấy danh sách vé đã đặt.");
       } finally {
-        setIsLoading(false); // Kết thúc tải dữ liệu
+        setIsLoading(false);
       }
     };
 
     fetchBookings();
   }, []);
 
-  // Hủy vé
+  // Cancel booking
   const handleCancelBooking = async (bookingId) => {
     if (!window.confirm("Bạn có chắc chắn muốn hủy vé này không?")) {
       return;
@@ -37,7 +37,7 @@ const ManageTicket = () => {
       setBookings(
         bookings.map((booking) =>
           booking.booked_ticket_id === bookingId
-            ? { ...booking, status: "canceled" } // Cập nhật trạng thái thành "canceled"
+            ? { ...booking, status: "canceled" }
             : booking
         )
       );
@@ -53,9 +53,9 @@ const ManageTicket = () => {
 
   const filteredBookings = bookings.filter((booking) => {
     if (filter === "successful") {
-      return booking.status === "booked"; // Kiểm tra trạng thái "booked"
+      return booking.status === "booked";
     } else if (filter === "canceled") {
-      return booking.status === "canceled"; // Kiểm tra trạng thái "canceled"
+      return booking.status === "canceled";
     }
     return true; // 'all'
   });
@@ -90,34 +90,48 @@ const ManageTicket = () => {
         </button>
       </div>
       {isLoading ? (
-        <p>Đang tải vé...</p> // Hiển thị trạng thái tải dữ liệu
+        <p>Đang tải vé...</p>
       ) : filteredBookings.length > 0 ? (
         <ul className={styles.bookingList}>
           {filteredBookings.map((booking) => (
             <li key={booking.booked_ticket_id} className={styles.bookingItem}>
-              <p>
-                <strong>Vé số:</strong> {booking.booked_ticket_id}
-              </p>
-              <p>
-                <strong>Chuyến bay:</strong> {booking.flight_id}
-              </p>
-              <p>
-                <strong>Ghế:</strong> {booking.seat_id}
-              </p>
-              <p>
-                <strong>Giá vé:</strong> {booking.price.toLocaleString()} VND
-              </p>
-              <p>
-                <strong>Trạng thái:</strong> {booking.status === "booked" ? "Thành công" : "Đã hủy"}
-              </p>
-              {booking.status === "booked" && ( // Chỉ hiển thị nút "Hủy Vé" cho vé chưa bị hủy
-                <button
-                  className={styles.cancelButton}
-                  onClick={() => handleCancelBooking(booking.booked_ticket_id)}
-                >
-                  Hủy Vé
-                </button>
-              )}
+              <div className={styles.ticketCode}>Mã Vé {booking.booked_ticket_id}</div>
+              <div className={styles.bookingDetailsContainer}>
+                <div className={styles.bookingDetails}>
+                  <p>
+                    <span>Chuyến bay:</span> {booking.flight_id}
+                  </p>
+                  <p>
+                    <span>Ghế:</span> {booking.seat_id}
+                  </p>
+                  <p>
+                    <span>Giá vé:</span> {booking.price.toLocaleString()} VND
+                  </p>
+                  <p>
+                    <span>Ngày đặt:</span>{" "}
+                    {new Date(booking.booking_date).toLocaleDateString()}
+                  </p>
+                  <p>
+                    <span>Trạng thái:</span> {booking.status === "booked" ? "Thành công" : "Đã hủy"}
+                  </p>
+                </div>
+
+                {booking.additional_info && (
+                  <div className={styles.additionalInfo}>
+                    <p>
+                      <span>Thông tin thêm:</span> {booking.additional_info}
+                    </p>
+                  </div>
+                )}
+                {booking.status === "booked" && (
+                  <button
+                    className={styles.cancelButton}
+                    onClick={() => handleCancelBooking(booking.booked_ticket_id)}
+                  >
+                    Hủy Vé
+                  </button>
+                )}
+              </div>
             </li>
           ))}
         </ul>
