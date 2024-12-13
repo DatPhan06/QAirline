@@ -19,62 +19,61 @@ const FlightList = ({ flights, onFlightClick }) => {
 
   return (
     <div className={styles.flightListContainer}>
-      {flights.length === 0 ? (
-        <p className={styles.noFlights}>Hiện tại không có chuyến bay nào.</p>
-      ) : (
-        <>
-          <h2 className={styles.sectionTitle}>VUI TỪNG CHUYẾN BAY</h2>
-          <ul className={styles.flightList}>
-            {currentFlights.map((flight) => (
-              <li
-                key={flight.flight_id}
-                className={styles.flightCard}
-                onClick={() => onFlightClick(flight)}
-              >
-                <div className={styles.flightHeader}>
-                  <span className={styles.flightNumber}>
-                    {flight.flight_number}
-                  </span>
-                  <span className={styles.flightStatus}>{flight.status}</span>
-                </div>
-                <div className={styles.flightRow}>
-                  <p className={styles.flightDetails}>
-                    <span>Khởi hành:</span> {flight.departure_airport.iata_code}{" "}
-                    - {new Date(flight.departure_time).toLocaleString()}
-                  </p>
-                  <p className={styles.flightDetails}>
-                    <span>Điểm đến:</span> {flight.arrival_airport.iata_code} -{" "}
-                    {new Date(flight.arrival_time).toLocaleString()}
-                  </p>
-                </div>
-                <div className={styles.flightRow}>
-                  <p className={styles.flightDetails}>
-                    <span>Thời gian bay:</span> {flight.flight_duration} phút
-                  </p>
-                  <p className={styles.flightDetails}>
-                    <span>Giá vé:</span> {flight.price.toLocaleString()} VND
-                  </p>
-                </div>{" "}
-              </li>
-            ))}
-          </ul>
-          {/* Điều hướng phân trang */}
-          <div className={styles.pagination}>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index + 1}
-                className={`${styles.pageButton} ${
-                  currentPage === index + 1 ? styles.activePageButton : ""
-                }`}
-                onClick={() => paginate(index + 1)}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
+  {flights.length === 0 ? (
+    <p className={styles.noFlights}>Hiện tại không có chuyến bay nào.</p>
+  ) : (
+    <>
+      <h2 className={styles.sectionTitle}>DANH SÁCH CHUYẾN BAY</h2>
+      <table className={styles.flightTable}>
+        <thead>
+          <tr>
+            <th>Số hiệu </th>
+            <th>Khởi hành</th>
+            <th>Thời gian bay </th>
+            <th>Điểm đến</th>
+            <th>Giá vé (VND)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentFlights.map((flight) => (
+            <tr key={flight.flight_id} onClick={() => onFlightClick(flight)}>
+              <td>{flight.flight_number}</td>
+              <td>
+                {flight.departure_airport.iata_code}<br />
+                <span className={styles.subInfo}>
+                  {new Date(flight.departure_time).toLocaleString()}
+                </span>
+              </td>
+              <td>{flight.flight_duration}</td>
+              <td>
+                {flight.arrival_airport.iata_code}<br />
+                <span className={styles.subInfo}>
+                  {new Date(flight.arrival_time).toLocaleString()}
+                </span>
+              </td>
+              <td>{flight.price.toLocaleString()}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div className={styles.pagination}>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            className={`${styles.pageButton} ${
+              currentPage === index + 1 ? styles.activePageButton : ""
+            }`}
+            onClick={() => paginate(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
+    </>
+  )}
+</div>
+
   );
 };
 

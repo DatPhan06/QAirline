@@ -1,241 +1,248 @@
-@keyframes fadein {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* FlightDetail.module.css */
 
+/* Root container for the flight detail section */
 .flightDetailContainer {
   max-width: 1200px;
-  margin: 0 auto;
-  background: linear-gradient(to bottom right, #f3f6f9, #e9edf1);
-  color: #333;
-  font-family: 'Nunito Sans', sans-serif;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  animation: fadein 0.6s ease-in-out;
-  position: relative;
+  margin: 40px auto;
+  padding: 40px 30px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #333333;
+  transition: transform 0.3s ease;
 }
 
-/* Tiêu đề trang */
-.title {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 2.5rem;
-  color: #2c3e50;
-  text-align: center;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  position: relative;
-  animation: fadein 0.8s ease-in-out;
+.flightDetailContainer:hover {
+  transform: translateY(-5px);
 }
 
-.title::after {
-  content: "";
-  display: block;
-  width: 80px;
-  height: 3px;
-  background: #2c3e50;
-  margin: 1rem auto 0;
-}
-
-/* Mỗi section */
-.section {
-  background: rgba(255,255,255,0.95);
-  border-radius: 10px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-  animation: fadein 0.7s ease-in-out;
-  animation-fill-mode: both;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-/* Tiêu đề Section */
+/* Section titles */
 .sectionTitle {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
+  font-size: 2.2rem;
   color: #2c3e50;
+  margin-bottom: 25px;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 10px;
+  text-align: center;
   font-weight: 700;
-  border-bottom: 1px solid #dcdcdc;
-  padding-bottom: 0.5rem;
-  letter-spacing: 0.5px;
-  position: relative;
 }
 
-.sectionTitle::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 50px;
-  height: 2px;
-  background: #2c3e50;
-}
-
-.infoGrid {
+/* Container for flight and airplane info */
+.infoContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
-  margin-top: 1rem;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  gap: 20px;
 }
 
-/* Block thông tin */
-.infoGrid > div {
+/* Individual info sections */
+.flightInfo,
+.airplaneInfo {
   flex: 1 1 45%;
-  background: #fafbfc;
-  border-radius: 8px;
-  padding: 1rem 1.5rem;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.03);
-  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: #f7f9fc;
+  padding: 25px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
 }
 
-.infoGrid > div:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+.flightInfo:hover,
+.airplaneInfo:hover {
+  background-color: #eef3f9;
+}
+
+/* Grid layout for information details */
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 20px;
+  column-gap: 15px;
 }
 
 .infoGrid p {
-  margin: 0.5rem 0;
-  line-height: 1.7;
-  font-size: 1.1rem;
-  color: #4a4a4a;
+  font-size: 1.05rem;
+  color: #555555;
+  margin: 0;
 }
 
-/* Select cho hạng vé */
+.infoGrid p strong {
+  color: #2c3e50;
+}
+
+/* Ticket class selection dropdown */
+.ticketClassSelection {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
 .selectClass {
-  display: inline-block;
-  padding: 0.6rem 1rem;
-  font-size: 1.1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background: #f7f9fa;
-  color: #333;
-  cursor: pointer;
-  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
-  outline: none;
-  margin-top: 1rem;
-}
-
-.selectClass:focus,
-.selectClass:hover {
-  border-color: #3a539b;
-  background: #eef2f5;
-  box-shadow: 0 0 5px rgba(58,83,155,0.3);
-}
-
-/* Loading và Error */
-.loading,
-.error {
-  margin: 1rem 0;
-  font-size: 1.2rem;
-  font-style: italic;
-}
-
-.error {
-  color: #c0392b;
-}
-
-/* Danh sách vé */
-.ticketList {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 ghế mỗi hàng */
-  gap: 10px; 
-  margin-top: 1rem;
-  padding: 1rem;
-  background: #fafbfc;
+  width: 250px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: 2px solid #3498db;
   border-radius: 8px;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.03);
+  background-color: #ffffff;
+  color: #2c3e50;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.selectClass:focus {
+  outline: none;
+  border-color: #2980b9;
+  box-shadow: 0 0 8px rgba(41, 128, 185, 0.3);
+}
+
+.selectClass:hover {
+  border-color: #2980b9;
+}
+
+/* Container for the ticket list */
+.ticketListContainer {
+  background-color: #f7f9fc;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.ticketListContainer h2 {
+  font-size: 1.9rem;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Loading and error messages */
+.loading {
+  text-align: center;
+  color: #f39c12;
+  font-size: 1.15rem;
+  margin-bottom: 20px;
+}
+
+.error {
+  text-align: center;
+  color: #e74c3c;
+  font-size: 1.15rem;
+  margin-bottom: 20px;
+}
+
+/* Ticket list styles */
+.ticketList {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
 }
 
 .ticketItem {
-  display: flex;
-  flex-direction: column; /* Số ghế ở trên, trạng thái ở dưới */
-  align-items: center;
-  justify-content: center;
-  background: #ecf0f1;
-  padding: 1rem;
-  border-radius: 4px;
+  padding: 20px 25px;
+  border: 2px solid #ecf0f1;
+  border-radius: 10px;
   cursor: pointer;
-  border-left: none; /* Bỏ border trái, không cần nữa */
-  border: 2px solid transparent;
-  transition: background 0.3s, transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-  font-size: 1.1rem;
-  color: #333;
-  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* Khi hover ghế */
 .ticketItem:hover {
-  background: #dce1e3;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transform: translateY(-3px);
+  border-color: #3498db;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Ghế trống */
-.available {
-  border-color: #3a539b; /* Màu xanh biểu thị sẵn sàng đặt */
+.ticketItem.available {
+  border-left: 5px solid #27ae60;
 }
 
-/* Ghế đã đặt */
-.occupied {
-  border-color: #7f8c8d; /* Xám cho ghế đã đặt */
-  opacity: 0.7;
+.ticketItem.occupied {
+  border-left: 5px solid #e74c3c;
   cursor: not-allowed;
+  opacity: 0.8;
 }
 
-/* Số ghế */
+/* Ticket details */
+.seatNumber,
+.classType,
+.status {
+  font-size: 1.05rem;
+  color: #555555;
+}
+
 .seatNumber {
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
+  color: #2c3e50;
 }
 
-/* Loại hạng vé */
 .classType {
-  font-size: 0.9rem;
-  font-style: italic;
-  color: #555;
+  color: #16a085;
 }
 
-/* Trạng thái ghế */
 .status {
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-  color: #333;
+  font-style: italic;
+  color: #7f8c8d;
 }
 
+/* Responsive Design */
+@media (max-width: 992px) {
+  .infoContainer {
+    flex-direction: column;
+  }
 
-/* Nút quay lại */
-.backButton {
-  display: inline-block;
-  margin: 2rem 0 0;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  background: #2c3e50;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none;
-  font-family: 'Nunito Sans', sans-serif;
-  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  .flightInfo,
+  .airplaneInfo {
+    flex: 1 1 100%;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .selectClass {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .ticketList {
+    grid-template-columns: 1fr;
+  }
 }
 
-.backButton:hover {
-  background: #34495e;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+@media (max-width: 576px) {
+  .flightDetailContainer {
+    padding: 30px 20px;
+  }
+
+  .sectionTitle {
+    font-size: 1.8rem;
+  }
+
+  .infoGrid p {
+    font-size: 1rem;
+  }
+
+  .selectClass {
+    width: 100%;
+  }
+
+  .ticketListContainer h2 {
+    font-size: 1.6rem;
+  }
+
+  .ticketItem {
+    padding: 15px 20px;
+  }
+
+  .seatNumber,
+  .classType,
+  .status {
+    font-size: 1rem;
+  }
 }

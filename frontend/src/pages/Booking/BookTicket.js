@@ -82,9 +82,9 @@ const BookTicket = () => {
   };
 
   return (
-    <div className={styles.pageContainer}>
+    <div className={styles.bookingContainer}>
       {/* Khung đặt vé */}
-      <div className={styles.container}>
+      <div className={styles.bookingForm}>
         <div className={styles.headingcontainer}>
           <h1 className={styles.heading}>ĐẶT VÉ </h1>
         </div>
@@ -204,6 +204,24 @@ const BookTicket = () => {
 
       {/* FlightList nằm riêng ngoài khung đặt vé */}
       <div className={styles.flightSchedule}>
+        <FlightList flights={showMatchingFlights ? matchingFlight : flights} onFlightClick={setSelectedFlight} />
+        
+        {/* Modal for FlightDetail */}
+        {selectedFlight && (
+          <div className={styles.modalOverlay} onClick={() => setSelectedFlight(null)}>
+            <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
+              <button 
+                className={styles.closeButton}
+                onClick={() => setSelectedFlight(null)}
+              >
+                ×
+              </button>
+              <FlightDetail flight={selectedFlight} />
+            </div>
+          </div>
+        )}
+      </div>
+      {/* <div className={styles.flightSchedule}>
         {selectedFlight ? (
           <FlightDetail flight={selectedFlight} />
         ) : showMatchingFlights ? (
@@ -218,7 +236,7 @@ const BookTicket = () => {
         ) : (
           <FlightList flights={flights} onFlightClick={setSelectedFlight} />
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
