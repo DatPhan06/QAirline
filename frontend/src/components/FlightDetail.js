@@ -80,72 +80,49 @@ const FlightDetail = ({ flight }) => {
 
   return (
     <div className={styles.flightDetailContainer}>
-      <h1 className={styles.title}>Chi tiết chuyến bay</h1>
+      <h2 className={styles.sectionTitle}>Chi tiết chuyến bay</h2>
 
-      <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Thông tin chuyến bay</h2>
-        <div className={styles.infoGrid}>
-          <div>
-            <p>
-              <strong>Số hiệu:</strong> {flight.flight_number}
-            </p>
-            <p>
-              <strong>Điểm khởi hành:</strong> {flight.departure_airport.name}
-            </p>
-            <p>
-              <strong>Điểm đến:</strong> {flight.arrival_airport.name}
-            </p>
-          </div>
-          <div>
-            <p>
-              <strong>Thời gian khởi hành:</strong>{" "}
-              {new Date(flight.departure_time).toLocaleString()}
-            </p>
-            <p>
-              <strong>Thời gian đến:</strong>{" "}
-              {new Date(flight.arrival_time).toLocaleString()}
-            </p>
-          </div>
-        </div>
-      </div>
+<div className={styles.infoContainer}>
+  {/* Thông tin chuyến bay */}
+  <div className={styles.flightInfo}>
+    <h3 className={styles.sectionTitle}>Thông tin chuyến bay</h3>
+    <div className={styles.infoGrid}>
+      <p><strong>Số hiệu:</strong> {flight.flight_number}</p>
+      <p><strong>Khởi hành:</strong> {flight.departure_airport.name}</p>
+      <p><strong>Điểm đến:</strong> {flight.arrival_airport.name}</p>
+      <p><strong>Thời gian bay:</strong> {flight.departure_time}</p>
+      <p><strong>Thời gian đến:</strong> {flight.arrival_time}</p>
+    </div>
+  </div>
 
-      <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Thông tin máy bay</h2>
-        <div className={styles.infoGrid}>
-          <div>
-            <p>
-              <strong>Mô hình:</strong> {flight.airplane.model}
-            </p>
-            <p>
-              <strong>Nhà sản xuất:</strong> {flight.airplane.manufacturer}
-            </p>
-          </div>
-          <div>
-            <p>
-              <strong>Sức chứa:</strong> {flight.airplane.seat_capacity}
-            </p>
-          </div>
-        </div>
-      </div>
+  {/* Thông tin máy bay */}
+  <div className={styles.airplaneInfo}>
+    <h3 className={styles.sectionTitle}>Thông tin máy bay</h3>
+    <div className={styles.infoGrid}>
+      <p><strong>Model:</strong> {flight.airplane.model}</p>
+      <p><strong>Nhà sản xuất:</strong> {flight.airplane.manufacturer}</p>
+      <p><strong>Sức chứa:</strong> {flight.airplane.seat_capacity}</p>
+    </div>
+  </div>
+</div>
 
-      <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Chọn hạng vé</h2>
-        <select
-          className={styles.selectClass}
-          value={selectedClass}
-          onChange={(e) => setSelectedClass(e.target.value)}
-        >
-          <option value="">Tất cả các hạng vé</option>
-          {ticketClasses.map((ticketClass) => (
-            <option key={ticketClass} value={ticketClass}>
-              {ticketClass}
-            </option>
-          ))}
-        </select>
-      </div>
+{/* Phần chọn hạng vé */}
+<div className={styles.ticketClassSelection}>
+  <select
+    className={styles.selectClass}
+    value={selectedClass}
+    onChange={(e) => setSelectedClass(e.target.value)}
+  >
+    <option value="">Tất cả các hạng vé</option>
+    {ticketClasses.map((ticketClass) => (
+      <option key={ticketClass} value={ticketClass}>{ticketClass}</option>
+    ))}
+  </select>
+</div>
 
+      {/* Danh sách vé - Hiển thị bên dưới 2 cột*/}
       {filteredTickets.length > 0 && (
-        <div className={styles.section}>
+        <div className={styles.ticketListContainer}>
           <h2 className={styles.sectionTitle}>
             Danh sách vé{" "}
             {selectedClass ? `(${selectedClass})` : "(Tất cả hạng vé)"}
@@ -177,13 +154,6 @@ const FlightDetail = ({ flight }) => {
           </ul>
         </div>
       )}
-
-      <button
-        className={styles.backButton}
-        onClick={() => window.location.reload()}
-      >
-        Quay lại danh sách
-      </button>
     </div>
   );
 };

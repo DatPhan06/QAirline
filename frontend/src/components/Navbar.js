@@ -139,7 +139,7 @@ const Navbar = () => {
             </li>
             <li className={styles.subMenuItem}>
               <Link to="/qairline/news" className={styles.subMenuLink}>
-                Tin Tức
+                Trải nghiệm bay
               </Link>
             </li>
           </ul>
