@@ -31,6 +31,10 @@ function SignUp() {
     window.location.href = "http://localhost:8000/auth/google/login";
   };
 
+  const handleGitHubLogin = () => {
+    window.location.href = "http://localhost:8000/auth/github/login";
+  };
+
   return (
     <div
       className={styles.signup}
@@ -115,15 +119,26 @@ function SignUp() {
                 <div className={styles["line-2"]}></div>
               </div>
               <div className={styles["frame-3"]}>
-              <img
-                className={styles.deviconGoogle}
-                src="/images/google.svg"
-                alt="Google"
-                onClick={handleGoogleLogin}
-                style={{ cursor: "pointer" }}
-              />
-                <img className={styles["logos-facebook"]} src="/images/fb.svg" />
-                <img className={styles["bi-github"]} src="/images/github.svg" />
+                <img
+                  className={styles.deviconGoogle}
+                  src="/images/google.svg"
+                  alt="Google"
+                  onClick={handleGoogleLogin}
+                  style={{ cursor: "pointer" }}
+                />
+                <img 
+                  className={styles["logos-facebook"]} 
+                  src="/images/fb.svg" 
+                  alt="Facebook"
+                  style={{ cursor: "pointer" }}
+                />
+                <img
+                  className={styles.biGithub}
+                  src="/images/github.svg"
+                  alt="GitHub"
+                  onClick={handleGitHubLogin}
+                  style={{ cursor: "pointer" }}
+                />
               </div>
             </div>
           </div>
