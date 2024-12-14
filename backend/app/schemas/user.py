@@ -38,11 +38,13 @@ class UserUpdate(BaseModel):
     Attributes:
         email (Optional[EmailStr]): Địa chỉ email mới.
         full_name (Optional[str]): Họ và tên đầy đủ mới.
+        phone (Optional[str]): Số điện thoại mới.
         password (Optional[str]): Mật khẩu mới.
     """
 
     email: Optional[EmailStr] = None
     full_name: Optional[str] = None
+    phone: Optional[str] = None
     password: Optional[str] = None
 
 
@@ -55,6 +57,7 @@ class User(UserBase):
     """
 
     user_id: int
+    phone: str
 
     class Config:
         orm_mode = True
