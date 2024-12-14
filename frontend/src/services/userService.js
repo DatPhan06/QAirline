@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 // Thêm interceptor để tự động đính kèm token vào header
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("userToken"); // Lấy token của user từ localStorage
+    const token = localStorage.getItem("token"); // Lấy token của user từ localStorage
     if (token) {
       config.headers.Authorization = `Bearer ${token}`; // Đính kèm token vào header
     }
