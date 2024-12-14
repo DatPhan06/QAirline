@@ -18,6 +18,7 @@ class UserBase(BaseModel):
     username: str
     email: EmailStr
     full_name: str
+    phone: Optional[str] = None  # Đảm bảo phone là chuỗi hoặc None
 
 
 class UserCreate(UserBase):
@@ -57,7 +58,8 @@ class User(UserBase):
     """
 
     user_id: int
-    phone: str
+    phone: Optional[str] = None
 
     class Config:
         orm_mode = True
+        from_attributes = True

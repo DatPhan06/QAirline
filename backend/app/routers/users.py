@@ -59,7 +59,7 @@ def login(
 @router.get("/me", response_model=schemas.User)
 def read_users_me(
     current_user: models.User = Depends(services.auth.get_current_active_user),
-) -> models.User:
+) -> schemas.User:
     """
     Lấy thông tin người dùng hiện tại đã đăng nhập.
 
@@ -69,7 +69,7 @@ def read_users_me(
     Returns:
         models.User: Thông tin người dùng hiện tại.
     """
-    return current_user
+    return schemas.User.from_orm(current_user)
 
 
 @router.get("/{user_id}", response_model=schemas.User)
