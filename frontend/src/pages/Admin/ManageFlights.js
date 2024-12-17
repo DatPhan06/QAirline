@@ -5,6 +5,7 @@ import {
   updateFlight,
 } from "../../services/flightService";
 import AdminSidebar from "../../components/AdminSidebar";
+import { createTicketsForFlight } from "../../services/ticketService";
 import FlightList from "../../components/FlightList";
 import styles from "./ManageFlights.module.css";
 
@@ -49,7 +50,8 @@ const ManageFlights = () => {
         await updateFlight(selectedFlight.flight_id, flightData);
         alert("Chuyến bay đã được cập nhật thành công!");
       } else {
-        await createFlight(flightData);
+        const newFlight = await createFlight(flightData);
+        await createTicketsForFlight(newFlight.flight_id);
         alert("Chuyến bay mới đã được thêm thành công!");
       }
       setIsModalOpen(false);
