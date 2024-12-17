@@ -1,8 +1,8 @@
 // FlightDetail.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getSeatsByAirplaneId } from "../services/seatService";
 import { createBooking } from "../services/bookingService";
+import { getBookingByTicketId } from "../services/bookingService";
 import {
   getTicketByFlightAndSeat,
   getTicketsByFlightId,
@@ -56,18 +56,20 @@ const FlightDetail = ({ flight }) => {
   }, [selectedClass, tickets]);
 
   const handleTicketSelection = async (ticket) => {
-    const confirmBooking = window.confirm(
-      `Bạn có muốn đặt vé cho ghế số ${ticket.seat.seat_number} không?`
-    );
-    if (confirmBooking) {
+    if (ticket.status === "available") {
       try {
         setIsLoading(true);
         setBookingError(null);
 
-        navigate("/booking/payment", { state: { flight, ticket } });
+        const confirmBooking = window.confirm(
+          `Bạn có muốn đặt vé cho ghế số ${ticket.seat.seat_number} không?`
+        );
+        if (confirmBooking) {
+          navigate("/booking/payment", { state: { flight, ticket } });
+        }
       } catch (error) {
-        console.error("Error creating booking:", error);
-        setBookingError("Đã xảy ra lỗi khi đặt chỗ");
+        console.error("Error checking ticket or booking:", error);
+        setBookingError("Đã xảy ra lỗi khi kiểm tra vé.");
       } finally {
         setIsLoading(false);
       }
@@ -82,43 +84,61 @@ const FlightDetail = ({ flight }) => {
     <div className={styles.flightDetailContainer}>
       <h2 className={styles.sectionTitle}>Chi tiết chuyến bay</h2>
 
-<div className={styles.infoContainer}>
-  {/* Thông tin chuyến bay */}
-  <div className={styles.flightInfo}>
-    <h3 className={styles.sectionTitle}>Thông tin chuyến bay</h3>
-    <div className={styles.infoGrid}>
-      <p><strong>Số hiệu:</strong> {flight.flight_number}</p>
-      <p><strong>Khởi hành:</strong> {flight.departure_airport.name}</p>
-      <p><strong>Điểm đến:</strong> {flight.arrival_airport.name}</p>
-      <p><strong>Thời gian bay:</strong> {flight.departure_time}</p>
-      <p><strong>Thời gian đến:</strong> {flight.arrival_time}</p>
-    </div>
-  </div>
+      <div className={styles.infoContainer}>
+        {/* Thông tin chuyến bay */}
+        <div className={styles.flightInfo}>
+          <h3 className={styles.sectionTitle}>Thông tin chuyến bay</h3>
+          <div className={styles.infoGrid}>
+            <p>
+              <strong>Số hiệu:</strong> {flight.flight_number}
+            </p>
+            <p>
+              <strong>Khởi hành:</strong> {flight.departure_airport.name}
+            </p>
+            <p>
+              <strong>Điểm đến:</strong> {flight.arrival_airport.name}
+            </p>
+            <p>
+              <strong>Thời gian bay:</strong> {flight.departure_time}
+            </p>
+            <p>
+              <strong>Thời gian đến:</strong> {flight.arrival_time}
+            </p>
+          </div>
+        </div>
 
-  {/* Thông tin máy bay */}
-  <div className={styles.airplaneInfo}>
-    <h3 className={styles.sectionTitle}>Thông tin máy bay</h3>
-    <div className={styles.infoGrid}>
-      <p><strong>Model:</strong> {flight.airplane.model}</p>
-      <p><strong>Nhà sản xuất:</strong> {flight.airplane.manufacturer}</p>
-      <p><strong>Sức chứa:</strong> {flight.airplane.seat_capacity}</p>
-    </div>
-  </div>
-</div>
+        {/* Thông tin máy bay */}
+        <div className={styles.airplaneInfo}>
+          <h3 className={styles.sectionTitle}>Thông tin máy bay</h3>
+          <div className={styles.infoGrid}>
+            <p>
+              <strong>Model:</strong> {flight.airplane.model}
+            </p>
+            <p>
+              <strong>Nhà sản xuất:</strong> {flight.airplane.manufacturer}
+            </p>
+            <p>
+              <strong>Sức chứa:</strong> {flight.airplane.seat_capacity}
+            </p>
+          </div>
+        </div>
+      </div>
 
-{/* Phần chọn hạng vé */}
-<div className={styles.ticketClassSelection}>
-  <select
-    className={styles.selectClass}
-    value={selectedClass}
-    onChange={(e) => setSelectedClass(e.target.value)}
-  >
-    <option value="">Tất cả các hạng vé</option>
-    {ticketClasses.map((ticketClass) => (
-      <option key={ticketClass} value={ticketClass}>{ticketClass}</option>
-    ))}
-  </select>
-</div>
+      {/* Phần chọn hạng vé */}
+      <div className={styles.ticketClassSelection}>
+        <select
+          className={styles.selectClass}
+          value={selectedClass}
+          onChange={(e) => setSelectedClass(e.target.value)}
+        >
+          <option value="">Tất cả các hạng vé</option>
+          {ticketClasses.map((ticketClass) => (
+            <option key={ticketClass} value={ticketClass}>
+              {ticketClass}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {/* Danh sách vé - Hiển thị bên dưới 2 cột*/}
       {filteredTickets.length > 0 && (

@@ -1,0 +1,83 @@
+/* Profile.module.css */
+
+/* Container tổng thể */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 20px;
+  background-color: #f0f2f5;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Tiêu đề trang */
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 50px;
+}
+
+/* Form thông tin cá nhân */
+.profileForm {
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Nhãn cho các trường */
+.label {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+/* Input chung */
+.input {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 25px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input:focus {
+  border-color: #1d72b8;
+  box-shadow: 0 0 8px rgba(29, 114, 184, 0.2);
+}
+
+/* Nút cập nhật */
+.updateButton {
+  width: 100%;
+  padding: 16px;
+  background-color: #1d72b8;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.updateButton:hover {
+  background-color: #1663a2;
+}
+
+/* Responsive cho màn hình nhỏ */
+@media (max-width: 768px) {
+  .container {
+    padding: 60px 15px;
+  }
+
+  .profileForm {
+    padding: 40px 25px;
+  }
+}
