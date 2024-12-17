@@ -120,7 +120,7 @@ def get_ticket_by_flight_and_seat(db: Session, flight_id: int, seat_id: int) -> 
 
 def create_tickets_for_flight(db: Session, flight_id: int) -> List[models.Ticket]:
     """
-    Tạo vé cho tất cả các ghế của một chuyến bay.
+    Tạo vé cho tất cả các ghế khả dụng của một chuyến bay.
 
     Args:
         db (Session): Database session
@@ -134,9 +134,10 @@ def create_tickets_for_flight(db: Session, flight_id: int) -> List[models.Ticket
     if not flight:
         raise HTTPException(status_code=404, detail="Flight not found")
 
-    # Get all seats for the airplane
+    # Get all available seats for the airplane
     seats = db.query(models.Seat).filter(
-        models.Seat.airplane_id == flight.airplane_id
+        models.Seat.airplane_id == flight.airplane_id,
+        models.Seat.status == "available"  # Chỉ lấy các ghế khả dụng
     ).all()
 
     tickets = []

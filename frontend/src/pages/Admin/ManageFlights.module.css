@@ -1,0 +1,129 @@
+/* ManageFlights.module.css */
+
+/* Container chính */
+.adminContainer {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background-color: #2c3e50;
+  padding: 30px 20px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* Nội dung chính */
+.mainContent {
+  flex: 1;
+  padding: 40px;
+  overflow-x: hidden;
+}
+
+/* Tiêu đề chính */
+.mainContent h1 {
+  font-size: 2.4rem;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Nút tạo chuyến bay mới */
+.addButton {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.addButton:hover {
+  background-color: #2980b9;
+}
+
+/* Danh sách chuyến bay */
+.listContainer {
+  margin-top: 30px;
+}
+
+/* Modal overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal content */
+.modalContent {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 600px;
+  max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+/* Close button */
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Tiêu đề modal */
+.modalContent h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Animations */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Nút submit */
+.submitButton {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #2980b9;
+}
