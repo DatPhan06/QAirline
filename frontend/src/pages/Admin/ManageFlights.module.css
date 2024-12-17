@@ -21,8 +21,6 @@
   flex: 1;
   padding: 40px;
   overflow-x: hidden;
-  display: flex;
-  flex-direction: row;
 }
 
 /* Tiêu đề chính */
@@ -33,20 +31,25 @@
   font-weight: 600;
 }
 
-/* Form container */
-.formContainer {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-  flex: 2.5; /* 30% của tổng chiều rộng */
-  margin-right: 20px;
+/* Nút tạo chuyến bay mới */
+.addButton {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.addButton:hover {
+  background-color: #2980b9;
 }
 
 /* Danh sách chuyến bay */
 .listContainer {
-  flex: 8; /* 70% của tổng chiều rộng */
   margin-top: 30px;
 }
 
@@ -105,4 +108,20 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Nút submit */
+.submitButton {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #2980b9;
 }
