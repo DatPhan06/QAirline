@@ -91,6 +91,13 @@ const ManageFlights = () => {
     });
     setIsModalOpen(true);
   };
+
+  const handleCloseModal = () => {
+    if (window.confirm("Bạn có muốn thoát chỉnh sửa?")) {
+      setIsModalOpen(false);
+    }
+  };
+
   return (
     <div className={styles.adminContainer}>
       <div className={styles.sidebar}>
@@ -106,12 +113,12 @@ const ManageFlights = () => {
         </div>
       </div>
       {isModalOpen && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.modalContent}>
-            <button
-              className={styles.closeButton}
-              onClick={() => setIsModalOpen(false)}
-            >
+        <div className={styles.modalOverlay} onClick={handleCloseModal}>
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className={styles.closeButton} onClick={handleCloseModal}>
               ×
             </button>
             <h2>
