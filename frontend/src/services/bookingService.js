@@ -70,6 +70,17 @@ export const getBookingById = async (bookingId) => {
   }
 };
 
+// Hàm lấy thông tin booking theo ticket_id
+export const getBookingByTicketId = async (ticketId) => {
+  try {
+    const response = await axiosInstance.get(`/bookings/ticket/${ticketId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching booking by ticket ID:", error);
+    throw error;
+  }
+};
+
 // Hàm cập nhật vé đã đặt
 export const updateBooking = async (bookingId, updateData) => {
   try {

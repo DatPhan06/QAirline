@@ -110,6 +110,30 @@ def get_booking(
         )
     return booking
 
+@router.get("/ticket/{ticket_id}", response_model=schemas.BookedTicket)
+def get_booking_by_ticket_id(
+    ticket_id: int,
+    db: Session = Depends(get_db),
+    current_user: Union[models.User, models.Admin] = Depends(get_current_user_or_admin),
+) -> models.BookedTicket:
+    """
+    Lấy thông tin booking theo ticket_id.
+
+    Args:
+        ticket_id (int): ID của vé.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+        current_user (Union[models.User, models.Admin]): Người dùng hiện tại (đã đăng nhập).
+
+    Returns:
+        models.BookedTicket: Thông tin booking.
+    """
+    booking = services.booking_service.get_booking_by_ticket_id(db, ticket_id)
+    if not booking:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Booking không tồn tại"
+        )
+    return booking
+
 
 @router.get("/", response_model=List[schemas.BookedTicket])
 def get_bookings(
