@@ -61,17 +61,6 @@ const FlightDetail = ({ flight }) => {
         setIsLoading(true);
         setBookingError(null);
 
-        // Kiểm tra xem vé có tồn tại không
-        const ticketData = await getTicketByFlightAndSeat(
-          ticket.flight_id,
-          ticket.seat_id
-        );
-        if (!ticketData) {
-          alert("Vé không tồn tại.");
-          setIsLoading(false);
-          return;
-        }
-
         const confirmBooking = window.confirm(
           `Bạn có muốn đặt vé cho ghế số ${ticket.seat.seat_number} không?`
         );

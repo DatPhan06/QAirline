@@ -126,7 +126,7 @@ def get_all_bookings(db: Session) -> List[models.BookedTicket]:
     """
     return db.query(models.BookedTicket).all()
 
-def get_booking_by_ticket_id(db: Session, ticket_id: int) -> Optional[models.BookedTicket]:
+def get_bookings_by_ticket_id(db: Session, ticket_id: int) -> List[models.BookedTicket]:
     """
     Lấy thông tin booking theo ticket_id.
 
@@ -135,6 +135,6 @@ def get_booking_by_ticket_id(db: Session, ticket_id: int) -> Optional[models.Boo
         ticket_id (int): ID của vé.
 
     Returns:
-        Optional[models.BookedTicket]: Thông tin booking nếu tìm thấy, ngược lại là None.
+        List[models.BookedTicket]: Danh sách thông tin booking.
     """
-    return db.query(models.BookedTicket).filter(models.BookedTicket.ticket_id == ticket_id).first()
+    return db.query(models.BookedTicket).filter(models.BookedTicket.ticket_id == ticket_id).all()

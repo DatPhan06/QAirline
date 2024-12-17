@@ -35,7 +35,7 @@ const PaymentPage = () => {
     setPaymentError(null);
     try {
       // Giả lập quá trình thanh toán
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // Cập nhật trạng thái vé
       await updateTicketStatus(ticket.ticket_id, "sold");

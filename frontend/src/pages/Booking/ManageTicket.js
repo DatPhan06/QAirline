@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getBookings, deleteBooking } from "../../services/bookingService";
+import {
+  getBookings,
+  deleteBooking,
+  updateBooking,
+} from "../../services/bookingService";
+import { updateTicketStatus } from "../../services/ticketService";
 import styles from "./ManageTicket.module.css";
 
 const ManageTicket = () => {
@@ -32,7 +37,14 @@ const ManageTicket = () => {
     }
 
     try {
-      await deleteBooking(bookingId);
+      await updateBooking(bookingId, { status: "canceled" });
+
+      const canceledBooking = bookings.find(
+        (booking) => booking.booked_ticket_id === bookingId
+      );
+
+      await updateTicketStatus(canceledBooking.ticket_id, "available");
+
       alert("Hủy vé thành công!");
       setBookings(
         bookings.map((booking) =>
@@ -95,7 +107,9 @@ const ManageTicket = () => {
         <ul className={styles.bookingList}>
           {filteredBookings.map((booking) => (
             <li key={booking.booked_ticket_id} className={styles.bookingItem}>
-              <div className={styles.ticketCode}>Mã Vé {booking.booked_ticket_id}</div>
+              <div className={styles.ticketCode}>
+                Mã Vé {booking.booked_ticket_id}
+              </div>
               <div className={styles.bookingDetailsContainer}>
                 <div className={styles.bookingDetails}>
                   <p>
@@ -112,7 +126,8 @@ const ManageTicket = () => {
                     {new Date(booking.booking_date).toLocaleDateString()}
                   </p>
                   <p>
-                    <span>Trạng thái:</span> {booking.status === "booked" ? "Thành công" : "Đã hủy"}
+                    <span>Trạng thái:</span>{" "}
+                    {booking.status === "booked" ? "Thành công" : "Đã hủy"}
                   </p>
                 </div>
 
@@ -126,7 +141,9 @@ const ManageTicket = () => {
                 {booking.status === "booked" && (
                   <button
                     className={styles.cancelButton}
-                    onClick={() => handleCancelBooking(booking.booked_ticket_id)}
+                    onClick={() =>
+                      handleCancelBooking(booking.booked_ticket_id)
+                    }
                   >
                     Hủy Vé
                   </button>
