@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './SlideShow.module.css'; // Tạo file CSS Module riêng cho Slideshow
 
-const SlideShow = ({ images, interval = 2000 }) => {
+const SlideShow = ({ images, interval = 4000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {

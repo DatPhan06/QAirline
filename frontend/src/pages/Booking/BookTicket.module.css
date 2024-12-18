@@ -7,9 +7,8 @@
 
 /* Biến màu sắc và font */
 :root {
-  --main-color: #005baa; /* Màu chủ đạo: xanh đậm */
-  --accent-color: #003f7b;
-  --text-color: #333;
+  --main-color: #0d5777; /* Màu chủ đạo: xanh đậm */
+  --accent-color: #0d5777;
   --bg-color: #f7f9fc;
   --border-color: #dce3eb;
   --font-family: "Helvetica Neue", Arial, sans-serif;
@@ -59,7 +58,7 @@ body {
 /* Tiêu đề form */
 .bookingForm h2 {
   font-size: 1.6rem;
-  color: var(--text-color);
+  color: #143951;
   margin-bottom: 20px;
   font-weight: 700;
   text-transform: uppercase;
