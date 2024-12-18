@@ -22,7 +22,7 @@ const AdminSidebar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/admin/update-flight-time">Cập Nhật Lịch Bay</Link>
+          <Link to="/admin/account">Quản Lý Tài Khoản</Link>
         </li>
       </ul>
     </div>

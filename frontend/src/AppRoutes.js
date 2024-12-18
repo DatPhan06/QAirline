@@ -50,7 +50,7 @@ import PostInfo from "./pages/Admin/PostInfo";
 import ManageAirplanes from "./pages/Admin/ManageAirplanes";
 import ManageFlights from "./pages/Admin/ManageFlights";
 import ViewBookings from "./pages/Admin/ViewBookings";
-import UpdateFlightTime from "./pages/Admin/UpdateFlightTime";
+import AccountManager from "./pages/Admin/AccountManager";
 import EditAirplane from "./pages/Admin/EditAirplane";
 
 // OAuth2 callback page
@@ -201,10 +201,10 @@ function AppRoutes() {
         }
       />
       <Route
-        path="/admin/update-flight-time"
+        path="/admin/account"
         element={
           <PrivateAdminRoute>
-            <UpdateFlightTime />
+            <AccountManager />
           </PrivateAdminRoute>
         }
       />

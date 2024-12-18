@@ -177,3 +177,13 @@ export const deleteBooking = async (bookingId) => {
     throw error;
   }
 };
+
+export const createAdmin = async (adminData) => {
+  try {
+    const response = await axiosInstance.post("/admin/register", adminData);
+    return response.data;
+  } catch (error) {
+    console.error("Error creating admin:", error);
+    throw error;
+  }
+};
