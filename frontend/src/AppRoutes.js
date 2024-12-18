@@ -51,9 +51,10 @@ import ManageAirplanes from "./pages/Admin/ManageAirplanes";
 import ManageFlights from "./pages/Admin/ManageFlights";
 import ViewBookings from "./pages/Admin/ViewBookings";
 import UpdateFlightTime from "./pages/Admin/UpdateFlightTime";
+import EditAirplane from "./pages/Admin/EditAirplane";
 
 // OAuth2 callback page
-import OAuth2Callback from './pages/OAuth2Callback';
+import OAuth2Callback from "./pages/OAuth2Callback";
 
 function AppRoutes() {
   return (
@@ -206,6 +207,10 @@ function AppRoutes() {
             <UpdateFlightTime />
           </PrivateAdminRoute>
         }
+      />
+      <Route
+        path="/admin/edit-airplane/:airplaneId"
+        element={<EditAirplane />}
       />
     </Routes>
   );

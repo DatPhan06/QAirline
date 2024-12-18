@@ -110,3 +110,43 @@ def delete_seat(db: Session, seat_id: int) -> Optional[models.Seat]:
 
 def get_seats_by_airplane_id(db: Session, airplane_id: int) -> List[models.Seat]:
     return db.query(models.Seat).filter(models.Seat.airplane_id == airplane_id).all()
+
+def create_seats_for_airplane(db: Session, airplane_id: int, seat_capacity: int) -> None:
+    """
+    Tạo tất cả các ghế cho một máy bay theo số hàng và số cột.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+        airplane_id (int): ID của máy bay.
+        seat_capacity (int): Số lượng ghế của máy bay.
+
+    Returns:
+        None
+    """
+    rows = seat_capacity // 7  # Giả sử mỗi hàng có 7 ghế
+    columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+
+    if seat_capacity > 7 * rows:
+        rows += 1
+
+    if seat_capacity > 7 * rows:
+        columns.extend(['H', 'K'])
+
+    seats = []
+    for row in range(1, rows + 1):
+        for column in columns:
+            seat_number = f"{column}{row}"
+            seat_class = "Economy"
+            if row <= 2:
+                seat_class = "Business"
+            elif row <= 4:
+                seat_class = "Premium Economy"
+            seat = models.Seat(
+                airplane_id=airplane_id,
+                seat_number=seat_number,
+                seat_class=seat_class,
+                status="available"
+            )
+            seats.append(seat)
+            db.add(seat)
+    db.commit()
