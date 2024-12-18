@@ -5,10 +5,6 @@ import {
   updateAirplane,
 } from "../../services/airplaneService";
 import { getSeatsByAirplaneId, updateSeat } from "../../services/seatService";
-import {
-  getTicketByFlightAndSeat,
-  updateTicketStatus,
-} from "../../services/ticketService";
 import AdminSidebar from "../../components/AdminSidebar";
 import styles from "./EditAirplane.module.css";
 
@@ -18,6 +14,10 @@ const EditAirplane = () => {
   const [airplaneData, setAirplaneData] = useState(null);
   const [seats, setSeats] = useState([]);
   const [initialSeats, setInitialSeats] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
+  const [seatsPerPage] = useState(10); // Số ghế mỗi trang
+  const [searchTerm, setSearchTerm] = useState(""); // Từ khóa tìm kiếm
 
   useEffect(() => {
     const fetchAirplaneData = async () => {
@@ -45,6 +45,23 @@ const EditAirplane = () => {
         seat.seat_id === seatId ? { ...seat, status } : seat
       )
     );
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   const handleFormSubmit = async (e) => {
@@ -75,6 +92,21 @@ const EditAirplane = () => {
   if (!airplaneData) {
     return <p>Đang tải dữ liệu...</p>;
   }
+
+  // Lọc và phân trang danh sách ghế
+  const filteredSeats = seats.filter((seat) => {
+    const seatNumber = seat.seat_number.toLowerCase();
+    const seatClass = seat.seat_class.toLowerCase();
+    const search = searchTerm.toLowerCase();
+
+    return seatNumber.includes(search) || seatClass.includes(search);
+  });
+
+  const indexOfLastSeat = currentPage * seatsPerPage;
+  const indexOfFirstSeat = indexOfLastSeat - seatsPerPage;
+  const currentSeats = filteredSeats.slice(indexOfFirstSeat, indexOfLastSeat);
+
+  const totalPages = Math.ceil(filteredSeats.length / seatsPerPage);
 
   return (
     <div className={styles.editAirplaneContainer}>
@@ -172,6 +204,15 @@ const EditAirplane = () => {
           </form>
           <div className={styles.seatList}>
             <h2>Trạng thái ghế ngồi</h2>
+            <div className={styles.searchContainer}>
+              <input
+                type="text"
+                placeholder="Tìm kiếm ghế..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className={styles.searchInput}
+              />
+            </div>
             <table className={styles.seatTable}>
               <thead>
                 <tr>
@@ -181,7 +222,7 @@ const EditAirplane = () => {
                 </tr>
               </thead>
               <tbody>
-                {seats.map((seat) => (
+                {currentSeats.map((seat) => (
                   <tr key={seat.seat_id}>
                     <td>{seat.seat_number}</td>
                     <td>{seat.seat_class}</td>
@@ -201,6 +242,20 @@ const EditAirplane = () => {
                 ))}
               </tbody>
             </table>
+            <div className={styles.pagination}>
+              <button onClick={handlePrevPage} disabled={currentPage === 1}>
+                Trang trước
+              </button>
+              <span>
+                Trang {currentPage} / {totalPages}
+              </span>
+              <button
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+              >
+                Trang sau
+              </button>
+            </div>
           </div>
         </div>
       </div>

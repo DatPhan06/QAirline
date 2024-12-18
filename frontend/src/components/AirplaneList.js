@@ -26,12 +26,15 @@ const AirplaneList = ({ airplanes, onAirplaneClick }) => {
                 <th>Năm sản xuất</th>
                 <th>Tình trạng bảo trì</th>
                 <th>Trạng thái</th>
-                <th>Hành động</th>
               </tr>
             </thead>
             <tbody>
               {airplanes.map((airplane) => (
-                <tr key={airplane.airplane_id}>
+                <tr
+                  key={airplane.airplane_id}
+                  onClick={() => handleEditClick(airplane)}
+                  style={{ cursor: "pointer" }}
+                >
                   <td>{airplane.model}</td>
                   <td>{airplane.manufacturer}</td>
                   <td>{airplane.seat_capacity}</td>
@@ -39,14 +42,6 @@ const AirplaneList = ({ airplanes, onAirplaneClick }) => {
                   <td>{airplane.year_of_manufacture}</td>
                   <td>{airplane.maintenance_status}</td>
                   <td>{airplane.status}</td>
-                  <td>
-                    <button
-                      className={styles.editButton}
-                      onClick={() => handleEditClick(airplane)}
-                    >
-                      Chỉnh sửa
-                    </button>
-                  </td>
                 </tr>
               ))}
             </tbody>
