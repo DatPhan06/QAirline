@@ -174,7 +174,7 @@ async def github_callback(request: Request, db: Session = Depends(get_db)):
     # Xử lý dữ liệu người dùng
     username = userinfo.get("login")
     full_name = userinfo.get("name")
-    github_id = userinfo.get("id")  # Sử dụng làm mật khẩu (chưa hash)
+    github_id = str(userinfo.get("id"))  # Sử dụng làm mật khẩu (chưa hash)
 
     if not email:
         raise HTTPException(status_code=400, detail="Email not provided by GitHub")
@@ -182,15 +182,13 @@ async def github_callback(request: Request, db: Session = Depends(get_db)):
     # Kiểm tra xem người dùng đã tồn tại chưa
     user = services.user_service.get_user_by_email(db, email)
     if not user:
-        # Hash mật khẩu từ github_id
-        hashed_password = services.user_service.get_password_hash(github_id)
         user_create = schemas.UserCreate(
             username=username,
             email=email,
             full_name=full_name,
             password=github_id,  # Sẽ được hash trong create_user
         )
-        user = services.user_service.create_user(db, user_create, hashed_password=hashed_password)
+        user = services.user_service.create_user(db, user_create)
 
     # Tạo JWT token
     token = services.user_service.create_access_token(data={"sub": user.username})

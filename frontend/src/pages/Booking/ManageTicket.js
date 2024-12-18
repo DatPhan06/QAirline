@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  getBookings,
-  deleteBooking,
-  updateBooking,
-} from "../../services/bookingService";
+import { getBookings, updateBooking } from "../../services/bookingService";
 import { updateTicketStatus } from "../../services/ticketService";
+import { getFlightById } from "../../services/flightService";
 import styles from "./ManageTicket.module.css";
 
 const ManageTicket = () => {
@@ -17,7 +14,6 @@ const ManageTicket = () => {
     const fetchBookings = async () => {
       try {
         const data = await getBookings();
-        console.log("Fetched Bookings:", data);
         setBookings(data);
       } catch (error) {
         console.error("Error fetching bookings:", error);
@@ -31,12 +27,22 @@ const ManageTicket = () => {
   }, []);
 
   // Cancel booking
-  const handleCancelBooking = async (bookingId) => {
-    if (!window.confirm("Bạn có chắc chắn muốn hủy vé này không?")) {
-      return;
-    }
-
+  const handleCancelBooking = async (bookingId, flightId) => {
     try {
+      const flight = await getFlightById(flightId);
+      const departureDate = new Date(flight.departure_time);
+      const currentDate = new Date();
+      const daysDifference = (departureDate - currentDate) / (1000 * 60 * 60 * 24);
+
+      if (daysDifference < 3) {
+        alert("Không thể hủy vé trước khi chuyến bay cất cánh 3 ngày.");
+        return;
+      }
+
+      if (!window.confirm("Bạn có chắc chắn muốn hủy vé này không?")) {
+        return;
+      }
+
       await updateBooking(bookingId, { status: "canceled" });
 
       const canceledBooking = bookings.find(
@@ -64,6 +70,13 @@ const ManageTicket = () => {
   };
 
   const filteredBookings = bookings.filter((booking) => {
+    const currentDate = new Date();
+    const departureDate = new Date(booking.departure_time);
+
+    if (departureDate < currentDate) {
+      return false;
+    }
+
     if (filter === "successful") {
       return booking.status === "booked";
     } else if (filter === "canceled") {
@@ -142,7 +155,7 @@ const ManageTicket = () => {
                   <button
                     className={styles.cancelButton}
                     onClick={() =>
-                      handleCancelBooking(booking.booked_ticket_id)
+                      handleCancelBooking(booking.booked_ticket_id, booking.flight_id)
                     }
                   >
                     Hủy Vé
