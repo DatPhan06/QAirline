@@ -1,8 +1,10 @@
-from typing import List, Union
+from typing import List, Union, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload, aliased
 from sqlalchemy import func
+from datetime import datetime
+
 
 
 from .. import models, schemas, services
@@ -30,34 +32,64 @@ router = APIRouter(
 
 @router.get("/stats/overview")
 def get_booking_stats(
-    db: Session = Depends(get_db),
-    current_admin: models.Admin = Depends(get_current_admin),
+    month: Optional[int] = None,
+    year: Optional[int] = None,
+    db: Session = Depends(database.get_db),
+    current_admin: models.Admin = Depends(get_current_admin)
 ):
-    total_bookings = db.query(models.BookedTicket).count()
-    total_revenue = db.query(func.sum(models.BookedTicket.price)).scalar() or 0
+    if month:
+        # Lấy thống kê theo từng ngày trong tháng
+        query = db.query(
+            func.date(models.BookedTicket.booking_time).label('day'),
+            func.count(models.BookedTicket.booked_ticket_id).label('bookings'),
+            func.sum(models.BookedTicket.price).label('revenue')
+        ).group_by('day')
+    else:
+        # Lấy thống kê theo 12 tháng trong năm
+        query = db.query(
+            func.extract('month', models.BookedTicket.booking_time).label('month'),
+            func.count(models.BookedTicket.booked_ticket_id).label('bookings'),
+            func.sum(models.BookedTicket.price).label('revenue')
+        ).group_by('month')
 
-    bookings_by_user = (
-        db.query(models.User.username, func.count(models.BookedTicket.booked_ticket_id).label('bookings'))
-        .join(models.BookedTicket, models.BookedTicket.user_id == models.User.user_id)
-        .group_by(models.User.username)
-        .all()
-    )
-    bookings_by_user = [{"username": username, "bookings": bookings} for username, bookings in bookings_by_user]
+    if month:
+        query = query.filter(func.extract('month', models.BookedTicket.booking_time) == month)
+    if year:
+        query = query.filter(func.extract('year', models.BookedTicket.booking_time) == year)
 
-    bookings_by_flight = (
-        db.query(models.Flight.flight_number, func.count(models.BookedTicket.booked_ticket_id).label('bookings'))
-        .join(models.BookedTicket, models.BookedTicket.flight_id == models.Flight.flight_id)
-        .group_by(models.Flight.flight_number)
-        .all()
-    )
-    bookings_by_flight = [{"flightNumber": flight_number, "bookings": bookings} for flight_number, bookings in bookings_by_flight]
+    stats = query.all()
+    total_bookings = sum(stat.bookings for stat in stats)
+    total_revenue = sum(stat.revenue for stat in stats)
 
-    return {
-        "totalBookings": total_bookings,
-        "totalRevenue": total_revenue,
-        "bookingsByUser": bookings_by_user,
-        "bookingsByFlight": bookings_by_flight,
-    }
+    if month:
+        result = {
+            "totalBookings": total_bookings,
+            "totalRevenue": total_revenue,
+            "bookingsByDay": [
+                {
+                    "day": stat.day.day,
+                    "bookings": stat.bookings,
+                    "revenue": stat.revenue
+                }
+                for stat in stats
+            ],
+            "bookingsByMonth": []
+        }
+    else:
+        result = {
+            "totalBookings": total_bookings,
+            "totalRevenue": total_revenue,
+            "bookingsByMonth": [
+                {
+                    "month": stat.month,
+                    "bookings": stat.bookings,
+                    "revenue": stat.revenue
+                }
+                for stat in stats
+            ],
+            "bookingsByDay": []
+        }
+    return result
 
 @router.post("/", response_model=schemas.BookedTicket)
 def create_booking(
@@ -138,21 +170,30 @@ def get_bookings_by_ticket_id(
 @router.get("/", response_model=List[schemas.BookedTicket])
 def get_bookings(
     db: Session = Depends(get_db),
-    current_user: Union[models.User, models.Admin] = Depends(get_current_user_or_admin),
+    current_admin: models.Admin = Depends(get_current_admin)
 ) -> List[models.BookedTicket]:
     """
-    Lấy danh sách tất cả vé đã đặt của người dùng hiện tại.
-
-    Args:
-        db (Session): Phiên làm việc với cơ sở dữ liệu.
-        current_user (models.User): Người dùng hiện tại (đã đăng nhập).
-
-    Returns:
-        List[models.BookedTicket]: Danh sách vé đã đặt.
+    Lấy danh sách tất cả các vé đã đặt.
     """
-    if isinstance(current_user, models.Admin):
-        return services.booking_service.get_all_bookings(db)
-    return services.booking_service.get_bookings_by_user(db, current_user.user_id)
+    # Create aliases for the second join with Airport
+    ArrivalAirport = aliased(models.Airport)
+    
+    bookings = (
+        db.query(models.BookedTicket)
+        .join(models.Flight)
+        .join(models.User)
+        .join(models.Seat)
+        .join(models.Airport, models.Flight.departure_airport_id == models.Airport.airport_id)
+        .join(ArrivalAirport, models.Flight.arrival_airport_id == ArrivalAirport.airport_id)
+        .options(
+            joinedload(models.BookedTicket.flight).joinedload(models.Flight.departure_airport),
+            joinedload(models.BookedTicket.flight).joinedload(models.Flight.arrival_airport),
+            joinedload(models.BookedTicket.user),
+            joinedload(models.BookedTicket.seat)
+        )
+        .all()
+    )
+    return bookings
 
 @router.put("/{booking_id}", response_model=schemas.BookedTicket)
 def update_booking(

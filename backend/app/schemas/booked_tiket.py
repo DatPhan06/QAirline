@@ -1,7 +1,10 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import BaseModel
+from .flight import Flight
+from .user import User
+from .seat import Seat
 
 
 class BookedTicketBase(BaseModel):
@@ -52,9 +55,29 @@ class BookedTicket(BookedTicketBase):
     """
 
     booked_ticket_id: int
+    flight: Flight
     user_id: int
+    user: User 
+    seat: Seat
     booking_time: datetime
     status: str
 
+    class Config:
+        orm_mode = True
+
+class BookingStats(BaseModel):
+    month: Optional[datetime]
+    day: Optional[int]
+    bookings: int
+    revenue: float
+
+    class Config:
+        orm_mode = True
+
+class BookingStatsOverview(BaseModel):
+    totalBookings: int
+    totalRevenue: float
+    bookingsByMonth: Optional[List[BookingStats]]
+    bookingsByDay: Optional[List[BookingStats]]
     class Config:
         orm_mode = True
