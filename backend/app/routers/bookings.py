@@ -170,8 +170,8 @@ def get_bookings_by_ticket_id(
 @router.get("/", response_model=List[schemas.BookedTicket])
 def get_bookings(
     db: Session = Depends(get_db),
-    current_admin: models.Admin = Depends(get_current_admin)
-) -> List[models.BookedTicket]:
+    current_user: Union[models.User, models.Admin] = Depends(get_current_user_or_admin),
+    ) -> List[models.BookedTicket]:
     """
     Lấy danh sách tất cả các vé đã đặt.
     """

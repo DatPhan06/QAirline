@@ -32,10 +32,11 @@ const ManageTicket = () => {
       const flight = await getFlightById(flightId);
       const departureDate = new Date(flight.departure_time);
       const currentDate = new Date();
-      const daysDifference = (departureDate - currentDate) / (1000 * 60 * 60 * 24);
+      const daysDifference =
+        (departureDate - currentDate) / (1000 * 60 * 60 * 24);
 
-      if (daysDifference < 3) {
-        alert("Không thể hủy vé trước khi chuyến bay cất cánh 3 ngày.");
+      if (daysDifference < 7) {
+        alert("Không thể hủy vé trước khi chuyến bay cất cánh 7 ngày.");
         return;
       }
 
@@ -155,7 +156,10 @@ const ManageTicket = () => {
                   <button
                     className={styles.cancelButton}
                     onClick={() =>
-                      handleCancelBooking(booking.booked_ticket_id, booking.flight_id)
+                      handleCancelBooking(
+                        booking.booked_ticket_id,
+                        booking.flight_id
+                      )
                     }
                   >
                     Hủy Vé
