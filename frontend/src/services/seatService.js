@@ -29,26 +29,6 @@ export const createSeat = async (seatData) => {
   }
 };
 
-// Hàm tạo tất cả ghế cho một máy bay
-export const createSeatsForAirplane = async (airplaneId, seatCapacity) => {
-  try {
-    const seats = [];
-    for (let i = 1; i <= seatCapacity; i++) {
-      const seatData = {
-        airplane_id: airplaneId,
-        seat_number: `A${i}`,
-        seat_class: "Economy",
-        status: "available",
-      };
-      seats.push(createSeat(seatData));
-    }
-    await Promise.all(seats);
-  } catch (error) {
-    console.error("Error creating seats for airplane:", error);
-    throw error;
-  }
-};
-
 // Hàm lấy danh sách chỗ ngồi theo máy bay
 export const getSeatsByAirplaneId = async (airplaneId) => {
   try {

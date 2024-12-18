@@ -23,11 +23,18 @@
   overflow-x: hidden;
 }
 
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 /* Tiêu đề chính */
-.mainContent h1 {
+.header h1 {
   font-size: 2.4rem;
   color: #2c3e50;
-  margin-bottom: 30px;
   font-weight: 600;
 }
 
@@ -41,7 +48,6 @@
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-bottom: 20px;
 }
 
 .addButton:hover {

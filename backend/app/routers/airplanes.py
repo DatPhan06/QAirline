@@ -23,7 +23,9 @@ def create_airplane(
     Returns:
         schemas.Airplane: Thông tin máy bay mới được tạo.
     """
-    return services.airplane_service.create_airplane(db, airplane)
+    new_airplane = services.airplane_service.create_airplane(db, airplane)
+    services.seat_service.create_seats_for_airplane(db, new_airplane.airplane_id, new_airplane.seat_capacity)
+    return new_airplane
 
 
 @router.get("/{airplane_id}", response_model=schemas.Airplane)
