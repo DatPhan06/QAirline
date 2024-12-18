@@ -2,6 +2,9 @@ from datetime import datetime
 from typing import Optional, List
 
 from pydantic import BaseModel
+from .flight import Flight
+from .user import User
+from .seat import Seat
 
 
 class BookedTicketBase(BaseModel):
@@ -52,7 +55,10 @@ class BookedTicket(BookedTicketBase):
     """
 
     booked_ticket_id: int
+    flight: Flight
     user_id: int
+    user: User 
+    seat: Seat
     booking_time: datetime
     status: str
 

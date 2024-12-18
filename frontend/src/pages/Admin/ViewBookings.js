@@ -104,13 +104,25 @@ const ViewBookings = () => {
   }
 
   // Lọc danh sách đặt vé dựa trên tìm kiếm
-  const filteredBookings = bookings.filter(
-    (booking) =>
-      booking.booked_ticket_id.toString().includes(searchQuery) ||
-      booking.user_id.toString().includes(searchQuery) ||
-      booking.flight_id.toString().includes(searchQuery) ||
-      booking.status.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredBookings = bookings.filter((booking) => {
+    const searchTerm = searchQuery.toLowerCase();
+    return (
+      booking.booked_ticket_id.toString().includes(searchTerm) ||
+      booking.user_id.toString().includes(searchTerm) ||
+      booking.flight_id.toString().includes(searchTerm) ||
+      booking.status.toLowerCase().includes(searchTerm) ||
+      // Add user information search
+      booking.user?.full_name?.toLowerCase().includes(searchTerm) ||
+      booking.user?.email?.toLowerCase().includes(searchTerm) ||
+      booking.user?.phone?.toLowerCase().includes(searchTerm) ||
+      // Add flight information search
+      booking.flight?.flight_number?.toLowerCase().includes(searchTerm) ||
+      booking.flight?.departure_airport?.name
+        ?.toLowerCase()
+        .includes(searchTerm) ||
+      booking.flight?.arrival_airport?.name?.toLowerCase().includes(searchTerm)
+    );
+  });
 
   // Tính toán các đặt vé cho trang hiện tại
   const indexOfLastBooking = currentPage * bookingsPerPage;
@@ -280,31 +292,6 @@ const ViewBookings = () => {
             </div>
           )}
         </div>
-
-        <div className={styles.chartContainer}>
-          <h2>Đặt vé theo chuyến bay</h2>
-          <PieChart width={600} height={400}>
-            <Pie
-              data={flightData}
-              dataKey="bookings"
-              nameKey="name"
-              cx="50%"
-              cy="50%"
-              outerRadius={150}
-              fill="#82ca9d"
-              label
-            >
-              {flightData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={"#" + (((1 << 24) * Math.random()) | 0).toString(16)}
-                />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-          </PieChart>
-        </div>
       </div>
 
       {/* Cửa sổ Modal hiển thị chi tiết đặt vé */}
@@ -318,30 +305,76 @@ const ViewBookings = () => {
               &times;
             </span>
             <h2>Chi Tiết Đặt Vé</h2>
+
             <div className={styles.modalDetails}>
-              <p>
-                <strong>ID Đặt Vé:</strong> {selectedBooking.booked_ticket_id}
-              </p>
-              <p>
-                <strong>User ID:</strong> {selectedBooking.user_id}
-              </p>
-              <p>
-                <strong>Flight ID:</strong> {selectedBooking.flight_id}
-              </p>
-              <p>
-                <strong>Ticket ID:</strong> {selectedBooking.ticket_id}
-              </p>
-              <p>
-                <strong>Giá:</strong> {selectedBooking.price.toLocaleString()}{" "}
-                VND
-              </p>
-              <p>
-                <strong>Trạng Thái:</strong> {selectedBooking.status}
-              </p>
-              <p>
-                <strong>Ngày Đặt:</strong>{" "}
-                {new Date(selectedBooking.booking_time).toLocaleString()}
-              </p>
+              {/* Thông tin đặt vé */}
+              <div className={styles.detailSection}>
+                <h3>Thông tin đặt vé</h3>
+                <p>
+                  <strong>ID Đặt Vé:</strong> {selectedBooking.booked_ticket_id}
+                </p>
+                <p>
+                  <strong>Giá vé:</strong>{" "}
+                  {selectedBooking.price.toLocaleString()} VND
+                </p>
+                <p>
+                  <strong>Trạng thái:</strong> {selectedBooking.status}
+                </p>
+                <p>
+                  <strong>Thời gian đặt:</strong>{" "}
+                  {new Date(selectedBooking.booking_time).toLocaleString()}
+                </p>
+              </div>
+
+              {/* Thông tin chuyến bay */}
+              <div className={styles.detailSection}>
+                <h3>Thông tin chuyến bay</h3>
+                <p>
+                  <strong>Mã chuyến bay:</strong>{" "}
+                  {selectedBooking.flight?.flight_number}
+                </p>
+                <p>
+                  <strong>Điểm khởi hành:</strong>{" "}
+                  {selectedBooking.flight?.departure_airport?.name}
+                </p>
+                <p>
+                  <strong>Điểm đến:</strong>{" "}
+                  {selectedBooking.flight?.arrival_airport?.name}
+                </p>
+                <p>
+                  <strong>Thời gian khởi hành:</strong>{" "}
+                  {new Date(
+                    selectedBooking.flight?.departure_time
+                  ).toLocaleString()}
+                </p>
+                <p>
+                  <strong>Thời gian đến:</strong>{" "}
+                  {new Date(
+                    selectedBooking.flight?.arrival_time
+                  ).toLocaleString()}
+                </p>
+                <p>
+                  <strong>Số ghế:</strong> {selectedBooking.seat?.seat_number}
+                </p>
+              </div>
+
+              {/* Thông tin hành khách */}
+              <div className={styles.detailSection}>
+                <h3>Thông tin hành khách</h3>
+                <p>
+                  <strong>ID người dùng:</strong>{" "}
+                  {selectedBooking.user?.user_id}
+                </p>
+                <p>
+                  <strong>Tên:</strong> {selectedBooking.user?.full_name}
+                </p>
+                <p>
+                  <strong>Email:</strong> {selectedBooking.user?.email}
+                </p>
+                <p>
+                  <strong>Số điện thoại:</strong> {selectedBooking.user?.phone}
+                </p>
+              </div>
             </div>
           </div>
         </div>

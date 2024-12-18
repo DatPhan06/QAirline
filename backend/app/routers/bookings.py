@@ -1,7 +1,7 @@
 from typing import List, Union, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload, aliased
 from sqlalchemy import func
 from datetime import datetime
 
@@ -170,21 +170,30 @@ def get_bookings_by_ticket_id(
 @router.get("/", response_model=List[schemas.BookedTicket])
 def get_bookings(
     db: Session = Depends(get_db),
-    current_user: Union[models.User, models.Admin] = Depends(get_current_user_or_admin),
+    current_admin: models.Admin = Depends(get_current_admin)
 ) -> List[models.BookedTicket]:
     """
-    Lấy danh sách tất cả vé đã đặt của người dùng hiện tại.
-
-    Args:
-        db (Session): Phiên làm việc với cơ sở dữ liệu.
-        current_user (models.User): Người dùng hiện tại (đã đăng nhập).
-
-    Returns:
-        List[models.BookedTicket]: Danh sách vé đã đặt.
+    Lấy danh sách tất cả các vé đã đặt.
     """
-    if isinstance(current_user, models.Admin):
-        return services.booking_service.get_all_bookings(db)
-    return services.booking_service.get_bookings_by_user(db, current_user.user_id)
+    # Create aliases for the second join with Airport
+    ArrivalAirport = aliased(models.Airport)
+    
+    bookings = (
+        db.query(models.BookedTicket)
+        .join(models.Flight)
+        .join(models.User)
+        .join(models.Seat)
+        .join(models.Airport, models.Flight.departure_airport_id == models.Airport.airport_id)
+        .join(ArrivalAirport, models.Flight.arrival_airport_id == ArrivalAirport.airport_id)
+        .options(
+            joinedload(models.BookedTicket.flight).joinedload(models.Flight.departure_airport),
+            joinedload(models.BookedTicket.flight).joinedload(models.Flight.arrival_airport),
+            joinedload(models.BookedTicket.user),
+            joinedload(models.BookedTicket.seat)
+        )
+        .all()
+    )
+    return bookings
 
 @router.put("/{booking_id}", response_model=schemas.BookedTicket)
 def update_booking(
