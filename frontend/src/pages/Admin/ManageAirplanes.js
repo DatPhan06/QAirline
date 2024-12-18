@@ -4,6 +4,7 @@ import {
   getAirplanes,
   updateAirplane,
 } from "../../services/airplaneService";
+import { createSeatsForAirplane } from "../../services/seatService";
 import AdminSidebar from "../../components/AdminSidebar";
 import AirplaneList from "../../components/AirplaneList";
 import styles from "./ManageAirplanes.module.css";
@@ -47,6 +48,10 @@ const ManageAirplanes = () => {
         alert("Máy bay đã được cập nhật thành công!");
       } else {
         const newAirplane = await createAirplane(airplaneData);
+        await createSeatsForAirplane(
+          newAirplane.airplane_id,
+          newAirplane.seat_capacity
+        );
         alert("Máy bay mới đã được thêm thành công!");
       }
       setIsModalOpen(false);
