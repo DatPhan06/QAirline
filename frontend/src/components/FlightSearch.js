@@ -84,8 +84,6 @@ const FlightSearch = () => {
                   </select>
             </div>
 
-              {/* Icon chuyển hướng */}
-              <div className={styles.arrowIcon}>⟶</div>
 
               <div className={styles.formGroup}>
                 <label htmlFor="arrival" className={styles.label}>Đến</label>

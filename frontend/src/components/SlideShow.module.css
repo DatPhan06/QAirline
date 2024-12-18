@@ -1,23 +1,27 @@
 .slideshowContainer {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Chiều cao toàn màn hình, bạn có thể điều chỉnh */
-    overflow: hidden;
-  }
-  
-  .slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 90vh;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    z-index: 1;
-  }
-  
-  .active {
-    opacity: 1;
-  }
-  
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* Thêm đổ bóng */
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90vh;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.1); /* Bắt đầu với tỷ lệ lớn hơn */
+  transition: all 1s ease-in-out; /* Transition cho tất cả thuộc tính */
+  z-index: 1;
+}
+
+.active {
+  opacity: 1;
+  transform: scale(1); /* Trở về tỷ lệ bình thường khi active */
+  filter: brightness(1.1); /* Tăng độ sáng cho ảnh active */
+}

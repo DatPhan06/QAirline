@@ -49,7 +49,7 @@
 }
 
 .flightTable thead th {
-  background: #005baa; 
+  background: #1a8098; 
   color: #ffffff;
   font-weight: 700;
   text-transform: uppercase;
@@ -57,7 +57,7 @@
   font-size: 0.9rem;
   padding: 14px 10px;
   text-align: left;
-  border-bottom: 2px solid #003f7b;
+  border-bottom: 2px solid #1a8098;
 }
 
 .flightTable tbody td {
@@ -107,8 +107,8 @@
 }
 
 .activePageButton {
-  background: #005baa; 
+  background: #1a8098; 
   color: #ffffff;
-  border-color: #005baa;
+  border-color: #1a8098;
   font-weight: 600;
 }

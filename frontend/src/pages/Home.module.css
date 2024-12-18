@@ -1,257 +1,275 @@
-/* Home.module.css */
-
-/* General Styles */
-.landing-page {
-  width: 100%;
-  min-height: 100vh;
-  font-family: 'Arial, sans-serif';
-  background-color: #f5f5f5;
-}
-
-.contentContainer {
-  width: 100%;
+/* Base container */
+.homeContainer {
   max-width: 1200px;
   margin: 0 auto;
-}
-
-/* Section 1: Background and Search Bar */
-.searchSection {
-  position: absolute;
-  bottom: -130px; /* Điều chỉnh để form search thò ra khỏi slideshow */
-  left: 0;
-  right: 0;
-  z-index: 2;
-}
-
-.section1 {
-  position: relative;
-  min-height: 100vh; /* Giảm chiều cao một chút */
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 80px; /* Thêm margin để tạo khoảng trống cho phần đè lên */
-}
-
-/* Updated styles for .bookBtn */
-.bookBtn {
-  position: absolute;
-  z-index: 3;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 15px 40px;
-  background: linear-gradient(45deg, #6b9cff, #4d75f9);
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: bold;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.bookBtn:hover {
-  background: linear-gradient(45deg, #f94d6a, #ff6b6b);
-  transform: translate(-50%, -50%) scale(1.05);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-}
-
-/* Section 2: Destinations */
-.section2 {
-  padding: 60px 0;
-  background-color: #ffffff;
-}
-
-.locationHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.textHeader {
-  max-width: 800px;
-}
-
-.headerMain {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #333333;
-  margin-bottom: 10px;
-}
-
-.headerDes {
-  font-size: 1.1rem;
-  color: #666666;
-}
-
-.buttonHeader2 {
-  margin-top: 20px;
-}
-
-.button2 {
-  background-color: #2196f3;
-  color: #fff;
-  border: none;
-  padding: 12px 25px;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.button2:hover {
-  background-color: #1976d2;
-}
-
-.locationInfo {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  /* Add your destination cards or images here */
-}
-
-/* Section 3: Flights & Hotels */
-.section3 {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  padding: 60px 0;
-  background-color: #f0f0f0;
-  justify-content: center;
-}
-
-.flightImg,
-.hotelImg {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #ffffff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.flightImg img,
-.hotelImg img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.rectangle-40,
-.rectangle-41 {
-  width: 100%;
-  height: auto;
-}
-
-.frame-2608785,
-.frame-26087862 {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
   padding: 20px;
-  background: rgba(0, 0, 0, 0.6);
-  color: #ffffff;
-}
-
-.rectangle-32,
-.rectangle-322 {
+  display: flex;
+  gap: 30px;
+  min-height: 100vh;
+  box-sizing: border-box;
   width: 100%;
-  height: 4px;
-  background-color: #ff5722;
-  margin-bottom: 10px;
+  padding-top: 50px;
 }
 
-.frame-2608784 {
+/* Left section - 2/3 width */
+.leftSection {
+  flex: 2;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  gap: 20px;
+  min-width: 0;
+  width: 100%;
 }
 
-.frame-2608786 {
+/* Right section - 1/3 width */
+.rightSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  width: 100%;
+  max-width: calc(100% / 3);
+}
+
+/* SlideShow container */
+.slideShowContainer {
+  width: 100%;
+  max-height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Hashtag bar */
+.hashtagBar {
+  width: 100%;
+  background: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hashtagBar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.hashtagBar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.hashtagBar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.hashtagBar span {
+  color: #1a8098;
+  font-weight: 500;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 4px 12px;
+  border-radius: 15px;
+  background: rgba(0, 91, 170, 0.1);
+}
+
+.hashtagBar span:hover {
+  color: #003d71;
+  background: rgba(0, 91, 170, 0.2);
+}
+
+/* FlightSearch section */
+.searchSection {
+  width: 100%;
+  background: #fff;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Email signup section */
+.emailSignup {
+  width: 100%;
+  background: #fff;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.emailSignup h3 {
+  font-size: 1.2rem;
+  color: #2c3e50;
   margin-bottom: 15px;
 }
 
-.flights2,
-.hotels2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 5px;
+.emailSignup form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.search-flights,
-.search-hotels {
-  font-size: 1rem;
-  color: #dddddd;
+.emailSignup input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
 }
 
-.button {
-  margin-top: 10px;
+.emailSignup input:focus {
+  border-color: #005baa;
+  box-shadow: 0 0 0 2px rgba(0, 91, 170, 0.1);
+  outline: none;
 }
 
-.style-layer {
+.emailSignup button {
+  width: 100%;
+  background: #1a8098;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.emailSignup button:hover {
+  background: #004c8c;
+  transform: translateY(-1px);
+}
+
+/* Popular destinations section */
+.popularDestinations {
+  width: 100%;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.popularDestinations h3 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.destinationList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.destinationItem {
   display: flex;
   align-items: center;
+  gap: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
   cursor: pointer;
+  background: #f8f9fa;
 }
 
-.style-layer img {
-  width: 24px;
-  height: 24px;
-  margin-right: 10px;
+.destinationItem:hover {
+  background: #f1f4f7;
+  transform: translateX(5px);
 }
 
-.button2 {
+.destinationImage {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.destinationInfo h4 {
   font-size: 1rem;
-  color: #ffffff;
-  background-color: transparent;
-  border: none;
+  color: #2c3e50;
+  margin: 0 0 5px 0;
+}
+
+.viewAllButton {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: none;
+  border: 2px solid #005baa;
+  color: #005baa;
+  border-radius: 8px;
+  font-weight: 500;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.button:hover .button2 {
-  color: #ffeb3b;
+.viewAllButton:hover {
+  background: #005baa;
+  color: white;
 }
 
-.paper-plane2,
-.paper-plane3 {
-  width: 24px;
-  height: 24px;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .section3 {
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .homeContainer {
     flex-direction: column;
-    align-items: center;
+    padding: 15px;
+    padding-top: 80px;
   }
 
-  .searchSection {
-    width: 90%;
+  .leftSection,
+  .rightSection {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
   }
 
-  .headerMain {
-    font-size: 2rem;
+  .slideShowContainer {
+    height: 300px;
   }
 
-  .headerDes {
-    font-size: 1rem;
+  .hashtagBar {
+    padding: 10px;
   }
 
-  .bookBtn {
-    padding: 12px 25px;
-    font-size: 0.9rem;
+  .hashtagBar span {
+    font-size: 0.8rem;
+    padding: 3px 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .slideShowContainer {
+    height: 250px;
   }
 
-  .button2 {
-    padding: 10px 20px;
-    font-size: 0.9rem;
+  .destinationItem {
+    padding: 10px;
+  }
+
+  .destinationImage {
+    width: 60px;
+    height: 60px;
+  }
+
+  .emailSignup,
+  .popularDestinations {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slideShowContainer {
+    height: 200px;
+  }
+
+  .hashtagBar span {
+    font-size: 0.75rem;
+    padding: 2px 8px;
   }
 }

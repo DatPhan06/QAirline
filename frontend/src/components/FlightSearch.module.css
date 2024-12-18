@@ -1,7 +1,7 @@
 .flightSearchContainer {
   position: relative;
   z-index: 2; /* Cao hơn slideshow để hiển thị phía trên */
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: #f9f7f3;
   backdrop-filter: blur(10px);
   padding: 30px;
   border-radius: 8px;
@@ -9,7 +9,6 @@
   max-width: 1000px;
   width: 90%;
   margin: 0 auto;
-  transform: translateY(-50%); /* Đẩy form lên trên để đè lên slideshow */
 }
 
 .title {
@@ -21,8 +20,8 @@
 /* Thanh form chính */
 .searchForm {
   display: flex; /* Sử dụng flex cho layout */
-  align-items: center;
-  gap: 15px;
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
   padding: 10px 20px;
   background-color: #f9f7f3;
@@ -30,9 +29,9 @@
 
 .fromToContainer, .dateContainer {
   display: flex;
-  flex: 1; /* Tự động chia không gian */
-  align-items: center;
+  flex-direction: column;
   gap: 15px;
+  width: 100%;
 }
 
 .dateContainer {
@@ -42,8 +41,8 @@
 .formGroup {
   display: flex;
   flex-direction: column;
-  position: relative;
-  max-width: 200px;
+  gap: 8px;
+  width: 100%;
 }
 
 .label {
@@ -57,35 +56,41 @@
   border: none;
   background: transparent;
   border-bottom: 1px solid #ccc;
-  padding: 5px 0;
   font-size: 14px;
   color: #333;
   outline: none;
   min-width: 150px;
   flex: 1; /* Tự động giãn chiều rộng */
-  max-width: 150px; /* Kiểm soát chiều rộng tối đa */
+  width: 100%;
+  padding: 12px;
+  transition: all 0.3s ease;
 }
 
 .select:focus, .input:focus {
-  border-bottom-color: #999;
+  border-color: #1a8098;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(26, 128, 152, 0.1);
 }
 
 /* Icon chuyển hướng giữa Từ và Đến */
 .arrowIcon {
   font-size: 20px;
   color: #6e6e6e;
-  flex-shrink: 0; /* Đảm bảo icon không bị co lại */
+  flex-shrink: 0; 
 }
 
 /* Nút tìm kiếm */
 .searchButton {
-  background-color: #1a8098; 
+  width: 100%;
+  background-color: #1a8098;
   color: #fff;
-  padding: 8px 15px;
+  padding: 12px;
   border: none;
-  border-radius: 3px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
 }
 
 .searchButton:hover {
@@ -94,15 +99,11 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .searchForm {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
+  .flightSearchContainer {
+    padding: 20px;
   }
 
-  .fromToContainer,
-  .dateContainer {
-    width: 100%;
-    gap: 10px;
+  .searchForm {
+    gap: 15px;
   }
 }
