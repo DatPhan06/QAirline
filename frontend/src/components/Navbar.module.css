@@ -5,9 +5,8 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: white;
-  /* background-color: #333333;  */
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+  background: #f9f7f3;
+  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1); /* Chỉ đổ bóng phía dưới */
   padding: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
