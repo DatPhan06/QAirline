@@ -22,9 +22,9 @@ const Home = () => {
   }, []);
 
   const slideshowImages = [
-    "/images/backa.jpg",
-    "/images/airwayfilm.jpg",
-    "/images/hanoi.jpeg",
+    "/images/tlan.png",
+    "/images/danang.png",
+    "/images/bali.png",
   ];
 
   const popularDestinations = [
