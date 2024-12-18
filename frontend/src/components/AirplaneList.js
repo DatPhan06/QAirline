@@ -1,27 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { getAirplanes } from "../services/airplaneService";
+import React from "react";
 import styles from "./AirplaneList.module.css";
 
-/**
- * Component hiển thị danh sách các máy bay.
- * Sử dụng hook useEffect để gọi API lấy dữ liệu máy bay khi component được render.
- */
-const AirplaneList = () => {
-  const [airplanes, setAirplanes] = useState([]);
-
-  useEffect(() => {
-    const fetchAirplanes = async () => {
-      try {
-        const data = await getAirplanes();
-        setAirplanes(data);
-      } catch (error) {
-        console.error("Lỗi khi lấy dữ liệu máy bay:", error);
-      }
-    };
-
-    fetchAirplanes();
-  }, []);
-
+const AirplaneList = ({ airplanes, onAirplaneClick }) => {
   return (
     <div className={styles.airplaneListContainer}>
       {airplanes.length === 0 ? (
@@ -29,31 +9,35 @@ const AirplaneList = () => {
       ) : (
         <>
           <h2 className={styles.sectionTitle}>Danh Sách Máy Bay</h2>
-          <ul className={styles.airplaneList}>
-            {airplanes.map((airplane) => (
-              <li key={airplane.airplane_id} className={styles.airplaneCard}>
-                <span className={styles.airplaneModel}>{airplane.model}</span>
-                <p className={styles.airplaneDetails}>
-                  <span>Nhà sản xuất:</span> {airplane.manufacturer}
-                </p>
-                <p className={styles.airplaneDetails}>
-                  <span>Sức chứa:</span> {airplane.seat_capacity} ghế
-                </p>
-                <p className={styles.airplaneDetails}>
-                  <span>Tầm bay:</span> {airplane.range_km} km
-                </p>
-                <p className={styles.airplaneDetails}>
-                  <span>Năm sản xuất:</span> {airplane.year_of_manufacture}
-                </p>
-                <p className={styles.airplaneDetails}>
-                  <span>Trạng thái bảo trì:</span> {airplane.maintenance_status}
-                </p>
-                <p className={styles.airplaneDetails}>
-                  <span>Trạng thái:</span> {airplane.status}
-                </p>
-              </li>
-            ))}
-          </ul>
+          <table className={styles.airplaneTable}>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Nhà sản xuất</th>
+                <th>Sức chứa ghế</th>
+                <th>Tầm bay (km)</th>
+                <th>Năm sản xuất</th>
+                <th>Tình trạng bảo trì</th>
+                <th>Trạng thái</th>
+              </tr>
+            </thead>
+            <tbody>
+              {airplanes.map((airplane) => (
+                <tr
+                  key={airplane.airplane_id}
+                  onClick={() => onAirplaneClick(airplane)}
+                >
+                  <td>{airplane.model}</td>
+                  <td>{airplane.manufacturer}</td>
+                  <td>{airplane.seat_capacity}</td>
+                  <td>{airplane.range_km}</td>
+                  <td>{airplane.year_of_manufacture}</td>
+                  <td>{airplane.maintenance_status}</td>
+                  <td>{airplane.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </>
       )}
     </div>
