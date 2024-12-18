@@ -11,13 +11,13 @@ const AdminLogin = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Kiểm tra token khi component được mount
-    const token = localStorage.getItem("adminToken");
-    if (token) {
-      navigate("/admin/post-info");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   // Kiểm tra token khi component được mount
+  //   const token = localStorage.getItem("adminToken");
+  //   if (token) {
+  //     navigate("/admin/post-info");
+  //   }
+  // }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

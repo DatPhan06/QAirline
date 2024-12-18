@@ -116,3 +116,15 @@ export const deleteBooking = async (bookingId) => {
     throw error;
   }
 };
+
+export const getBookingStatsByMonth = async (month, year) => {
+  try {
+    const response = await axiosInstance.get(
+      `/bookings/stats/overview?month=${month}&year=${year}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching booking stats by month:", error);
+    throw error;
+  }
+};

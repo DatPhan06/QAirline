@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import BaseModel
 
@@ -56,5 +56,22 @@ class BookedTicket(BookedTicketBase):
     booking_time: datetime
     status: str
 
+    class Config:
+        orm_mode = True
+
+class BookingStats(BaseModel):
+    month: Optional[datetime]
+    day: Optional[int]
+    bookings: int
+    revenue: float
+
+    class Config:
+        orm_mode = True
+
+class BookingStatsOverview(BaseModel):
+    totalBookings: int
+    totalRevenue: float
+    bookingsByMonth: Optional[List[BookingStats]]
+    bookingsByDay: Optional[List[BookingStats]]
     class Config:
         orm_mode = True

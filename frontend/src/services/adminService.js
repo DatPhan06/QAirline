@@ -187,3 +187,19 @@ export const createAdmin = async (adminData) => {
     throw error;
   }
 };
+
+// Hàm lấy thống kê đặt vé theo tháng
+export const getBookingStatsByMonth = async (month, year) => {
+  try {
+    const response = await axiosInstance.get(`/bookings/stats/overview`, {
+      params: {
+        month: month || undefined,
+        year: year,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching booking stats by month:", error);
+    throw error;
+  }
+};
