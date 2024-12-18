@@ -1,7 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./AirplaneList.module.css";
 
 const AirplaneList = ({ airplanes, onAirplaneClick }) => {
+  const navigate = useNavigate();
+
+  const handleEditClick = (airplane) => {
+    navigate(`/admin/edit-airplane/${airplane.airplane_id}`);
+  };
+
   return (
     <div className={styles.airplaneListContainer}>
       {airplanes.length === 0 ? (
@@ -19,14 +26,12 @@ const AirplaneList = ({ airplanes, onAirplaneClick }) => {
                 <th>Năm sản xuất</th>
                 <th>Tình trạng bảo trì</th>
                 <th>Trạng thái</th>
+                <th>Hành động</th>
               </tr>
             </thead>
             <tbody>
               {airplanes.map((airplane) => (
-                <tr
-                  key={airplane.airplane_id}
-                  onClick={() => onAirplaneClick(airplane)}
-                >
+                <tr key={airplane.airplane_id}>
                   <td>{airplane.model}</td>
                   <td>{airplane.manufacturer}</td>
                   <td>{airplane.seat_capacity}</td>
@@ -34,6 +39,14 @@ const AirplaneList = ({ airplanes, onAirplaneClick }) => {
                   <td>{airplane.year_of_manufacture}</td>
                   <td>{airplane.maintenance_status}</td>
                   <td>{airplane.status}</td>
+                  <td>
+                    <button
+                      className={styles.editButton}
+                      onClick={() => handleEditClick(airplane)}
+                    >
+                      Chỉnh sửa
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
