@@ -1,5 +1,3 @@
-/* ViewBookings.module.css */
-
 /* Container chính */
 .adminContainer {
   display: flex;
@@ -37,16 +35,23 @@
   display: flex;
   gap: 30px;
   margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
 /* Card thống kê */
 .statCard {
   background-color: #fff;
-  border-radius: 12px;
   padding: 25px;
+  border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   flex: 1;
+  min-width: 250px;
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-5px);
 }
 
 .statCard h2 {
@@ -70,43 +75,33 @@
   margin-bottom: 30px;
 }
 
-.chartContainer h2 {
-  font-size: 1.2rem;
-  color: #2c3e50;
-  margin-bottom: 15px;
-}
-
-/* Container bảng đặt vé */
+/* Danh sách đặt vé */
 .bookingsListContainer {
-  width: 100%;
   background: #fff;
   border-radius: 12px;
   padding: 25px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-}
-
-.bookingsListContainer h2 {
-  text-align: center;
-  font-size: 1.5rem;
-  color: #2c3e50;
-  margin-bottom: 20px;
 }
 
 /* Thanh tìm kiếm */
 .searchContainer {
   margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
 }
 
 .searchInput {
   width: 100%;
   max-width: 400px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px 20px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
   font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
 }
 
 /* Bảng đặt vé */
@@ -118,7 +113,7 @@
 
 .bookingsTable th,
 .bookingsTable td {
-  padding: 12px;
+  padding: 15px;
   text-align: left;
   border-bottom: 1px solid #eee;
 }
@@ -129,8 +124,12 @@
   font-weight: 600;
 }
 
+.bookingsTable tbody tr {
+  transition: background-color 0.3s ease;
+}
+
 .bookingsTable tbody tr:hover {
-  background-color: #f1f1f1;
+  background-color: #f8f9fa;
   cursor: pointer;
 }
 
@@ -139,117 +138,34 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 30px;
+  gap: 15px;
 }
 
-.pageButton {
+.pagination button {
   background-color: #3498db;
   color: white;
-  padding: 8px 16px;
-  margin: 0 5px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.pageButton:disabled {
+.pagination button:disabled {
   background-color: #bdc3c7;
   cursor: not-allowed;
 }
 
-.pageButton:hover:not(:disabled) {
+.pagination button:hover:not(:disabled) {
   background-color: #2980b9;
+  transform: translateY(-2px);
 }
 
-.activePage {
-  background-color: #2980b9;
-}
-
-/* Modal overlay */
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-/* Modal content */
-.modalContent {
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 500px;
-  position: relative;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.closeButton {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 24px;
+/* Loading state */
+.loading {
+  text-align: center;
   color: #666;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.closeButton:hover {
-  color: #e74c3c;
-}
-
-.modalDetails {
-  margin-top: 20px;
-}
-
-.modalDetails p {
-  margin: 10px 0;
-  font-size: 1rem;
-  color: #333;
-}
-
-.modalDetails p strong {
-  color: #2c3e50;
-  margin-right: 10px;
-}
-
-/* Responsive Design */
-@media (max-width: 1200px) {
-  .mainContent {
-    flex-direction: column;
-  }
-
-  .leftColumn {
-    flex: 0 0 auto;
-    width: 100%;
-  }
-
-  .chartContainer {
-    overflow-x: auto;
-  }
-}
-
-@media (max-width: 768px) {
-  .adminContainer {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-  }
-
-  .mainContent {
-    padding: 20px;
-  }
-
-  .bookingsTable {
-    display: block;
-    overflow-x: auto;
-  }
+  font-size: 1.1rem;
+  margin: 20px 0;
 }
