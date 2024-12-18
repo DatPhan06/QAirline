@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginAdmin } from "../../services/adminService";
 import styles from "./AdminLogin.module.css";
@@ -11,6 +11,14 @@ const AdminLogin = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Kiểm tra token khi component được mount
+    const token = localStorage.getItem("adminToken");
+    if (token) {
+      navigate("/admin/post-info");
+    }
+  }, [navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -18,7 +26,7 @@ const AdminLogin = () => {
       const response = await loginAdmin(formData.username, formData.password);
       localStorage.setItem("adminToken", response.access_token);
       alert("Đăng nhập thành công!");
-      navigate("/admin/manage-flights");
+      navigate("/admin/post-info");
     } catch (error) {
       console.error("Error during admin login:", error);
       alert("Đăng nhập thất bại, vui lòng thử lại.");

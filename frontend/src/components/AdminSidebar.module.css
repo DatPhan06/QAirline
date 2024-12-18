@@ -68,6 +68,24 @@
   font-weight: bold;
 }
 
+/* Nút đăng xuất */
+.logoutButton {
+  background: none;
+  border: none;
+  color: #ecf0f1;
+  font-size: 1.1rem;
+  padding: 12px 15px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.logoutButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .sidebar {
