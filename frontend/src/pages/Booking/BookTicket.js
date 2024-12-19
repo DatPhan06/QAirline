@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./BookTicket.module.css";
 import FlightList from "../../components/FlightList";
 import { getFlights } from "../../services/flightService";
 import { getAirports } from "../../services/airportService";
 import { getCurrentUser } from "../../services/userService";
-import FlightDetail from "../../components/FlightDetail"; // Import component FlightDetail
+import FlightDetail from "../../components/FlightDetail";
 
 const BookTicket = () => {
   const [departure_airport, setDeparture_airport] = useState("");
@@ -20,6 +20,9 @@ const BookTicket = () => {
   const [user, setUser] = useState(null);
   const [showMatchingFlights, setShowMatchingFlights] = useState(false);
   const [selectedFlight, setSelectedFlight] = useState(null);
+
+  const location = useLocation();
+  const searchParams = location.state?.searchParams;
 
   const navigate = useNavigate();
 
@@ -62,17 +65,31 @@ const BookTicket = () => {
     fetchAirports();
   }, []);
 
-  const airport_names = airports.map((airport) => airport.city);
+  // Hàm tìm kiếm chuyến bay
+  const searchFlights = (
+    departure,
+    arrival,
+    departureDate,
+    returnDate,
+    passengers,
+    tripType
+  ) => {
+    const filter_flights = flights.filter((flight) => {
+      const departureMatch = flight.departure_airport.city === departure;
+      const arrivalMatch = flight.arrival_airport.city === arrival;
+      const dateMatch = flight.departure_time.split("T")[0] === departureDate;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+      // Nếu là khứ hồi, kiểm tra thêm ngày về
+      if (tripType === "round-trip") {
+        const returnDateMatch = flight.return_time
+          ? flight.return_time.split("T")[0] === returnDate
+          : false;
+        return departureMatch && arrivalMatch && dateMatch && returnDateMatch;
+      }
 
-    const filter_flights = flights.filter(
-      (flight) =>
-        flight.departure_airport.city === departure_airport &&
-        flight.arrival_airport.city === arrival_airport &&
-        flight.departure_time.split("T")[0] === departure_time
-    );
+      return departureMatch && arrivalMatch && dateMatch;
+    });
+
     setMatchingFlight(filter_flights);
     setShowMatchingFlights(true);
 
@@ -80,6 +97,47 @@ const BookTicket = () => {
       alert("Không tìm thấy chuyến bay phù hợp.");
     }
   };
+
+  // Trình xử lý sự kiện submit
+  const handleSubmit = (e) => {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+    searchFlights(
+      departure_airport,
+      arrival_airport,
+      departure_time,
+      arrival_time,
+      passengers,
+      tripType
+    );
+  };
+
+  // useEffect để tự động tìm kiếm khi nhận được searchParams và flights đã được tải
+  useEffect(() => {
+    if (searchParams && flights.length > 0) {
+      const {
+        departure,
+        arrival,
+        tripType,
+        departureDate,
+        returnDate,
+        passengers,
+      } = searchParams;
+
+      setDeparture_airport(departure);
+      setArrival_airport(arrival);
+      setTripType(tripType);
+      setDeparture_time(departureDate);
+      setArrival_time(returnDate);
+      setPassengers(passengers);
+
+      // Thực hiện tìm kiếm trực tiếp với các tham số
+      searchFlights(departure, arrival, departureDate, returnDate, passengers, tripType);
+    }
+  }, [searchParams, flights]);
+
+  const airport_names = airports.map((airport) => airport.city);
 
   return (
     <div className={styles.bookingContainer}>
@@ -204,13 +262,22 @@ const BookTicket = () => {
 
       {/* FlightList nằm riêng ngoài khung đặt vé */}
       <div className={styles.flightSchedule}>
-        <FlightList flights={showMatchingFlights ? matchingFlight : flights} onFlightClick={setSelectedFlight} />
-        
+        <FlightList
+          flights={showMatchingFlights ? matchingFlight : flights}
+          onFlightClick={setSelectedFlight}
+        />
+
         {/* Modal for FlightDetail */}
         {selectedFlight && (
-          <div className={styles.modalOverlay} onClick={() => setSelectedFlight(null)}>
-            <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
-              <button 
+          <div
+            className={styles.modalOverlay}
+            onClick={() => setSelectedFlight(null)}
+          >
+            <div
+              className={styles.modalContent}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
                 className={styles.closeButton}
                 onClick={() => setSelectedFlight(null)}
               >
@@ -221,22 +288,6 @@ const BookTicket = () => {
           </div>
         )}
       </div>
-      {/* <div className={styles.flightSchedule}>
-        {selectedFlight ? (
-          <FlightDetail flight={selectedFlight} />
-        ) : showMatchingFlights ? (
-          matchingFlight.length > 0 ? (
-            <FlightList
-              flights={matchingFlight}
-              onFlightClick={setSelectedFlight}
-            />
-          ) : (
-            <p>Không có chuyến bay phù hợp.</p>
-          )
-        ) : (
-          <FlightList flights={flights} onFlightClick={setSelectedFlight} />
-        )}
-      </div> */}
     </div>
   );
 };

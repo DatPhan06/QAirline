@@ -30,6 +30,15 @@ class Airport(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
+    # Thông tin chung về sân bay
+    general_info = Column(String(1000))  # Thông tin chung về sân bay
+    check_in_counters = Column(String(500))  # Thông tin quầy thủ tục
+    shopping_services = Column(String(500))  # Thông tin dịch vụ mua sắm
+    lounge_services = Column(String(500))  # Thông tin dịch vụ phòng chờ 
+    food_services = Column(String(500))  # Thông tin dịch vụ ăn uống
+    currency_exchange = Column(String(500))  # Thông tin dịch vụ đổi tiền
+
+    
     # Quan hệ
     departure_flights = relationship("Flight", foreign_keys="[Flight.departure_airport_id]", back_populates="departure_airport")
     arrival_flights = relationship("Flight", foreign_keys="[Flight.arrival_airport_id]", back_populates="arrival_airport")   

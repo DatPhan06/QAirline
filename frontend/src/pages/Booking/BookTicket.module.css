@@ -18,7 +18,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--font-family);
-  background: var(--bg-color);
 }
 
 /* Bọc cả trang, căn giữa nội dung theo chiều ngang */
@@ -41,7 +40,7 @@ body {
   align-items: flex-start;
 }
 
-/* Khung đặt vé (form): nhỏ gọn, đẹp hơn */
+/* Khung đặt vé (form)*/
 .bookingForm {
   background: #ffffff;
   padding: 30px;

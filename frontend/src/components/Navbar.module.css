@@ -1,3 +1,8 @@
+/* Ẩn nút toggle menu mặc định */
+.menuToggle {
+  display: none; /* Ẩn nút menu mặc định */
+}
+
 /* Navbar.module.css */
 .nav {
   position: sticky; /* Thay đổi từ fixed sang sticky */
@@ -103,7 +108,7 @@
   top: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(10px);
-  background: rgba(51, 51, 51, 0.98);
+  background: #f9f7f3;
   backdrop-filter: blur(10px);
   min-width: 200px;
   padding: 15px 0;
@@ -125,7 +130,7 @@
 }
 
 .subMenuLink {
-  color: #ffffff;
+  color: black;
   text-decoration: none;
   padding: 12px 25px;
   display: block;
@@ -177,5 +182,110 @@
   .logo {
     height: 40px;
     margin-right: 20px;
+  }
+}
+
+/* Giữ nguyên các styles hiện tại */
+
+/* Thêm media query cho màn hình nhỏ */
+/* Chỉ hiện menu toggle và thay đổi layout khi màn hình nhỏ hơn 768px */
+@media (max-width: 768px) {
+  .menuToggle {
+    display: block; /* Hiện nút menu */
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+  }
+
+  .nav {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: -250px;
+    transition: left 0.3s ease;
+    background: #f9f7f3;
+  }
+
+  .nav.active {
+    left: 0;
+  }
+
+  .navList {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    height: 100%;
+    gap: 10px;
+  }
+
+  .navItem {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navLink {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+
+  /* Xử lý submenu */
+  .subMenu {
+    position: static;
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    padding: 0 0 0 20px;
+    display: none;
+  }
+
+  .navItem:hover .subMenu {
+    display: block;
+  }
+
+  .subMenuItem {
+    padding: 8px 0;
+  }
+
+  .subMenuLink {
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+
+  /* Thêm nút toggle menu */
+  .menuToggle {
+    display: block;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+  }
+
+  /* Logo adjustments */
+  .navItem:first-child {
+    margin: 0 0 20px 0;
+    padding: 0;
+  }
+
+  .logo {
+    height: 35px;
+  }
+
+  /* Account section adjustment */
+  .navItem:last-child {
+    margin-top: auto; /* Đẩy phần account xuống cuối */
+    padding: 0;
   }
 }
