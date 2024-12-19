@@ -1,6 +1,5 @@
-/* Sidebar Container */
 .sidebar {
-  width: 80px; /* Đảm bảo sidebar không bị thu nhỏ quá mức */
+  width: 80px;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -9,12 +8,32 @@
   color: #ecf0f1;
   padding: 30px 20px;
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.2);
-  transition: width 0.3s ease;
+  transition: all 0.3s ease;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Đẩy nút Đăng Xuất xuống dưới */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  justify-content: space-between;
+  overflow-x: hidden;
+  z-index: 1000;
+}
+
+/* Add overlay when sidebar is open */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
 }
 
 .sidebar.open {
