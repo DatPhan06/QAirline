@@ -169,6 +169,16 @@
   gap: 8px; /* Khoảng cách giữa text và avatar */
 }
 
+.authLinks {
+  display: flex;
+  align-items: center;
+}
+
+.separator {
+  margin: 0 8px;
+  color: #555;
+}
+
 @media (max-width: 1024px) {
   .navList {
     gap: 15px;

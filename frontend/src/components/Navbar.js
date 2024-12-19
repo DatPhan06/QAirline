@@ -157,17 +157,17 @@ const Navbar = () => {
 
         {/* Mục Tài Khoản */}
         <li className={`${styles.navItem} ${styles.account}`}>
-          <Link to="/account" className={styles.navLink}>
-            <img
-              src="/images/user.png"
-              alt="Avatar"
-              className={styles.avatar}
-            />
-            Tài khoản
-          </Link>
-          <ul className={styles.subMenu}>
-            {isLoggedIn ? (
-              <>
+          {isLoggedIn ? (
+            <>
+              <Link to="/account" className={styles.navLink}>
+                <img
+                  src="/images/user.png"
+                  alt="Avatar"
+                  className={styles.avatar}
+                />
+                Tài khoản
+              </Link>
+              <ul className={styles.subMenu}>
                 <li className={styles.subMenuItem}>
                   <Link to="/account/profile" className={styles.subMenuLink}>
                     Hồ Sơ
@@ -183,27 +183,19 @@ const Navbar = () => {
                     Đăng Xuất
                   </Link>
                 </li>
-              </>
-            ) : (
-              <>
-                <li className={styles.subMenuItem}>
-                  <Link to="/account/signin" className={styles.subMenuLink}>
-                    Đăng Nhập
-                  </Link>
-                </li>
-                <li className={styles.subMenuItem}>
-                  <Link to="/account/signup" className={styles.subMenuLink}>
-                    Đăng Ký
-                  </Link>
-                </li>
-                <li className={styles.subMenuItem}>
-                  <Link to="/account/settings" className={styles.subMenuLink}>
-                    Cài Đặt
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
+              </ul>
+            </>
+          ) : (
+            <div className={styles.authLinks}>
+              <Link to="/account/signin" className={styles.navLink}>
+                Đăng Nhập
+              </Link>
+              <span className={styles.separator}>|</span>
+              <Link to="/account/signup" className={styles.navLink}>
+                Đăng Ký
+              </Link>
+            </div>
+          )}
         </li>
       </ul>
     </nav>
