@@ -1,6 +1,6 @@
 /* Sidebar Container */
 .sidebar {
-  width: 260px;
+  width: 80px; /* Đảm bảo sidebar không bị thu nhỏ quá mức */
   height: 100vh;
   position: fixed;
   top: 0;
@@ -11,9 +11,20 @@
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.2);
   transition: width 0.3s ease;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Đẩy nút Đăng Xuất xuống dưới */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-/* Sidebar Header */
+.sidebar.open {
+  width: 260px; /* Mở rộng sidebar khi hover */
+}
+
+.sidebar:hover {
+  width: 260px; /* Mở rộng sidebar khi hover */
+}
+
 .sidebar h2 {
   font-size: 1.8rem;
   margin-bottom: 30px;
@@ -21,21 +32,41 @@
   letter-spacing: 1px;
   border-bottom: 2px solid #ecf0f1;
   padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Navigation List */
+.sidebar h2 .icon {
+  margin-right: 10px;
+  font-size: 1.5rem;
+  min-width: 25px; /* Ensure icon is always visible */
+  opacity: 1; /* Ensure icon is always visible */
+}
+
+.sidebar h2 .text {
+  opacity: 0; /* Ẩn tiêu đề khi sidebar bị thu nhỏ */
+  transition: opacity 0.3s ease;
+}
+
+.sidebar:hover h2 .text {
+  opacity: 1; /* Hiển thị tiêu đề khi sidebar mở rộng */
+}
+
+.sidebar.open h2 .text {
+  opacity: 1; /* Hiển thị tiêu đề khi sidebar mở rộng */
+}
+
 .sidebar ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* Navigation Items */
 .sidebar ul li {
   margin-bottom: 15px;
 }
 
-/* Navigation Links */
 .sidebar ul li a {
   color: #ecf0f1;
   text-decoration: none;
@@ -47,28 +78,29 @@
   transition: background 0.3s, transform 0.2s;
 }
 
-/* Icon Placeholder (Optional) */
-/* You can include icons by adding an <span> inside the <Link> in your React component */
-/*
-.sidebar ul li a .icon {
-  margin-right: 10px;
-  font-size: 1.2rem;
-}
-*/
-
-/* Hover Effects */
 .sidebar ul li a:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: translateX(5px);
 }
 
-/* Active Link Styling */
-.sidebar ul li a.active {
-  background: rgba(255, 255, 255, 0.2);
-  font-weight: bold;
+.sidebar ul li a .icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
 }
 
-/* Nút đăng xuất */
+.sidebar ul li a .text {
+  opacity: 0; /* Ẩn văn bản khi sidebar bị thu nhỏ */
+  transition: opacity 0.3s ease;
+}
+
+.sidebar:hover ul li a .text {
+  opacity: 1; /* Hiển thị văn bản khi sidebar mở rộng */
+}
+
+.sidebar.open ul li a .text {
+  opacity: 1; /* Hiển thị văn bản khi sidebar mở rộng */
+}
+
 .logoutButton {
   background: none;
   border: none;
@@ -79,6 +111,7 @@
   width: 100%;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
+  margin-top: auto; /* Đẩy nút Đăng Xuất xuống dưới */
 }
 
 .logoutButton:hover {
@@ -86,46 +119,118 @@
   transform: translateX(5px);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 200px;
-    padding: 25px 15px;
-  }
-
-  .sidebar h2 {
-    font-size: 1.5rem;
-    margin-bottom: 25px;
-  }
-
-  .sidebar ul li a {
-    font-size: 1rem;
-    padding: 10px 12px;
-  }
+/* Icon styles */
+.icon {
+  font-size: 1.2rem;
+  min-width: 25px; /* Đảm bảo icon luôn có kích thước cố định */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
 }
 
-@media (max-width: 480px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-    box-shadow: none;
-    padding: 20px;
-  }
+/* Text styles */
+.text {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap; /* Tránh text bị xuống dòng */
+}
 
-  .sidebar ul {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
+/* Hiển thị text khi hover */
+.sidebar:hover .text {
+  opacity: 1;
+}
 
-  .sidebar ul li {
-    margin-bottom: 10px;
-  }
+/* Hiển thị text khi mở rộng */
+.sidebar.open .text {
+  opacity: 1;
+}
 
-  .sidebar ul li a {
-    padding: 8px 10px;
-    font-size: 0.9rem;
-  }
+/* Link và button styles */
+.sidebar ul li a,
+.logoutButton {
+  display: flex;
+  align-items: center;
+  color: #ecf0f1;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 12px 15px;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+/* Hover effects */
+.sidebar ul li a:hover,
+.logoutButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+/* Điều chỉnh icon cho header */
+.sidebar h2 .icon {
+  margin-right: 10px;
+  font-size: 1.5rem;
+  min-width: 25px; /* Đảm bảo chiều rộng tối thiểu */
+  opacity: 1 !important; /* Đảm bảo luôn hiển thị */
+  transition: none; /* Tắt hiệu ứng transition */
+}
+
+/* Đảm bảo container của icon luôn đủ rộng */
+.sidebar h2 {
+  min-width: 40px;
+  justify-content: flex-start; /* Căn trái thay vì căn giữa */
+  white-space: nowrap; /* Ngăn text bị xuống dòng */
+}
+
+/* Điều chỉnh header của sidebar */
+.sidebar h2 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Căn trái khi mở rộng */
+}
+
+/* Đảm bảo icon header luôn được căn giữa khi thu nhỏ */
+.sidebar:not(.open):not(:hover) h2 {
+  justify-content: center; /* Căn giữa khi sidebar thu nhỏ */
+}
+
+/* Điều chỉnh icon và text trong header */
+.sidebar .icon {
+  font-size: 1.5rem;
+  min-width: 25px;
+  margin-right: 10px;
+  flex-shrink: 0; /* Không cho phép icon co lại */
+}
+/* Initially hide the text */
+.text {
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-width 0.3s ease, margin-left 0.3s ease;
+}
+
+/* Show the text smoothly on hover or when sidebar is open */
+.sidebar:hover .text,
+.sidebar.open .text {
+  opacity: 1;
+  max-width: 200px; /* Adjust as needed */
+  margin-left: 10px;
+  white-space: normal; /* Allow text to wrap naturally */
+  word-wrap: break-word; /* Break long words */
+  overflow-wrap: break-word;
+  line-height: 1.4;
+  padding-right: 10px;
+}
+
+/* Ensure sidebar has enough width when expanded */
+.sidebar:hover,
+.sidebar.open {
+  width: 260px;
+  padding-right: 15px; /* Add padding to prevent text from touching the edge */
 }
