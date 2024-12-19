@@ -107,3 +107,14 @@ export const deleteUser = async (userId) => {
     throw error;
   }
 };
+
+// Hàm đổi mật khẩu người dùng
+export const changePassword = async (userId, passwordData) => {
+  try {
+    const response = await axiosInstance.put(`/users/${userId}/change-password`, passwordData);
+    return response.data;
+  } catch (error) {
+    console.error("Error changing password:", error);
+    throw error;
+  }
+};

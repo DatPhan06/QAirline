@@ -228,3 +228,34 @@ def delete_user(db: Session, user_id: int) -> dict:
     db.delete(db_user)
     db.commit()
     return {"detail": "Đã xóa người dùng thành công"}
+
+def change_password(db: Session, user_id: int, password_change_request: schemas.PasswordChangeRequest) -> models.User:
+    """
+    Đổi mật khẩu người dùng.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+        user_id (int): ID của người dùng cần đổi mật khẩu.
+        password_change_request (schemas.UserUpdate): Thông tin đổi mật khẩu.
+
+    Raises:
+        HTTPException: Nếu mật khẩu hiện tại không đúng.
+
+    Returns:
+        models.User: Đối tượng người dùng sau khi đổi mật khẩu.
+    """
+    db_user = get_user(db, user_id)
+    if not db_user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Người dùng không tồn tại",
+        )
+    if not verify_password(password_change_request.current_password, db_user.hashed_password):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Mật khẩu hiện tại không đúng",
+        )
+    db_user.hashed_password = get_password_hash(password_change_request.new_password)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
