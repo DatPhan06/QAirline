@@ -52,6 +52,7 @@ import ManageFlights from "./pages/Admin/ManageFlights";
 import ViewBookings from "./pages/Admin/ViewBookings";
 import AccountManager from "./pages/Admin/AccountManager";
 import EditAirplane from "./pages/Admin/EditAirplane";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
 
 // OAuth2 callback page
 import OAuth2Callback from "./pages/OAuth2Callback";
@@ -176,6 +177,15 @@ function AppRoutes() {
           </PrivateAdminRoute>
         }
       />
+      <Route
+        path="/admin/dashboard"
+        element={
+          <PrivateAdminRoute>
+            <AdminDashboard />
+          </PrivateAdminRoute>
+        }
+      />
+
       <Route
         path="/admin/manage-airplanes"
         element={

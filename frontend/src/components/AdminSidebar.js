@@ -35,10 +35,12 @@ const AdminSidebar = () => {
         onMouseEnter={() => setIsSidebarOpen(true)}
         onMouseLeave={() => setIsSidebarOpen(false)}
       >
-        <h2>
-          <FaUserShield className={styles.icon} />
-          <span className={styles.text}>Menu Quản Trị</span>
-        </h2>
+        <Link to="/admin/dashboard">
+          <h2>
+            <FaUserShield className={styles.icon} />
+            <span className={styles.text}>Menu Quản Trị</span>
+          </h2>
+        </Link>
         <ul>
           <li>
             <Link to="/admin/post-info">

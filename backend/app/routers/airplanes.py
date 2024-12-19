@@ -122,3 +122,16 @@ def delete_airplane(
             status_code=status.HTTP_404_NOT_FOUND, detail="Airplane not found"
         )
     return {"message": "Airplane deleted successfully"}
+
+@router.get("/stats/overview")
+def get_airplane_stats(db: Session = Depends(database.get_db)):
+    """
+    Lấy thống kê máy bay.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        dict: Thống kê máy bay.
+    """
+    return services.airplane_service.get_airplane_stats(db)
