@@ -1,81 +1,52 @@
+/* Sidebar Styles */
 .sidebar {
-  width: 80px;
+  width: 80px; /* Initial width when collapsed */
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   background: linear-gradient(135deg, #2c3e50, #4ca1af);
   color: #ecf0f1;
-  padding: 30px 20px;
+  padding: 30px 0; /* Remove horizontal padding */
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  overflow-y: auto;
+  transition: width 0.3s ease;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow-x: hidden;
   z-index: 1000;
 }
 
-/* Add overlay when sidebar is open */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  z-index: 999;
-}
-
-.overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.sidebar.open {
-  width: 260px; /* Mở rộng sidebar khi hover */
-}
-
 .sidebar:hover {
-  width: 260px; /* Mở rộng sidebar khi hover */
+  width: 310px; /* Expanded width on hover */
 }
 
+/* Header Styles */
 .sidebar h2 {
-  font-size: 1.8rem;
-  margin-bottom: 30px;
-  text-align: center;
-  letter-spacing: 1px;
-  border-bottom: 2px solid #ecf0f1;
-  padding-bottom: 10px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 0 20px; /* Horizontal padding for content */
 }
 
 .sidebar h2 .icon {
-  margin-right: 10px;
-  font-size: 1.5rem;
-  min-width: 25px; /* Ensure icon is always visible */
-  opacity: 1; /* Ensure icon is always visible */
+  flex: 0 0 60px; /* Fixed width for icon container */
+  text-align: center;
+  font-size: 1.8rem;
 }
 
 .sidebar h2 .text {
-  opacity: 0; /* Ẩn tiêu đề khi sidebar bị thu nhỏ */
+  flex: 1;
+  opacity: 0;
   transition: opacity 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .sidebar:hover h2 .text {
-  opacity: 1; /* Hiển thị tiêu đề khi sidebar mở rộng */
+  opacity: 1;
 }
 
-.sidebar.open h2 .text {
-  opacity: 1; /* Hiển thị tiêu đề khi sidebar mở rộng */
-}
-
+/* Menu Styles */
 .sidebar ul {
   list-style: none;
   padding: 0;
@@ -87,12 +58,12 @@
 }
 
 .sidebar ul li a {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px; /* Horizontal padding for content */
   color: #ecf0f1;
   text-decoration: none;
   font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  padding: 12px 15px;
   border-radius: 8px;
   transition: background 0.3s, transform 0.2s;
 }
@@ -103,34 +74,35 @@
 }
 
 .sidebar ul li a .icon {
-  margin-right: 10px;
-  font-size: 1.2rem;
+  flex: 0 0 60px; /* Fixed width for icon container */
+  text-align: center;
+  font-size: 1.5rem;
 }
 
 .sidebar ul li a .text {
-  opacity: 0; /* Ẩn văn bản khi sidebar bị thu nhỏ */
+  flex: 1;
+  opacity: 0;
   transition: opacity 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .sidebar:hover ul li a .text {
-  opacity: 1; /* Hiển thị văn bản khi sidebar mở rộng */
+  opacity: 1;
 }
 
-.sidebar.open ul li a .text {
-  opacity: 1; /* Hiển thị văn bản khi sidebar mở rộng */
-}
-
+/* Logout Button Styles */
 .logoutButton {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px; /* Horizontal padding for content */
   background: none;
   border: none;
   color: #ecf0f1;
   font-size: 1.1rem;
-  padding: 12px 15px;
-  text-align: left;
-  width: 100%;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
-  margin-top: auto; /* Đẩy nút Đăng Xuất xuống dưới */
+  margin-top: auto;
 }
 
 .logoutButton:hover {
@@ -138,118 +110,20 @@
   transform: translateX(5px);
 }
 
-/* Icon styles */
-.icon {
-  font-size: 1.2rem;
-  min-width: 25px; /* Đảm bảo icon luôn có kích thước cố định */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
+.logoutButton .icon {
+  flex: 0 0 60px; /* Fixed width for icon container */
+  text-align: center;
+  font-size: 1.5rem;
 }
 
-/* Text styles */
-.text {
+.logoutButton .text {
+  flex: 1;
   opacity: 0;
   transition: opacity 0.3s ease;
-  white-space: nowrap; /* Tránh text bị xuống dòng */
-}
-
-/* Hiển thị text khi hover */
-.sidebar:hover .text {
-  opacity: 1;
-}
-
-/* Hiển thị text khi mở rộng */
-.sidebar.open .text {
-  opacity: 1;
-}
-
-/* Link và button styles */
-.sidebar ul li a,
-.logoutButton {
-  display: flex;
-  align-items: center;
-  color: #ecf0f1;
-  text-decoration: none;
-  font-size: 1.1rem;
-  padding: 12px 15px;
-  border-radius: 8px;
-  transition: background 0.3s, transform 0.2s;
-}
-
-/* Hover effects */
-.sidebar ul li a:hover,
-.logoutButton:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateX(5px);
-}
-
-/* Điều chỉnh icon cho header */
-.sidebar h2 .icon {
-  margin-right: 10px;
-  font-size: 1.5rem;
-  min-width: 25px; /* Đảm bảo chiều rộng tối thiểu */
-  opacity: 1 !important; /* Đảm bảo luôn hiển thị */
-  transition: none; /* Tắt hiệu ứng transition */
-}
-
-/* Đảm bảo container của icon luôn đủ rộng */
-.sidebar h2 {
-  min-width: 40px;
-  justify-content: flex-start; /* Căn trái thay vì căn giữa */
-  white-space: nowrap; /* Ngăn text bị xuống dòng */
-}
-
-/* Điều chỉnh header của sidebar */
-.sidebar h2 {
-  font-size: 1.8rem;
-  margin-bottom: 30px;
-  text-align: center;
-  letter-spacing: 1px;
-  border-bottom: 2px solid #ecf0f1;
-  padding-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* Căn trái khi mở rộng */
-}
-
-/* Đảm bảo icon header luôn được căn giữa khi thu nhỏ */
-.sidebar:not(.open):not(:hover) h2 {
-  justify-content: center; /* Căn giữa khi sidebar thu nhỏ */
-}
-
-/* Điều chỉnh icon và text trong header */
-.sidebar .icon {
-  font-size: 1.5rem;
-  min-width: 25px;
-  margin-right: 10px;
-  flex-shrink: 0; /* Không cho phép icon co lại */
-}
-/* Initially hide the text */
-.text {
-  opacity: 0;
-  max-width: 0;
+  white-space: nowrap;
   overflow: hidden;
-  transition: opacity 0.3s ease, max-width 0.3s ease, margin-left 0.3s ease;
 }
 
-/* Show the text smoothly on hover or when sidebar is open */
-.sidebar:hover .text,
-.sidebar.open .text {
+.sidebar:hover .logoutButton .text {
   opacity: 1;
-  max-width: 200px; /* Adjust as needed */
-  margin-left: 10px;
-  white-space: normal; /* Allow text to wrap naturally */
-  word-wrap: break-word; /* Break long words */
-  overflow-wrap: break-word;
-  line-height: 1.4;
-  padding-right: 10px;
-}
-
-/* Ensure sidebar has enough width when expanded */
-.sidebar:hover,
-.sidebar.open {
-  width: 260px;
-  padding-right: 15px; /* Add padding to prevent text from touching the edge */
 }

@@ -61,9 +61,13 @@ const AdminSidebar = () => {
           <li>
             <Link to="/admin/view-bookings">
               <FaChartBar className={styles.icon} />
-              <span className={styles.text}>
-                Xem Và Thống Kê Đặt Vé Của Khách Hàng
-              </span>
+              <span className={styles.text}>Xem Và Thống Kê Đặt Vé</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/account">
+              <FaUserShield className={styles.icon} />
+              <span className={styles.text}>Quản Lý Tài Khoản</span>
             </Link>
           </li>
         </ul>
