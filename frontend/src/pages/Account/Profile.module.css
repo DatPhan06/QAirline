@@ -71,13 +71,25 @@
   background-color: #1663a2;
 }
 
+/* Form đổi mật khẩu */
+.passwordForm {
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
 /* Responsive cho màn hình nhỏ */
 @media (max-width: 768px) {
   .container {
     padding: 60px 15px;
   }
 
-  .profileForm {
+  .profileForm,
+  .passwordForm {
     padding: 40px 25px;
   }
 }

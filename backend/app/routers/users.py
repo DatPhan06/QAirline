@@ -140,3 +140,22 @@ def delete_user(user_id: int, db: Session = Depends(get_db)) -> dict:
         dict: Thông báo xác nhận xóa thành công.
     """
     return services.user_service.delete_user(db, user_id)
+
+@router.put("/{user_id}/change-password", response_model=schemas.User)
+def change_user_password(
+    user_id: int,
+    password_change_request: schemas.PasswordChangeRequest,
+    db: Session = Depends(get_db),
+) -> models.User:
+    """
+    Đổi mật khẩu người dùng.
+
+    Args:
+        user_id (int): ID của người dùng cần đổi mật khẩu.
+        password_change_request (schemas.PasswordChangeRequest): Thông tin đổi mật khẩu.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        models.User: Thông tin người dùng sau khi đổi mật khẩu.
+    """
+    return services.user_service.change_password(db, user_id, password_change_request)
