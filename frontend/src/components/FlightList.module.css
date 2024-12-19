@@ -6,6 +6,7 @@
   font-family: "Helvetica Neue", Arial, sans-serif;
   background: #fff;
   box-sizing: border-box;
+  border-radius: 20px;
 }
 
 .noFlights {

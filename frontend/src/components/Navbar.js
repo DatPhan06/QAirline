@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
@@ -10,11 +10,21 @@ import styles from "./Navbar.module.css";
  * @returns {JSX.Element} Thành phần Navbar.
  */
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const token = localStorage.getItem("token");
   const isLoggedIn = !!token;
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <nav className={styles.nav}>
+    <>
+      <button className={styles.menuToggle} onClick={toggleMenu}>
+        {isMenuOpen ? '×' : '☰'}
+      </button>
+      
+      <nav className={`${styles.nav} ${isMenuOpen ? styles.active : ''}`}>
       
       <ul className={styles.navList}>
         <li className={styles.navItem}>
@@ -197,6 +207,7 @@ const Navbar = () => {
         </li>
       </ul>
     </nav>
+    </>
   );
 };
 
