@@ -3,6 +3,7 @@ import {
   getBookingStats,
   getBookings,
   getBookingStatsByMonth,
+  getGeneralStats,
 } from "../../services/adminService";
 import {
   BarChart,
@@ -44,8 +45,13 @@ const ViewBookings = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const data = await getBookingStats();
-        setStats(data);
+        const generalStats = await getGeneralStats();
+        setStats({
+          totalBookings: generalStats.total_bookings,
+          totalRevenue: generalStats.total_revenue,
+          totalAirplanes: generalStats.total_airplanes,
+          totalFlights: generalStats.total_flights,
+        });
       } catch (error) {
         console.error("Error fetching stats:", error);
       }
@@ -67,12 +73,11 @@ const ViewBookings = () => {
           selectedYear
         );
         if (selectedMonth === 0) {
-          // Hiển thị theo 12 tháng trong năm
-          setMonthlyStats(data.bookingsByMonth);
+          // Hiển thị đủ 12 tháng
+          setMonthlyStats(data.bookingsByMonth || []);
         } else {
-          // Hiển thị theo nhóm 5 ngày trong tháng
-          const groupedData = groupByFiveDays(data.bookingsByDay);
-          setMonthlyStats(groupedData);
+          // // Hiển thị dữ liệu từng ngày
+          setMonthlyStats(data.bookingsByDay || []);
         }
       } catch (error) {
         console.error("Error fetching monthly stats:", error);
@@ -187,24 +192,29 @@ const ViewBookings = () => {
             <FontAwesomeIcon icon={faQuestionCircle} />
           </button>
         </h1>
-        <div className={styles.statsContainer}>
-          <div className={styles.statCard}>
-            <h2>Tổng số đặt vé</h2>
-            <p>{stats?.totalBookings ?? 0}</p>
+
+        <div className={styles.statsAndChartContainer}>
+          <div className={styles.statsContainer}>
+            <div className={styles.statCard}>
+              <h2>Tổng số đặt vé</h2>
+              <p>{stats?.totalBookings ?? 0}</p>
+            </div>
+            <div className={styles.statCard}>
+              <h2>Tổng doanh thu</h2>
+              <p>{stats?.totalRevenue?.toLocaleString() || "0"} VND</p>
+            </div>
           </div>
-          <div className={styles.statCard}>
-            <h2>Tổng doanh thu</h2>
-            <p>{stats?.totalRevenue?.toLocaleString() || "0"} VND</p>
+
+          <div className={styles.chartContainer}>
+            <BookingChart
+              monthlyStats={monthlyStats}
+              selectedMonth={selectedMonth}
+              selectedYear={selectedYear}
+              handleMonthChange={handleMonthChange}
+              handleYearChange={handleYearChange}
+            />
           </div>
         </div>
-
-        <BookingChart
-          monthlyStats={monthlyStats}
-          selectedMonth={selectedMonth}
-          selectedYear={selectedYear}
-          handleMonthChange={handleMonthChange}
-          handleYearChange={handleYearChange}
-        />
 
         <div className={styles.bookingsListContainer}>
           <h2>Danh Sách Đặt Vé</h2>
@@ -369,36 +379,72 @@ const ViewBookings = () => {
             </button>
             <div className={styles.guide}>
               <h2>Hướng dẫn sử dụng trang Thống kê</h2>
-              <p>
-                Trang thống kê đặt vé cung cấp tổng quan về hoạt động đặt vé và
-                doanh thu.
-              </p>
-              <ul>
-                <li>
-                  <strong>Thống kê tổng quan:</strong>
-                  <ul>
-                    <li>Xem tổng số đặt vé trong tháng</li>
-                    <li>Theo dõi doanh thu theo thời gian</li>
-                    <li>Phân tích xu hướng đặt vé</li>
-                  </ul>
-                </li>
-                <li>
-                  <strong>Bộ lọc thời gian:</strong>
-                  <ul>
-                    <li>Chọn tháng và năm để xem số liệu chi tiết</li>
-                    <li>Dữ liệu được nhóm theo từng 5 ngày</li>
-                    <li>So sánh dữ liệu giữa các thời điểm</li>
-                  </ul>
-                </li>
-                <li>
-                  <strong>Danh sách đặt vé:</strong>
-                  <ul>
-                    <li>Xem chi tiết từng đặt vé</li>
-                    <li>Tìm kiếm đặt vé theo mã</li>
-                    <li>Sắp xếp theo thời gian đặt</li>
-                  </ul>
-                </li>
-              </ul>
+
+              <section>
+                <h3>1. Thống kê tổng quan</h3>
+                <ul>
+                  <li>
+                    <strong>Tổng số đặt vé:</strong>
+                    <ul>
+                      <li>Hiển thị tổng số vé đã được đặt trong hệ thống</li>
+                      <li>Bao gồm cả vé đã hoàn thành và đã hủy</li>
+                      <li>Cập nhật theo thời gian thực</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Tổng doanh thu:</strong>
+                    <ul>
+                      <li>Tổng giá trị từ các vé đã bán</li>
+                      <li>Được tính bằng VND</li>
+                      <li>Không bao gồm vé đã hủy</li>
+                    </ul>
+                  </li>
+                </ul>
+              </section>
+
+              <section>
+                <h3>2. Đồ thị thống kê</h3>
+                <ul>
+                  <li>
+                    <strong>Chọn thời gian:</strong>
+                    <ul>
+                      <li>Chọn tháng cụ thể hoặc xem tổng quan cả năm</li>
+                      <li>Có thể chọn năm để xem dữ liệu quá khứ</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Đọc biểu đồ:</strong>
+                    <ul>
+                      <li>Cột xanh: Số lượng đặt vé</li>
+                      <li>Cột cam: Doanh thu</li>
+                      <li>Trục ngang: Thời gian (ngày hoặc tháng)</li>
+                      <li>Trục dọc: Số lượng/Giá trị</li>
+                    </ul>
+                  </li>
+                </ul>
+              </section>
+
+              <section>
+                <h3>3. Danh sách đặt vé</h3>
+                <ul>
+                  <li>
+                    <strong>Tìm kiếm:</strong>
+                    <ul>
+                      <li>Tìm theo ID đặt vé, thông tin khách hàng</li>
+                      <li>Tìm theo mã chuyến bay, sân bay</li>
+                      <li>Lọc theo trạng thái vé</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Thông tin chi tiết:</strong>
+                    <ul>
+                      <li>Nhấp vào từng dòng để xem chi tiết đặt vé</li>
+                      <li>Thông tin về hành khách và chuyến bay</li>
+                      <li>Lịch sử đặt vé và thanh toán</li>
+                    </ul>
+                  </li>
+                </ul>
+              </section>
             </div>
           </div>
         </div>

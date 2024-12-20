@@ -221,33 +221,101 @@
   color: #333;
 }
 
-/* Guide content */
-.guide {
-  color: #333;
+.guide section {
+  margin-bottom: 24px;
 }
 
-.guide h2 {
-  font-size: 1.8rem;
+.guide h3 {
   color: #2c3e50;
-  margin-bottom: 20px;
-}
-
-.guide p {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
 }
 
 .guide ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.guide ul ul {
   padding-left: 20px;
+  margin-top: 8px;
+  margin-bottom: 16px;
 }
 
 .guide li {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  line-height: 1.5;
 }
 
 .guide strong {
+  color: #3498db;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.guide section + section {
+  border-top: 1px solid #eee;
+  padding-top: 24px;
+}
+.statsAndChartContainer {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 300px;
+}
+
+.statCard {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.statCard h2 {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.statCard p {
+  font-size: 1.8rem;
   color: #2c3e50;
-  display: block;
-  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.chartContainer {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .statsAndChartContainer {
+    flex-direction: column;
+  }
+
+  .statsContainer {
+    width: 100%;
+    flex-direction: row;
+  }
+
+  .statCard {
+    flex: 1;
+  }
+}
+
+@media (max-width: 576px) {
+  .statsContainer {
+    flex-direction: column;
+  }
 }
