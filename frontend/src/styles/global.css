@@ -1,10 +1,11 @@
 /* styles/global.css */
 body {
+  margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
-    background-image: url("../assets/images/backc.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-
+  background-image: url("../assets/images/backc.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 a {
