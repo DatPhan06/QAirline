@@ -5,6 +5,7 @@ import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { getUserNotifications } from "../services/notificationService";
 import { getCurrentUser } from "../services/userService";
 import styles from "./Navbar.module.css";
+import Markdown from "markdown-to-jsx";
 
 /**
  * Thành phần Navbar hiển thị thanh điều hướng của trang web.
@@ -303,7 +304,10 @@ const Navbar = () => {
                               {notification.title}
                             </div>
                             <div className={styles.notificationContent}>
-                              {notification.content}
+                              {notification.content.replace(
+                                /\*\*(.*?)\*\*/g,
+                                "$1"
+                              )}{" "}
                             </div>
                             <div className={styles.notificationTime}>
                               {new Date(
@@ -351,7 +355,42 @@ const Navbar = () => {
                           )}
                         </div>
                         <div className={styles.notificationBody}>
-                          {selectedNotification.content}
+                          <Markdown
+                            options={{
+                              forceBlock: true,
+                              overrides: {
+                                strong: {
+                                  component: "strong",
+                                  props: {
+                                    className: styles.markdownStrong,
+                                  },
+                                },
+                                p: {
+                                  component: "p",
+                                  props: {
+                                    className: styles.markdownParagraph,
+                                  },
+                                },
+                                ul: {
+                                  component: "ul",
+                                  props: {
+                                    className: styles.markdownList,
+                                  },
+                                },
+                                li: {
+                                  component: "li",
+                                  props: {
+                                    className: styles.markdownListItem,
+                                  },
+                                },
+                              },
+                            }}
+                          >
+                            {/* Remove extra spaces and tabs from notification content */}
+                            {selectedNotification.content
+                              .trim()
+                              .replace(/^\s+/gm, "")}
+                          </Markdown>
                         </div>
                       </div>
                     </div>
