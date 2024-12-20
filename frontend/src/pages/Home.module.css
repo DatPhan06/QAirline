@@ -1,9 +1,3 @@
-.containerAll {
-  background-image: url("../assets/images/backc.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 /* Base container */
 .homeContainer {
   max-width: 1200px;
