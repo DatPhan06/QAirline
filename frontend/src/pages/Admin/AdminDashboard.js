@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AdminSidebar from "../../components/AdminSidebar";
-// import { Bar } from "react-chartjs-2";
+import BookingChart from "../../components/BookingChart";
 import { getGeneralStats } from "../../services/adminService";
 import styles from "./AdminDashboard.module.css";
 
@@ -14,6 +14,9 @@ const AdminDashboard = () => {
     totalAirplanes: 0,
     totalFlights: 0,
   });
+  const [selectedMonth, setSelectedMonth] = useState(0);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [monthlyStats, setMonthlyStats] = useState([]);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -25,32 +28,26 @@ const AdminDashboard = () => {
           totalAirplanes: generalStats.totalAirplanes,
           totalFlights: generalStats.totalFlights,
         });
+        // Thêm dữ liệu thống kê theo tháng
+        setMonthlyStats(generalStats.monthlyStats || []);
       } catch (error) {
         console.error("Error fetching stats:", error);
       }
     };
 
     fetchStats();
-  }, []);
+  }, [selectedMonth, selectedYear]);
+
+  const handleMonthChange = (e) => {
+    setSelectedMonth(parseInt(e.target.value));
+  };
+
+  const handleYearChange = (e) => {
+    setSelectedYear(parseInt(e.target.value));
+  };
 
   const handleCardClick = (path) => {
     navigate(path);
-  };
-
-  const chartData = {
-    labels: ["Bookings", "Revenue", "Airplanes", "Flights"],
-    datasets: [
-      {
-        label: "Statistics",
-        data: [
-          stats.totalBookings,
-          stats.totalRevenue,
-          stats.totalAirplanes,
-          stats.totalFlights,
-        ],
-        backgroundColor: ["#3498db", "#2ecc71", "#e74c3c", "#f1c40f"],
-      },
-    ],
   };
 
   return (
@@ -58,39 +55,44 @@ const AdminDashboard = () => {
       <AdminSidebar />
       <div className={styles.mainContent}>
         <h1>Trang Tổng Quan Admin</h1>
-        <div className={styles.statsContainer}>
-          <div
-            className={styles.statCard}
-            onClick={() => handleCardClick("/admin/view-bookings")}
-          >
-            <h2>Tổng số đặt vé</h2>
-            <p>{stats.totalBookings}</p>
+        <div className={styles.dashboardGrid}>
+          <div className={styles.statsContainer}>
+            <div
+              className={styles.statCard}
+              onClick={() => handleCardClick("/admin/view-bookings")}
+            >
+              <h2>Tổng số đặt vé</h2>
+              <p>{stats.totalBookings}</p>
+            </div>
+            <div
+              className={styles.statCard}
+              onClick={() => handleCardClick("/admin/view-bookings")}
+            >
+              <h2>Tổng doanh thu</h2>
+              <p>{stats.totalRevenue.toLocaleString()} VND</p>
+            </div>
+            <div
+              className={styles.statCard}
+              onClick={() => handleCardClick("/admin/manage-airplanes")}
+            >
+              <h2>Tổng số máy bay</h2>
+              <p>{stats.totalAirplanes}</p>
+            </div>
+            <div
+              className={styles.statCard}
+              onClick={() => handleCardClick("/admin/manage-flights")}
+            >
+              <h2>Tổng số chuyến bay</h2>
+              <p>{stats.totalFlights}</p>
+            </div>
           </div>
-          <div
-            className={styles.statCard}
-            onClick={() => handleCardClick("/admin/view-bookings")}
-          >
-            <h2>Tổng doanh thu</h2>
-            <p>{stats.totalRevenue.toLocaleString()} VND</p>
-          </div>
-          <div
-            className={styles.statCard}
-            onClick={() => handleCardClick("/admin/manage-airplanes")}
-          >
-            <h2>Tổng số máy bay</h2>
-            <p>{stats.totalAirplanes}</p>
-          </div>
-          <div
-            className={styles.statCard}
-            onClick={() => handleCardClick("/admin/manage-flights")}
-          >
-            <h2>Tổng số chuyến bay</h2>
-            <p>{stats.totalFlights}</p>
-          </div>
-        </div>
-        <div className={styles.chartContainer}>
-          <h2>Thống Kê Tổng Quát</h2>
-          {/* <Bar data={chartData} /> */}
+          <BookingChart
+            monthlyStats={monthlyStats}
+            selectedMonth={selectedMonth}
+            selectedYear={selectedYear}
+            handleMonthChange={handleMonthChange}
+            handleYearChange={handleYearChange}
+          />
         </div>
         <div className={styles.buttonsContainer}>
           <Link to="/admin/post-info" className={styles.button}>

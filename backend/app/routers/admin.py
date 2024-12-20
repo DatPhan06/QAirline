@@ -160,3 +160,19 @@ def delete_admin(admin_id: int, db: Session = Depends(get_db)) -> dict:
     if not success:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Admin not found")
     return success
+
+@router.get("/general-stats")
+def get_general_stats(db: Session = Depends(get_db),
+                     dependencies=[Depends(services.auth.get_current_admin)],
+                     ):
+    """
+    Lấy thống kê tổng quát.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        dict: Thống kê tổng quát.
+    """
+    return services.admin_service.get_general_stats(db)
+

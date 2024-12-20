@@ -226,6 +226,7 @@ export const getFlightStats = async () => {
   }
 };
 
+// Hàm lấy thống kê tổng quát
 export const getGeneralStats = async () => {
   try {
     const response = await axiosInstance.get("/admin/general-stats");
