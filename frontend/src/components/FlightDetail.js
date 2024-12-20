@@ -1,8 +1,7 @@
 // FlightDetail.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createBooking } from "../services/bookingService";
-import { getBookingByTicketId } from "../services/bookingService";
+import { createBooking, getBookingByTicketId } from "../services/bookingService";
 import {
   getTicketByFlightAndSeat,
   getTicketsByFlightId,
@@ -36,7 +35,7 @@ const FlightDetail = ({ flight }) => {
       } catch (error) {
         console.error("Error fetching tickets:", error);
         setBookingError("Không thể tải thông tin vé");
-        setTickets([]); // Xóa danh sách vé hiện tại
+        setTickets([]); // Clear current ticket list
       }
     };
 
@@ -80,12 +79,45 @@ const FlightDetail = ({ flight }) => {
     return <p>Đang tải thông tin chuyến bay...</p>;
   }
 
+  // Group tickets by class_type
+  const economyTickets = filteredTickets.filter(
+    (ticket) => ticket.class_type.toLowerCase() === "economy"
+  );
+  const businessTickets = filteredTickets.filter(
+    (ticket) => ticket.class_type.toLowerCase() === "business"
+  );
+
+  // Define seat layout structure
+  const seatLayout = [
+    // Cockpit
+    { type: "cockpit", label: "Khoang Phi Công" },
+
+    // Business Class Section
+    ...businessTickets.map((ticket) => ({
+      type: "seat",
+      ticket,
+    })),
+
+    // Aisle
+    { type: "aisle" },
+
+    // Economy Class Section
+    ...economyTickets.map((ticket) => ({
+      type: "seat",
+      ticket,
+    })),
+
+    // Bathrooms and Doors
+    { type: "bathroom", label: "WC" },
+    { type: "door", label: "Cửa Ra Vào" },
+  ];
+
   return (
     <div className={styles.flightDetailContainer}>
       <h2 className={styles.sectionTitle}>Chi tiết chuyến bay</h2>
 
       <div className={styles.infoContainer}>
-        {/* Thông tin chuyến bay */}
+        {/* Flight Information */}
         <div className={styles.flightInfo}>
           <h3 className={styles.sectionTitle}>Thông tin chuyến bay</h3>
           <div className={styles.infoGrid}>
@@ -107,7 +139,7 @@ const FlightDetail = ({ flight }) => {
           </div>
         </div>
 
-        {/* Thông tin máy bay */}
+        {/* Airplane Information */}
         <div className={styles.airplaneInfo}>
           <h3 className={styles.sectionTitle}>Thông tin máy bay</h3>
           <div className={styles.infoGrid}>
@@ -124,7 +156,7 @@ const FlightDetail = ({ flight }) => {
         </div>
       </div>
 
-      {/* Phần chọn hạng vé */}
+      {/* Ticket Class Selection */}
       <div className={styles.ticketClassSelection}>
         <select
           className={styles.selectClass}
@@ -140,38 +172,69 @@ const FlightDetail = ({ flight }) => {
         </select>
       </div>
 
-      {/* Danh sách vé - Hiển thị bên dưới 2 cột*/}
+      {/* Seat Map */}
       {filteredTickets.length > 0 && (
         <div className={styles.ticketListContainer}>
           <h2 className={styles.sectionTitle}>
-            Danh sách vé{" "}
-            {selectedClass ? `(${selectedClass})` : "(Tất cả hạng vé)"}
+            Danh sách vé {selectedClass ? `(${selectedClass})` : "(Tất cả hạng vé)"}
           </h2>
           {isLoading && <p className={styles.loading}>Đang xử lý đặt chỗ...</p>}
           {bookingError && <p className={styles.error}>{bookingError}</p>}
-          <ul className={styles.ticketList}>
-            {filteredTickets.map((ticket) => (
-              <li
-                key={ticket.ticket_id}
-                className={`${styles.ticketItem} ${
-                  ticket.status === "available"
-                    ? styles.available
-                    : styles.occupied
-                }`}
-                onClick={() => handleTicketSelection(ticket)}
-              >
-                <span className={styles.seatNumber}>
-                  Ghế số: {ticket.seat.seat_number}
-                </span>
-                <span className={styles.classType}>
-                  Hạng vé: {ticket.class_type}
-                </span>
-                <span className={styles.status}>
-                  Trạng thái: {ticket.status}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <div className={styles.seatMap}>
+            {seatLayout.map((item, index) => {
+              if (item.type === "cockpit") {
+                return (
+                  <div key={index} className={styles.cockpit}>
+                    {item.label}
+                  </div>
+                );
+              }
+
+              if (item.type === "aisle") {
+                return <div key={index} className={styles.aisle}></div>;
+              }
+
+              if (item.type === "bathroom") {
+                return (
+                  <div key={index} className={styles.bathroom}>
+                    {item.label}
+                  </div>
+                );
+              }
+
+              if (item.type === "door") {
+                return (
+                  <div key={index} className={styles.door}>
+                    {item.label}
+                  </div>
+                );
+              }
+
+              if (item.type === "seat") {
+                const ticket = item.ticket;
+                return (
+                  <div
+                    key={ticket.ticket_id}
+                    className={`${styles.ticketItem} ${
+                      ticket.class_type.toLowerCase() === "economy"
+                        ? styles.economy
+                        : styles.business
+                    } ${
+                      ticket.status === "available"
+                        ? styles.available
+                        : styles.occupied
+                    }`}
+                    onClick={() => handleTicketSelection(ticket)}
+                    title={`Ghế số: ${ticket.seat.seat_number}`}
+                  >
+                    {ticket.seat.seat_number}
+                  </div>
+                );
+              }
+
+              return null;
+            })}
+          </div>
         </div>
       )}
     </div>

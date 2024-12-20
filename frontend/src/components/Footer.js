@@ -36,9 +36,13 @@ const Footer = () => {
         <div className={styles.footerLinks}>
           <h3 className={styles.footerTitle}>Liên kết</h3>
           <Link to="/about" className={styles.footerLink}>Giới thiệu</Link>
+          <br></br>
           <Link to="/services" className={styles.footerLink}>Dịch vụ</Link>
+          <br></br>
           <Link to="/contact" className={styles.footerLink}>Liên hệ</Link>
+          <br></br>
           <Link to="/privacy" className={styles.footerLink}>Chính sách bảo mật</Link>
+          <br></br>
           <Link to="/terms" className={styles.footerLink}>Điều khoản sử dụng</Link>
         </div>
 

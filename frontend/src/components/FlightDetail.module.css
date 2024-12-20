@@ -1,248 +1,207 @@
 /* FlightDetail.module.css */
 
-/* Root container for the flight detail section */
+/* Container for the entire flight detail component */
 .flightDetailContainer {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 40px 30px;
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  color: #333333;
-  transition: transform 0.3s ease;
-}
-
-.flightDetailContainer:hover {
-  transform: translateY(-5px);
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
 }
 
 /* Section titles */
 .sectionTitle {
-  font-size: 2.2rem;
-  color: #2c3e50;
-  margin-bottom: 25px;
-  border-bottom: 3px solid #3498db;
-  padding-bottom: 10px;
-  text-align: center;
-  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
 }
 
-/* Container for flight and airplane info */
+/* Container for flight and airplane information */
 .infoContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 40px;
   gap: 20px;
+  margin-bottom: 30px;
 }
 
-/* Individual info sections */
+/* Individual information sections */
 .flightInfo,
 .airplaneInfo {
-  flex: 1 1 45%;
-  background-color: #f7f9fc;
-  padding: 25px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.3s ease;
+  flex: 1 1 300px;
+  background-color: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
-.flightInfo:hover,
-.airplaneInfo:hover {
-  background-color: #eef3f9;
-}
-
-/* Grid layout for information details */
+/* Grid layout for info items */
 .infoGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  row-gap: 20px;
-  column-gap: 15px;
+  row-gap: 10px;
+  column-gap: 10px;
 }
 
-.infoGrid p {
-  font-size: 1.05rem;
-  color: #555555;
-  margin: 0;
-}
-
-.infoGrid p strong {
-  color: #2c3e50;
-}
-
-/* Ticket class selection dropdown */
+/* Dropdown for selecting ticket class */
 .ticketClassSelection {
-  text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 20px;
 }
 
 .selectClass {
-  width: 250px;
-  padding: 12px 20px;
+  padding: 8px 12px;
   font-size: 1rem;
-  border: 2px solid #3498db;
-  border-radius: 8px;
-  background-color: #ffffff;
-  color: #2c3e50;
-  appearance: none;
-  cursor: pointer;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
 }
 
-.selectClass:focus {
-  outline: none;
-  border-color: #2980b9;
-  box-shadow: 0 0 8px rgba(41, 128, 185, 0.3);
-}
-
-.selectClass:hover {
-  border-color: #2980b9;
-}
-
-/* Container for the ticket list */
+/* Container for the ticket list (seat map) */
 .ticketListContainer {
-  background-color: #f7f9fc;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-.ticketListContainer h2 {
-  font-size: 1.9rem;
-  color: #2c3e50;
-  margin-bottom: 25px;
-  text-align: center;
-  font-weight: 600;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
 /* Loading and error messages */
 .loading {
-  text-align: center;
-  color: #f39c12;
-  font-size: 1.15rem;
-  margin-bottom: 20px;
+  color: #555;
+  margin-bottom: 10px;
 }
 
 .error {
-  text-align: center;
-  color: #e74c3c;
-  font-size: 1.15rem;
-  margin-bottom: 20px;
+  color: red;
+  margin-bottom: 10px;
 }
 
-/* Ticket list styles */
-.ticketList {
-  list-style: none;
-  padding: 0;
+/* Seat map container */
+.seatMap {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 25px;
-}
-
-.ticketItem {
-  padding: 20px 25px;
-  border: 2px solid #ecf0f1;
+  grid-template-columns: repeat(12, 40px); /* Adjust based on seat layout */
+  grid-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #e6e6e6;
   border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  background-color: #ffffff;
+}
+
+/* Cockpit styling */
+.cockpit {
+  grid-column: 1 / span 12;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Aisle styling */
+.aisle {
+  grid-column: 6 / span 1;
+  height: 40px;
+  background-color: #ccc;
+}
+
+/* Bathroom styling */
+.bathroom {
+  grid-column: 1 / span 12;
+  background-color: #2196f3;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Door styling */
+.door {
+  grid-column: 12 / span 1;
+  background-color: #8bc34a;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Individual seat styling */
+.ticketItem {
+  width: 40px;
+  height: 40px;
+  background-color: #4caf50; /* Available seats are green */
+  color: white;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  font-size: 0.8rem;
+  user-select: none;
 }
 
-.ticketItem:hover {
-  transform: translateY(-3px);
-  border-color: #3498db;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-}
-
-.ticketItem.available {
-  border-left: 5px solid #27ae60;
-}
-
+/* Sold seats are red and not clickable */
 .ticketItem.occupied {
-  border-left: 5px solid #e74c3c;
+  background-color: #f44336; /* Sold seats are red */
   cursor: not-allowed;
-  opacity: 0.8;
 }
 
-/* Ticket details */
-.seatNumber,
-.classType,
-.status {
-  font-size: 1.05rem;
-  color: #555555;
+/* Hover effect for available seats */
+.ticketItem.available:hover {
+  background-color: #45a049;
 }
 
-.seatNumber {
-  font-weight: 600;
-  color: #2c3e50;
+/* Separate styling for Economy and Business sections (if needed) */
+.economy {
+  /* Additional styles for Economy seats can be added here */
 }
 
-.classType {
-  color: #16a085;
+.business {
+  /* Additional styles for Business seats can be added here */
 }
 
-.status {
-  font-style: italic;
-  color: #7f8c8d;
-}
-
-/* Responsive Design */
-@media (max-width: 992px) {
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .infoContainer {
     flex-direction: column;
   }
 
-  .flightInfo,
-  .airplaneInfo {
-    flex: 1 1 100%;
-  }
-
-  .infoGrid {
-    grid-template-columns: 1fr;
-  }
-
   .selectClass {
-    width: 100%;
-    max-width: 300px;
+    max-width: 100%;
   }
 
-  .ticketList {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 576px) {
-  .flightDetailContainer {
-    padding: 30px 20px;
-  }
-
-  .sectionTitle {
-    font-size: 1.8rem;
-  }
-
-  .infoGrid p {
-    font-size: 1rem;
-  }
-
-  .selectClass {
-    width: 100%;
-  }
-
-  .ticketListContainer h2 {
-    font-size: 1.6rem;
+  .seatMap {
+    grid-template-columns: repeat(6, 30px); /* Adjust for smaller screens */
+    grid-gap: 8px;
   }
 
   .ticketItem {
-    padding: 15px 20px;
+    width: 30px;
+    height: 30px;
+    font-size: 0.7rem;
   }
 
-  .seatNumber,
-  .classType,
-  .status {
+  .seatSectionTitle {
     font-size: 1rem;
+  }
+
+  .ticketClassSelection {
+    margin-bottom: 15px;
+  }
+
+  /* Adjust special sections for smaller screens */
+  .cockpit,
+  .bathroom,
+  .door {
+    grid-column: 1 / span 6;
+    padding: 8px 0;
+    font-size: 0.9rem;
+  }
+
+  .aisle {
+    height: 30px;
   }
 }
