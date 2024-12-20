@@ -17,24 +17,11 @@ router = APIRouter(
     tags=["bookings"],
 )
 
-# backend/app/routers/bookings.py
-
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-from sqlalchemy import func
-from .. import models, schemas, database, services
-from ..services.auth import get_current_admin
-
-router = APIRouter(
-    prefix="/bookings",
-    tags=["bookings"],
-)
-
 @router.get("/stats/overview")
 def get_booking_stats(
     month: Optional[int] = None,
     year: Optional[int] = None,
-    db: Session = Depends(database.get_db),
+    db: Session = Depends(get_db),
     current_admin: models.Admin = Depends(get_current_admin)
 ):
     if month:
