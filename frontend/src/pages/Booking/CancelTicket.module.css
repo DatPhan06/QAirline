@@ -1,144 +1,67 @@
-/* CancelTicket.module.css */
-
-/* Root container styling */
+/* Container chính */
 .container {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 50px 20px;
-  font-family: 'Roboto', sans-serif;
-  color: #333;
-  overflow: hidden;
-}
-
-/* Benefits Section */
-.benefits {
-  margin-bottom: 60px;
-  text-align: center;
-  animation: fadeInUp 1s ease-out;
-}
-
-.benefits h1 {
-  font-size: 2.8rem;
-  margin-bottom: 25px;
-  color: #2c3e50;
-  position: relative;
-  display: inline-block;
-}
-
-.benefits h1::after {
-  content: '';
-  width: 50px;
-  height: 4px;
-  background-color: #0d5777;
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 2px;
-}
-
-.benefits ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.benefits li {
-  font-size: 1.1rem;
-  margin: 10px 20px;
-  position: relative;
-  padding-left: 35px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.5s forwards;
-}
-
-.benefits li::before {
-  content: '✔️';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #27ae60;
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
-}
-
-.benefits li:hover::before {
-  transform: translateY(-50%) scale(1.2);
-}
-
-/* Ticket Selection Section */
-.ticketSelectionSection {
+  margin: 40px auto;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 60px;
-  animation: fadeInUp 1s ease-out;
+  gap: 30px;
 }
 
+/* Phần chọn hạng vé */
+.ticketSelectionSection {
+  display: flex;
+  gap: 10px;
+  min-height: 400px;
+}
+
+/* Container nút chọn hạng vé bên trái */
 .ticketSelection {
   display: flex;
-  gap: 25px;
-  margin-bottom: 40px;
-  transform: scale(0.9);
-  animation: scaleUp 0.5s forwards;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 250px;
+  background: #0c213c;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* Style cho các nút chọn hạng vé */
 .ticketButton {
-  padding: 14px 28px;
-  font-size: 1.1rem;
-  border: 2px solid #3498db;
-  border-radius: 30px;
-  background-color: #fff;
-  color: #3498db;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(216, 214, 214, 0.7);
+  color: #6c6c6c;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.ticketButton::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: rgba(52, 152, 219, 0.2);
-  transform: translateY(-50%) rotate(45deg);
-  transition: all 0.5s ease;
-}
-
-.ticketButton:hover::after {
-  left: 150%;
+  transition: all 0.3s ease;
+  text-align: left;
+  font-weight: 100;
 }
 
 .ticketButton:hover {
-  background-color: #3498db;
-  color: #fff;
-  box-shadow: 0 8px 16px rgba(52, 152, 219, 0.3);
+  background: #f0f0f0;
+  transform: translateY(-2px);
 }
 
-.active {
-  background-color: #0d5777;
-  color: #fff;
-  box-shadow: 0 8px 16px rgba(52, 152, 219, 0.3);
+.ticketButton.active {
+  background: #0d5777;
+  color: white;
+  border-color: #0d5777;
 }
 
+/* Bảng thông tin chi tiết bên phải */
 .ticketDetails {
-  width: 100%;
-  max-width: 900px;
-  overflow-x: auto;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  animation: slideIn 0.7s ease-out;
+  flex: 1;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* Style cho bảng */
 .ticketTable {
   width: 100%;
   border-collapse: collapse;
@@ -146,210 +69,53 @@
 
 .ticketTable th,
 .ticketTable td {
-  padding: 20px;
+  padding: 15px;
   text-align: left;
-  border-bottom: 1px solid #e1e1e1;
-  transition: background-color 0.3s ease;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .ticketTable th {
-  background-color: #0d5777;
-  color: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  font-size: 1.1rem;
-}
-
-.ticketTable tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-.ticketTable tr:hover {
-  background-color: #f1f1f1;
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  width: 30%;
 }
 
 .ticketTable td {
-  color: #555;
+  color: #666;
 }
 
-.ticketTable tbody tr {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.5s forwards;
-}
-
-.ticketTable tbody tr:nth-child(odd) {
-  animation-delay: 0.2s;
-}
-
-.ticketTable tbody tr:nth-child(even) {
-  animation-delay: 0.4s;
-}
-
-/* Notes Section */
+/* Phần lưu ý */
 .notes {
-  background: #fff;
-  padding: 25px 40px;
-  border-left: 6px solid #3498db;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  animation: fadeInUp 1s ease-out;
+  background: #f9f7f3;
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 4px solid #ffc107;
 }
 
 .notes h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #2c3e50;
-  position: relative;
-}
-
-.notes h2::after {
-  content: '';
-  width: 40px;
-  height: 3px;
-  background-color: #0d5777;
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  border-radius: 2px;
+  color: #333;
+  font-size: 1.25rem;
+  margin-bottom: 15px;
 }
 
 .notes p {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: #555;
-  animation: fadeInUp 0.8s ease-out;
-}
-
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scaleUp {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  color: #666;
+  line-height: 1.6;
 }
 
 /* Responsive Design */
-@media (max-width: 992px) {
-  .container {
-    padding: 40px 15px;
-  }
-
-  .benefits h1 {
-    font-size: 2.4rem;
-  }
-
-  .benefits li {
-    margin: 10px 15px;
-  }
-
-  .ticketSelection {
-    gap: 20px;
-  }
-
-  .ticketButton {
-    padding: 12px 24px;
-    font-size: 1rem;
-  }
-
-  .ticketDetails {
-    max-width: 100%;
-  }
-
-  .notes {
-    padding: 20px 30px;
-  }
-}
-
 @media (max-width: 768px) {
-  .benefits h1 {
-    font-size: 2rem;
-  }
-
-  .benefits ul {
+  .ticketSelectionSection {
     flex-direction: column;
-    align-items: center;
   }
 
   .ticketSelection {
-    flex-direction: column;
-    gap: 15px;
     width: 100%;
-    align-items: center;
+    min-width: unset;
   }
 
-  .ticketButton {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .ticketTable th,
-  .ticketTable td {
-    padding: 15px;
-    font-size: 0.95rem;
-  }
-
-  .notes h2 {
-    font-size: 1.8rem;
-  }
-
-  .notes p {
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 30px 10px;
-  }
-
-  .benefits h1 {
-    font-size: 1.8rem;
-  }
-
-  .ticketButton {
-    padding: 10px 20px;
-    font-size: 0.95rem;
-  }
-
-  .ticketTable th,
-  .ticketTable td {
-    padding: 12px;
-    font-size: 0.9rem;
-  }
-
-  .notes h2 {
-    font-size: 1.6rem;
-  }
-
-  .notes p {
-    font-size: 0.9rem;
+  .ticketTable th {
+    width: 40%;
   }
 }
