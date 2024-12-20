@@ -41,6 +41,7 @@ app.include_router(flight_log_router)
 app.include_router(admin_router)
 app.include_router(airplane_router)
 app.include_router(location_router) 
+app.include_router(chat_router)
 
 # Tạo các bảng trong cơ sở dữ liệu
 Base.metadata.create_all(bind=engine)

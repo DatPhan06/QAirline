@@ -14,3 +14,4 @@ from .admin import router as admin_router
 from .airplanes import router as airplane_router
 from .login_auth import router as login_auth_router
 from .location import router as location_router
+from .chat import router as chat_router
