@@ -132,23 +132,85 @@ def update_flight_and_notify(
     if db_flight is None:
         raise HTTPException(status_code=404, detail="Flight not found")
 
+    # Store original flight data before update
+    original_flight_data = db_flight.__dict__.copy()
+
+    # Update the flight
     updated_flight = services.flight_service.update_flight(db, db_flight, flight_update)
 
-    # Fetch all users who have booked tickets for this flight
-    booked_tickets = db.query(models.BookedTicket).filter(models.BookedTicket.flight_id == flight_id).all()
-    user_ids = {ticket.user_id for ticket in booked_tickets}
+    # Identify changed fields
+    changed_fields = []
+    for field, new_value in flight_update.dict(exclude_unset=True).items():
+        old_value = original_flight_data.get(field)  # Use dict.get() instead of getattr()
+        if old_value != new_value:
+            changed_fields.append((field, old_value, new_value))
 
-    # Create notifications for each user
-    for user_id in user_ids:
-        notification = models.Notification(
-            title="Thay đổi thông tin chuyến bay",
-            content=f"Chuyến bay {updated_flight.flight_number} đã được cập nhật. Vui lòng kiểm tra lại thông tin chuyến bay của bạn.",
-            type="FLIGHT_UPDATE",
-            user_id=user_id,
-            flight_id=flight_id,
-            created_at=datetime.now(timezone.utc),
-        )
-        db.add(notification)
 
-    db.commit()
+# If there are changes, send notifications
+    if changed_fields:
+            # Fetch all users who have booked tickets for this flight
+        booked_tickets = db.query(models.BookedTicket).filter(models.BookedTicket.flight_id == flight_id).all()
+        user_ids = {ticket.user_id for ticket in booked_tickets}
+
+        # Create a detailed message about the changes
+
+        # Mapping field names to user-friendly labels
+        field_labels = {
+            "flight_number": "Số hiệu chuyến bay",
+            "airplane_id": "Máy bay",
+            "departure_airport_id": "Sân bay đi",
+            "arrival_airport_id": "Sân bay đến",
+            "departure_time": "Thời gian khởi hành",
+            "arrival_time": "Thời gian hạ cánh",
+            "flight_duration": "Thời lượng bay",
+            "status": "Trạng thái",
+            "available_seats": "Ghế trống",
+            "price": "Giá vé",
+        }
+
+        # Function to format field values
+        def format_value(field, value):
+            if field in ["departure_time", "arrival_time"]:
+                if isinstance(value, datetime):
+                    return value.strftime("%d/%m/%Y %H:%M")
+                return value
+            elif field == "price":
+                return f"{value:,.0f} VND"
+            elif field.endswith("_airport_id"):
+                airport = db.query(models.Airport).filter(models.Airport.airport_id == value).first()
+                return airport.name if airport else value
+            elif field == "airplane_id":
+                airplane = db.query(models.Airplane).filter(models.Airplane.airplane_id == value).first()
+                return airplane.name if airplane else value
+            else:
+                return str(value)
+
+        # Build the changes description
+        changes_description = "\n".join([
+            f"- {field_labels.get(field, field)}: {format_value(field, old_value)} → {format_value(field, new_value)}"
+            for field, old_value, new_value in changed_fields
+        ])
+
+        notification_content = f"""
+        Chuyến bay **{updated_flight.flight_number}** đã có những thay đổi sau:
+
+        {changes_description}
+
+        Vui lòng kiểm tra lại thông tin chuyến bay của bạn.
+        """
+
+        # Create notifications for each user
+        for user_id in user_ids:
+            notification = models.Notification(
+                title="Thay đổi thông tin chuyến bay",
+                content=notification_content.strip(),
+                type="FLIGHT_UPDATE",
+                user_id=user_id,
+                flight_id=flight_id,
+                created_at=datetime.now(timezone.utc),
+            )
+            db.add(notification)
+
+        db.commit()
+
     return updated_flight

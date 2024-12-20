@@ -18,6 +18,8 @@ const Navbar = () => {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [selectedNotification, setSelectedNotification] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const token = localStorage.getItem("token");
   const isLoggedIn = !!token;
 
@@ -59,6 +61,18 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  // Handler for notification click
+  const handleNotificationClick = (notification) => {
+    setSelectedNotification(notification);
+    setIsModalOpen(true);
+  };
+
+  // Handler to close modal
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedNotification(null);
   };
 
   return (
@@ -274,42 +288,75 @@ const Navbar = () => {
                 </button>{" "}
                 {isNotificationOpen && (
                   <div className={styles.notificationDropdown}>
-                    {" "}
-                    <h3>Thông báo</h3>{" "}
+                    <h3>Thông báo</h3>
                     {notifications.length > 0 ? (
                       <div className={styles.notificationList}>
-                        {" "}
                         {notifications.map((notification) => (
                           <div
                             key={notification.notification_id}
                             className={styles.notificationItem}
+                            onClick={() =>
+                              handleNotificationClick(notification)
+                            }
                           >
-                            {" "}
                             <div className={styles.notificationTitle}>
-                              {" "}
-                              {notification.title}{" "}
-                            </div>{" "}
+                              {notification.title}
+                            </div>
                             <div className={styles.notificationContent}>
-                              {" "}
-                              {notification.content}{" "}
-                            </div>{" "}
+                              {notification.content}
+                            </div>
                             <div className={styles.notificationTime}>
-                              {" "}
                               {new Date(
                                 notification.created_at
-                              ).toLocaleDateString()}{" "}
-                            </div>{" "}
+                              ).toLocaleDateString()}
+                            </div>
                           </div>
-                        ))}{" "}
+                        ))}
                       </div>
                     ) : (
                       <p className={styles.noNotifications}>
-                        {" "}
-                        Không có thông báo mới{" "}
+                        Không có thông báo mới
                       </p>
-                    )}{" "}
+                    )}
                   </div>
-                )}{" "}
+                )}
+                {/* Notification Detail Modal */}
+                {isModalOpen && selectedNotification && (
+                  <div
+                    className={styles.modalOverlay}
+                    onClick={handleCloseModal}
+                  >
+                    <div
+                      className={styles.modalContent}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <button
+                        className={styles.closeButton}
+                        onClick={handleCloseModal}
+                      >
+                        ×
+                      </button>
+                      <div className={styles.notificationDetail}>
+                        <h2>{selectedNotification.title}</h2>
+                        <div className={styles.notificationInfo}>
+                          <p className={styles.notificationTime}>
+                            {new Date(
+                              selectedNotification.created_at
+                            ).toLocaleString()}
+                          </p>
+                          {selectedNotification.type && (
+                            <p className={styles.notificationType}>
+                              Loại: {selectedNotification.type}
+                            </p>
+                          )}
+                        </div>
+                        <div className={styles.notificationBody}>
+                          {selectedNotification.content}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </li>
