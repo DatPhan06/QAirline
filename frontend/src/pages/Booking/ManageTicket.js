@@ -170,7 +170,7 @@ const ManageTicket = () => {
                   </p>
                   <p>
                     <span>Ngày đặt:</span>{" "}
-                    {new Date(booking.booking_date).toLocaleDateString()}
+                    {new Date(booking.booking_time).toLocaleDateString()}
                   </p>
                   <p>
                     <span>Trạng thái:</span>{" "}
