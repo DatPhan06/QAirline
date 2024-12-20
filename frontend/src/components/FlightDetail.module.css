@@ -5,6 +5,7 @@
   padding: 20px;
   font-family: Arial, sans-serif;
   background-color: #f0f4f8; /* Màu nền nhạt hơn */
+  max-width: 800px;
 }
 
 /* Section titles */
@@ -101,7 +102,7 @@
 /* Cockpit styling */
 .cockpit {
   width: 100%;
-  background-color: #34495e;
+  background-color: #0a1f3a;
   color: #ecf0f1;
   text-align: center;
   padding: 10px 0;
@@ -134,22 +135,10 @@
   color: #7f8c8d;
 }
 
-/* Bathroom styling */
-.bathroom {
-  width: 100%;
-  background-color: #2980b9;
-  color: #ffffff;
-  text-align: center;
-  padding: 10px 0;
-  border-radius: 4px;
-  font-weight: bold;
-  margin-top: 15px;
-}
-
 /* Door styling */
 .door {
   width: 100%;
-  background-color: #27ae60;
+  background-color: #545454;
   color: #ffffff;
   text-align: center;
   padding: 10px 0;
@@ -162,6 +151,7 @@
 .classSection {
   width: 100%;
   margin-bottom: 20px;
+  position: relative;
 }
 
 /* Class title styling */
@@ -191,7 +181,7 @@
 .ticketItem {
   width: 40px;
   height: 40px;
-  background-color: #3498db; /* Màu xanh dương cho ghế trống */
+  background-color: #0d5777; /* Màu xanh dương cho ghế trống */
   color: white;
   display: flex;
   align-items: center;
@@ -213,6 +203,48 @@
 .ticketItem.available:hover {
   background-color: #2980b9; /* Xanh dương đậm hơn khi hover */
   transform: scale(1.05);
+}
+
+/* Cửa ra vào khoang business */
+.Busdoor {
+  position: absolute;
+  left: 0;
+  top: 70%;
+  transform: translateY(-50%);
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 1.9rem;
+  width:70px;
+  text-align: center;
+}
+
+
+/* WC khoang business */ 
+.Busbathroom {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 1.9rem;
+  width: 50px;
+  text-align: center;
+}
+
+.Ecombathroom {
+  position: absolute;
+  right: 0;
+  top: 10%;
+  transform: translateY(-50%);
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 1.9rem;
+  width: 50px;
+  text-align: center;
 }
 
 /* Responsive adjustments */

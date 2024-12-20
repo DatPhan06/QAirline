@@ -62,7 +62,7 @@ const PaymentPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.flightInfo}>
-        <h2>Thông tin chuyến bay</h2>
+        <h2>Thông tin vé </h2>
         <p>
           <strong>Chuyến bay:</strong> {flight.flight_number}
         </p>
@@ -92,7 +92,7 @@ const PaymentPage = () => {
       </div>
 
       <div className={styles.paymentFormContainer}>
-        <h1 className={styles.title}>Thanh toán vé</h1>
+        <h1 className={styles.title}>THANH TOÁN VÉ </h1>
         <form className={styles.paymentForm} onSubmit={handlePayment}>
           <h2>Thông tin thanh toán</h2>
 
