@@ -127,3 +127,53 @@
 .sidebar:hover .logoutButton .text {
   opacity: 1;
 }
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  padding: 20px 15px;
+  gap: 15px;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Logo container */
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between logo and text */
+  padding: 20px;
+  margin: 0;
+}
+
+/* When sidebar is open */
+.sidebar.open .text {
+  opacity: 1;
+}
+
+/* Link styling */
+.sidebar h2 {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Hover effects */
+.sidebar:hover .adminLogo {
+  transform: scale(1.05);
+}
+.adminLogo {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+/* When sidebar is collapsed */
+.sidebar:not(.open) .adminLogo {
+  width: 110px;
+  height: 110px;
+}
+
+.sidebar:not(.open) .text {
+  display: none;
+}
