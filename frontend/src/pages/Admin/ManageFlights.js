@@ -10,6 +10,7 @@ import FlightList from "../../components/FlightList";
 import styles from "./ManageFlights.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { createNotification } from "../../services/notificationService";
 
 const ManageFlights = () => {
   const [selectedFlight, setSelectedFlight] = useState(null);
@@ -50,26 +51,39 @@ const ManageFlights = () => {
     e.preventDefault();
     try {
       if (selectedFlight) {
-        await updateFlight(selectedFlight.flight_id, flightData);
-        alert("Chuyến bay đã được cập nhật thành công!");
+        // Update existing flight
+        const updatedFields = {};
+        for (const key in flightData) {
+          if (flightData[key] !== selectedFlight[key]) {
+            updatedFields[key] = flightData[key];
+          } else {
+            updatedFields[key] = selectedFlight[key];
+          }
+        }
+        await updateFlight(selectedFlight.flight_id, updatedFields);
+        alert("Cập nhật chuyến bay thành công!");
       } else {
-        const newFlight = await createFlight(flightData);
-        await createTicketsForFlight(newFlight.flight_id);
-        alert("Chuyến bay mới đã được thêm thành công!");
+        // Create new flight
+        await createFlight(flightData);
+        alert("Tạo chuyến bay mới thành công!");
       }
       setIsModalOpen(false);
-      // Cập nhật lại danh sách chuyến bay
-      const updatedFlights = await getFlights();
-      setFlights(updatedFlights);
+      // Refresh flight list
+      const response = await getFlights();
+      setFlights(response);
     } catch (error) {
-      console.error("Error submitting flight data:", error);
-      alert("Cập nhật chuyến bay thất bại. Vui lòng thử lại.");
+      console.error("Error saving flight:", error);
+      alert("Đã xảy ra lỗi khi lưu chuyến bay.");
     }
   };
 
   const handleFlightClick = (flight) => {
     setSelectedFlight(flight);
     setFlightData({
+      flight_number: flight.flight_number,
+      airplane_id: flight.airplane_id,
+      departure_airport_id: flight.departure_airport_id,
+      arrival_airport_id: flight.arrival_airport_id,
       departure_time: flight.departure_time,
       arrival_time: flight.arrival_time,
       flight_duration: flight.flight_duration,
