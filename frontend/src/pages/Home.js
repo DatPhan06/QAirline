@@ -3,7 +3,6 @@ import styles from "./Home.module.css";
 import FlightSearch from "../components/FlightSearch";
 import FlightList from "../components/FlightList";
 import Slideshow from "../components/SlideShow";
-import ChatBot from "../components/ChatBot";
 import { getFlights } from "../services/flightService";
 
 const Home = () => {
@@ -88,7 +87,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <ChatBot />
     </div>
   );
 };

@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AppRoutes from "./AppRoutes";
 import Banner from "./components/Banner";
+import Layout from "./components/Layout";
 
 import "./styles/global.css";
 import "./styles/variables.css";
@@ -34,7 +35,9 @@ function App() {
 function AppWrapper() {
   return (
     <Router>
-      <App />
+      <Layout>
+        <App />
+      </Layout>
     </Router>
   );
 }

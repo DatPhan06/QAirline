@@ -6,6 +6,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { sendMessage } from "../services/chatService";
+import ReactMarkdown from "react-markdown";
 import styles from "./ChatBot.module.css";
 
 const ChatBot = () => {
@@ -88,7 +89,7 @@ const ChatBot = () => {
                     : styles.botMessage
                 }`}
               >
-                {message.content}
+                <ReactMarkdown>{message.content}</ReactMarkdown>
               </div>
             ))}
             {isLoading && (
