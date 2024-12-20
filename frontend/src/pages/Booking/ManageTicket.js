@@ -117,7 +117,6 @@ const ManageTicket = () => {
 
   return (
     <div className={styles.manageTicketPage}>
-      <h1>Quản Lý Vé</h1>
       <div className={styles.filterButtons}>
         <button
           className={`${styles.filterButton} ${
@@ -125,7 +124,7 @@ const ManageTicket = () => {
           }`}
           onClick={() => handleFilterChange("successful")}
         >
-          Vé thành công
+          VÉ THÀNH CÔNG
         </button>
         <button
           className={`${styles.filterButton} ${
@@ -133,7 +132,7 @@ const ManageTicket = () => {
           }`}
           onClick={() => handleFilterChange("canceled")}
         >
-          Vé đã hủy
+          VÉ ĐÃ HỦY
         </button>
         <button
           className={`${styles.filterButton} ${
@@ -141,9 +140,10 @@ const ManageTicket = () => {
           }`}
           onClick={() => handleFilterChange("all")}
         >
-          Tất cả
+          TẤT CẢ VÉ
         </button>
       </div>
+      <div className={styles.separator}></div>
       {isLoading ? (
         <p>Đang tải vé...</p>
       ) : filteredBookings.length > 0 ? (
@@ -185,19 +185,7 @@ const ManageTicket = () => {
                     </p>
                   </div>
                 )}
-                {booking.status === "booked" && (
-                  <button
-                    className={styles.cancelButton}
-                    onClick={() =>
-                      handleCancelBooking(
-                        booking.booked_ticket_id,
-                        booking.flight_id
-                      )
-                    }
-                  >
-                    Hủy Vé
-                  </button>
-                )}
+
               </div>
             </li>
           ))}
@@ -232,6 +220,21 @@ const ManageTicket = () => {
       <p>
         <strong>Ngày đặt:</strong> {new Date(selectedBooking.booking_time).toLocaleString()}
       </p>
+
+          {/* Thêm nút hủy vé vào modal */}
+          {selectedBooking.status === "booked" && (
+                  <button
+                    className={styles.cancelButton}
+                    onClick={() =>
+                      handleCancelBooking(
+                        selectedBooking.booked_ticket_id,
+                        selectedBooking.flight_id
+                      )
+                    }
+                  >
+                    Hủy Vé
+                  </button>
+                )}
     </div>
   </div>
 )}
