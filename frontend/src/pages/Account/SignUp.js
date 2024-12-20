@@ -1,169 +1,148 @@
 import React, { useState } from "react";
-import axios from "axios";
-import styles from './SignUp.module.css';
-import { registerUser, reigsterUser } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../services/userService";
+import styles from "./SignUp.module.css";
 
 function SignUp() {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    full_name: "",
     password: "",
+    full_name: "", // Thêm trường full_name
   });
 
   const navigate = useNavigate();
-  
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       await registerUser(formData);
       alert("Đăng ký thành công!");
       navigate("/account/signin");
     } catch (error) {
       console.error("Error during sign up:", error);
-      alert("Đăng ký thất bại, vui lòng thử lại.");
+      const errorMessage =
+        error.response?.data?.detail ||
+        error.response?.data?.message ||
+        "Đăng ký thất bại. Vui lòng thử lại.";
+      alert(errorMessage);
     }
   };
 
-  const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8000/auth/google/login";
-  };
-
-  const handleGitHubLogin = () => {
-    window.location.href = "http://localhost:8000/auth/github/login";
+  const handleOAuthLogin = (provider) => {
+    const baseUrl = "http://localhost:8000/auth";
+    window.location.href = `${baseUrl}/${provider}/login`;
   };
 
   return (
-    <div
-      className={styles.signup}
-      style={{
-        background: `url(/images/air2.jpg) center`,
-      backgroundSize: "cover",  // Thay 'cover' bằng 'contain' để vừa khung
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center", // Đảm bảo hình ảnh được căn giữa
-      }}
-    >
-      <div className={styles["frame-2"]}>
-        <div className={styles["frame-5"]}>
-          <div className={styles["frame-4"]}>
-            <div className={styles["upper-section"]}>
-              <div className={styles["login-text"]}>
-                <div className={styles["ng-k-ngay"]}>ĐĂNG KÝ NGAY !</div>
-                <div className={styles["just-some-details-to-get-you-in"]}>
-                  Just some details to get you in!
-                </div>
-                <br></br>
-              </div>
-              <div className={styles.credentials}>
-                <div className={styles.username}>
-                  <input
-                    className={styles["t-n-ng-nh-p"]}
-                    type="text"
-                    placeholder="Tên đăng nhập"
-                    value={formData.username}
-                    onChange={(e) =>
-                      setFormData({ ...formData, username: e.target.value })
-                    }
-                  />
-                </div>
-                <div className={styles.username}>
-                  <input
-                    className={styles.email}
-                    type="email"
-                    placeholder="Email"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                  />
-                </div>
-                <div className={styles["password-rem"]}>
-                  <div className={styles.password}>
-                    <input
-                      className={styles["h-v-t-n"]}
-                      type="text"
-                      placeholder="Họ và tên"
-                      value={formData.full_name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, full_name: e.target.value })
-                      }
-                    />
-                  </div>
-                  <div className={styles.password}>
-                    <input
-                      className={styles["m-t-kh-u"]}
-                      type="password"
-                      placeholder="Mật khẩu"
-                      value={formData.password}
-                      onChange={(e) =>
-                        setFormData({ ...formData, password: e.target.value })
-                      }
-                    />
-                  </div>
-                </div>
-                <div className={styles["login-bt-fp"]}>
-                  <div className={styles.login}>
-                    <div type="submit" className={styles["signup2"]} onClick={handleSubmit}>
-                      Đăng Ký
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <div className={styles.container}>
+      <div className={styles.signupBox}>
+        {/* Left Side: Image */}
+        <div className={styles.imageContainer}>
+          <img src="/images/login.png" alt="Sign Up" />
+        </div>
+
+        {/* Right Side: Sign Up Form */}
+        <div className={styles.formContainer}>
+          <h2 className={styles.title}>Đăng ký</h2>
+          <form onSubmit={handleSubmit} className={styles.signupForm}>
+            <input
+              type="text"
+              name="full_name"
+              placeholder="Họ và tên"
+              value={formData.full_name}
+              onChange={handleInputChange}
+              required
+              className={styles.inputField}
+            />
+            <input
+              type="text"
+              name="username"
+              placeholder="Tên đăng nhập"
+              value={formData.username}
+              onChange={handleInputChange}
+              required
+              className={styles.inputField}
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+              className={styles.inputField}
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Mật khẩu"
+              value={formData.password}
+              onChange={handleInputChange}
+              required
+              className={styles.inputField}
+            />
+            <button type="submit" className={styles.submitButton}>
+              Đăng ký
+            </button>
+          </form>
+          <div className={styles.otherLogins}>
+            <div className={styles.or}>
+              <div className={styles.line1}></div>
+              <div className={styles.or2}>Hoặc</div>
+              <div className={styles.line2}></div>
             </div>
-            <div className={styles["other-logins"]}>
-              <div className={styles.or}>
-                <div className={styles["line-1"]}></div>
-                <div className={styles.or2}>Or</div>
-                <div className={styles["line-2"]}></div>
-              </div>
-              <div className={styles["frame-3"]}>
-                <img
-                  className={styles.deviconGoogle}
-                  src="/images/google.svg"
-                  alt="Google"
-                  onClick={handleGoogleLogin}
-                  style={{ cursor: "pointer" }}
-                />
-                <img 
-                  className={styles["logos-facebook"]} 
-                  src="/images/fb.svg" 
-                  alt="Facebook"
-                  style={{ cursor: "pointer" }}
-                />
-                <img
-                  className={styles.biGithub}
-                  src="/images/github.svg"
-                  alt="GitHub"
-                  onClick={handleGitHubLogin}
-                  style={{ cursor: "pointer" }}
-                />
-              </div>
+            <div className={styles.frame3}>
+              <img
+                className={styles.icon}
+                src="/images/google.svg"
+                alt="Google"
+                onClick={() => handleOAuthLogin("google")}
+              />
+              <img
+                className={styles.icon}
+                src="/images/fb.svg"
+                alt="Facebook"
+              />
+              <img
+                className={styles.icon}
+                src="/images/github.svg"
+                alt="GitHub"
+                onClick={() => handleOAuthLogin("github")}
+              />
             </div>
           </div>
-          <div className={styles["frame-9"]}>
-            <div className={styles["b-n-c-t-i-kho-n-ng-nh-p"]}>
-              Bạn đã có tài khoản? 
-              <a href="/account/signin" className={styles.subMenuLink}>
-                Đăng Nhập
+
+          {/* Footer Links */}
+          <div className={styles.frame9}>
+            <div className={styles.chuaCoTaiKhoan}>
+              Đã có tài khoản?
+              <a href="/account/signin" className={styles.dangKy}>
+                Đăng nhập
               </a>
             </div>
-            <div className={styles["customer-care"]}>
-              <div className={styles["frame-6"]}>
-                <div className={styles["terms-conditions"]}>Terms &amp; Conditions</div>
-              </div>
-              <div className={styles["frame-7"]}>
-                <div className={styles.support}>Support</div>
-              </div>
-              <div className={styles["frame-8"]}>
-                <div className={styles["customer-care2"]}>Customer Care</div>
-              </div>
+            <div className={styles.customerCare}>
+              <a href="/terms" className={styles.termsConditions}>
+                Điều khoản & Điều kiện
+              </a>
+              <a href="/support" className={styles.support}>
+                Hỗ trợ
+              </a>
+              <a href="/customer-care" className={styles.customerCare2}>
+                Chăm sóc khách hàng
+              </a>
             </div>
           </div>
         </div>
       </div>
-      <div className={styles["line-3"]}></div>
+
+      {/* Bottom Line */}
+      <div className={styles.line3}></div>
     </div>
   );
 }

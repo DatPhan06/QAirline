@@ -21,6 +21,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   max-width: 800px; /* Reduced width for better fit */
+  border-radius: 12px; /* Thêm thuộc tính này để bo tròn các góc */
   width: 90%;
 }
 
