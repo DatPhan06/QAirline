@@ -1,0 +1,204 @@
+/* Main container */
+.airportContainer {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(to bottom, #f8f9fa, #fff);
+    min-height: 100vh;
+  }
+  
+  /* Page title */
+  .title {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 15px;
+  }
+  
+  .title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    border-radius: 2px;
+  }
+  
+  /* Content layout */
+  .content {
+    display: flex;
+    gap: 30px;
+    min-height: 600px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+  
+  /* Airport list sidebar */
+  .airportList {
+    flex: 0 0 300px;
+    background: #f8f9fa;
+    padding: 25px;
+    border-right: 1px solid #eee;
+  }
+  
+  .airportList h2 {
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+    color: #2c3e50;
+    font-weight: 600;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+  }
+  
+  .airportList ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .airportItem {
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+    color: #495057;
+    font-size: 0.95rem;
+  }
+  
+  .airportItem:hover {
+    background: #e3f2fd;
+    transform: translateX(5px);
+  }
+  
+  .airportItem.active {
+    background: #1976d2;
+    color: #fff;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
+  }
+  
+  /* Airport details section */
+  .airportDetails {
+    flex: 1;
+    padding: 30px;
+    background: #fff;
+  }
+  
+  .airportDetails h2 {
+    margin-bottom: 30px;
+    color: #1976d2;
+    font-size: 1.8rem;
+    font-weight: 600;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e3f2fd;
+  }
+  
+  .detailsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .detailsTable th,
+  .detailsTable td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .detailsTable th {
+    width: 200px;
+    color: #6c757d;
+    font-weight: 600;
+    background: #f8f9fa;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .detailsTable td {
+    color: #2c3e50;
+    line-height: 1.6;
+  }
+  
+  /* Loading state */
+  .loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2rem;
+    color: #6c757d;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+  }
+  
+  /* Error state */
+  .error {
+    text-align: center;
+    padding: 40px;
+    color: #dc3545;
+    font-size: 1.2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.1);
+  }
+  
+  /* Responsive design */
+  @media (max-width: 992px) {
+    .content {
+      flex-direction: column;
+    }
+  
+    .airportList {
+      flex: none;
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid #eee;
+    }
+  
+    .airportDetails {
+      padding: 20px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .title {
+      font-size: 2rem;
+    }
+  
+    .detailsTable th {
+      width: 150px;
+    }
+  
+    .airportContainer {
+      padding: 20px 15px;
+    }
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .content {
+    animation: fadeIn 0.5s ease-out;
+  }
