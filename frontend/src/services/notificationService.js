@@ -21,7 +21,10 @@ axiosInstance.interceptors.request.use(
 // Hàm tạo thông báo mới
 export const createNotification = async (notificationData) => {
   try {
-    const response = await axiosInstance.post("/notifications/", notificationData);
+    const response = await axiosInstance.post(
+      "/notifications/",
+      notificationData
+    );
     return response.data;
   } catch (error) {
     console.error("Error creating notification:", error);
@@ -32,7 +35,9 @@ export const createNotification = async (notificationData) => {
 // Hàm lấy thông báo theo ID
 export const getNotificationById = async (notificationId) => {
   try {
-    const response = await axiosInstance.get(`/notifications/${notificationId}`);
+    const response = await axiosInstance.get(
+      `/notifications/${notificationId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error fetching notification:", error);
@@ -68,10 +73,23 @@ export const updateNotification = async (notificationId, updateData) => {
 // Hàm xóa thông báo
 export const deleteNotification = async (notificationId) => {
   try {
-    const response = await axiosInstance.delete(`/notifications/${notificationId}`);
+    const response = await axiosInstance.delete(
+      `/notifications/${notificationId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error deleting notification:", error);
+    throw error;
+  }
+};
+
+// Hàm lấy thông báo cho người dùng cụ thể
+export const getUserNotifications = async (userId) => {
+  try {
+    const response = await axiosInstance.get(`/notifications/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user notifications:", error);
     throw error;
   }
 };
