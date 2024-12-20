@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import { getBookings, updateBooking } from "../../services/bookingService";
 import { updateTicketStatus } from "../../services/ticketService";
 import { getFlightById } from "../../services/flightService";
+import { getTicketById } from "../../services/ticketService";
+import { getUserById } from "../../services/userService";
 import styles from "./ManageTicket.module.css";
 
 const ManageTicket = () => {
   const [bookings, setBookings] = useState([]);
   const [filter, setFilter] = useState("all"); // 'all', 'successful', 'canceled'
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   // Fetch bookings data
   useEffect(() => {
@@ -25,6 +29,30 @@ const ManageTicket = () => {
 
     fetchBookings();
   }, []);
+
+  const handleBookingClick = async (booking) => {
+    if (booking.status !== "booked") {
+      // Không làm gì nếu vé không ở trạng thái thành công
+      return;
+    }
+    try {
+      // Lấy thông tin vé từ backend
+      const ticketDetails = await getTicketById(booking.ticket_id);
+      // Lấy thông tin người dùng từ backend
+      const userDetails = await getUserById(booking.user_id);
+      // Kết hợp thông tin booking, ticket và user
+      const detailedBooking = {
+        ...booking,
+        ticket: ticketDetails,
+        user: userDetails,
+      };
+      setSelectedBooking(detailedBooking);
+      setShowModal(true);
+    } catch (error) {
+      console.error("Error fetching booking details:", error);
+      alert("Không thể lấy thông tin chi tiết của vé.");
+    }
+  };
 
   // Cancel booking
   const handleCancelBooking = async (bookingId, flightId) => {
@@ -120,7 +148,11 @@ const ManageTicket = () => {
       ) : filteredBookings.length > 0 ? (
         <ul className={styles.bookingList}>
           {filteredBookings.map((booking) => (
-            <li key={booking.booked_ticket_id} className={styles.bookingItem}>
+            <li
+              key={booking.booked_ticket_id}
+              className={styles.bookingItem}
+              onClick={() => handleBookingClick(booking)}
+            >
               <div className={styles.ticketCode}>
                 Mã Vé {booking.booked_ticket_id}
               </div>
@@ -168,6 +200,38 @@ const ManageTicket = () => {
               </div>
             </li>
           ))}
+          {showModal && selectedBooking && (
+  <div className={styles.modalOverlay} onClick={() => setShowModal(false)}>
+    <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+      <button className={styles.closeButton} onClick={() => setShowModal(false)}>
+        ×
+      </button>
+      <h2>Chi tiết vé</h2>
+      <p>
+        <strong>Mã vé đặt:</strong> {selectedBooking.booked_ticket_id}
+      </p>
+      <p>
+        <strong>Người đặt:</strong> {selectedBooking.user.full_name} ({selectedBooking.user.email})
+      </p>
+      <p>
+        <strong>Mã vé:</strong> {selectedBooking.ticket.ticket_id}
+      </p>
+      <p>
+        <strong>Chuyến bay:</strong> {selectedBooking.flight_id}
+      </p>
+      <p>
+        <strong>Số ghế:</strong> {selectedBooking.ticket.seat.seat_number}
+      </p>
+      <p>
+        <strong>Giá vé:</strong> {selectedBooking.price.toLocaleString()} VND
+      </p>
+      <p>
+        <strong>Ngày đặt:</strong> {new Date(selectedBooking.booking_time).toLocaleString()}
+      </p>
+      {/* Thêm các thông tin khác nếu cần */}
+    </div>
+  </div>
+)}
         </ul>
       ) : (
         <p>Bạn chưa có vé nào được đặt.</p>
