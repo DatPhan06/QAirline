@@ -13,9 +13,7 @@
     display: flex;
     gap: 50px;
     padding: 50px;
-    background: linear-gradient(135deg, #ece9e6, #ffffff);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
+    max-width: 1200px;
     animation: fadeIn 0.8s ease-out forwards;
   }
   

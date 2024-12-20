@@ -191,7 +191,7 @@ const FlightDetail = ({ flight }) => {
       </div>
 
       {/* Ticket Class Selection */}
-      <div className={styles.ticketClassSelection}>
+      {/* <div className={styles.ticketClassSelection}>
         <select
           className={styles.selectClass}
           value={selectedClass}
@@ -204,13 +204,13 @@ const FlightDetail = ({ flight }) => {
             </option>
           ))}
         </select>
-      </div>
+      </div> */}
 
       {/* Seat Map */}
       {filteredTickets.length > 0 && (
         <div className={styles.ticketListContainer}>
           <h2 className={styles.sectionTitle}>
-            Danh sách vé {selectedClass ? `(${selectedClass})` : "(Tất cả hạng vé)"}
+            Danh sách vé 
           </h2>
           {isLoading && (
             <p className={styles.loading}>Đang xử lý đặt chỗ...</p>
@@ -268,6 +268,12 @@ const FlightDetail = ({ flight }) => {
                     </div>
                   </div>
                 ))}
+                  {/* Bathroom in Business Class */}
+                  <div className={styles.Busbathroom}> 🚻 </div>
+
+                  {/* Exit Door in Business Class */}
+                  <div className={styles.Busdoor}>⬅️ ➡️
+                  </div>
               </div>
             )}
 
@@ -317,11 +323,12 @@ const FlightDetail = ({ flight }) => {
                     </div>
                   </div>
                 ))}
+                {/* Bathroom in Economy Class */}
+              <div className={styles.Ecombathroom}>🚻</div>
               </div>
             )}
 
             {/* Bathrooms and Doors */}
-            <div className={styles.bathroom}>WC</div>
             <div className={styles.door}>Cửa Ra Vào</div>
           </div>
         </div>
