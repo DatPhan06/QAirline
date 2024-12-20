@@ -1,5 +1,8 @@
+/* frontend/src/pages/Admin/AdminDashboard.module.css */
+
 .adminContainer {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background-color: #f5f7fa;
 }
@@ -44,6 +47,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.3s ease;
+  height: calc(86%); /* Set height to half of the BookingChart */
 }
 
 .statCard:hover {
@@ -127,21 +131,60 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Responsive */
 @media (max-width: 1200px) {
+  .dashboardGrid {
+    grid-template-columns: 1fr; /* Chuyển sang 1 cột */
+  }
+
+  .statsContainer {
+    grid-template-columns: 1fr; /* Chuyển sang 1 cột */
+  }
+
   .buttonsContainer {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 768px) {
+  .statsContainer {
+    grid-template-columns: 1fr; /* Chuyển sang 1 cột */
+    width: 100%; /* Đảm bảo biểu đồ chiếm toàn bộ chiều rộng */
+  }
+
+  .chartContainer {
+    width: 100%; /* Đảm bảo biểu đồ chiếm toàn bộ chiều rộng */
+  }
+
   .buttonsContainer {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 480px) {
+  .statsContainer {
+    display: flex;
+    flex-direction: column; /* Chuyển sang bố cục dọc */
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+    width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+  }
+
+  .statCard {
+    width: 100%; /* Đảm bảo các thẻ thống kê chiếm toàn bộ chiều rộng */
+  }
+
+  .chartContainer {
+    width: 100%; /* Đảm bảo biểu đồ chiếm toàn bộ chiều rộng */
+    margin-bottom: 20px; /* Khoảng cách dưới biểu đồ */
+  }
+
   .buttonsContainer {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column; /* Chuyển sang bố cục dọc */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+  }
+
+  .button {
+    width: 100%; /* Đảm bảo các nút chiếm toàn bộ chiều rộng */
   }
 }
