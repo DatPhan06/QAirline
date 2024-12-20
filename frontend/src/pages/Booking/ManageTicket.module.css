@@ -6,13 +6,13 @@
   --color-danger: #e74c3c;
   --color-text: #34495e;
   --color-white: #ffffff;
-  --font-primary: 'Roboto', sans-serif;
+  --font-primary: "Roboto", sans-serif;
   --transition-speed: 0.3s;
 }
 
 .manageTicketPage {
   /* background: linear-gradient(45deg, #fff1eb 0%, #ace0f9 100%); */
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   min-height: 100vh;
 }
 
@@ -54,7 +54,7 @@
 
 /* Đường kẻ dọc giữa các button */
 .filterButton:not(:last-child)::after {
-  content: '';
+  content: "";
   position: absolute;
   right: 0;
   top: 50%;
@@ -102,12 +102,13 @@
   background-position: center;
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(44, 62, 80, 0.05);
-  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  transition: transform var(--transition-speed),
+    box-shadow var(--transition-speed);
   max-width: 500px;
   margin: 0 auto;
   width: 100%;
   min-height: 100px; /* Đảm bảo chiều cao tối thiểu để hiển thị đủ background */
-} 
+}
 
 .bookingItem:hover {
   transform: translateY(-6px);
@@ -122,7 +123,7 @@
     padding: 0 20px;
     gap: 20px;
   }
-  
+
   .bookingItem {
     background-size: 400px 240px; /* Giảm kích thước background */
   }
@@ -248,7 +249,8 @@
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
-  transition: background-color var(--transition-speed), transform var(--transition-speed);
+  transition: background-color var(--transition-speed),
+    transform var(--transition-speed);
   margin-top: 20px;
   display: flex;
   align-items: center;
@@ -280,7 +282,11 @@
 
 /* Modal Content */
 .modalContent {
-  background: linear-gradient(135deg, #f9f7f3 0%, #f9f7f3 100%); /* Thêm gradient nhẹ */
+  background: linear-gradient(
+    135deg,
+    #f9f7f3 0%,
+    #f9f7f3 100%
+  ); /* Thêm gradient nhẹ */
   padding: 40px;
   border-radius: 16px;
   max-width: 600px;
@@ -314,7 +320,7 @@
   margin: 0;
   font-size: 2.2rem;
   font-weight: bold;
-  color: #2c3e50;
+  color: #d9dde1;
   text-align: center;
   border-bottom: 2px solid #ececec;
   padding-bottom: 15px;
@@ -365,3 +371,211 @@
   }
 }
 
+/* ManageTicket.module.css */
+.modalContent {
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 800px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.closeButton:hover {
+  color: #ff4d4d;
+}
+
+.ticketContainer {
+  background: linear-gradient(135deg, #f5f7fa 0%, #fff 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+}
+
+.ticketHeader {
+  background: #0d5777;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.ticketHeader h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.ticketId {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.ticketBody {
+  padding: 30px;
+}
+
+.flightMainInfo {
+  margin-bottom: 30px;
+}
+
+.airportInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.departure,
+.arrival {
+  text-align: center;
+  flex: 1;
+}
+
+.departure h3,
+.arrival h3 {
+  font-size: 24px;
+  color: #333;
+  margin: 0 0 5px 0;
+}
+
+.departure p,
+.arrival p {
+  color: #666;
+  margin: 0 0 10px 0;
+  font-size: 14px;
+}
+
+.departure time,
+.arrival time {
+  font-size: 18px;
+  color: #0d5777;
+  font-weight: 600;
+}
+
+.flightPath {
+  flex: 2;
+  text-align: center;
+  position: relative;
+  padding: 0 20px;
+}
+
+.flightNumber {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.pathLine {
+  height: 2px;
+  background: #0d5777;
+  position: relative;
+}
+
+.airplane {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  font-size: 24px;
+  color: #0d5777;
+}
+
+.ticketDetails {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+  background: rgba(13, 87, 119, 0.05);
+  border-radius: 12px;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail span {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.detail strong {
+  font-size: 16px;
+  color: #333;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.printButton {
+  padding: 12px 24px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.printButton:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+.cancelButton {
+  padding: 12px 24px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancelButton:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+@media (max-width: 768px) {
+  .ticketDetails {
+    grid-template-columns: 1fr;
+  }
+
+  .airportInfo {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .flightPath {
+    width: 100%;
+    padding: 20px 0;
+  }
+}
