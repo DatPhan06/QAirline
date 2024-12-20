@@ -383,6 +383,52 @@
 .notificationItem:hover {
   background-color: #f5f8fa;
 }
+.notificationBody {
+  white-space: pre-line; /* Preserve line breaks but collapse spaces */
+}
+
+.markdownStrong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.markdownParagraph {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.markdownList {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 1rem 0;
+}
+
+.markdownListItem {
+  margin-bottom: 0.5rem;
+  padding-left: 20px;
+  position: relative;
+  color: #333;
+}
+
+.markdownListItem::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  color: #666;
+}
+
+.notificationDetail h2 {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.notificationInfo {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
 @media (max-width: 768px) {
   .menuToggle {
     display: block; /* Hiện nút menu */
