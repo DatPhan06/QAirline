@@ -26,7 +26,7 @@ const AdminLogin = () => {
       const response = await loginAdmin(formData.username, formData.password);
       localStorage.setItem("adminToken", response.access_token);
       alert("Đăng nhập thành công!");
-      navigate("/admin/post-info");
+      navigate("/admin/dashboard");
     } catch (error) {
       console.error("Error during admin login:", error);
       alert("Đăng nhập thất bại, vui lòng thử lại.");

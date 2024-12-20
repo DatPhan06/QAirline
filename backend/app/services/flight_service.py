@@ -79,3 +79,22 @@ def delete_flight(db: Session, db_flight: models.Flight) -> None:
     """
     db.delete(db_flight)
     db.commit()
+
+def get_flight_stats(db: Session) -> dict:
+    """
+    Lấy thống kê chuyến bay.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        dict: Thống kê chuyến bay.
+    """
+    total_flights = db.query(models.Flight).count()
+    total_seats = db.query(models.Seat).count()
+    total_booked_tickets = db.query(models.BookedTicket).count()
+    return {
+        "total_flights": total_flights,
+        "total_seats": total_seats,
+        "total_booked_tickets": total_booked_tickets,
+    }

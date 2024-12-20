@@ -5,6 +5,7 @@ from fastapi import HTTPException, status
 from jose import jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 
 from .. import models, schemas
 from ..config import settings
@@ -215,3 +216,25 @@ def delete_admin(db: Session, admin_id: int) -> dict:
     db.delete(db_admin)
     db.commit()
     return {"message": "Admin đã được xóa thành công."}
+
+def get_general_stats(db: Session) -> dict:
+    """
+    Lấy thống kê tổng quát.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        dict: Thống kê tổng quát.
+    """
+    total_bookings = db.query(models.BookedTicket).count()
+    total_revenue = db.query(models.BookedTicket).with_entities(func.sum(models.BookedTicket.price)).scalar()
+    total_airplanes = db.query(models.Airplane).count()
+    total_flights = db.query(models.Flight).count()
+
+    return {
+        "total_bookings": total_bookings,
+        "total_revenue": total_revenue,
+        "total_airplanes": total_airplanes,
+        "total_flights": total_flights,
+    }

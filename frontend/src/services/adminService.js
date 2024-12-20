@@ -203,3 +203,36 @@ export const getBookingStatsByMonth = async (month, year) => {
     throw error;
   }
 };
+
+// Hàm lấy thống kê máy bay
+export const getAirplaneStats = async () => {
+  try {
+    const response = await axiosInstance.get("/airplanes/stats/overview");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching airplane stats:", error);
+    throw error;
+  }
+};
+
+// Hàm lấy thống kê chuyến bay
+export const getFlightStats = async () => {
+  try {
+    const response = await axiosInstance.get("/flights/stats/overview");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching flight stats:", error);
+    throw error;
+  }
+};
+
+// Hàm lấy thống kê tổng quát
+export const getGeneralStats = async () => {
+  try {
+    const response = await axiosInstance.get("/admin/general-stats");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching general stats:", error);
+    throw error;
+  }
+};

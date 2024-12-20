@@ -96,3 +96,16 @@ def delete_flight(flight_id: int, db: Session = Depends(database.get_db)) -> Non
     if db_flight is None:
         raise HTTPException(status_code=404, detail="Flight not found")
     services.flight_service.delete_flight(db, db_flight)
+
+@router.get("/stats/overview")
+def get_flight_stats(db: Session = Depends(database.get_db)):
+    """
+    Lấy thống kê chuyến bay.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        dict: Thống kê chuyến bay.
+    """
+    return services.flight_service.get_flight_stats(db)

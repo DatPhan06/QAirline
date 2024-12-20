@@ -1,43 +1,87 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./AdminSidebar.module.css";
+import {
+  FaInfoCircle,
+  FaPlane,
+  FaClipboardList,
+  FaChartBar,
+  FaSignOutAlt,
+  FaUserShield,
+} from "react-icons/fa";
 
 const AdminSidebar = () => {
   const navigate = useNavigate();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
     navigate("/admin");
   };
 
+  const handleSidebarToggle = (isOpen) => {
+    setIsSidebarOpen(isOpen);
+    // Add/remove shifted class from mainContent
+    const mainContent = document.querySelector(".mainContent");
+    if (mainContent) {
+      mainContent.classList.toggle("shifted", isOpen);
+    }
+  };
+
   return (
-    <div className={styles.sidebar}>
-      <h2>Menu Quản Trị</h2>
-      <ul>
-        <li>
-          <Link to="/admin/post-info">Đăng thông tin</Link>
-        </li>
-        <li>
-          <Link to="/admin/manage-airplanes">Quản Lý Máy Bay</Link>
-        </li>
-        <li>
-          <Link to="/admin/manage-flights">Quản Lý Chuyến Bay</Link>
-        </li>
-        <li>
-          <Link to="/admin/view-bookings">
-            Xem Và Thống Kê Đặt Vé Của Khách Hàng
-          </Link>
-        </li>
-        <li>
-          <Link to="/admin/account">Quản Lý Tài Khoản</Link>
-        </li>
-        <li>
-          <button onClick={handleLogout} className={styles.logoutButton}>
-            Đăng Xuất
-          </button>
-        </li>
-      </ul>
-    </div>
+    <>
+      <div
+        className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ""}`}
+        onMouseEnter={() => setIsSidebarOpen(true)}
+        onMouseLeave={() => setIsSidebarOpen(false)}
+      >
+        <Link to="/admin/dashboard">
+          <h2>
+            <FaUserShield className={styles.icon} />
+            <span className={styles.text}>Menu Quản Trị</span>
+          </h2>
+        </Link>
+        <ul>
+          <li>
+            <Link to="/admin/post-info">
+              <FaInfoCircle className={styles.icon} />
+              <span className={styles.text}>Đăng thông tin</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/manage-airplanes">
+              <FaPlane className={styles.icon} />
+              <span className={styles.text}>Quản Lý Máy Bay</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/manage-flights">
+              <FaClipboardList className={styles.icon} />
+              <span className={styles.text}>Quản Lý Chuyến Bay</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/view-bookings">
+              <FaChartBar className={styles.icon} />
+              <span className={styles.text}>Xem Và Thống Kê Đặt Vé</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/account">
+              <FaUserShield className={styles.icon} />
+              <span className={styles.text}>Quản Lý Tài Khoản</span>
+            </Link>
+          </li>
+        </ul>
+        <button onClick={handleLogout} className={styles.logoutButton}>
+          <FaSignOutAlt className={styles.icon} />
+          <span className={styles.text}>Đăng Xuất</span>
+        </button>
+      </div>
+      <div
+        className={`${styles.overlay} ${isSidebarOpen ? styles.active : ""}`}
+      />
+    </>
   );
 };
 

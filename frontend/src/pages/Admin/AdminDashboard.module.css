@@ -1,0 +1,190 @@
+/* frontend/src/pages/Admin/AdminDashboard.module.css */
+
+.adminContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.sidebar {
+  width: 80px; /* Initial width when collapsed */
+  transition: width 0.3s ease;
+}
+
+.sidebar:hover {
+  width: 300px; /* Expanded width on hover */
+}
+
+.mainContent {
+  flex: 1;
+  padding: 40px;
+  margin-left: 80px; /* Add space for collapsed sidebar */
+  transition: all 0.3s ease;
+}
+
+.sidebar:hover ~ .mainContent {
+  margin-left: 300px; /* Adjust based on expanded sidebar width */
+}
+
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: 2fr 3fr; /* Two columns: 2fr for stats, 3fr for chart */
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.statsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns for stats */
+  gap: 20px;
+}
+
+.statCard {
+  background-color: #fff;
+  padding: 15px; /* Adjust padding to make the cards shorter */
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+  height: calc(86%); /* Set height to half of the BookingChart */
+}
+
+.statCard:hover {
+  transform: translateY(-5px);
+}
+
+.statCard h2 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 10px; /* Adjust margin to make the cards shorter */
+}
+
+.statCard p {
+  font-size: 1.5rem; /* Adjust font size to make the cards shorter */
+  color: #3498db;
+  font-weight: 600;
+}
+
+.chartContainer {
+  background: #fff;
+  padding: 15px; /* Adjust padding to make the chart container shorter */
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chartContainer h2 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 10px; /* Adjust margin to make the chart container shorter */
+}
+
+.buttonsContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Hiển thị 5 cột bằng nhau */
+  gap: 20px;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  color: white;
+  min-height: 80px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Màu sắc cho từng nút */
+.button:nth-child(1) {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+}
+
+.button:nth-child(2) {
+  background: linear-gradient(135deg, #4ecdc4, #45b7af);
+}
+
+.button:nth-child(3) {
+  background: linear-gradient(135deg, #45b649, #dce35b);
+}
+
+.button:nth-child(4) {
+  background: linear-gradient(135deg, #614385, #516395);
+}
+
+.button:nth-child(5) {
+  background: linear-gradient(135deg, #ff8008, #ffc837);
+}
+
+/* Hiệu ứng hover */
+.button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 1200px) {
+  .dashboardGrid {
+    grid-template-columns: 1fr; /* Chuyển sang 1 cột */
+  }
+
+  .statsContainer {
+    grid-template-columns: 1fr; /* Chuyển sang 1 cột */
+  }
+
+  .buttonsContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .statsContainer {
+    grid-template-columns: 1fr; /* Chuyển sang 1 cột */
+    width: 100%; /* Đảm bảo biểu đồ chiếm toàn bộ chiều rộng */
+  }
+
+  .chartContainer {
+    width: 100%; /* Đảm bảo biểu đồ chiếm toàn bộ chiều rộng */
+  }
+
+  .buttonsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .statsContainer {
+    display: flex;
+    flex-direction: column; /* Chuyển sang bố cục dọc */
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+    width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+  }
+
+  .statCard {
+    width: 100%; /* Đảm bảo các thẻ thống kê chiếm toàn bộ chiều rộng */
+  }
+
+  .chartContainer {
+    width: 100%; /* Đảm bảo biểu đồ chiếm toàn bộ chiều rộng */
+    margin-bottom: 20px; /* Khoảng cách dưới biểu đồ */
+  }
+
+  .buttonsContainer {
+    display: flex;
+    flex-direction: column; /* Chuyển sang bố cục dọc */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+  }
+
+  .button {
+    width: 100%; /* Đảm bảo các nút chiếm toàn bộ chiều rộng */
+  }
+}

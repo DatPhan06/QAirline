@@ -1,23 +1,19 @@
 /* AccountManager.module.css */
 
 .adminContainer {
-  display: flex;
   min-height: 100vh;
   background-color: #f5f7fa;
 }
 
-.sidebar {
-  width: 260px;
-  background-color: #2c3e50;
-  padding: 30px 20px;
-  color: #fff;
-  flex-shrink: 0;
+.mainContent {
+  padding: 40px;
+  padding-left: 120px; /* Add space for collapsed sidebar */
+  transition: all 0.3s ease;
 }
 
-.mainContent {
-  flex: 1;
-  padding: 40px;
-  overflow-x: hidden;
+/* Move content when sidebar is open */
+.mainContent.shifted {
+  padding-left: 300px; /* Adjust based on expanded sidebar width */
 }
 
 h1 {

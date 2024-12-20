@@ -16,6 +16,8 @@ import {
   Cell,
 } from "recharts";
 import AdminSidebar from "../../components/AdminSidebar";
+import BookingChart from "../../components/BookingChart";
+
 import styles from "./ViewBookings.module.css";
 
 const ViewBookings = () => {
@@ -184,47 +186,13 @@ const ViewBookings = () => {
           </div>
         </div>
 
-        <div className={styles.chartContainer}>
-          <div className={styles.chartHeader}>
-            <h2>Đặt vé theo tháng</h2>
-            <div className={styles.dateSelectors}>
-              <select
-                value={selectedMonth}
-                onChange={handleMonthChange}
-                className={styles.select}
-              >
-                <option value={0}>Tất cả các tháng</option>
-                {Array.from({ length: 12 }, (_, i) => (
-                  <option key={i + 1} value={i + 1}>
-                    Tháng {i + 1}
-                  </option>
-                ))}
-              </select>
-              <select
-                value={selectedYear}
-                onChange={handleYearChange}
-                className={styles.select}
-              >
-                {Array.from({ length: 5 }, (_, i) => {
-                  const year = new Date().getFullYear() - i + 1;
-                  return (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
-          <BarChart width={600} height={300} data={monthlyStats}>
-            <XAxis dataKey={selectedMonth === 0 ? "month" : "group"} />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="bookings" name="Số lượng đặt vé" fill="#8884d8" />
-            <Bar dataKey="revenue" name="Doanh thu (VND)" fill="#82ca9d" />
-          </BarChart>
-        </div>
+        <BookingChart
+          monthlyStats={monthlyStats}
+          selectedMonth={selectedMonth}
+          selectedYear={selectedYear}
+          handleMonthChange={handleMonthChange}
+          handleYearChange={handleYearChange}
+        />
 
         <div className={styles.bookingsListContainer}>
           <h2>Danh Sách Đặt Vé</h2>

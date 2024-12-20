@@ -97,3 +97,20 @@ def delete_airplane(db: Session, airplane_id: int) -> None:
         db.commit()
         return True
     return False
+
+def get_airplane_stats(db: Session) -> dict:
+    """
+    Lấy thống kê máy bay.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        dict: Thống kê máy bay.
+    """
+    total_airplanes = db.query(models.Airplane).count()
+    total_seats = db.query(models.Seat).count()
+    return {
+        "total_airplanes": total_airplanes,
+        "total_seats": total_seats,
+    }
