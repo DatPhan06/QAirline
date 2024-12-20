@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
+import { getUserNotifications } from "../services/notificationService";
+import { getCurrentUser } from "../services/userService";
 import styles from "./Navbar.module.css";
 
 /**
@@ -15,6 +17,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
   const token = localStorage.getItem("token");
   const isLoggedIn = !!token;
 
@@ -29,9 +32,25 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    if (isLoggedIn) {
-      fetchNotifications();
-    }
+    const fetchUserAndNotifications = async () => {
+      if (isLoggedIn) {
+        try {
+          const userData = await getCurrentUser();
+          setCurrentUser(userData);
+
+          if (userData) {
+            const userNotifications = await getUserNotifications(
+              userData.user_id
+            );
+            setNotifications(userNotifications);
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      }
+    };
+
+    fetchUserAndNotifications();
   }, [isLoggedIn]);
 
   const toggleNotification = () => {
@@ -235,52 +254,62 @@ const Navbar = () => {
                 </Link>
               </div>
             )}
-
+          </li>
+          <li>
             {isLoggedIn && (
               <div className={styles.notificationContainer}>
+                {" "}
                 <button
                   className={styles.notificationButton}
                   onClick={toggleNotification}
                 >
-                  <FontAwesomeIcon icon={faBell} />
+                  {" "}
+                  <FontAwesomeIcon icon={faBell} />{" "}
                   {notifications.length > 0 && (
                     <span className={styles.notificationBadge}>
-                      {notifications.length}
+                      {" "}
+                      {notifications.length}{" "}
                     </span>
-                  )}
-                </button>
-
+                  )}{" "}
+                </button>{" "}
                 {isNotificationOpen && (
                   <div className={styles.notificationDropdown}>
-                    <h3>Thông báo</h3>
+                    {" "}
+                    <h3>Thông báo</h3>{" "}
                     {notifications.length > 0 ? (
                       <div className={styles.notificationList}>
+                        {" "}
                         {notifications.map((notification) => (
                           <div
                             key={notification.notification_id}
                             className={styles.notificationItem}
                           >
+                            {" "}
                             <div className={styles.notificationTitle}>
-                              {notification.title}
-                            </div>
+                              {" "}
+                              {notification.title}{" "}
+                            </div>{" "}
                             <div className={styles.notificationContent}>
-                              {notification.content}
-                            </div>
+                              {" "}
+                              {notification.content}{" "}
+                            </div>{" "}
                             <div className={styles.notificationTime}>
+                              {" "}
                               {new Date(
                                 notification.created_at
-                              ).toLocaleDateString()}
-                            </div>
+                              ).toLocaleDateString()}{" "}
+                            </div>{" "}
                           </div>
-                        ))}
+                        ))}{" "}
                       </div>
                     ) : (
                       <p className={styles.noNotifications}>
-                        Không có thông báo mới
+                        {" "}
+                        Không có thông báo mới{" "}
                       </p>
-                    )}
+                    )}{" "}
                   </div>
-                )}
+                )}{" "}
               </div>
             )}
           </li>

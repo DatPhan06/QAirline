@@ -112,3 +112,20 @@ def delete_notification(
     if not success:
         raise HTTPException(status_code=404, detail="Notification not found")
     return {"message": success}
+
+@router.get("/user/{user_id}", response_model=List[schemas.Notification])
+def get_user_notifications(
+    user_id: int,
+    db: Session = Depends(database.get_db)
+):
+    """
+    Lấy thông báo của người dùng và thông báo chung.
+
+    Args:
+        user_id (int): ID của người dùng.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        List[schemas.Notification]: Danh sách thông báo.
+    """
+    return services.notification_service.get_user_notifications(db, user_id)
