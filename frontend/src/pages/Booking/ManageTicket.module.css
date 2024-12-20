@@ -53,13 +53,13 @@
 }
 
 .filterButton:hover {
-  background-color: var(--color-accent);
+  background-color: #1c769c;
   color: var(--color-white);
   transform: translateY(-3px);
 }
 
 .active {
-  background-color: var(--color-accent);
+  background-color: #0d5777;
   color: var(--color-white);
   box-shadow: 0 6px 8px rgba(44, 62, 80, 0.15);
 }
@@ -89,7 +89,7 @@
 
 /* Left section for Ticket Code */
 .ticketCode {
-  background: #0d5777;
+  background: #0c223c;
   color: #e7c150;
   padding: 30px 25px;
   max-width: 105px;
