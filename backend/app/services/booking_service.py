@@ -126,6 +126,19 @@ def get_all_bookings(db: Session) -> List[models.BookedTicket]:
     """
     return db.query(models.BookedTicket).all()
 
+def get_bookings_by_user(db: Session, user_id: int) -> List[models.BookedTicket]:
+    """
+    Lấy danh sách tất cả vé đã đặt của một người dùng.
+
+    Args:
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+        user_id (int): ID của người dùng.
+
+    Returns:
+        List[models.BookedTicket]: Danh sách vé đã đặt.
+    """
+    return db.query(models.BookedTicket).filter(models.BookedTicket.user_id == user_id).all()
+
 def get_bookings_by_ticket_id(db: Session, ticket_id: int) -> List[models.BookedTicket]:
     """
     Lấy thông tin booking theo ticket_id.

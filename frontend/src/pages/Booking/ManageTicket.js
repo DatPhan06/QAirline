@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getBookings, updateBooking } from "../../services/bookingService";
+import { getBookings, updateBooking, getBookingsByUserId } from "../../services/bookingService";
 import { updateTicketStatus } from "../../services/ticketService";
 import { getFlightById } from "../../services/flightService";
 import { getTicketById } from "../../services/ticketService";
@@ -17,7 +17,8 @@ const ManageTicket = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const data = await getBookings();
+        const currentUser = await getCurrentUser();
+        const data = await getBookingsByUserId(currentUser.user_id);
         setBookings(data);
       } catch (error) {
         console.error("Error fetching bookings:", error);
@@ -103,10 +104,6 @@ const ManageTicket = () => {
     const departureDate = new Date(booking.departure_time);
 
     if (departureDate < currentDate) {
-      return false;
-    }
-
-    if (booking.user_id !== getCurrentUser().user_id) {
       return false;
     }
 
