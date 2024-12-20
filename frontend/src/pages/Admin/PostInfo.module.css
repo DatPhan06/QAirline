@@ -46,6 +46,10 @@
   transition: all 0.3s ease;
 }
 
+.sectionTabs button {
+  width: 100%; /* Đảm bảo các button chiếm toàn bộ chiều rộng */
+}
+
 .sectionTabs button:hover {
   background: #e9ecef;
   transform: translateY(-2px);
@@ -319,5 +323,50 @@
   .inputGroup textarea {
     padding: 10px 12px;
     font-size: 13px;
+  }
+  .sectionTabs button {
+    width: 100%; /* Đảm bảo các button chiếm toàn bộ chiều rộng */
+  }
+}
+
+@media (max-width: 400px) {
+  .modalContent {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .inputGroup label {
+    font-size: 12px;
+  }
+
+  .inputGroup input,
+  .inputGroup textarea {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .createButton,
+  .submitButton,
+  .backButton {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .sectionTabs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sectionTabs button {
+    width: 100%; /* Đảm bảo các button chiếm toàn bộ chiều rộng */
+  }
+
+  .itemCard {
+    padding: 15px;
+  }
+
+  .itemHeader h3 {
+    font-size: 1rem;
   }
 }
