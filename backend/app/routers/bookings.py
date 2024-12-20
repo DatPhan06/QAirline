@@ -142,6 +142,28 @@ def get_booking(
         )
     return booking
 
+@router.get("/user/{user_id}", response_model=List[schemas.BookedTicket])
+def get_bookings_by_user(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_active_user),
+) -> List[models.BookedTicket]:
+    """
+    Lấy danh sách tất cả vé đã đặt của một người dùng.
+
+    Args:
+        user_id (int): ID của người dùng.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+        current_user (models.User): Người dùng hiện tại (đã đăng nhập).
+
+    Returns:
+        List[models.BookedTicket]: Danh sách vé đã đặt.
+    """
+    if current_user.user_id != user_id:
+        raise HTTPException(status_code=403, detail="Không có quyền truy cập")
+    
+    return services.booking_service.get_bookings_by_user(db, user_id)
+
 @router.get("/ticket/{ticket_id}", response_model=List[schemas.BookedTicket])
 def get_bookings_by_ticket_id(
     ticket_id: int,

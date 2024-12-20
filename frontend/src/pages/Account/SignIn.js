@@ -147,10 +147,10 @@ function SignIn() {
         {/* Sign up section */}
         <div className={styles.frame9}>
           <div className={styles.chuaCoTaiKhoan}>Chưa có tài khoản? 
-            <a href="/account/signup" className={styles.subMenuLink}>
-                  Đăng Ký
-                </a>
-            </div>
+            <a href="/account/signup" className={styles.dangKy}>
+              Đăng Ký
+            </a>
+          </div>
           <div className={styles.customerCare}>
             <div className={styles.frame6}>
               <div className={styles.termsConditions}>Terms &amp; Conditions</div>

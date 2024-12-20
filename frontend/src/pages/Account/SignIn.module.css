@@ -259,6 +259,10 @@
   font-size: 16px;
   font-weight: 500;
   position: relative;
+  cursor: pointer;
+}
+.quenMatKhau:hover {
+  color: #7ba0ff;
 }
 .otherLogins {
   display: flex;
@@ -442,4 +446,15 @@ input{
 input:focus {
   outline: none; /* Đảm bảo không có viền khi input được focus */
   box-shadow: none; /* Xóa bất kỳ hiệu ứng shadow nào khi focus */
+}
+
+.dangKy {
+  cursor: pointer;
+  font-weight: bold;
+  color: #7ba0ff;
+  text-decoration: none;
+}
+
+.dangKy:hover {
+  color: #604eff;
 }

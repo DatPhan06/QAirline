@@ -70,6 +70,16 @@ export const getBookingById = async (bookingId) => {
   }
 };
 
+export const getBookingsByUserId = async (userId) => {
+  try {
+    const response = await axiosInstance.get(`/bookings/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching bookings by user ID:", error);
+    throw error;
+  }
+};
+
 // Hàm lấy thông tin booking theo ticket_id
 export const getBookingByTicketId = async (ticketId) => {
   try {

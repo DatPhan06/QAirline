@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getBookings, updateBooking } from "../../services/bookingService";
+import { getBookings, updateBooking, getBookingsByUserId } from "../../services/bookingService";
 import { updateTicketStatus } from "../../services/ticketService";
 import { getFlightById } from "../../services/flightService";
 import { getTicketById } from "../../services/ticketService";
-import { getUserById } from "../../services/userService";
+import { getUserById, getCurrentUser } from "../../services/userService";
 import styles from "./ManageTicket.module.css";
 
 const ManageTicket = () => {
@@ -17,7 +17,8 @@ const ManageTicket = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const data = await getBookings();
+        const currentUser = await getCurrentUser();
+        const data = await getBookingsByUserId(currentUser.user_id);
         setBookings(data);
       } catch (error) {
         console.error("Error fetching bookings:", error);
