@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, Text
 from sqlalchemy.orm import relationship
 from datetime import datetime, timezone
 from app.base import Base
@@ -14,6 +14,8 @@ class User(Base):
         email (str): Địa chỉ email của người dùng, duy nhất và không được để trống.
         hashed_password (str): Mật khẩu đã được mã hóa của người dùng, không được để trống.
         phone (str): Số điện thoại của người dùng, có thể để trống.
+        address (str): Địa chỉ của người dùng, có thể để trống.
+        date_of_birth (datetime): Ngày sinh của người dùng, có thể để trống.
         created_at (datetime): Thời gian tạo tài khoản, mặc định là thời gian hiện tại.
         updated_at (datetime): Thời gian cập nhật tài khoản, tự động cập nhật khi có thay đổi.
     """
@@ -26,6 +28,8 @@ class User(Base):
     email = Column(String(100), unique=True, nullable=False)
     hashed_password = Column(String(255), nullable=False)
     phone = Column(String(15), nullable=True)
+    address = Column(Text, nullable=True)
+    date_of_birth = Column(String(20), nullable=True)
     created_at = Column(DateTime, default=datetime.now(timezone.utc))
     updated_at = Column(DateTime, default=datetime.now(timezone.utc), onupdate=datetime.now(timezone.utc))
 
