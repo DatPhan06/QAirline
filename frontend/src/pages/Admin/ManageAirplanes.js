@@ -6,11 +6,14 @@ import {
 } from "../../services/airplaneService";
 import AdminSidebar from "../../components/AdminSidebar";
 import AirplaneList from "../../components/AirplaneList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import styles from "./ManageAirplanes.module.css";
 
 const ManageAirplanes = () => {
   const [selectedAirplane, setSelectedAirplane] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [airplaneData, setAirplaneData] = useState({
     model: "",
     manufacturer: "",
@@ -93,16 +96,28 @@ const ManageAirplanes = () => {
     }
   };
 
+  const toggleGuide = () => {
+    setIsGuideOpen(!isGuideOpen);
+  };
+
   return (
     <div className={styles.adminContainer}>
       <div className={styles.sidebar}>
         <AdminSidebar />
       </div>
       <div className={styles.mainContent}>
-        <h1>Quản lý máy bay</h1>
+        <h1>
+          Quản lý máy bay{" "}
+          <button className={styles.guideButton} onClick={toggleGuide}>
+            {" "}
+            <FontAwesomeIcon icon={faQuestionCircle} />{" "}
+          </button>
+        </h1>
+
         <button className={styles.addButton} onClick={handleAddNewAirplane}>
           Thêm máy bay mới
         </button>
+
         <div className={styles.listContainer}>
           <AirplaneList
             airplanes={airplanes}
@@ -201,6 +216,42 @@ const ManageAirplanes = () => {
                 {selectedAirplane ? "Lưu thay đổi" : "Thêm máy bay"}
               </button>
             </form>
+          </div>
+        </div>
+      )}
+      {isGuideOpen && (
+        <div className={styles.modalOverlay} onClick={toggleGuide}>
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className={styles.closeButton} onClick={toggleGuide}>
+              ×
+            </button>
+            <div className={styles.guide}>
+              <h2>Hướng dẫn sử dụng trang</h2>
+              <p>
+                Trên trang này, bạn có thể quản lý danh sách máy bay. Bạn có thể
+                thêm máy bay mới, chỉnh sửa thông tin máy bay hiện có, và xem
+                danh sách các máy bay.
+              </p>
+              <ul>
+                <li>
+                  <strong>Thêm máy bay mới:</strong> Nhấn vào nút "Thêm máy bay
+                  mới" và điền thông tin vào biểu mẫu. Sau đó nhấn "Thêm máy
+                  bay".
+                </li>
+                <li>
+                  <strong>Chỉnh sửa máy bay:</strong> Nhấn vào một máy bay trong
+                  danh sách để chỉnh sửa thông tin. Sau khi chỉnh sửa, nhấn "Lưu
+                  thay đổi".
+                </li>
+                <li>
+                  <strong>Đóng biểu mẫu:</strong> Nhấn vào nút "×" hoặc nhấn ra
+                  ngoài biểu mẫu để đóng biểu mẫu.
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       )}

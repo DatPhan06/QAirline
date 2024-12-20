@@ -1,3 +1,5 @@
+/* AirplaneList.module.css */
+
 .airplaneListContainer {
   width: 100%;
   max-width: 1200px;
@@ -37,6 +39,19 @@
   border-radius: 2px;
 }
 
+/* Search Container */
+.searchContainer {
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
 /* Bảng máy bay */
 .airplaneTable {
   width: 100%;
@@ -49,7 +64,7 @@
 }
 
 .airplaneTable thead th {
-  background: #1a8098;
+  background: #0d5777;
   color: #ffffff;
   font-weight: 700;
   text-transform: uppercase;
@@ -57,7 +72,7 @@
   font-size: 0.9rem;
   padding: 14px 10px;
   text-align: left;
-  border-bottom: 2px solid #1a8098;
+  border-bottom: 2px solid #0d5777;
 }
 
 .airplaneTable tbody td {
@@ -69,5 +84,32 @@
 .airplaneTable tbody tr:hover {
   background: #f7faff;
   cursor: pointer;
-  transition: background 0.3s ease;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 1rem;
 }
