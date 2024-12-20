@@ -17,36 +17,31 @@ const ConfirmationPage = () => {
 
   return (
     <div className={styles.confirmationContainer}>
-      <h1 className={styles.title}>Xác nhận đặt vé</h1>
-      
-      <div className={styles.flightInfo}>
-        <h2>Thông tin chuyến bay</h2>
-        <p><strong>Chuyến bay:</strong> {flight.flight_number}</p>
-        <p>
-          <strong>Điểm khởi hành:</strong> {flight.departure_airport.name} - {flight.departure_airport.city}
-        </p>
-        <p>
-          <strong>Điểm đến:</strong> {flight.arrival_airport.name} - {flight.arrival_airport.city}
-        </p>
-        <p>
-          <strong>Thời gian khởi hành:</strong> {new Date(flight.departure_time).toLocaleString()}
-        </p>
-        <p>
-          <strong>Thời gian đến:</strong> {new Date(flight.arrival_time).toLocaleString()}
-        </p>
-        <p>
-          <strong>Ghế:</strong> {ticket.seat.seat_number} ({ticket.seat.seat_class})
-        </p>
-        <p>
-          <strong>Giá vé:</strong> {ticket.price.toLocaleString()} VND
-        </p>
+      {/* Header Section */}
+      <div className={styles.headerSection}>
+        <h1 className={styles.successMessage}> ✅ Chúc mừng bạn đã đặt vé thành công!</h1>
+        <p className={styles.instruction}>Vui lòng mang theo CMND/CCCD và vé điện tử khi đi du lịch</p>
       </div>
 
-      <p className={styles.thankYou}>Cảm ơn quý khách đã sử dụng dịch vụ của chúng tôi!</p>
+      {/* Ticket Information Section */}
+      <div className={styles.ticketInfoSection}>
+        <h2 className={styles.ticketTitle}>Thông tin vé</h2>
+        <div className={styles.ticketDetails}>
+          <p><strong>Chuyến bay:</strong> {flight.flight_number}</p>
+          <p><strong>Điểm khởi hành:</strong> {flight.departure_airport.name} - {flight.departure_airport.city}</p>
+          <p><strong>Điểm đến:</strong> {flight.arrival_airport.name} - {flight.arrival_airport.city}</p>
+          <p><strong>Thời gian khởi hành:</strong> {new Date(flight.departure_time).toLocaleString()}</p>
+          <p><strong>Thời gian đến:</strong> {new Date(flight.arrival_time).toLocaleString()}</p>
+          <p><strong>Ghế:</strong> {ticket.seat.seat_number} ({ticket.seat.seat_class})</p>
+          <p><strong>Giá vé:</strong> {ticket.price.toLocaleString()} VND</p>
+        </div>
+      </div>
 
-      <button onClick={() => navigate("/")} className={styles.homeButton}>
-        Về trang chủ
-      </button>
+      {/* Buttons Section */}
+      <div className={styles.actionButtons}>
+        <button className={styles.bookButton} onClick={() => navigate("/booking/book-ticket")}>Đặt vé khác</button>
+        <button className={styles.manageButton} onClick={() => navigate("/booking/manage-ticket")}>Quản lý vé của tôi</button>
+      </div>
     </div>
   );
 };
