@@ -162,3 +162,92 @@
   font-size: 1.1rem;
   margin: 20px 0;
 }
+
+/* Guide button */
+.guideButton {
+  background-color: transparent;
+  color: #3498db;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin-left: 10px;
+}
+
+.guideButton:hover {
+  color: #2980b9;
+}
+
+/* Modal overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal content */
+.modalContent {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 600px;
+  max-width: 90%;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Close button */
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+  color: #333;
+}
+
+/* Guide content */
+.guide {
+  color: #333;
+}
+
+.guide h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.guide p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.guide ul {
+  padding-left: 20px;
+}
+
+.guide li {
+  margin-bottom: 10px;
+}
+
+.guide strong {
+  color: #2c3e50;
+  display: block;
+  margin-bottom: 5px;
+}

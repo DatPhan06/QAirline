@@ -17,6 +17,8 @@ import {
 } from "recharts";
 import AdminSidebar from "../../components/AdminSidebar";
 import BookingChart from "../../components/BookingChart";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./ViewBookings.module.css";
 
@@ -32,6 +34,12 @@ const ViewBookings = () => {
   const [monthlyStats, setMonthlyStats] = useState([]);
 
   const bookingsPerPage = 10; // Số đặt vé trên mỗi trang
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
+
+  // Add toggle function for guide
+  const toggleGuide = () => {
+    setIsGuideOpen(!isGuideOpen);
+  };
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -173,8 +181,12 @@ const ViewBookings = () => {
         <AdminSidebar />
       </div>
       <div className={styles.mainContent}>
-        <h1>Thống kê đặt vé</h1>
-
+        <h1>
+          Thống kê đặt vé
+          <button className={styles.guideButton} onClick={toggleGuide}>
+            <FontAwesomeIcon icon={faQuestionCircle} />
+          </button>
+        </h1>
         <div className={styles.statsContainer}>
           <div className={styles.statCard}>
             <h2>Tổng số đặt vé</h2>
@@ -261,7 +273,6 @@ const ViewBookings = () => {
           )}
         </div>
       </div>
-
       {/* Cửa sổ Modal hiển thị chi tiết đặt vé */}
       {isModalOpen && selectedBooking && (
         <div className={styles.modalOverlay} onClick={closeModal}>
@@ -343,6 +354,51 @@ const ViewBookings = () => {
                   <strong>Số điện thoại:</strong> {selectedBooking.user?.phone}
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {isGuideOpen && (
+        <div className={styles.modalOverlay} onClick={toggleGuide}>
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className={styles.closeButton} onClick={toggleGuide}>
+              ×
+            </button>
+            <div className={styles.guide}>
+              <h2>Hướng dẫn sử dụng trang Thống kê</h2>
+              <p>
+                Trang thống kê đặt vé cung cấp tổng quan về hoạt động đặt vé và
+                doanh thu.
+              </p>
+              <ul>
+                <li>
+                  <strong>Thống kê tổng quan:</strong>
+                  <ul>
+                    <li>Xem tổng số đặt vé trong tháng</li>
+                    <li>Theo dõi doanh thu theo thời gian</li>
+                    <li>Phân tích xu hướng đặt vé</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Bộ lọc thời gian:</strong>
+                  <ul>
+                    <li>Chọn tháng và năm để xem số liệu chi tiết</li>
+                    <li>Dữ liệu được nhóm theo từng 5 ngày</li>
+                    <li>So sánh dữ liệu giữa các thời điểm</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Danh sách đặt vé:</strong>
+                  <ul>
+                    <li>Xem chi tiết từng đặt vé</li>
+                    <li>Tìm kiếm đặt vé theo mã</li>
+                    <li>Sắp xếp theo thời gian đặt</li>
+                  </ul>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
