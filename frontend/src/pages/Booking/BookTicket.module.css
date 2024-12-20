@@ -31,141 +31,136 @@ body {
 /* Container chính: Giữ form và flight list cạnh nhau, căn giữa */
 .bookingContainer {
   display: flex;
-  gap: 40px;
-  max-width: 1200px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  gap: 30px; /* Giảm khoảng cách giữa các phần từ 50px xuống 30px */
+  max-width: 1000px; /* Giảm max-width từ 1200px xuống 1000px */
+  padding-bottom: 15px; /* Giảm padding */
   width: 100%;
   margin: 0 auto;
   align-items: flex-start;
 }
 
-/* Khung đặt vé (form)*/
-.bookingForm {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-  width: 400px;
-  min-width: 300px;
-  flex-shrink: 0;
-  /* Nền nhẹ dạng gradient rất mờ để thêm chiều sâu */
-  background: linear-gradient(to bottom right, #fff, #f9fbfd);
-  
-}
-
-/* Tiêu đề form */
-.bookingForm h2 {
-  font-size: 1.6rem;
-  color: #143951;
-  margin-bottom: 20px;
-  font-weight: 700;
-  text-transform: uppercase;
+/* Khung đặt vé */
+.flightSearchContainer {
   position: relative;
-  text-align: left;
+  background-image: url("../../assets/images/tk2.png");
+  background-size: cover;
+  background-position: center;
+  backdrop-filter: blur(10px);
+  padding: 20px 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  margin: 0 auto;
+  flex-shrink: 0;
+  margin-top: 70px;
 }
 
-.bookingForm h2::after {
-  content: "";
+.title {
   display: block;
-  width: 60px;
-  height: 3px;
-  background: var(--main-color);
-  margin-top: 8px;
-  border-radius: 2px;
-}
-
-/* Loại chuyến (một chiều / khứ hồi) */
-.tripType {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.tripType label {
-  display: flex;
-  align-items: center;
-  font-size: 1rem;
+  text-transform: uppercase;
   color: var(--text-color);
-  cursor: pointer;
-  font-weight: 500;
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center; /* Căn giữa text */
+  width: 100%; /* Đảm bảo title chiếm full width */
 }
 
-.radio {
-  margin-right: 8px;
-  accent-color: var(--main-color);
-}
-
-/* Các dòng form */
-.formRow,
-.dateRow,
-.passengerContainer {
-  display: flex;
-  flex-wrap: wrap;
+/* Thanh form chính */
+.searchForm {
+  display: flex; /* Sử dụng flex cho layout */
+  flex-direction: column;
   gap: 20px;
-  margin-bottom: 20px;
+  width: 100%;
+  padding: 10px 20px;
+  /* background-color: #fff; */
 }
 
-.selectContainer,
-.dateContainer {
-  flex: 1;
+.fromToContainer, .dateContainer, .passengerContainer {
   display: flex;
   flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.dateContainer {
+  justify-content: flex-start; /* Căn chỉnh nội dung trong container */
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .label {
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 6px;
-  font-weight: 600;
+  font-size: 14px;
+  color: #6e6e6e;
 }
 
-.select,
-.input {
-  padding: 10px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  font-size: 1rem;
-  color: var(--text-color);
-  background: #fff;
-  outline: none;
-  transition: border 0.3s ease;
-}
-
-.select:focus,
-.input:focus {
-  border-color: var(--main-color);
-}
-
-/* Nút tìm chuyến bay */
-.submitButton {
-  display: inline-block;
-  padding: 12px 20px;
-  background: var(--main-color);
-  color: #ffffff;
-  font-size: 1.05rem;
-  font-weight: 600;
-  border-radius: 6px;
+/* Style select và input giống như ảnh: gạch dưới, không viền nổi */
+.select, .input {
   border: none;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  background: transparent;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  min-width: 150px;
   width: 100%;
-  text-align: center;
-  text-transform: uppercase;
-  margin-top: 10px;
+  padding: 10px;
+  transition: all 0.3s ease;
 }
 
-.submitButton:hover {
-  background: var(--accent-color);
+.select:focus, .input:focus {
+  border-color: #1a8098;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(26, 128, 152, 0.1);
 }
+
+
+/* Nút tìm kiếm */
+.searchButton {
+  width: 100%;
+  background-color: #0d5777;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.searchButton:hover {
+  background-color: #166b82;
+}
+
+.tripTypeContainer {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.radioInput {
+  cursor: pointer;
+}
+
+.passengerContainer {
+  margin-bottom: 20px;
+}
+
 
 /* Flight Schedule bên phải, chiếm phần còn lại */
 .flightSchedule {
   flex: 1;
-  background: #ffffff;
   padding: 20px 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
   overflow: auto;
 }
 
@@ -200,7 +195,6 @@ body {
 /* FlightList và bảng */
 .flightListContainer {
   width: 100%;
-  margin-top: 20px;
 }
 
 .noFlights {
@@ -236,7 +230,6 @@ body {
   border-collapse: collapse;
   font-size: 1rem;
   color: var(--text-color);
-  margin-bottom: 40px;
   background-color: #fdfdfd;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
@@ -342,139 +335,4 @@ body {
 
 .closeButton:hover {
   color: #666;
-}
-
-/* Khung đặt vé */
-.flightSearchContainer {
-  position: relative;
-  z-index: 2; /* Cao hơn slideshow để hiển thị phía trên */
-  background-color: #fff;
-  background-image: url("../../assets/images/tk2.png");
-  background-size: cover;
-  background-position: center;
-  backdrop-filter: blur(10px);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  margin: 0 auto;
-  width: 400px;
-  min-width: 300px;
-  flex-shrink: 0;
-}
-
-.title {
-  display: block;
-  text-transform: uppercase;
-  color: var(--text-color);
-  font-size: 24px;
-  margin-bottom: 10px;
-  text-align: center; /* Căn giữa text */
-  width: 100%; /* Đảm bảo title chiếm full width */
-}
-
-/* Thanh form chính */
-.searchForm {
-  display: flex; /* Sử dụng flex cho layout */
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  padding: 10px 20px;
-  /* background-color: #fff; */
-}
-
-.fromToContainer, .dateContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-}
-
-.dateContainer {
-  justify-content: flex-start; /* Căn chỉnh nội dung trong container */
-}
-
-.formGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-}
-
-.label {
-  font-size: 14px;
-  color: #6e6e6e;
-  margin-bottom: 5px;
-}
-
-/* Style select và input giống như ảnh: gạch dưới, không viền nổi */
-.select, .input {
-  border: none;
-  background: transparent;
-  border-bottom: 1px solid #ccc;
-  font-size: 14px;
-  color: #333;
-  outline: none;
-  min-width: 150px;
-  flex: 1; /* Tự động giãn chiều rộng */
-  width: 100%;
-  padding: 12px;
-  transition: all 0.3s ease;
-}
-
-.select:focus, .input:focus {
-  border-color: #1a8098;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(26, 128, 152, 0.1);
-}
-
-/* Icon chuyển hướng giữa Từ và Đến */
-.arrowIcon {
-  font-size: 20px;
-  color: #6e6e6e;
-  flex-shrink: 0; 
-}
-
-/* Nút tìm kiếm */
-.searchButton {
-  width: 100%;
-  background-color: #0d5777;
-  color: #fff;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
-}
-
-.searchButton:hover {
-  background-color: #166b82;
-}
-
-.tripTypeContainer {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.radioLabel {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
-
-.radioInput {
-  cursor: pointer;
-}
-
-.passengerContainer {
-  margin-bottom: 20px;
-}
-
-.dateContainer {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
 }
