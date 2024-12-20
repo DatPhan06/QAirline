@@ -3,7 +3,7 @@ import { getBookings, updateBooking } from "../../services/bookingService";
 import { updateTicketStatus } from "../../services/ticketService";
 import { getFlightById } from "../../services/flightService";
 import { getTicketById } from "../../services/ticketService";
-import { getUserById } from "../../services/userService";
+import { getUserById, getCurrentUser } from "../../services/userService";
 import styles from "./ManageTicket.module.css";
 
 const ManageTicket = () => {
@@ -103,6 +103,10 @@ const ManageTicket = () => {
     const departureDate = new Date(booking.departure_time);
 
     if (departureDate < currentDate) {
+      return false;
+    }
+
+    if (booking.user_id !== getCurrentUser().user_id) {
       return false;
     }
 
