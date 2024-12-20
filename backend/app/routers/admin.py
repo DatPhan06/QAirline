@@ -14,6 +14,14 @@ router = APIRouter(
     tags=["admin"]
 )
 
+@router.get("/general-stats", dependencies=[Depends(services.auth.get_current_admin)])
+def get_general_stats(db: Session = Depends(get_db)) -> dict:
+    """
+    Lấy thống kê tổng quát.
+    """
+    return services.admin_service.get_general_stats(db)
+
+
 
 @router.post("/register", response_model=schemas.Admin, status_code=status.HTTP_201_CREATED, dependencies=[Depends(services.auth.get_current_admin)])
 def register_admin(admin: schemas.AdminCreate, db: Session = Depends(get_db)) -> schemas.Admin:
@@ -160,19 +168,4 @@ def delete_admin(admin_id: int, db: Session = Depends(get_db)) -> dict:
     if not success:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Admin not found")
     return success
-
-@router.get("/general-stats")
-def get_general_stats(db: Session = Depends(get_db),
-                     dependencies=[Depends(services.auth.get_current_admin)],
-                     ):
-    """
-    Lấy thống kê tổng quát.
-
-    Args:
-        db (Session): Phiên làm việc với cơ sở dữ liệu.
-
-    Returns:
-        dict: Thống kê tổng quát.
-    """
-    return services.admin_service.get_general_stats(db)
 

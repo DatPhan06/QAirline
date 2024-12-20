@@ -3,7 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AdminSidebar from "../../components/AdminSidebar";
 import BookingChart from "../../components/BookingChart";
-import { getGeneralStats } from "../../services/adminService";
+import {
+  getGeneralStats,
+  getBookingStatsByMonth,
+} from "../../services/adminService";
 import styles from "./AdminDashboard.module.css";
 
 const AdminDashboard = () => {
@@ -23,19 +26,36 @@ const AdminDashboard = () => {
       try {
         const generalStats = await getGeneralStats();
         setStats({
-          totalBookings: generalStats.totalBookings,
-          totalRevenue: generalStats.totalRevenue,
-          totalAirplanes: generalStats.totalAirplanes,
-          totalFlights: generalStats.totalFlights,
+          totalBookings: generalStats.total_bookings,
+          totalRevenue: generalStats.total_revenue,
+          totalAirplanes: generalStats.total_airplanes,
+          totalFlights: generalStats.total_flights,
         });
-        // Thêm dữ liệu thống kê theo tháng
-        setMonthlyStats(generalStats.monthlyStats || []);
       } catch (error) {
         console.error("Error fetching stats:", error);
       }
     };
 
+    const fetchMonthlyStats = async () => {
+      try {
+        const data = await getBookingStatsByMonth(
+          selectedMonth === 0 ? null : selectedMonth,
+          selectedYear
+        );
+        if (selectedMonth === 0) {
+          // Hiển thị đủ 12 tháng
+          setMonthlyStats(data.bookingsByMonth || []);
+        } else {
+          // Hiển thị dữ liệu từng ngày
+          setMonthlyStats(data.bookingsByDay || []);
+        }
+      } catch (error) {
+        console.error("Error fetching monthly stats:", error);
+      }
+    };
+
     fetchStats();
+    fetchMonthlyStats();
   }, [selectedMonth, selectedYear]);
 
   const handleMonthChange = (e) => {

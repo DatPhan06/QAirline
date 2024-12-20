@@ -233,8 +233,8 @@ def get_general_stats(db: Session) -> dict:
     total_flights = db.query(models.Flight).count()
 
     return {
-        "totalBookings": total_bookings,
-        "totalRevenue": total_revenue,
-        "totalAirplanes": total_airplanes,
-        "totalFlights": total_flights,
+        "total_bookings": total_bookings,
+        "total_revenue": total_revenue,
+        "total_airplanes": total_airplanes,
+        "total_flights": total_flights,
     }
