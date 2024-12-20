@@ -1,7 +1,10 @@
 // FlightDetail.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createBooking, getBookingByTicketId } from "../services/bookingService";
+import {
+  createBooking,
+  getBookingByTicketId,
+} from "../services/bookingService";
 import {
   getTicketByFlightAndSeat,
   getTicketsByFlightId,
@@ -79,38 +82,69 @@ const FlightDetail = ({ flight }) => {
     return <p>Đang tải thông tin chuyến bay...</p>;
   }
 
-  // Group tickets by class_type
-  const economyTickets = filteredTickets.filter(
-    (ticket) => ticket.class_type.toLowerCase() === "economy"
-  );
+  // Helper function to group tickets by row
+  const groupTicketsByRow = (tickets) => {
+    const rows = {};
+    tickets.forEach((ticket) => {
+      const seatNumber = ticket.seat.seat_number;
+      const rowMatch = seatNumber.match(/\d+/);
+      if (rowMatch) {
+        const rowNumber = parseInt(rowMatch[0], 10);
+        if (!rows[rowNumber]) {
+          rows[rowNumber] = [];
+        }
+        rows[rowNumber].push(ticket);
+      }
+    });
+    // Sort rows by row number
+    return Object.entries(rows)
+      .sort((a, b) => a[0] - b[0])
+      .map((entry) => entry[1]);
+  };
+
+  // Helper function to group tickets by row and section (left/right)
+  const groupTicketsByRowAndSection = (tickets) => {
+    const rows = {};
+    tickets.forEach((ticket) => {
+      const seatNumber = ticket.seat.seat_number;
+      const rowMatch = seatNumber.match(/\d+/);
+      const seatMatch = seatNumber.match(/[A-Z]/);
+      if (rowMatch && seatMatch) {
+        const rowNumber = parseInt(rowMatch[0], 10);
+        const seatLetter = seatMatch[0].toUpperCase();
+        // Define left and right sections based on seat letters
+        // Adjust the seat letters according to your airplane's seating plan
+        const leftSeats = ["A", "B", "C", "D", "E", "F"];
+        const rightSeats = ["G", "H", "J", "K", "L", "M"];
+
+        let section = "left";
+        if (rightSeats.includes(seatLetter)) {
+          section = "right";
+        }
+
+        if (!rows[rowNumber]) {
+          rows[rowNumber] = { left: [], right: [] };
+        }
+        rows[rowNumber][section].push(ticket);
+      }
+    });
+    // Sort rows by row number
+    return Object.entries(rows)
+      .sort((a, b) => a[0] - b[0])
+      .map((entry) => entry[1]);
+  };
+
+  // Separate tickets into Business and Economy
   const businessTickets = filteredTickets.filter(
     (ticket) => ticket.class_type.toLowerCase() === "business"
   );
+  const economyTickets = filteredTickets.filter(
+    (ticket) => ticket.class_type.toLowerCase() === "economy"
+  );
 
-  // Define seat layout structure
-  const seatLayout = [
-    // Cockpit
-    { type: "cockpit", label: "Khoang Phi Công" },
-
-    // Business Class Section
-    ...businessTickets.map((ticket) => ({
-      type: "seat",
-      ticket,
-    })),
-
-    // Aisle
-    { type: "aisle" },
-
-    // Economy Class Section
-    ...economyTickets.map((ticket) => ({
-      type: "seat",
-      ticket,
-    })),
-
-    // Bathrooms and Doors
-    { type: "bathroom", label: "WC" },
-    { type: "door", label: "Cửa Ra Vào" },
-  ];
+  // Group tickets by rows
+  const businessRows = groupTicketsByRowAndSection(businessTickets);
+  const economyRows = groupTicketsByRowAndSection(economyTickets);
 
   return (
     <div className={styles.flightDetailContainer}>
@@ -119,7 +153,7 @@ const FlightDetail = ({ flight }) => {
       <div className={styles.infoContainer}>
         {/* Flight Information */}
         <div className={styles.flightInfo}>
-          <h3 className={styles.sectionTitle}>Thông tin chuyến bay</h3>
+          <h3 className={styles.subSectionTitle}>Thông tin chuyến bay</h3>
           <div className={styles.infoGrid}>
             <p>
               <strong>Số hiệu:</strong> {flight.flight_number}
@@ -141,7 +175,7 @@ const FlightDetail = ({ flight }) => {
 
         {/* Airplane Information */}
         <div className={styles.airplaneInfo}>
-          <h3 className={styles.sectionTitle}>Thông tin máy bay</h3>
+          <h3 className={styles.subSectionTitle}>Thông tin máy bay</h3>
           <div className={styles.infoGrid}>
             <p>
               <strong>Model:</strong> {flight.airplane.model}
@@ -178,62 +212,117 @@ const FlightDetail = ({ flight }) => {
           <h2 className={styles.sectionTitle}>
             Danh sách vé {selectedClass ? `(${selectedClass})` : "(Tất cả hạng vé)"}
           </h2>
-          {isLoading && <p className={styles.loading}>Đang xử lý đặt chỗ...</p>}
-          {bookingError && <p className={styles.error}>{bookingError}</p>}
+          {isLoading && (
+            <p className={styles.loading}>Đang xử lý đặt chỗ...</p>
+          )}
+          {bookingError && (
+            <p className={styles.error}>{bookingError}</p>
+          )}
           <div className={styles.seatMap}>
-            {seatLayout.map((item, index) => {
-              if (item.type === "cockpit") {
-                return (
-                  <div key={index} className={styles.cockpit}>
-                    {item.label}
+            {/* Cockpit */}
+            <div className={styles.cockpit}>Khoang Phi Công</div>
+
+            {/* Business Class Rows */}
+            {businessRows.length > 0 && (
+              <div className={styles.classSection}>
+                <h3 className={styles.classTitle}>Hạng Thương Gia</h3>
+                {businessRows.map((row, rowIndex) => (
+                  <div key={`business-row-${rowIndex}`} className={styles.seatRow}>
+                    {/* Left Section */}
+                    <div className={styles.seatSection}>
+                      {row.left.map((ticket) => (
+                        <div
+                          key={ticket.ticket_id}
+                          className={`${styles.ticketItem} ${
+                            ticket.status === "available"
+                              ? styles.available
+                              : styles.occupied
+                          }`}
+                          onClick={() => handleTicketSelection(ticket)}
+                          title={`Ghế số: ${ticket.seat.seat_number}`}
+                        >
+                          {ticket.seat.seat_number}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Aisle */}
+                    <div className={styles.aisle}></div>
+
+                    {/* Right Section */}
+                    <div className={styles.seatSection}>
+                      {row.right.map((ticket) => (
+                        <div
+                          key={ticket.ticket_id}
+                          className={`${styles.ticketItem} ${
+                            ticket.status === "available"
+                              ? styles.available
+                              : styles.occupied
+                          }`}
+                          onClick={() => handleTicketSelection(ticket)}
+                          title={`Ghế số: ${ticket.seat.seat_number}`}
+                        >
+                          {ticket.seat.seat_number}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                );
-              }
+                ))}
+              </div>
+            )}
 
-              if (item.type === "aisle") {
-                return <div key={index} className={styles.aisle}></div>;
-              }
+            {/* Economy Class Rows */}
+            {economyRows.length > 0 && (
+              <div className={styles.classSection}>
+                <h3 className={styles.classTitle}>Hạng Phổ Thông</h3>
+                {economyRows.map((row, rowIndex) => (
+                  <div key={`economy-row-${rowIndex}`} className={styles.seatRow}>
+                    {/* Left Section */}
+                    <div className={styles.seatSection}>
+                      {row.left.map((ticket) => (
+                        <div
+                          key={ticket.ticket_id}
+                          className={`${styles.ticketItem} ${
+                            ticket.status === "available"
+                              ? styles.available
+                              : styles.occupied
+                          }`}
+                          onClick={() => handleTicketSelection(ticket)}
+                          title={`Ghế số: ${ticket.seat.seat_number}`}
+                        >
+                          {ticket.seat.seat_number}
+                        </div>
+                      ))}
+                    </div>
 
-              if (item.type === "bathroom") {
-                return (
-                  <div key={index} className={styles.bathroom}>
-                    {item.label}
+                    {/* Aisle */}
+                    <div className={styles.aisle}></div>
+
+                    {/* Right Section */}
+                    <div className={styles.seatSection}>
+                      {row.right.map((ticket) => (
+                        <div
+                          key={ticket.ticket_id}
+                          className={`${styles.ticketItem} ${
+                            ticket.status === "available"
+                              ? styles.available
+                              : styles.occupied
+                          }`}
+                          onClick={() => handleTicketSelection(ticket)}
+                          title={`Ghế số: ${ticket.seat.seat_number}`}
+                        >
+                          {ticket.seat.seat_number}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                );
-              }
+                ))}
+              </div>
+            )}
 
-              if (item.type === "door") {
-                return (
-                  <div key={index} className={styles.door}>
-                    {item.label}
-                  </div>
-                );
-              }
-
-              if (item.type === "seat") {
-                const ticket = item.ticket;
-                return (
-                  <div
-                    key={ticket.ticket_id}
-                    className={`${styles.ticketItem} ${
-                      ticket.class_type.toLowerCase() === "economy"
-                        ? styles.economy
-                        : styles.business
-                    } ${
-                      ticket.status === "available"
-                        ? styles.available
-                        : styles.occupied
-                    }`}
-                    onClick={() => handleTicketSelection(ticket)}
-                    title={`Ghế số: ${ticket.seat.seat_number}`}
-                  >
-                    {ticket.seat.seat_number}
-                  </div>
-                );
-              }
-
-              return null;
-            })}
+            {/* Bathrooms and Doors */}
+            <div className={styles.bathroom}>WC</div>
+            <div className={styles.door}>Cửa Ra Vào</div>
           </div>
         </div>
       )}

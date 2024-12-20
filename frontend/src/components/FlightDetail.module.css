@@ -4,16 +4,25 @@
 .flightDetailContainer {
   padding: 20px;
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #f0f4f8; /* Màu nền nhạt hơn */
 }
 
 /* Section titles */
 .sectionTitle {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: #333;
-  border-bottom: 2px solid #ddd;
+  color: #2c3e50; /* Màu sắc đậm hơn */
+  border-bottom: 2px solid #bdc3c7;
   padding-bottom: 5px;
+}
+
+/* Sub-section titles */
+.subSectionTitle {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #34495e;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 3px;
 }
 
 /* Container for flight and airplane information */
@@ -28,10 +37,11 @@
 .flightInfo,
 .airplaneInfo {
   flex: 1 1 300px;
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #dfe6e9;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Grid layout for info items */
@@ -54,113 +64,155 @@
   border-radius: 4px;
   width: 100%;
   max-width: 300px;
+  background-color: #ecf0f1;
 }
 
 /* Container for the ticket list (seat map) */
 .ticketListContainer {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid #dfe6e9;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Loading and error messages */
 .loading {
-  color: #555;
+  color: #7f8c8d;
   margin-bottom: 10px;
 }
 
 .error {
-  color: red;
+  color: #e74c3c;
   margin-bottom: 10px;
 }
 
 /* Seat map container */
 .seatMap {
-  display: grid;
-  grid-template-columns: repeat(12, 40px); /* Adjust based on seat layout */
-  grid-gap: 10px;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #e6e6e6;
+  background-color: #dfe6e9;
   border-radius: 10px;
+  position: relative;
 }
 
 /* Cockpit styling */
 .cockpit {
-  grid-column: 1 / span 12;
-  background-color: #555;
-  color: #fff;
+  width: 100%;
+  background-color: #34495e;
+  color: #ecf0f1;
   text-align: center;
   padding: 10px 0;
   border-radius: 4px;
   font-weight: bold;
+  margin-bottom: 15px;
 }
 
 /* Aisle styling */
 .aisle {
-  grid-column: 6 / span 1;
-  height: 40px;
-  background-color: #ccc;
+  width: 40px; /* Tăng kích thước lối đi */
+  height: auto;
+  margin: 10px 0;
+  background-color: #ffffff; /* Màu trắng cho lối đi nổi bật */
+  border-left: 2px solid #7f8c8d;
+  border-right: 2px solid #7f8c8d;
+  border-radius: 4px;
+  position: relative;
+}
+
+.aisle::before {
+  content: "Aisle";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  padding: 2px 5px;
+  font-size: 0.8rem;
+  color: #7f8c8d;
 }
 
 /* Bathroom styling */
 .bathroom {
-  grid-column: 1 / span 12;
-  background-color: #2196f3;
-  color: #fff;
+  width: 100%;
+  background-color: #2980b9;
+  color: #ffffff;
   text-align: center;
   padding: 10px 0;
   border-radius: 4px;
   font-weight: bold;
+  margin-top: 15px;
 }
 
 /* Door styling */
 .door {
-  grid-column: 12 / span 1;
-  background-color: #8bc34a;
-  color: #fff;
+  width: 100%;
+  background-color: #27ae60;
+  color: #ffffff;
   text-align: center;
   padding: 10px 0;
   border-radius: 4px;
   font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Class section styling */
+.classSection {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Class title styling */
+.classTitle {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  border-bottom: 1px solid #bdc3c7;
+  padding-bottom: 5px;
+}
+
+/* Seat row styling */
+.seatRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+/* Seat section within a row */
+.seatSection {
+  display: flex;
+  gap: 5px;
 }
 
 /* Individual seat styling */
 .ticketItem {
   width: 40px;
   height: 40px;
-  background-color: #4caf50; /* Available seats are green */
+  background-color: #3498db; /* Màu xanh dương cho ghế trống */
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border-radius: 4px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
   font-size: 0.8rem;
   user-select: none;
+  margin: 0 5px; /* Space between seats */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Sold seats are red and not clickable */
 .ticketItem.occupied {
-  background-color: #f44336; /* Sold seats are red */
+  background-color: #7f8c8d; /* Màu xám cho ghế đã bán */
   cursor: not-allowed;
 }
 
-/* Hover effect for available seats */
 .ticketItem.available:hover {
-  background-color: #45a049;
-}
-
-/* Separate styling for Economy and Business sections (if needed) */
-.economy {
-  /* Additional styles for Economy seats can be added here */
-}
-
-.business {
-  /* Additional styles for Business seats can be added here */
+  background-color: #2980b9; /* Xanh dương đậm hơn khi hover */
+  transform: scale(1.05);
 }
 
 /* Responsive adjustments */
@@ -174,34 +226,33 @@
   }
 
   .seatMap {
-    grid-template-columns: repeat(6, 30px); /* Adjust for smaller screens */
-    grid-gap: 8px;
+    padding: 15px;
   }
 
   .ticketItem {
     width: 30px;
     height: 30px;
     font-size: 0.7rem;
+    margin: 0 3px;
   }
 
-  .seatSectionTitle {
-    font-size: 1rem;
-  }
-
-  .ticketClassSelection {
-    margin-bottom: 15px;
-  }
-
-  /* Adjust special sections for smaller screens */
   .cockpit,
   .bathroom,
   .door {
-    grid-column: 1 / span 6;
     padding: 8px 0;
     font-size: 0.9rem;
   }
 
   .aisle {
-    height: 30px;
+    width: 30px;
+    margin: 8px 0;
+  }
+
+  .aisle::before {
+    font-size: 0.7rem;
+  }
+
+  .classTitle {
+    font-size: 1.1rem;
   }
 }
