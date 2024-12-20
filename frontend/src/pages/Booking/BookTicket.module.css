@@ -25,7 +25,7 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 120px 20px 40px; /* Thêm padding-top để tránh navbar */
+  padding: 80px 20px 40px; /* Thêm padding-top để tránh navbar */
 }
 
 /* Container chính: Giữ form và flight list cạnh nhau, căn giữa */
@@ -46,7 +46,7 @@ body {
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-  width: 350px;
+  width: 400px;
   min-width: 300px;
   flex-shrink: 0;
   /* Nền nhẹ dạng gradient rất mờ để thêm chiều sâu */
@@ -342,4 +342,139 @@ body {
 
 .closeButton:hover {
   color: #666;
+}
+
+/* Khung đặt vé */
+.flightSearchContainer {
+  position: relative;
+  z-index: 2; /* Cao hơn slideshow để hiển thị phía trên */
+  background-color: #fff;
+  background-image: url("../../assets/images/tk2.png");
+  background-size: cover;
+  background-position: center;
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  margin: 0 auto;
+  width: 400px;
+  min-width: 300px;
+  flex-shrink: 0;
+}
+
+.title {
+  display: block;
+  text-transform: uppercase;
+  color: var(--text-color);
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center; /* Căn giữa text */
+  width: 100%; /* Đảm bảo title chiếm full width */
+}
+
+/* Thanh form chính */
+.searchForm {
+  display: flex; /* Sử dụng flex cho layout */
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding: 10px 20px;
+  /* background-color: #fff; */
+}
+
+.fromToContainer, .dateContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.dateContainer {
+  justify-content: flex-start; /* Căn chỉnh nội dung trong container */
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.label {
+  font-size: 14px;
+  color: #6e6e6e;
+  margin-bottom: 5px;
+}
+
+/* Style select và input giống như ảnh: gạch dưới, không viền nổi */
+.select, .input {
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  min-width: 150px;
+  flex: 1; /* Tự động giãn chiều rộng */
+  width: 100%;
+  padding: 12px;
+  transition: all 0.3s ease;
+}
+
+.select:focus, .input:focus {
+  border-color: #1a8098;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(26, 128, 152, 0.1);
+}
+
+/* Icon chuyển hướng giữa Từ và Đến */
+.arrowIcon {
+  font-size: 20px;
+  color: #6e6e6e;
+  flex-shrink: 0; 
+}
+
+/* Nút tìm kiếm */
+.searchButton {
+  width: 100%;
+  background-color: #0d5777;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.searchButton:hover {
+  background-color: #166b82;
+}
+
+.tripTypeContainer {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.radioInput {
+  cursor: pointer;
+}
+
+.passengerContainer {
+  margin-bottom: 20px;
+}
+
+.dateContainer {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
 }

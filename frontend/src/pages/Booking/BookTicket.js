@@ -142,121 +142,117 @@ const BookTicket = () => {
   return (
     <div className={styles.bookingContainer}>
       {/* Khung đặt vé */}
-      <div className={styles.bookingForm}>
-        <div className={styles.headingcontainer}>
-          <h1 className={styles.heading}>ĐẶT VÉ </h1>
-        </div>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          {/* Loại chuyến đi */}
-          <div className={styles.tripType}>
-            <label>
+      <div className={styles.flightSearchContainer}>
+        <h2 className={styles.title}>Đặt vé</h2>
+        <form onSubmit={handleSubmit} className={styles.searchForm}>
+          {/* Trip Type Selection */}
+          <div className={styles.tripTypeContainer}>
+            <label className={styles.radioLabel}>
               <input
                 type="radio"
                 name="tripType"
                 value="one-way"
                 checked={tripType === "one-way"}
                 onChange={(e) => setTripType(e.target.value)}
-                className={styles.radio}
+                className={styles.radioInput}
               />
               Một chiều
             </label>
-            <label>
+            <label className={styles.radioLabel}>
               <input
                 type="radio"
                 name="tripType"
                 value="round-trip"
                 checked={tripType === "round-trip"}
                 onChange={(e) => setTripType(e.target.value)}
-                className={styles.radio}
+                className={styles.radioInput}
               />
               Khứ hồi
             </label>
           </div>
-
-          {/* Điểm đi và điểm đến */}
-          <div className={styles.formRow}>
-            <div className={styles.selectContainer}>
-              <label className={styles.label}>Điểm khởi hành:</label>
+          {/* Container cho phần "Từ" và "Đến" */}
+          <div className={styles.fromToContainer}>
+            <div className={styles.formGroup}>
+              <label htmlFor="departure" className={styles.label}>Từ</label>
               <select
+                id="departure"
                 value={departure_airport}
                 onChange={(e) => setDeparture_airport(e.target.value)}
-                required
                 className={styles.select}
               >
-                <option value="">-- Chọn sân bay --</option>
-                {airport_names.map((city) => (
-                  <option key={city} value={city}>
-                    {city}
+                <option value="">Chọn điểm đi</option>
+                {airports.map((airport) => (
+                  <option key={airport.airport_id} value={airport.city}>
+                    {airport.city}
                   </option>
                 ))}
               </select>
             </div>
-            <div className={styles.selectContainer}>
-              <label className={styles.label}>Điểm đến:</label>
+  
+            <div className={styles.formGroup}>
+              <label htmlFor="arrival" className={styles.label}>Đến</label>
               <select
+                id="arrival"
                 value={arrival_airport}
                 onChange={(e) => setArrival_airport(e.target.value)}
-                required
                 className={styles.select}
               >
-                <option value="">-- Chọn sân bay --</option>
-                {airport_names
-                  .filter((city) => city !== departure_airport)
-                  .map((city) => (
-                    <option key={city} value={city}>
-                      {city}
-                    </option>
-                  ))}
+                <option value="">Chọn điểm đến</option>
+                {airports.map((airport) => (
+                  <option key={airport.airport_id} value={airport.city}>
+                    {airport.city}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
-
-          {/* Ngày đi và ngày về */}
-          <div className={styles.dateRow}>
-            <div className={styles.dateContainer}>
-              <label className={styles.label}>Ngày đi:</label>
+  
+          {/* Container cho phần Ngày đi và Ngày về */}
+          <div className={styles.dateContainer}>
+            <div className={styles.formGroup}>
+              <label htmlFor="date" className={styles.label}>Ngày đi</label>
               <input
                 type="date"
+                id="date"
                 value={departure_time}
                 onChange={(e) => setDeparture_time(e.target.value)}
-                required
                 className={styles.input}
               />
             </div>
-
+  
             {tripType === "round-trip" && (
-              <div className={styles.dateContainer}>
-                <label className={styles.label}>Ngày về:</label>
+              <div className={styles.formGroup}>
+                <label htmlFor="returnDate" className={styles.label}>Ngày về</label>
                 <input
                   type="date"
+                  id="returnDate"
                   value={arrival_time}
                   onChange={(e) => setArrival_time(e.target.value)}
-                  required
                   className={styles.input}
                 />
               </div>
             )}
           </div>
-
-          {/* Số hành khách */}
+  
+          {/* Passenger Selection */}
           <div className={styles.passengerContainer}>
-            <label className={styles.label}>Hành khách:</label>
-            <input
-              type="number"
-              min="1"
-              value={passengers}
-              onChange={(e) => setPassengers(parseInt(e.target.value) || 1)}
-              required
-              className={styles.input}
-            />
+            <div className={styles.formGroup}>
+              <label htmlFor="passengers" className={styles.label}>Số hành khách</label>
+              <input
+                type="number"
+                id="passengers"
+                min="1"
+                max="9"
+                value={passengers}
+                onChange={(e) => setPassengers(parseInt(e.target.value) || 1)}
+                className={styles.input}
+              />
+            </div>
           </div>
-
-          {/* Nút tìm chuyến bay */}
-          <div>
-            <button type="submit" className={styles.submitButton}>
-              Tìm chuyến bay
-            </button>
-          </div>
+  
+          <button type="submit" className={styles.searchButton}>
+            Tìm chuyến bay
+          </button>
         </form>
       </div>
 
