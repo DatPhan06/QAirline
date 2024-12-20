@@ -193,3 +193,32 @@ h2 {
   background-color: #3cb4b4;
   margin-top: 20px; /* Reduced margin */
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .signupBox {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .imageContainer {
+    width: 100%;
+    height: 200px; /* Adjust height for smaller screens */
+  }
+
+  .formContainer {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .inputField {
+    font-size: 1rem;
+  }
+
+  .submitButton {
+    font-size: 1rem;
+  }
+}
