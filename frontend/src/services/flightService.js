@@ -75,3 +75,17 @@ export const deleteFlight = async (flightId) => {
     throw error;
   }
 };
+
+// Hàm cập nhật chuyến bay và gửi thông báo
+export const updateFlightAndNotify = async (flightId, updateData) => {
+  try {
+    const response = await axiosInstance.put(
+      `/flights/${flightId}/update-and-notify`,
+      updateData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating flight and sending notifications:", error);
+    throw error;
+  }
+};

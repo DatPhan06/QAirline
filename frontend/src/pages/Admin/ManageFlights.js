@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   createFlight,
   getFlights,
-  updateFlight,
+  updateFlightAndNotify,
 } from "../../services/flightService";
 import AdminSidebar from "../../components/AdminSidebar";
 import { createTicketsForFlight } from "../../services/ticketService";
@@ -60,7 +60,7 @@ const ManageFlights = () => {
             updatedFields[key] = selectedFlight[key];
           }
         }
-        await updateFlight(selectedFlight.flight_id, updatedFields);
+        await updateFlightAndNotify(selectedFlight.flight_id, updatedFields);
         alert("Cập nhật chuyến bay thành công!");
       } else {
         // Create new flight

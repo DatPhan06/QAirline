@@ -47,7 +47,7 @@ def get_flights(db: Session) -> List[models.Flight]:
     flights = db.query(models.Flight).all()
     return flights
     
-def update_flight(db: Session, db_flight: models.Flight, flight: schemas.FlightCreate) -> models.Flight:
+def update_flight(db: Session, db_flight: models.Flight, flight_update: schemas.FlightCreate) -> models.Flight:
     """
     Cập nhật thông tin của một chuyến bay.
 
@@ -59,7 +59,7 @@ def update_flight(db: Session, db_flight: models.Flight, flight: schemas.FlightC
     Returns:
         models.Flight: Đối tượng chuyến bay đã được cập nhật.
     """
-    update_data = flight.dict(exclude_unset=True)
+    update_data = flight_update.dict(exclude_unset=True)
     for key, value in update_data.items():
         setattr(db_flight, key, value)
     db.commit()
