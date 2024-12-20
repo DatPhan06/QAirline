@@ -29,7 +29,7 @@ const Navbar = () => {
       <ul className={styles.navList}>
         <li className={styles.navItem}>
           <Link to="/">
-            <img src="/images/ylogo.png" alt="Logo" className={styles.logo} />
+            <img src="/images/vtcb_logo.png" alt="Logo" className={styles.logo} />
           </Link>
         </li>
 

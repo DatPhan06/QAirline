@@ -2,6 +2,9 @@
   position: relative;
   z-index: 2; /* Cao hơn slideshow để hiển thị phía trên */
   background-color: #fff;
+  background-image: url("../assets/images/tk2.png");
+  background-size: cover;
+  background-position: center;
   backdrop-filter: blur(10px);
   padding: 30px;
   border-radius: 20px;
@@ -15,6 +18,8 @@
   font-size: 18px;
   color: #333;
   margin-bottom: 10px;
+  text-align: center; /* Căn giữa text */
+  width: 100%; /* Đảm bảo title chiếm full width */
 }
 
 /* Thanh form chính */
@@ -24,7 +29,7 @@
   gap: 20px;
   width: 100%;
   padding: 10px 20px;
-  background-color: #fff;
+  /* background-color: #fff; */
 }
 
 .fromToContainer, .dateContainer {

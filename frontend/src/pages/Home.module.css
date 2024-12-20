@@ -1,3 +1,9 @@
+.containerAll {
+  background-image: url("../assets/images/backc.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 /* Base container */
 .homeContainer {
   max-width: 1200px;
@@ -43,7 +49,7 @@
 /* Hashtag bar */
 .hashtagBar {
   width: 100%;
-  background: white;
+  background: #f9f7f3;
   padding: 12px 20px;
   border-radius: 8px;
   display: flex;

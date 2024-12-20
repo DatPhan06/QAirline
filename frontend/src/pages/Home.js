@@ -41,6 +41,7 @@ const Home = () => {
   ];
 
   return (
+    <div className={styles.containerAll}> 
     <div className={styles.homeContainer}>
       <div className={styles.leftSection}>
         <Slideshow images={slideshowImages} />
@@ -85,6 +86,7 @@ const Home = () => {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };
