@@ -32,7 +32,7 @@ body {
 .bookingContainer {
   display: flex;
   gap: 30px; /* Giảm khoảng cách giữa các phần từ 50px xuống 30px */
-  max-width: 1000px; /* Giảm max-width từ 1200px xuống 1000px */
+  max-width: 1200px; /* Giảm max-width từ 1200px xuống 1000px */
   padding-bottom: 15px; /* Giảm padding */
   width: 100%;
   margin: 0 auto;

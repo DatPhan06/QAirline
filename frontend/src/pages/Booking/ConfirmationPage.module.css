@@ -1,204 +1,166 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap');
-
-:root {
-  --primary-color: #a88a5a;
-  --secondary-color: #c8b28b;
-  --text-color: #333;
-  --subtext-color: #555;
-  --bg-light: #ffffff;
-  --bg-gradient-start: #fdfdfd;
-  --bg-gradient-end: #f9f9f9;
-}
+/* ConfirmationPage.module.css */
 
 .confirmationContainer {
-  font-family: "Merriweather", serif;
-  background: linear-gradient(to bottom, var(--bg-gradient-start), var(--bg-gradient-end));
-  padding: 40px;
-  max-width: 700px;
-  margin: 80px auto;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.7s ease both;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image:  url("../../assets/images/tk1.png");
+  background-size: cover;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  color: #fff;
+  padding: 40px 20px;
 }
 
-@keyframes fadeIn {
-  0% {
+.headerSection {
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeInDown 0.8s ease;
+}
+
+.successMessage {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.ticketInfoSection {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 800px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  color: #2c3e50;
+  animation: fadeInUp 1s ease;
+}
+
+.ticketTitle {
+  color: #0d5777;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e7eef3;
+}
+
+.ticketDetails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.ticketDetails p {
+  margin: 0;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  line-height: 1.6;
+  color: #4a5568;
+}
+
+.ticketDetails p:hover {
+  background-color: rgba(13, 87, 119, 0.03);
+  transform: translateX(5px);
+}
+
+.ticketDetails strong {
+  min-width: 180px;
+  color: #2d3748;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.bookButton, .manageButton {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bookButton {
+  background-color: #0d5777;
+  color: white;
+}
+
+.bookButton:hover {
+  background-color: #0a4560;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(13, 87, 119, 0.2);
+}
+
+.manageButton {
+  background-color: #ffffff;
+  color: #0d5777;
+  border: 2px solid #0d5777;
+}
+
+.manageButton:hover {
+  background-color: #0d5777;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(13, 87, 119, 0.2);
+}
+
+@keyframes fadeInDown {
+  from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(-20px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.title {
-  font-size: 2.4em;
-  font-weight: bold;
-  text-align: center;
-  color: var(--text-color);
-  margin-bottom: 40px;
-  letter-spacing: 1px;
-  font-family: "Playfair Display", serif;
-  position: relative;
-  animation: fadeInTitle 1s ease both;
-}
-
-@keyframes fadeInTitle {
-  0% {
+@keyframes fadeInUp {
+  from {
     opacity: 0;
-    transform: translateY(-10px) rotateX(10deg);
+    transform: translateY(20px);
   }
-  100% {
+  to {
     opacity: 1;
-    transform: translateY(0) rotateX(0deg);
+    transform: translateY(0);
   }
 }
 
-.title::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
-  margin: 8px auto 0;
-  border-radius: 2px;
-}
-
-.flightInfo {
-  background: var(--bg-light);
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 30px 35px;
-  margin-bottom: 30px;
-  animation: fadeIn 1s ease both;
-}
-
-.flightInfo h2 {
-  font-size: 1.6em;
-  font-weight: 600;
-  color: #4a4a4a;
-  margin-bottom: 25px;
-  letter-spacing: 0.5px;
-  font-family: "Playfair Display", serif;
-  position: relative;
-}
-
-.flightInfo h2::after {
-  content: "";
-  display: block;
-  width: 40px;
-  height: 2px;
-  background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
-  margin: 10px 0 20px;
-  border-radius: 2px;
-}
-
-.flightInfo p {
-  font-size: 1.1em;
-  color: var(--subtext-color);
-  line-height: 1.7;
-  margin: 12px 0;
-  font-family: "Merriweather", serif;
-}
-
-.flightInfo p strong {
-  color: var(--text-color);
-  font-weight: 600;
-}
-
-.thankYou {
-  font-size: 1.2em;
-  font-family: "Merriweather", serif;
-  color: var(--text-color);
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.homeButton {
-  display: block;
-  text-align: center;
-  font-size: 1em;
-  font-weight: 600;
-  color: #ffffff;
-  background: var(--primary-color);
-  border: none;
-  padding: 14px 28px;
-  border-radius: 6px;
-  cursor: pointer;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-  margin: 0 auto;
-  font-family: "Merriweather", serif;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.homeButton:hover {
-  background: var(--secondary-color);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-
-/* Responsive adjustments */
+/* Responsive Design */
 @media (max-width: 768px) {
   .confirmationContainer {
     padding: 20px;
-    margin: 40px auto;
   }
 
-  .title {
-    font-size: 2em;
-    margin-bottom: 30px;
+  .successMessage {
+    font-size: 2rem;
   }
 
-  .flightInfo {
-    padding: 20px 25px;
+  .ticketInfoSection {
+    padding: 25px;
   }
 
-  .flightInfo h2 {
-    font-size: 1.4em;
+  .ticketTitle {
+    font-size: 1.5rem;
   }
 
-  .flightInfo p {
-    font-size: 1em;
-    margin: 10px 0;
+  .actionButtons {
+    flex-direction: column;
   }
 
-  .thankYou {
-    font-size: 1.1em;
-  }
-
-  .homeButton {
-    font-size: 0.9em;
-    padding: 12px 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .title {
-    font-size: 1.8em;
-  }
-
-  .flightInfo {
-    padding: 15px 20px;
-  }
-
-  .flightInfo h2 {
-    font-size: 1.3em;
-    margin-bottom: 20px;
-  }
-
-  .flightInfo p {
-    font-size: 0.95em;
-  }
-
-  .thankYou {
-    font-size: 1em;
-  }
-
-  .homeButton {
-    font-size: 0.85em;
-    padding: 10px 16px;
+  .bookButton, .manageButton {
+    width: 100%;
   }
 }
