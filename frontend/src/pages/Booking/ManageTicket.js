@@ -206,12 +206,15 @@ const ManageTicket = () => {
       <button className={styles.closeButton} onClick={() => setShowModal(false)}>
         ×
       </button>
-      <h2>Chi tiết vé</h2>
+      <h2>THÔNG TIN CHI TIẾT </h2>
       <p>
-        <strong>Mã vé đặt:</strong> {selectedBooking.booked_ticket_id}
+        <strong>Mã vé:</strong> {selectedBooking.booked_ticket_id}
       </p>
       <p>
-        <strong>Người đặt:</strong> {selectedBooking.user.full_name} ({selectedBooking.user.email})
+        <strong>Họ tên người đặt:</strong> {selectedBooking.user.full_name} 
+      </p>
+      <p>
+        <strong>Email:</strong> {selectedBooking.user.email}
       </p>
       <p>
         <strong>Mã vé:</strong> {selectedBooking.ticket.ticket_id}
@@ -228,7 +231,6 @@ const ManageTicket = () => {
       <p>
         <strong>Ngày đặt:</strong> {new Date(selectedBooking.booking_time).toLocaleString()}
       </p>
-      {/* Thêm các thông tin khác nếu cần */}
     </div>
   </div>
 )}

@@ -3,6 +3,9 @@
   display: none; /* Ẩn nút menu mặc định */
 }
 
+.navbar {
+  background: linear-gradient(to right, #0b1f3a, #143a51);
+}
 /* Navbar.module.css */
 .nav {
   position: sticky; /* Thay đổi từ fixed sang sticky */
@@ -19,14 +22,21 @@
   flex-direction: column;
 }
 
+/* Hiệu ứng khi cuộn */
+.nav.scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  padding: 5px 0;
+  transform: translateY(-5px);
+}
+
 .navList {
-  max-width: 1200px;
+  max-width: 1400px; /* Tăng chiều rộng tối đa */
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0 40px; /* Tăng padding hai bên */
-  height: 75px;
+  justify-content: space-between; /* Phân bố không gian đều hơn */
+  padding: 0 50px;
+  height: 75px; /* Tăng chiều cao navbar */
 }
 
 /* Logo container */
@@ -92,14 +102,14 @@
 
 /* Logo styling */
 .logo {
-  height: 45px; /* Logo lớn hơn */
+  padding-top: 5px;
+  height: 70px; /* Logo lớn hơn */
   margin-right: 30px;
   transition: all 0.4s ease;
 }
 
 .logo:hover {
   transform: scale(1.08);
-  filter: brightness(1.2);
 }
 
 /* Submenu styling with improved effects */
