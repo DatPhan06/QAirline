@@ -2,16 +2,20 @@ import React, { useState, useEffect } from "react";
 import {
   createFlight,
   getFlights,
-  updateFlight,
+  updateFlightAndNotify,
 } from "../../services/flightService";
 import AdminSidebar from "../../components/AdminSidebar";
 import { createTicketsForFlight } from "../../services/ticketService";
 import FlightList from "../../components/FlightList";
 import styles from "./ManageFlights.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { createNotification } from "../../services/notificationService";
 
 const ManageFlights = () => {
   const [selectedFlight, setSelectedFlight] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [flightData, setFlightData] = useState({
     flight_number: "",
     airplane_id: "",
@@ -47,26 +51,39 @@ const ManageFlights = () => {
     e.preventDefault();
     try {
       if (selectedFlight) {
-        await updateFlight(selectedFlight.flight_id, flightData);
-        alert("Chuyến bay đã được cập nhật thành công!");
+        // Update existing flight
+        const updatedFields = {};
+        for (const key in flightData) {
+          if (flightData[key] !== selectedFlight[key]) {
+            updatedFields[key] = flightData[key];
+          } else {
+            updatedFields[key] = selectedFlight[key];
+          }
+        }
+        await updateFlightAndNotify(selectedFlight.flight_id, updatedFields);
+        alert("Cập nhật chuyến bay thành công!");
       } else {
-        const newFlight = await createFlight(flightData);
-        await createTicketsForFlight(newFlight.flight_id);
-        alert("Chuyến bay mới đã được thêm thành công!");
+        // Create new flight
+        await createFlight(flightData);
+        alert("Tạo chuyến bay mới thành công!");
       }
       setIsModalOpen(false);
-      // Cập nhật lại danh sách chuyến bay
-      const updatedFlights = await getFlights();
-      setFlights(updatedFlights);
+      // Refresh flight list
+      const response = await getFlights();
+      setFlights(response);
     } catch (error) {
-      console.error("Error submitting flight data:", error);
-      alert("Cập nhật chuyến bay thất bại. Vui lòng thử lại.");
+      console.error("Error saving flight:", error);
+      alert("Đã xảy ra lỗi khi lưu chuyến bay.");
     }
   };
 
   const handleFlightClick = (flight) => {
     setSelectedFlight(flight);
     setFlightData({
+      flight_number: flight.flight_number,
+      airplane_id: flight.airplane_id,
+      departure_airport_id: flight.departure_airport_id,
+      arrival_airport_id: flight.arrival_airport_id,
       departure_time: flight.departure_time,
       arrival_time: flight.arrival_time,
       flight_duration: flight.flight_duration,
@@ -100,13 +117,24 @@ const ManageFlights = () => {
     }
   };
 
+  // Add toggle function for guide
+  const toggleGuide = () => {
+    setIsGuideOpen(!isGuideOpen);
+  };
+
   return (
     <div className={styles.adminContainer}>
       <div className={styles.sidebar}>
         <AdminSidebar />
       </div>
       <div className={styles.mainContent}>
-        <h1>Quản lý chuyến bay</h1>
+        <h1>
+          Quản lý chuyến bay
+          <button className={styles.guideButton} onClick={toggleGuide}>
+            <FontAwesomeIcon icon={faQuestionCircle} />
+          </button>
+        </h1>
+
         <button className={styles.addButton} onClick={handleAddNewFlight}>
           Tạo chuyến bay mới
         </button>
@@ -314,6 +342,57 @@ const ManageFlights = () => {
                 {selectedFlight ? "Lưu thay đổi" : "Tạo chuyến bay"}
               </button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Guide Modal */}
+      {isGuideOpen && (
+        <div className={styles.modalOverlay} onClick={toggleGuide}>
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className={styles.closeButton} onClick={toggleGuide}>
+              ×
+            </button>
+            <div className={styles.guide}>
+              <h2>Hướng dẫn sử dụng trang</h2>
+              <p>
+                Quản lý chuyến bay cho phép bạn thêm, sửa và xem danh sách các
+                chuyến bay. Dưới đây là các chức năng chính:
+              </p>
+              <ul>
+                <li>
+                  <strong>Tạo chuyến bay mới:</strong>
+                  <ul>
+                    <li>Nhấn vào nút "Tạo chuyến bay mới"</li>
+                    <li>Điền đầy đủ thông tin chuyến bay</li>
+                    <li>Số hiệu chuyến bay phải là duy nhất</li>
+                    <li>ID máy bay phải tồn tại trong hệ thống</li>
+                    <li>ID sân bay đi/đến phải hợp lệ</li>
+                    <li>Thời gian khởi hành phải sau thời điểm hiện tại</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Chỉnh sửa chuyến bay:</strong>
+                  <ul>
+                    <li>Nhấn vào chuyến bay trong danh sách để chỉnh sửa</li>
+                    <li>Có thể cập nhật thời gian, trạng thái, giá vé</li>
+                    <li>Số ghế trống sẽ tự động cập nhật theo đặt vé</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Quản lý trạng thái:</strong>
+                  <ul>
+                    <li>Scheduled: Chuyến bay đã lên lịch</li>
+                    <li>Delayed: Chuyến bay bị trễ</li>
+                    <li>Cancelled: Chuyến bay bị hủy</li>
+                    <li>Completed: Chuyến bay đã hoàn thành</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       )}

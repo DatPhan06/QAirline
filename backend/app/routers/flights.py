@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
+from datetime import datetime, timezone
 from .. import models, schemas, database, services
 
 router = APIRouter(
@@ -109,3 +110,45 @@ def get_flight_stats(db: Session = Depends(database.get_db)):
         dict: Thống kê chuyến bay.
     """
     return services.flight_service.get_flight_stats(db)
+
+@router.put("/{flight_id}/update-and-notify", response_model=schemas.Flight)
+def update_flight_and_notify(
+    flight_id: int,
+    flight_update: schemas.FlightCreate,
+    db: Session = Depends(database.get_db)
+) -> schemas.Flight:
+    """
+    Cập nhật thông tin chuyến bay và gửi thông báo đến người dùng đã đặt vé.
+
+    Args:
+        flight_id (int): ID của chuyến bay cần cập nhật.
+        flight_update (schemas.FlightCreate): Thông tin chuyến bay cần cập nhật.
+        db (Session): Phiên làm việc với cơ sở dữ liệu.
+
+    Returns:
+        schemas.Flight: Thông tin chuyến bay đã được cập nhật.
+    """
+    db_flight = services.flight_service.get_flight(db, flight_id)
+    if db_flight is None:
+        raise HTTPException(status_code=404, detail="Flight not found")
+
+    updated_flight = services.flight_service.update_flight(db, db_flight, flight_update)
+
+    # Fetch all users who have booked tickets for this flight
+    booked_tickets = db.query(models.BookedTicket).filter(models.BookedTicket.flight_id == flight_id).all()
+    user_ids = {ticket.user_id for ticket in booked_tickets}
+
+    # Create notifications for each user
+    for user_id in user_ids:
+        notification = models.Notification(
+            title="Thay đổi thông tin chuyến bay",
+            content=f"Chuyến bay {updated_flight.flight_number} đã được cập nhật. Vui lòng kiểm tra lại thông tin chuyến bay của bạn.",
+            type="FLIGHT_UPDATE",
+            user_id=user_id,
+            flight_id=flight_id,
+            created_at=datetime.now(timezone.utc),
+        )
+        db.add(notification)
+
+    db.commit()
+    return updated_flight

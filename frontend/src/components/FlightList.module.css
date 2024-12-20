@@ -33,7 +33,7 @@
   display: block;
   width: 80px;
   height: 3px;
-  background: #005baa; 
+  background: #005baa;
   margin-top: 8px;
   border-radius: 2px;
 }
@@ -46,11 +46,11 @@
   color: #333;
   margin-bottom: 40px;
   background-color: #fdfdfd;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .flightTable thead th {
-  background: #0d5777; 
+  background: #0d5777;
   color: #ffffff;
   font-weight: 700;
   text-transform: uppercase;
@@ -108,8 +108,40 @@
 }
 
 .activePageButton {
-  background: #0d5777; 
+  background: #0d5777;
   color: #ffffff;
   border-color: #0d5777;
   font-weight: 600;
+}
+
+.flightTable th {
+  position: relative;
+  cursor: help;
+}
+
+.flightTable th:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }

@@ -37,8 +37,13 @@ const AdminSidebar = () => {
       >
         <Link to="/admin/dashboard">
           <h2>
-            <FaUserShield className={styles.icon} />
-            <span className={styles.text}>Menu Quản Trị</span>
+            <img
+              src="/images/ylogo.png"
+              alt="QAirline Admin Logo"
+              className={styles.adminLogo}
+            />
+            {"  "}
+            <span className={styles.text}>Menu</span>
           </h2>
         </Link>
         <ul>
