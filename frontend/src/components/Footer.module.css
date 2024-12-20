@@ -1,83 +1,231 @@
-/* Footer Styles */
+/* Footer.module.css */
+
+/* Biến màu để dễ dàng tùy chỉnh và duy trì tính nhất quán */
+:root {
+  --footer-bg-color: #0b203b;
+  --footer-text-color: #f1f1f1;
+  --footer-link-color: #cccccc;
+  --footer-link-hover-color: #ff6b6b;
+  --footer-title-color: #ffffff;
+  --footer-border-color: #333333;
+  --button-bg-color: #ff6b6b;
+  --button-hover-bg-color: #ff4b4b;
+  --input-bg-color: #333333;
+  --input-text-color: #ffffff;
+}
+
 .footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-    font-family: 'Helvetica', sans-serif;
-  }
-  
+  background-color: var(--footer-bg-color);
+  color: var(--footer-text-color);
+  padding: 60px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+.footerContent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+.footerLogo {
+  flex: 1 1 200px;
+}
+
+.logoImage {
+  width: 180px;
+  transition: transform 0.3s ease;
+}
+
+.logoImage:hover {
+  transform: scale(1.05);
+}
+
+.footerInfo,
+.footerLinks,
+.footerSocial {
+  flex: 1 1 200px;
+}
+
+.footerTitle {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: var(--footer-title-color);
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.footerTitle::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background-color: var(--button-bg-color);
+  bottom: 0;
+  left: 0;
+}
+
+.footerInfo p,
+.footerLinks a {
+  font-size: 15px;
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.footerLinks a {
+  color: var(--footer-link-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footerLinks a:hover {
+  color: var(--footer-link-hover-color);
+}
+
+.footerSocial .socialIcons {
+  display: flex;
+  gap: 15px;
+}
+
+.socialLink {
+  color: var(--footer-text-color);
+  font-size: 20px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.socialLink:hover {
+  color: var(--button-bg-color);
+  transform: translateY(-3px);
+}
+
+.footerNewsletter {
+  flex: 1 1 250px;
+}
+
+.newsletterForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.newsletterInput {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  margin-bottom: 10px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.newsletterInput::placeholder {
+  color: #bbbbbb;
+}
+
+.newsletterInput:focus {
+  outline: none;
+  background-color: #444444;
+}
+
+.newsletterButton {
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--button-bg-color);
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.newsletterButton:hover {
+  background-color: var(--button-hover-bg-color);
+  transform: translateY(-2px);
+}
+
+.footerBottom {
+  border-top: 1px solid var(--footer-border-color);
+  padding-top: 25px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.footerCopyright {
+  font-size: 14px;
+  color: #aaaaaa;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
   .footerContent {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    gap: 30px;
   }
-  
-  
-  /* Footer Links */
-  .footerLinks {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-bottom: 20px;
+
+  .footerLogo,
+  .footerInfo,
+  .footerLinks,
+  .footerSocial,
+  .footerNewsletter {
+    flex: 1 1 45%;
   }
-  
-  /* Logo trong Footer */
-  .footerLogo {
+}
+
+@media (max-width: 768px) {
+  .footerContent {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .footerLogo,
+  .footerInfo,
+  .footerLinks,
+  .footerSocial,
+  .footerNewsletter {
+    flex: 1 1 100%;
     text-align: center;
-    margin-bottom: 20px;
   }
-  
+
+  .footerSocial .socialIcons {
+    justify-content: center;
+  }
+
+  .newsletterForm {
+    align-items: center;
+  }
+
+  .newsletterInput {
+    width: 80%;
+  }
+
+  .newsletterButton {
+    width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
   .logoImage {
-    max-width: 150px;  /* Đảm bảo kích thước logo hợp lý */
-    height: auto;
-    transition: transform 0.3s ease;
+    width: 150px;
   }
-  
-  /* Thông tin bổ sung (Liên hệ, Địa chỉ) */
-  .footerInfo {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #ddd; /* Màu chữ sáng cho phần thông tin bổ sung */
+
+  .footerTitle {
+    font-size: 18px;
   }
-  
-  .footerInfo p {
-    margin: 5px 0;
+
+  .footerInfo p,
+  .footerLinks a {
     font-size: 14px;
-    font-weight: normal;
   }
-  
-  /* Footer Links */
-  .footerLinks {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-bottom: 20px;
+
+  .socialLink {
+    font-size: 18px;
   }
-  
-  .footerLink {
-    color: #fff;
-    font-size: 16px;
-    text-decoration: none;
-    transition: color 0.3s ease;
+
+  .newsletterInput,
+  .newsletterButton {
+    width: 100%;
   }
-  
-  .footerLink:hover {
-    color: #f1c40f; /* Gold color for hover effect */
-  }
-  
-  .footerCopyright {
-    font-size: 14px;
-    color: #aaa;
-    margin-top: 20px;
-  }
-  
-  .footerCopyright a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .footerCopyright a:hover {
-    color: #f1c40f; /* Gold color for hover effect */
-  }
-  
+}

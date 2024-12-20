@@ -1,135 +1,232 @@
-/* Container tổng thể */
+/* CancelTicket.module.css */
+
+/* Root container styling */
 .container {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f7fa;
-  padding: 40px 60px;
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 120px;
+  padding: 50px 20px;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  overflow: hidden;
 }
 
-/* Phần Lợi ích khi đặt vé */
+/* Benefits Section */
 .benefits {
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  margin-bottom: 40px;
+  margin-bottom: 60px;
+  text-align: center;
+  animation: fadeInUp 1s ease-out;
 }
 
 .benefits h1 {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 20px;
-  font-weight: 600;
+  font-size: 2.8rem;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  position: relative;
+  display: inline-block;
+}
+
+.benefits h1::after {
+  content: '';
+  width: 50px;
+  height: 4px;
+  background-color: #0d5777;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
 }
 
 .benefits ul {
-  list-style-type: disc;
-  padding-left: 20px;
-  font-size: 1.1rem;
-  color: #555;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .benefits li {
-  margin-bottom: 10px;
+  font-size: 1.1rem;
+  margin: 10px 20px;
+  position: relative;
+  padding-left: 35px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
 }
 
-.benefits li:hover {
-  color: #007bff; /* Đổi màu khi hover */
+.benefits li::before {
+  content: '✔️';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #27ae60;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
 }
 
-/* Phần Lựa chọn hạng vé */
+.benefits li:hover::before {
+  transform: translateY(-50%) scale(1.2);
+}
+
+/* Ticket Selection Section */
 .ticketSelectionSection {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-bottom: 60px;
+  animation: fadeInUp 1s ease-out;
 }
 
 .ticketSelection {
   display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin-bottom: 30px;
+  gap: 25px;
+  margin-bottom: 40px;
+  transform: scale(0.9);
+  animation: scaleUp 0.5s forwards;
 }
 
 .ticketButton {
-  background-color: #007bff;
-  color: white;
-  padding: 12px 30px;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 8px;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  border: 2px solid #3498db;
+  border-radius: 30px;
+  background-color: #fff;
+  color: #3498db;
   cursor: pointer;
-  transition: all 0.3s ease;
-  flex: 1;
-  text-align: center;
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ticketButton::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(52, 152, 219, 0.2);
+  transform: translateY(-50%) rotate(45deg);
+  transition: all 0.5s ease;
+}
+
+.ticketButton:hover::after {
+  left: 150%;
 }
 
 .ticketButton:hover {
-  background-color: #0056b3;
+  background-color: #3498db;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(52, 152, 219, 0.3);
 }
 
-.ticketButton.active {
-  background-color: #0056b3;
-  transform: scale(1.05);
+.active {
+  background-color: #0d5777;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(52, 152, 219, 0.3);
 }
 
 .ticketDetails {
-  background-color: #ffffff;
-  padding: 30px;
+  width: 100%;
+  max-width: 900px;
+  overflow-x: auto;
+  background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.7s ease-out;
 }
 
 .ticketTable {
   width: 100%;
   border-collapse: collapse;
-  font-size: 1rem;
-  color: #333;
 }
 
-.ticketTable th, .ticketTable td {
-  padding: 15px;
+.ticketTable th,
+.ticketTable td {
+  padding: 20px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e1e1e1;
+  transition: background-color 0.3s ease;
 }
 
 .ticketTable th {
-  background-color: #007bff;
-  color: white;
-  font-weight: 600;
+  background-color: #0d5777;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  font-size: 1.1rem;
 }
 
-.ticketTable tbody tr:hover {
+.ticketTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.ticketTable tr:hover {
   background-color: #f1f1f1;
 }
 
-/* Phần Lưu ý */
+.ticketTable td {
+  color: #555;
+}
+
+.ticketTable tbody tr {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+}
+
+.ticketTable tbody tr:nth-child(odd) {
+  animation-delay: 0.2s;
+}
+
+.ticketTable tbody tr:nth-child(even) {
+  animation-delay: 0.4s;
+}
+
+/* Notes Section */
 .notes {
-  background-color: #ffffff;
-  padding: 30px;
+  background: #fff;
+  padding: 25px 40px;
+  border-left: 6px solid #3498db;
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 1s ease-out;
 }
 
 .notes h2 {
   font-size: 2rem;
-  color: #333;
-  margin-bottom: 15px;
-  font-weight: 600;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  position: relative;
+}
+
+.notes h2::after {
+  content: '';
+  width: 40px;
+  height: 3px;
+  background-color: #0d5777;
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  border-radius: 2px;
 }
 
 .notes p {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
   color: #555;
-  line-height: 1.6;
+  animation: fadeInUp 0.8s ease-out;
 }
 
-/* Thêm hiệu ứng cho các phần tử */
-@keyframes fadeIn {
+/* Animations */
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -137,7 +234,122 @@
   }
 }
 
-/* Hiệu ứng fadeIn cho phần lợi ích, hạng vé và lưu ý */
-.benefits, .ticketSelectionSection, .notes {
-  animation: fadeIn 0.8s ease-in-out;
+@keyframes scaleUp {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .container {
+    padding: 40px 15px;
+  }
+
+  .benefits h1 {
+    font-size: 2.4rem;
+  }
+
+  .benefits li {
+    margin: 10px 15px;
+  }
+
+  .ticketSelection {
+    gap: 20px;
+  }
+
+  .ticketButton {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+
+  .ticketDetails {
+    max-width: 100%;
+  }
+
+  .notes {
+    padding: 20px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .benefits h1 {
+    font-size: 2rem;
+  }
+
+  .benefits ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ticketSelection {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .ticketButton {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .ticketTable th,
+  .ticketTable td {
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+
+  .notes h2 {
+    font-size: 1.8rem;
+  }
+
+  .notes p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 10px;
+  }
+
+  .benefits h1 {
+    font-size: 1.8rem;
+  }
+
+  .ticketButton {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+
+  .ticketTable th,
+  .ticketTable td {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  .notes h2 {
+    font-size: 1.6rem;
+  }
+
+  .notes p {
+    font-size: 0.9rem;
+  }
 }

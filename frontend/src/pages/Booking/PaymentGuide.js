@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import styles from './PaymentGuide.module.css';  // Import the CSS module
+import styles from './PaymentGuide.module.css'; // Import the CSS module
 
 const PaymentGuide = () => {
-  const [selectedGuide, setSelectedGuide] = useState('');
+  const [selectedGuide, setSelectedGuide] = useState('onlineBooking');
 
   const handleButtonClick = (guide) => {
     setSelectedGuide(guide);
@@ -15,22 +15,22 @@ const PaymentGuide = () => {
         {/* Left Section: Button Area */}
         <div className={styles.buttons}>
           <button 
-            className={styles.button} 
+            className={`${styles.button} ${selectedGuide === 'onlineBooking' ? styles.active : ''}`} 
             onClick={() => handleButtonClick('onlineBooking')}>
             Hướng dẫn đặt vé trực tuyến
           </button>
           <button 
-            className={styles.button} 
+            className={`${styles.button} ${selectedGuide === 'cancelBooking' ? styles.active : ''}`} 
             onClick={() => handleButtonClick('cancelBooking')}>
             Hướng dẫn hủy vé
           </button>
           <button 
-            className={styles.button} 
+            className={`${styles.button} ${selectedGuide === 'paymentMethod' ? styles.active : ''}`} 
             onClick={() => handleButtonClick('paymentMethod')}>
             Hướng dẫn thanh toán
           </button>
           <button 
-            className={styles.button} 
+            className={`${styles.button} ${selectedGuide === 'refundPolicy' ? styles.active : ''}`} 
             onClick={() => handleButtonClick('refundPolicy')}>
             Chính sách hoàn tiền
           </button>
