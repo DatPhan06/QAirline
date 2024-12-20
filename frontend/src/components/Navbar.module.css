@@ -80,7 +80,7 @@
 
 /* Hiệu ứng hover cho navLink */
 .navLink::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -193,22 +193,112 @@
   .navList {
     gap: 15px;
   }
-  
+
   .navLink {
     font-size: 11px;
     padding: 6px 8px;
   }
-  
+
   .logo {
     height: 40px;
     margin-right: 20px;
   }
 }
 
-/* Giữ nguyên các styles hiện tại */
+.notificationContainer {
+  position: relative;
+  margin-left: 20px;
+}
 
-/* Thêm media query cho màn hình nhỏ */
-/* Chỉ hiện menu toggle và thay đổi layout khi màn hình nhỏ hơn 768px */
+.notificationButton {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.notificationButton:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.notificationBadge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notificationDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 16px;
+}
+
+.notificationDropdown h3 {
+  margin: 0 0 16px;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.notificationList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notificationItem {
+  padding: 12px;
+  border-radius: 6px;
+  background-color: #f8fafc;
+  transition: background-color 0.3s ease;
+}
+
+.notificationItem:hover {
+  background-color: #f1f5f9;
+}
+
+.notificationTitle {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 4px;
+}
+
+.notificationContent {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.notificationTime {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.noNotifications {
+  text-align: center;
+  color: #64748b;
+  padding: 16px;
+}
 @media (max-width: 768px) {
   .menuToggle {
     display: block; /* Hiện nút menu */
