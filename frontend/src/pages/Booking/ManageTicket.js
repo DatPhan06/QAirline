@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getBookings, updateBooking, getBookingsByUserId } from "../../services/bookingService";
+import {
+  getBookings,
+  updateBooking,
+  getBookingsByUserId,
+} from "../../services/bookingService";
 import { updateTicketStatus } from "../../services/ticketService";
 import { getFlightById } from "../../services/flightService";
 import { getTicketById } from "../../services/ticketService";
@@ -185,44 +189,102 @@ const ManageTicket = () => {
                     </p>
                   </div>
                 )}
-
               </div>
             </li>
           ))}
           {showModal && selectedBooking && (
-  <div className={styles.modalOverlay} onClick={() => setShowModal(false)}>
-    <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-      <button className={styles.closeButton} onClick={() => setShowModal(false)}>
-        ×
-      </button>
-      <h2>THÔNG TIN CHI TIẾT </h2>
-      <p>
-        <strong>Mã vé:</strong> {selectedBooking.booked_ticket_id}
-      </p>
-      <p>
-        <strong>Họ tên người đặt:</strong> {selectedBooking.user.full_name} 
-      </p>
-      <p>
-        <strong>Email:</strong> {selectedBooking.user.email}
-      </p>
-      <p>
-        <strong>Mã vé:</strong> {selectedBooking.ticket.ticket_id}
-      </p>
-      <p>
-        <strong>Chuyến bay:</strong> {selectedBooking.flight_id}
-      </p>
-      <p>
-        <strong>Số ghế:</strong> {selectedBooking.ticket.seat.seat_number}
-      </p>
-      <p>
-        <strong>Giá vé:</strong> {selectedBooking.price.toLocaleString()} VND
-      </p>
-      <p>
-        <strong>Ngày đặt:</strong> {new Date(selectedBooking.booking_time).toLocaleString()}
-      </p>
+            <div
+              className={styles.modalOverlay}
+              onClick={() => setShowModal(false)}
+            >
+              <div
+                className={styles.modalContent}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  className={styles.closeButton}
+                  onClick={() => setShowModal(false)}
+                >
+                  ×
+                </button>
 
-          {/* Thêm nút hủy vé vào modal */}
-          {selectedBooking.status === "booked" && (
+                <div className={styles.ticketContainer}>
+                  <div className={styles.ticketHeader}>
+                    <h2>VÉ MÁY BAY ĐIỆN TỬ</h2>
+                    <span className={styles.ticketId}>
+                      Mã vé: {selectedBooking.booked_ticket_id}
+                    </span>
+                  </div>
+
+                  <div className={styles.ticketBody}>
+                    <div className={styles.flightMainInfo}>
+                      <div className={styles.airportInfo}>
+                        <div className={styles.departure}>
+                          <h3>
+                            {selectedBooking.flight.departure_airport?.city}
+                          </h3>
+                          <p>
+                            {selectedBooking.flight.departure_airport?.name}
+                          </p>
+                          <time>
+                            {new Date(
+                              selectedBooking.flight.departure_time
+                            ).toLocaleTimeString()}
+                          </time>
+                        </div>
+
+                        <div className={styles.flightPath}>
+                          <span className={styles.flightNumber}>
+                            {selectedBooking.flight.flight_number}
+                          </span>
+                          <div className={styles.pathLine}>
+                            <div className={styles.airplane}>✈</div>
+                          </div>
+                        </div>
+
+                        <div className={styles.arrival}>
+                          <h3>
+                            {selectedBooking.flight.arrival_airport?.city}
+                          </h3>
+                          <p>{selectedBooking.flight.arrival_airport?.name}</p>
+                          <time>
+                            {new Date(
+                              selectedBooking.flight.arrival_time
+                            ).toLocaleTimeString()}
+                          </time>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className={styles.ticketDetails}>
+                      <div className={styles.detail}>
+                        <span>Họ tên</span>
+                        <strong>{selectedBooking.user.full_name}</strong>
+                      </div>
+                      <div className={styles.detail}>
+                        <span>Ngày bay</span>
+                        <strong>
+                          {new Date(
+                            selectedBooking.flight.departure_time
+                          ).toLocaleDateString()}
+                        </strong>
+                      </div>
+                      <div className={styles.detail}>
+                        <span>Ghế</span>
+                        <strong>{selectedBooking.seat?.seat_number}</strong>
+                      </div>
+                      <div className={styles.detail}>
+                        <span>Giá vé</span>
+                        <strong>
+                          {selectedBooking.price.toLocaleString()} VND
+                        </strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Thêm nút hủy vé vào modal */}
+                {selectedBooking.status === "booked" && (
                   <button
                     className={styles.cancelButton}
                     onClick={() =>
@@ -235,9 +297,9 @@ const ManageTicket = () => {
                     Hủy Vé
                   </button>
                 )}
-    </div>
-  </div>
-)}
+              </div>
+            </div>
+          )}
         </ul>
       ) : (
         <p>Bạn chưa có vé nào được đặt.</p>

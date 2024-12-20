@@ -429,6 +429,7 @@
     "jsonfile": "^6.1.0",
     "jsonpath": "^1.1.1",
     "jsonpointer": "^5.0.1",
+    "jspdf": "^2.5.2",
     "jsx-ast-utils": "^3.3.5",
     "keyv": "^4.5.4",
     "kind-of": "^6.0.3",
