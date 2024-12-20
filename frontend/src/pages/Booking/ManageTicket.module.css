@@ -14,6 +14,7 @@
   /* background: linear-gradient(45deg, #fff1eb 0%, #ace0f9 100%); */
   font-family: "Roboto", sans-serif;
   min-height: 100vh;
+  margin-bottom: 20px;
 }
 
 /* Page title styling */
@@ -77,9 +78,9 @@
 /* Đường kẻ ngăn cách giữa buttons và danh sách vé */
 .separator {
   height: 2px;
-  background-color: #99b2ca;
+  background-color: #37577790;
   margin: 20px auto;
-  max-width: 1000px;
+  max-width: 1100px;
 }
 
 /* Danh sách vé */
@@ -298,7 +299,7 @@
   margin: 0;
   font-size: 2.2rem;
   font-weight: bold;
-  color: #2c3e50;
+  color: #dedede;
   text-align: center;
   border-bottom: 2px solid #ececec;
   padding-bottom: 15px;
