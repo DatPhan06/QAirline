@@ -24,7 +24,10 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import styles from "./ViewBookings.module.css";
 
 const ViewBookings = () => {
-  const [stats, setStats] = useState(null);
+  const [stats, setStats] = useState({
+    totalBookings: 0,
+    totalRevenue: 0,
+  });
   const [bookings, setBookings] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
