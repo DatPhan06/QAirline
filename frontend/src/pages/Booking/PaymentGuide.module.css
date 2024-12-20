@@ -1,160 +1,196 @@
-/* Tổng thể container */
+/* PaymentGuide.module.css */
+
+/* CSS Variables for Consistent Styling */
+:root {
+  --primary-color: #0d5777;
+  --secondary-color: #0056b3;
+  --background-color: #ffffff;
+  --text-color: #0b203b;
+  --heading-color: #333;
+  --subtext-color: #555;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-dark: rgba(0, 0, 0, 0.15);
+  --transition-speed: 0.3s;
+  --font-family: 'Arial, sans-serif';
+}
+
+/* Container Styling */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f9f9f9;  /* Nền sáng, sạch sẽ */
-    transition: background-color 0.3s ease;
-    padding-top: 100px;
-  }
-  
-  /* Tiêu đề */
-  .title {
-    font-size: 3.5rem;
-    color: #333;  /* Màu đen đậm, dễ đọc */
-    margin-bottom: 40px;
-    font-weight: bold;
-    text-align: center;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
-  }
-  
-  .title:hover {
-    color: #0056b3; /* Đổi màu sang xanh dương đậm khi hover */
-  }
-  
-  /* Phần chứa nội dung chính */
-  .content {
-    display: flex;
-    width: 100%;
-    max-width: 1300px;
-    justify-content: space-between;
-    gap: 40px;
-    animation: fadeIn 1s ease-in-out;
-    margin-bottom: 40px;
-  }
-  
-  /* Phần nút bên trái */
-  .buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    width: 30%;
-    background-color: #ffffff;  /* Nền trắng */
-    padding: 35px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .buttons:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Nút bấm */
-  .button {
-    padding: 18px;
-    font-size: 1.3rem;
-    background-color: #0056b3;  /* Xanh dương đậm cho nút */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .button:hover {
-    background-color: #003f8a; /* Màu xanh đậm hơn khi hover */
-    transform: translateY(-5px);
-  }
-  
-  .button:active {
-    transform: translateY(2px);
-  }
-  
-  /* Phần frame bên phải (hiển thị nội dung chi tiết) */
-  .frame {
-    width: 65%;
-    padding: 35px;
-    background-color: #ffffff;  /* Nền trắng */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-height: 600px;
-    overflow-y: auto;
-  }
-  
-  .frame:hover {
-    transform: scale(1.02);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Các tiêu đề trong phần nội dung */
-  .frame h2 {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: bold;
-    position: relative;
-    padding-left: 25px;
-    border-left: 5px solid #0056b3;  /* Sử dụng màu xanh dương đậm làm điểm nhấn */
-  }
-  
-  /* Nội dung phần chi tiết */
-  .frame p {
-    font-size: 1.2rem;
-    color: #555;  /* Màu xám nhẹ */
-    line-height: 1.6;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  font-family: var(--font-family);
+}
+
+/* Title Styling */
+.title {
+  font-size: 2.5rem;
+  color: var(--text-color);
+  margin-bottom: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color var(--transition-speed) ease;
+}
+
+.title:hover {
+  color: var(--secondary-color);
+}
+
+/* Content Area */
+.content {
+  display: flex;
+  width: 100%;
+  max-width: 1300px;
+  justify-content: space-between;
+  gap: 2.5rem;
+  animation: fadeIn 1s ease-in-out;
+  margin-bottom: 2.5rem;
+}
+
+/* Buttons Section */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5625rem; /* 25px */
+  width: 30%;
+  background-color: var(--background-color);
+  padding: 2.1875rem; /* 35px */
+  border-radius: 0.75rem; /* 12px */
+  box-shadow: 0 10px 30px var(--shadow-light);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.buttons:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px var(--shadow-dark);
+}
+
+/* Button Styling */
+.button {
+  padding: 1.125rem; /* 18px */
+  font-size: 1rem;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  border-radius: 0.5rem; /* 8px */
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease, transform 0.2s ease, box-shadow var(--transition-speed) ease;
+  box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-0.3125rem); /* -5px */
+}
+
+.button:active {
+  transform: translateY(0.125rem); /* 2px */
+}
+
+/* Active Button Styling */
+.active {
+  background-color: var(--secondary-color);
+}
+
+/* Frame (Content Display Area) */
+.frame {
+  width: 65%;
+  padding: 2.1875rem; /* 35px */
+  background-color: var(--background-color);
+  box-shadow: 0 10px 30px var(--shadow-light);
+  border-radius: 0.75rem; /* 12px */
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.frame:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 40px var(--shadow-dark);
+}
+
+/* Headings in Content */
+.frame h2 {
+  font-size: 1.5rem;
+  color: var(--heading-color);
+  margin-bottom: 1.25rem; /* 20px */
+  font-weight: bold;
+  position: relative;
+  padding-left: 1.5625rem; /* 25px */
+  border-left: 0.3125rem solid var(--secondary-color); /* 5px */
+}
+
+/* Paragraphs in Content */
+.frame p {
+  font-size: 1rem;
+  color: var(--subtext-color);
+  line-height: 1.6;
+  margin-bottom: 1.25rem; /* 20px */
+  opacity: 0;
+  animation: fadeInContent 1s ease-in-out forwards;
+}
+
+/* Lists in Content */
+.frame ul {
+  list-style-type: square;
+  padding-left: 1.5625rem; /* 25px */
+  margin-bottom: 1.875rem; /* 30px */
+  animation: fadeInContent 1s ease-in-out forwards;
+}
+
+.frame li {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 0.75rem; /* 12px */
+  transition: color var(--transition-speed) ease, transform 0.2s ease;
+}
+
+.frame li:hover {
+  color: var(--secondary-color);
+  transform: translateX(0.625rem); /* 10px */
+  cursor: pointer;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
     opacity: 0;
-    animation: fadeInContent 1s ease-in-out forwards;
+    transform: translateY(1.25rem); /* 20px */
   }
-  
-  /* Danh sách các bước */
-  .frame ul {
-    list-style-type: square;
-    padding-left: 25px;
-    margin-bottom: 30px;
-    animation: fadeInContent 1s ease-in-out forwards;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .frame ul li {
-    font-size: 1.1rem;
-    color: #333;  /* Màu đen đậm cho văn bản */
-    margin-bottom: 12px;
-    transition: color 0.3s ease;
+}
+
+@keyframes fadeInContent {
+  to {
+    opacity: 1;
   }
-  
-  .frame ul li:hover {
-    color: #0056b3; /* Đổi màu thành xanh dương khi hover */
-    transform: translateX(10px);  /* Tạo hiệu ứng dịch chuyển khi hover */
-    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    gap: 2rem;
   }
-  
-  /* Hiệu ứng fade-in cho phần tử */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+
+  .buttons, .frame {
+    width: 100%;
   }
-  
-  /* Hiệu ứng fade-in cho các phần chi tiết */
-  @keyframes fadeInContent {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+
+  .title {
+    font-size: 2rem;
   }
-  
+
+  .frame h2 {
+    font-size: 1.5rem;
+  }
+}
