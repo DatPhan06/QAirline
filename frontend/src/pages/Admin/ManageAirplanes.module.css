@@ -47,6 +47,52 @@
   background-color: #2980b9;
 }
 
+/* Nút hướng dẫn */
+.guideButton {
+  background-color: transparent;
+  color: #3498db;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.guideButton:hover {
+  color: #2980b9;
+}
+
+/* Hướng dẫn */
+.guide {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.guide h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.guide p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.guide ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.guide li {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
 /* Danh sách máy bay */
 .listContainer {
   margin-top: 30px;
