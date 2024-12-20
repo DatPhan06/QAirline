@@ -16,7 +16,7 @@ const EditAirplane = () => {
   const [initialSeats, setInitialSeats] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
-  const [seatsPerPage] = useState(10); // Số ghế mỗi trang
+  const [seatsPerPage] = useState(7); // Số ghế mỗi trang
   const [searchTerm, setSearchTerm] = useState(""); // Từ khóa tìm kiếm
 
   useEffect(() => {

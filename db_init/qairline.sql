@@ -1,59 +1,60 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
+-- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th12 04, 2024 lúc 03:06 PM
--- Phiên bản máy phục vụ: 8.0.30
--- Phiên bản PHP: 8.1.10
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: 127.0.0.1    Database: qairline
+-- ------------------------------------------------------
+-- Server version	8.0.39
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Cơ sở dữ liệu: `qairline`
+-- Table structure for table `admins`
 --
 
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `admins`
---
-
+DROP TABLE IF EXISTS `admins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `admins` (
-  `admin_id` int NOT NULL,
+  `admin_id` int NOT NULL AUTO_INCREMENT,
   `role` varchar(50) NOT NULL,
   `permissions` varchar(50) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `username` varchar(50) NOT NULL,
-  `hashed_password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `hashed_password` varchar(255) NOT NULL,
+  PRIMARY KEY (`admin_id`),
+  UNIQUE KEY `username` (`username`),
+  KEY `ix_admins_admin_id` (`admin_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Đang đổ dữ liệu cho bảng `admins`
+-- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`admin_id`, `role`, `permissions`, `created_at`, `updated_at`, `username`, `hashed_password`) VALUES
-(1, 'Admin', 'Full', '2024-11-25 10:00:00', '2024-11-25 12:00:00', 'admin1', 'hashedpassword1'),
-(2, 'Editor', 'Limited', '2024-11-24 09:00:00', '2024-11-24 11:00:00', 'editor1', 'hashedpassword2'),
-(3, 'full', 'full', '2024-12-01 16:07:22', '2024-12-01 16:07:22', '1234', '$2b$12$khBjm6fqVGXAfTLt08dt8OiUM5zR7yoOeBWWP/Q6tXJDTmwl5Axyu');
-
--- --------------------------------------------------------
+LOCK TABLES `admins` WRITE;
+/*!40000 ALTER TABLE `admins` DISABLE KEYS */;
+INSERT INTO `admins` VALUES (1,'Admin','Full','2024-11-25 10:00:00','2024-12-18 08:40:19','admin1','$2b$12$ZEcGYIuSAYn45IUk5HN5pOTC6HP2hnd2U4bAM9PNCDStnDOy06.pe'),(2,'Editor','Limited','2024-11-24 09:00:00','2024-11-24 11:00:00','editor1','hashedpassword2'),(3,'string','string','2024-12-04 13:28:18','2024-12-04 13:28:18','string','$2b$12$J5zUFfcs9tx1Cd90ud3uweRCFycY3FxeoCCzzf4L48fudjWXYs2nS'),(4,'Admin','Full','2024-12-04 13:28:18','2024-12-18 09:03:04','admin','$2b$12$T.IQtyJ7muyCARVmk7mTWuKeD/cyTltC2jtIJWPim385hwphLu6ky');
+/*!40000 ALTER TABLE `admins` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Cấu trúc bảng cho bảng `airplanes`
+-- Table structure for table `airplanes`
 --
 
+DROP TABLE IF EXISTS `airplanes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `airplanes` (
-  `airplane_id` int NOT NULL,
+  `airplane_id` int NOT NULL AUTO_INCREMENT,
   `model` varchar(100) NOT NULL,
   `manufacturer` varchar(100) NOT NULL,
   `seat_capacity` int NOT NULL,
@@ -62,69 +63,93 @@ CREATE TABLE `airplanes` (
   `maintenance_status` varchar(50) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`airplane_id`),
+  KEY `ix_airplanes_airplane_id` (`airplane_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Đang đổ dữ liệu cho bảng `airplanes`
+-- Dumping data for table `airplanes`
 --
 
-INSERT INTO `airplanes` (`airplane_id`, `model`, `manufacturer`, `seat_capacity`, `range_km`, `year_of_manufacture`, `maintenance_status`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Boeing 737', 'Boeing', 150, 6000, 2015, 'Good', 'Active', '2024-11-25 10:30:00', '2024-11-25 10:45:00'),
-(2, 'Airbus A320', 'Airbus', 180, 5700, 2018, 'Excellent', 'Active', '2024-11-25 10:35:00', '2024-11-25 10:50:00'),
-(3, '123', '123', 123, 123, 123, '123', '1', '2024-12-02 06:37:37', '2024-12-02 06:37:37'),
-(4, '123', '123', 123, 123, 123, '123', '1', '2024-12-02 19:13:45', '2024-12-02 19:13:45');
-
--- --------------------------------------------------------
+LOCK TABLES `airplanes` WRITE;
+/*!40000 ALTER TABLE `airplanes` DISABLE KEYS */;
+INSERT INTO `airplanes` VALUES (1,'Boeing 736','Boeing',150,6000,2015,'Good','Active','2024-11-25 10:30:00','2024-12-18 07:05:40'),(2,'Airbus A320','Airbus',180,5700,2018,'Excellent','Active','2024-11-25 10:35:00','2024-11-25 10:50:00'),(3,'123','123',123,123,123,'123','123','2024-12-18 07:05:40','2024-12-18 07:05:40'),(4,'ABC','test',120,1200,2024,'good','active','2024-12-18 07:05:40','2024-12-18 07:05:40'),(5,'ABC1','test',120,1200,2024,'good','active','2024-12-18 07:30:49','2024-12-18 07:30:49'),(6,'123','123',123,123,123,'123','123','2024-12-20 07:55:49','2024-12-20 07:55:49'),(7,'123','123',123,123,123,'123','123','2024-12-20 07:55:49','2024-12-20 07:55:49'),(8,'123','123',123,123,123,'123','123','2024-12-20 07:55:49','2024-12-20 07:55:49'),(9,'123','123',123,123,123,'123','123','2024-12-20 07:55:49','2024-12-20 07:55:49'),(10,'123','123',123,123,123,'123','123','2024-12-20 07:55:49','2024-12-20 07:55:49'),(11,'123','123',123,123,123,'123','123','2024-12-20 07:55:49','2024-12-20 07:55:49');
+/*!40000 ALTER TABLE `airplanes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Cấu trúc bảng cho bảng `airports`
+-- Table structure for table `airports`
 --
 
+DROP TABLE IF EXISTS `airports`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `airports` (
-  `airport_id` int NOT NULL,
+  `airport_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `city` varchar(100) NOT NULL,
   `country` varchar(100) NOT NULL,
   `iata_code` varchar(3) NOT NULL,
   `icao_code` varchar(4) NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `updated_at` datetime DEFAULT NULL,
+  `general_info` varchar(1000) DEFAULT NULL,
+  `check_in_counters` varchar(500) DEFAULT NULL,
+  `shopping_services` varchar(500) DEFAULT NULL,
+  `lounge_services` varchar(500) DEFAULT NULL,
+  `food_services` varchar(500) DEFAULT NULL,
+  `currency_exchange` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`airport_id`),
+  UNIQUE KEY `iata_code` (`iata_code`),
+  UNIQUE KEY `icao_code` (`icao_code`),
+  KEY `ix_airports_airport_id` (`airport_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Đang đổ dữ liệu cho bảng `airports`
+-- Dumping data for table `airports`
 --
 
-INSERT INTO `airports` (`airport_id`, `name`, `city`, `country`, `iata_code`, `icao_code`, `created_at`, `updated_at`) VALUES
-(1, 'Noi Bai International Airport', 'Hanoi', 'Vietnam', 'HAN', 'VVNB', '2024-11-25 10:40:00', '2024-11-25 10:50:00'),
-(2, 'Tan Son Nhat International Airport', 'Ho Chi Minh City', 'Vietnam', 'SGN', 'VVTS', '2024-11-25 10:45:00', '2024-11-25 10:55:00');
-
--- --------------------------------------------------------
+LOCK TABLES `airports` WRITE;
+/*!40000 ALTER TABLE `airports` DISABLE KEYS */;
+INSERT INTO `airports` VALUES (1,'Noi Bai International Airport','Hanoi','Vietnam','HAN','VVNB','2024-11-25 10:40:00','2024-11-25 10:50:00',NULL,NULL,NULL,NULL,NULL,NULL),(2,'Tan Son Nhat International Airport','Ho Chi Minh City','Vietnam','SGN','VVTS','2024-11-25 10:45:00','2024-11-25 10:55:00',NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `airports` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Cấu trúc bảng cho bảng `alembic_version`
+-- Table structure for table `alembic_version`
 --
 
+DROP TABLE IF EXISTS `alembic_version`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `alembic_version` (
-  `version_num` varchar(32) NOT NULL
+  `version_num` varchar(32) NOT NULL,
+  PRIMARY KEY (`version_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Đang đổ dữ liệu cho bảng `alembic_version`
+-- Dumping data for table `alembic_version`
 --
 
-INSERT INTO `alembic_version` (`version_num`) VALUES
-('97ad43fcabbc');
-
--- --------------------------------------------------------
+LOCK TABLES `alembic_version` WRITE;
+/*!40000 ALTER TABLE `alembic_version` DISABLE KEYS */;
+INSERT INTO `alembic_version` VALUES ('242293e35a8e');
+/*!40000 ALTER TABLE `alembic_version` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Cấu trúc bảng cho bảng `booked_tickets`
+-- Table structure for table `booked_tickets`
 --
 
+DROP TABLE IF EXISTS `booked_tickets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `booked_tickets` (
-  `booked_ticket_id` int NOT NULL,
+  `booked_ticket_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `flight_id` int NOT NULL,
   `seat_id` int NOT NULL,
@@ -133,26 +158,67 @@ CREATE TABLE `booked_tickets` (
   `booking_time` datetime DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`booked_ticket_id`),
+  KEY `flight_id` (`flight_id`),
+  KEY `seat_id` (`seat_id`),
+  KEY `ticket_id` (`ticket_id`),
+  KEY `user_id` (`user_id`),
+  KEY `ix_booked_tickets_booked_ticket_id` (`booked_ticket_id`),
+  CONSTRAINT `booked_tickets_ibfk_1` FOREIGN KEY (`flight_id`) REFERENCES `flights` (`flight_id`),
+  CONSTRAINT `booked_tickets_ibfk_2` FOREIGN KEY (`seat_id`) REFERENCES `seats` (`seat_id`),
+  CONSTRAINT `booked_tickets_ibfk_3` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`ticket_id`),
+  CONSTRAINT `booked_tickets_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Đang đổ dữ liệu cho bảng `booked_tickets`
+-- Dumping data for table `booked_tickets`
 --
 
-INSERT INTO `booked_tickets` (`booked_ticket_id`, `user_id`, `flight_id`, `seat_id`, `ticket_id`, `price`, `booking_time`, `status`, `created_at`, `updated_at`) VALUES
-(1, 7, 1, 1, 1, 100.00, '2024-11-25 12:00:00', 'Booked', '2024-11-25 12:10:00', '2024-11-25 12:15:00'),
-(3, 1, 1, 1, 1, 12345.00, '2024-12-25 17:24:16', 'Booked', '2024-12-25 17:24:16', '2024-12-26 17:25:08'),
-(8, 1, 11, 1, 1, 1234.00, '2024-12-25 17:25:29', 'Booked', '2024-12-26 17:25:29', '2024-12-26 17:25:29');
-
--- --------------------------------------------------------
+LOCK TABLES `booked_tickets` WRITE;
+/*!40000 ALTER TABLE `booked_tickets` DISABLE KEYS */;
+INSERT INTO `booked_tickets` VALUES (19,1,1,1,1,100.00,'2024-12-17 18:08:58','canceled','2024-12-17 17:55:03','2024-12-17 18:33:38'),(20,1,1,5,3,100.00,'2024-12-17 18:16:36','canceled','2024-12-17 17:55:03','2024-12-17 18:33:21'),(21,1,1,3,4,100.00,'2024-12-17 18:20:41','booked','2024-12-17 17:55:03','2024-12-17 17:55:03'),(22,1,1,4,5,100.00,'2024-12-17 18:32:44','booked','2024-12-17 18:30:19','2024-12-17 18:30:19'),(23,1,1,1,1,100.00,'2024-12-17 18:33:53','booked','2024-12-17 18:30:19','2024-12-17 18:30:19'),(24,1,29,3,8,120000.00,'2024-12-17 19:47:27','booked','2024-12-17 19:33:58','2024-12-17 19:33:58'),(25,1,1,5,3,100.00,'2024-12-28 07:08:35','booked','2024-12-27 07:05:40','2024-12-18 07:05:40'),(26,1,32,126,137,240000.00,'2024-12-28 07:35:19','booked','2024-12-18 07:30:49','2024-12-18 07:30:49'),(27,1,35,128,387,240000.00,'2024-12-27 12:41:10','canceled','2024-12-18 12:27:10','2024-12-18 16:04:32'),(28,1,35,130,388,240000.00,'2024-12-18 12:41:40','booked','2024-12-18 12:27:10','2024-12-18 12:27:10'),(29,1,35,131,389,240000.00,'2024-12-18 12:44:47','booked','2024-12-18 12:27:10','2024-12-18 12:27:10'),(30,1,1,1,1,100.00,'2024-12-17 18:08:58','canceled','2024-12-17 17:55:03','2024-12-17 18:33:38'),(31,1,1,5,3,100.00,'2024-12-17 18:16:36','canceled','2024-12-17 17:55:03','2024-12-17 18:33:21'),(32,1,1,3,4,100.00,'2024-11-17 18:20:41','booked','2024-12-17 17:55:03','2024-12-17 17:55:03'),(33,1,1,4,5,100.00,'2024-11-17 18:32:44','booked','2024-12-17 18:30:19','2024-12-17 18:30:19'),(34,1,1,1,1,100.00,'2024-10-17 18:33:53','booked','2024-12-17 18:30:19','2024-12-17 18:30:19'),(35,1,29,3,8,120000.00,'2024-09-17 19:47:27','booked','2024-12-17 19:33:58','2024-12-17 19:33:58'),(36,1,1,5,3,100.00,'2024-08-18 07:08:35','booked','2024-12-18 07:05:40','2024-12-18 07:05:40'),(37,1,32,126,137,240000.00,'2024-07-18 07:35:19','booked','2024-12-18 07:30:49','2024-12-18 07:30:49'),(38,1,35,128,387,240000.00,'2024-06-18 12:41:10','booked','2024-12-18 12:27:10','2024-12-18 12:27:10'),(39,1,35,130,388,240000.00,'2024-05-18 12:41:40','booked','2024-12-18 12:27:10','2024-12-18 12:27:10'),(40,1,35,131,389,240000.00,'2024-04-18 12:44:47','booked','2024-12-18 12:27:10','2024-12-18 12:27:10'),(41,1,35,132,390,240000.00,'2024-12-18 15:45:03','booked','2024-12-18 15:29:59','2024-12-18 15:29:59');
+/*!40000 ALTER TABLE `booked_tickets` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Cấu trúc bảng cho bảng `flights`
+-- Table structure for table `flight_logs`
 --
 
-CREATE TABLE `flights` (
+DROP TABLE IF EXISTS `flight_logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `flight_logs` (
+  `log_id` int NOT NULL AUTO_INCREMENT,
   `flight_id` int NOT NULL,
+  `log_message` text NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`log_id`),
+  KEY `flight_id` (`flight_id`),
+  KEY `ix_flight_logs_log_id` (`log_id`),
+  CONSTRAINT `flight_logs_ibfk_1` FOREIGN KEY (`flight_id`) REFERENCES `flights` (`flight_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `flight_logs`
+--
+
+LOCK TABLES `flight_logs` WRITE;
+/*!40000 ALTER TABLE `flight_logs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `flight_logs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `flights`
+--
+
+DROP TABLE IF EXISTS `flights`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `flights` (
+  `flight_id` int NOT NULL AUTO_INCREMENT,
   `airplane_id` int NOT NULL,
   `flight_number` varchar(20) NOT NULL,
   `departure_time` datetime NOT NULL,
@@ -164,474 +230,297 @@ CREATE TABLE `flights` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `departure_airport_id` int NOT NULL,
-  `arrival_airport_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `arrival_airport_id` int NOT NULL,
+  PRIMARY KEY (`flight_id`),
+  UNIQUE KEY `flight_number` (`flight_number`),
+  KEY `airplane_id` (`airplane_id`),
+  KEY `ix_flights_flight_id` (`flight_id`),
+  KEY `arrival_airport_id` (`arrival_airport_id`),
+  KEY `departure_airport_id` (`departure_airport_id`),
+  CONSTRAINT `flights_ibfk_1` FOREIGN KEY (`airplane_id`) REFERENCES `airplanes` (`airplane_id`),
+  CONSTRAINT `flights_ibfk_2` FOREIGN KEY (`arrival_airport_id`) REFERENCES `airports` (`airport_id`),
+  CONSTRAINT `flights_ibfk_3` FOREIGN KEY (`departure_airport_id`) REFERENCES `airports` (`airport_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Đang đổ dữ liệu cho bảng `flights`
+-- Dumping data for table `flights`
 --
 
-INSERT INTO `flights` (`flight_id`, `airplane_id`, `flight_number`, `departure_time`, `arrival_time`, `flight_duration`, `status`, `available_seats`, `price`, `created_at`, `updated_at`, `departure_airport_id`, `arrival_airport_id`) VALUES
-(1, 1, 'VN123', '2024-12-01 08:40:00', '2024-12-01 10:00:00', '02:00:00', 'Scheduled', 140, 100.00, '2024-11-25 10:50:00', '2024-12-02 19:13:45', 1, 2),
-(2, 2, 'VN456', '2024-12-01 14:00:00', '2024-12-01 16:30:00', '02:30:00', 'Scheduled', 160, 120.00, '2024-11-25 11:00:00', '2024-11-25 11:05:00', 2, 1),
-(4, 1, 'aloalo', '2024-11-27 16:44:59', '2024-11-27 16:44:59', '16:44:59', 'scheduled', 0, 100.00, '2024-11-27 16:44:17', '2024-11-27 16:44:17', 1, 2),
-(11, 1, 'string', '2024-11-27 16:57:43', '2024-11-27 16:57:43', '16:57:43', 'scheduled', 0, 0.00, '2024-11-27 16:57:10', '2024-11-27 16:57:10', 1, 2),
-(12, 1, '123', '2024-12-02 01:05:00', '2024-12-03 01:05:00', '12:23:23', '1', 120, 12.00, '2024-12-01 17:42:06', '2024-12-01 17:42:06', 1, 2),
-(15, 1, '12', '2024-12-03 06:00:00', '2024-12-03 18:31:00', '12:23:23', 'hehe', 123, 123.00, '2024-12-03 09:30:21', '2024-12-03 09:30:21', 1, 1),
-(19, 1, '120', '2024-12-03 06:00:00', '2024-12-03 18:31:00', '12:23:23', 'hehe', 123, 123.00, '2024-12-03 09:30:21', '2024-12-03 09:30:21', 1, 1);
-
--- --------------------------------------------------------
+LOCK TABLES `flights` WRITE;
+/*!40000 ALTER TABLE `flights` DISABLE KEYS */;
+INSERT INTO `flights` VALUES (1,1,'VN123','2024-12-12 09:00:00','2024-12-01 10:00:00','02:00:00','Scheduled',140,100.00,'2024-11-25 10:50:00','2024-12-17 18:38:59',1,2),(2,2,'VN456','2024-12-01 14:00:00','2024-12-01 16:30:00','02:30:00','Scheduled',160,120.00,'2024-11-25 11:00:00','2024-11-25 11:05:00',2,1),(3,1,'123','2024-12-25 20:49:00','2024-12-25 22:49:00','02:06:07','123',123,123.00,'2024-12-04 13:44:18','2024-12-04 13:44:18',1,2),(4,1,'12312','2024-12-25 01:11:00','2024-12-06 01:11:00','02:06:07','123',123,123.00,'2024-12-04 18:05:00','2024-12-04 18:05:00',1,2),(5,1,'1231','2024-12-25 01:11:00','2024-12-06 01:11:00','02:06:07','123',123,123.00,'2024-12-04 18:05:00','2024-12-04 18:05:00',1,2),(6,1,'12','2024-12-25 01:11:00','2024-12-06 01:11:00','02:06:07','123',123,123.00,'2024-12-04 18:05:00','2024-12-04 18:05:00',1,2),(7,1,'121','2024-12-25 01:11:00','2024-12-06 01:11:00','02:06:07','123',123,123.00,'2024-12-04 18:05:00','2024-12-04 18:05:00',1,2),(9,1,'hehe','2024-12-05 01:16:00','2024-12-05 01:30:00','02:06:07','123',123,123.00,'2024-12-04 18:05:00','2024-12-04 18:05:00',1,2),(10,1,'dat','2024-12-05 02:34:00','2024-12-05 02:34:00','02:06:07','123',123,123.00,'2024-12-04 19:22:23','2024-12-04 19:22:23',1,2),(17,1,'123he','2024-12-10 18:13:00','2024-12-11 18:13:00','02:06:07','123',123,123.00,'2024-12-10 11:03:53','2024-12-10 11:03:53',1,2),(18,1,'123hehe','2024-12-10 18:13:00','2024-12-11 18:13:00','02:06:07','123',123,123.00,'2024-12-10 11:03:53','2024-12-10 11:03:53',1,2),(19,1,'123heh','2024-12-10 18:13:00','2024-12-11 18:13:00','02:06:07','123',123,123.00,'2024-12-10 11:03:53','2024-12-10 11:03:53',1,2),(20,1,'123h','2024-12-10 18:13:00','2024-12-11 18:13:00','02:06:07','123',123,123.00,'2024-12-10 11:03:53','2024-12-10 11:03:53',1,2),(21,1,'UET123','2024-12-18 02:34:00','2024-12-19 02:34:00','02:06:07','runq',100,120000.00,'2024-12-17 19:33:58','2024-12-17 19:33:58',1,2),(27,1,'UET1234','2024-12-18 02:38:00','2024-12-19 02:38:00','02:06:07','runq',100,120000.00,'2024-12-17 19:33:58','2024-12-17 19:33:58',1,2),(29,1,'UET1','2024-12-18 02:38:00','2024-12-19 02:38:00','02:06:07','runq',100,120000.00,'2024-12-17 19:33:58','2024-12-17 19:33:58',1,2),(30,5,'UETVJP','2024-12-20 14:33:00','2024-12-21 14:33:00','02:06:07','run',100,120000.00,'2024-12-18 07:30:49','2024-12-18 07:30:49',1,1),(32,5,'UETVJPPRO','2024-12-20 14:34:00','2024-12-21 14:34:00','02:06:07','run',100,120000.00,'2024-12-18 07:30:49','2024-12-18 07:30:49',1,2),(33,5,'UETVJP1','2024-12-18 15:19:00','2024-12-19 15:19:00','02:06:07','run',100,120000.00,'2024-12-18 07:30:49','2024-12-18 07:30:49',1,2),(35,5,'UETVJP2','2025-01-01 19:39:00','2025-01-01 20:39:00','02:06:07','run',100,120000.00,'2024-12-18 12:27:10','2024-12-18 12:27:10',1,2);
+/*!40000 ALTER TABLE `flights` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Cấu trúc bảng cho bảng `flight_logs`
+-- Table structure for table `general_info`
 --
 
-CREATE TABLE `flight_logs` (
-  `log_id` int NOT NULL,
-  `flight_id` int NOT NULL,
-  `log_message` text NOT NULL,
-  `created_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `general_info`
---
-
+DROP TABLE IF EXISTS `general_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `general_info` (
-  `info_id` int NOT NULL,
+  `info_id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `content` text NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`info_id`),
+  KEY `ix_general_info_info_id` (`info_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `general_info`
+--
+
+LOCK TABLES `general_info` WRITE;
+/*!40000 ALTER TABLE `general_info` DISABLE KEYS */;
+INSERT INTO `general_info` VALUES (1,'hehe','test1','2024-11-07 21:35:28','2024-12-20 07:55:49'),(2,'22222','333333','2024-11-21 21:35:46','2024-12-10 11:03:53');
+/*!40000 ALTER TABLE `general_info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `locations`
+--
+
+DROP TABLE IF EXISTS `locations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `locations` (
+  `location_id` int DEFAULT NULL,
+  `city` varchar(100) NOT NULL,
+  `country` varchar(100) DEFAULT NULL,
+  `screen` varchar(255) DEFAULT NULL,
+  `food` varchar(255) DEFAULT NULL,
+  `activity` varchar(255) DEFAULT NULL,
+  `experience` varchar(255) DEFAULT NULL,
+  `airport_id` int DEFAULT NULL,
+  PRIMARY KEY (`city`),
+  UNIQUE KEY `location_id` (`location_id`),
+  KEY `airport_id` (`airport_id`),
+  CONSTRAINT `locations_ibfk_1` FOREIGN KEY (`airport_id`) REFERENCES `airports` (`airport_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Đang đổ dữ liệu cho bảng `general_info`
+-- Dumping data for table `locations`
 --
 
-INSERT INTO `general_info` (`info_id`, `title`, `content`, `created_at`, `updated_at`) VALUES
-(1, 'hehe', 'test', '2024-11-07 21:35:28', '2024-11-13 21:35:28'),
-(2, '22222', '222222', '2024-11-21 21:35:46', '2024-11-22 21:35:46'),
-(3, 'hehe', 'hehehehehe', '2024-12-02 10:19:41', '2024-12-02 10:19:41'),
-(4, 'hehe', 'hehe', '2024-12-02 10:19:41', '2024-12-02 10:19:41'),
-(5, 'hehe', 'hehe', '2024-12-02 11:31:58', '2024-12-02 11:31:58');
-
--- --------------------------------------------------------
+LOCK TABLES `locations` WRITE;
+/*!40000 ALTER TABLE `locations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `locations` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Cấu trúc bảng cho bảng `news`
+-- Table structure for table `news`
 --
 
+DROP TABLE IF EXISTS `news`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `news` (
-  `news_id` int NOT NULL,
+  `news_id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `content` text NOT NULL,
   `author_id` int NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`news_id`),
+  KEY `author_id` (`author_id`),
+  KEY `ix_news_news_id` (`news_id`),
+  CONSTRAINT `news_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `admins` (`admin_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Đang đổ dữ liệu cho bảng `news`
+-- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`news_id`, `title`, `content`, `author_id`, `created_at`, `updated_at`) VALUES
-(1, 'string', 'string', 1, '2024-12-02 11:31:58', '2024-12-02 11:31:58'),
-(2, '123', '123\n', 3, '2024-12-02 11:31:58', '2024-12-02 11:31:58'),
-(3, 'hehe', 'hehehe', 3, '2024-12-02 11:31:58', '2024-12-02 11:31:58'),
-(4, 'hehe', 'hehe', 3, '2024-12-02 11:31:58', '2024-12-02 11:31:58');
-
--- --------------------------------------------------------
+LOCK TABLES `news` WRITE;
+/*!40000 ALTER TABLE `news` DISABLE KEYS */;
+INSERT INTO `news` VALUES (1,'123','123',4,'2024-12-10 11:03:53','2024-12-10 11:03:53');
+/*!40000 ALTER TABLE `news` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Cấu trúc bảng cho bảng `notifications`
+-- Table structure for table `notifications`
 --
 
+DROP TABLE IF EXISTS `notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `notifications` (
-  `notification_id` int NOT NULL,
+  `notification_id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `content` text NOT NULL,
   `type` varchar(50) NOT NULL,
   `user_id` int DEFAULT NULL,
   `flight_id` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`notification_id`),
+  KEY `flight_id` (`flight_id`),
+  KEY `user_id` (`user_id`),
+  KEY `ix_notifications_notification_id` (`notification_id`),
+  CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`flight_id`) REFERENCES `flights` (`flight_id`),
+  CONSTRAINT `notifications_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Đang đổ dữ liệu cho bảng `notifications`
+-- Dumping data for table `notifications`
 --
 
-INSERT INTO `notifications` (`notification_id`, `title`, `content`, `type`, `user_id`, `flight_id`, `created_at`, `updated_at`) VALUES
-(1, 'hehe', 'hehe', 'hehe', 1, 1, '2024-12-02 11:31:58', '2024-12-02 11:31:58');
-
--- --------------------------------------------------------
+LOCK TABLES `notifications` WRITE;
+/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+INSERT INTO `notifications` VALUES (1,'hehe','klajljkf','laksjefd',1,1,'2024-12-10 11:03:53','2024-12-10 11:03:53'),(2,'hehe','123','123',1,1,'2024-12-10 11:03:53','2024-12-10 11:03:53');
+/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Cấu trúc bảng cho bảng `promotions`
+-- Table structure for table `promotions`
 --
 
+DROP TABLE IF EXISTS `promotions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `promotions` (
-  `promotion_id` int NOT NULL,
+  `promotion_id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `description` text NOT NULL,
   `discount_percentage` float NOT NULL,
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`promotion_id`),
+  KEY `ix_promotions_promotion_id` (`promotion_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Đang đổ dữ liệu cho bảng `promotions`
+-- Dumping data for table `promotions`
 --
 
-INSERT INTO `promotions` (`promotion_id`, `title`, `description`, `discount_percentage`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
-(1, 'hehe', 'hehe', 12, '2024-12-12 00:00:00', '2024-12-24 00:00:00', '2024-12-02 11:31:58', '2024-12-02 11:31:58');
-
--- --------------------------------------------------------
+LOCK TABLES `promotions` WRITE;
+/*!40000 ALTER TABLE `promotions` DISABLE KEYS */;
+INSERT INTO `promotions` VALUES (1,'hehe','123',12,'2024-12-04 00:00:00','2024-12-05 00:00:00','2024-12-04 15:03:09','2024-12-04 15:03:09'),(2,'hehe2','123',12,'2024-12-31 00:00:00','2024-12-19 00:00:00','2024-12-04 15:03:09','2024-12-04 15:03:09');
+/*!40000 ALTER TABLE `promotions` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Cấu trúc bảng cho bảng `seats`
+-- Table structure for table `seats`
 --
 
+DROP TABLE IF EXISTS `seats`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `seats` (
-  `seat_id` int NOT NULL,
+  `seat_id` int NOT NULL AUTO_INCREMENT,
   `airplane_id` int NOT NULL,
   `seat_number` varchar(10) NOT NULL,
   `seat_class` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`seat_id`),
+  KEY `airplane_id` (`airplane_id`),
+  KEY `ix_seats_seat_id` (`seat_id`),
+  CONSTRAINT `seats_ibfk_1` FOREIGN KEY (`airplane_id`) REFERENCES `airplanes` (`airplane_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1008 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Đang đổ dữ liệu cho bảng `seats`
+-- Dumping data for table `seats`
 --
 
-INSERT INTO `seats` (`seat_id`, `airplane_id`, `seat_number`, `seat_class`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'string', 'string', 'string', '2024-11-25 11:15:00', '2024-11-29 15:49:37'),
-(2, 2, '1B', 'Business', 'Available', '2024-11-25 11:25:00', '2024-11-25 11:30:00'),
-(3, 1, 'ALC123', 'hehe', 'available', '2024-11-29 15:49:37', '2024-11-29 15:49:37');
-
--- --------------------------------------------------------
+LOCK TABLES `seats` WRITE;
+/*!40000 ALTER TABLE `seats` DISABLE KEYS */;
+INSERT INTO `seats` VALUES (1,1,'1A','Economy','available','2024-11-25 11:15:00','2024-12-18 07:30:49'),(2,2,'1B','Business','Available','2024-11-25 11:25:00','2024-11-25 11:30:00'),(3,1,'1C','Bthg','unavailable','2024-11-25 11:15:00','2024-12-18 07:30:49'),(4,1,'2A','Economy','Available','2024-11-25 11:15:00','2024-11-25 11:20:00'),(5,1,'2B','Economy','Available','2024-11-25 11:15:00','2024-11-25 11:20:00'),(6,4,'A1','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(7,4,'A10','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(8,4,'A11','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(9,4,'A12','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(10,4,'A14','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(11,4,'A2','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(12,4,'A13','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(13,4,'A15','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(14,4,'A3','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(15,4,'A16','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(16,4,'A17','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(17,4,'A18','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(18,4,'A19','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(19,4,'A20','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(20,4,'A21','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(21,4,'A22','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(22,4,'A4','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(23,4,'A23','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(24,4,'A24','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(25,4,'A25','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(26,4,'A26','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(27,4,'A27','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(28,4,'A28','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(29,4,'A29','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(30,4,'A30','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(31,4,'A32','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(32,4,'A31','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(33,4,'A33','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(34,4,'A34','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(35,4,'A35','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(36,4,'A38','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(37,4,'A37','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(38,4,'A36','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(39,4,'A39','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(40,4,'A41','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(41,4,'A40','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(42,4,'A42','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(43,4,'A43','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(44,4,'A44','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(45,4,'A45','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(46,4,'A46','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(47,4,'A47','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(48,4,'A48','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(49,4,'A6','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(50,4,'A49','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(51,4,'A5','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(52,4,'A50','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(53,4,'A51','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(54,4,'A52','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(55,4,'A53','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(56,4,'A7','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(57,4,'A55','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(58,4,'A54','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(59,4,'A57','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(60,4,'A56','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(61,4,'A58','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(62,4,'A59','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(63,4,'A60','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(64,4,'A62','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(65,4,'A61','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(66,4,'A63','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(67,4,'A65','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(68,4,'A64','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(69,4,'A66','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(70,4,'A67','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(71,4,'A68','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(72,4,'A69','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(73,4,'A70','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(74,4,'A71','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(75,4,'A72','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(76,4,'A73','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(77,4,'A74','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(78,4,'A76','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(79,4,'A75','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(80,4,'A77','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(81,4,'A78','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(82,4,'A79','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(83,4,'A83','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(84,4,'A80','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(85,4,'A82','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(86,4,'A81','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(87,4,'A85','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(88,4,'A84','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(89,4,'A86','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(90,4,'A87','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(91,4,'A88','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(92,4,'A89','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(93,4,'A90','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(94,4,'A91','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(95,4,'A8','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(96,4,'A92','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(97,4,'A93','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(98,4,'A94','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(99,4,'A95','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(100,4,'A9','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(101,4,'A96','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(102,4,'A98','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(103,4,'A97','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(104,4,'A99','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(105,4,'A102','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(106,4,'A100','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(107,4,'A101','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(108,4,'A103','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(109,4,'A104','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(110,4,'A105','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(111,4,'A106','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(112,4,'A107','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(113,4,'A108','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(114,4,'A109','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(115,4,'A110','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(116,4,'A114','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(117,4,'A111','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(118,4,'A113','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(119,4,'A112','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(120,4,'A115','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(121,4,'A116','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(122,4,'A117','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(123,4,'A119','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(124,4,'A118','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(125,4,'A120','Economy','available','2024-12-18 07:05:40','2024-12-18 07:05:40'),(126,5,'A1','Business','available','2024-12-18 07:30:49','2024-12-18 15:29:59'),(127,5,'B1','Business','unavailable','2024-12-18 07:30:49','2024-12-18 07:30:49'),(128,5,'C1','Business','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(129,5,'D1','Business','unavailable','2024-12-18 07:30:49','2024-12-18 07:30:49'),(130,5,'E1','Business','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(131,5,'F1','Business','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(132,5,'G1','Business','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(133,5,'A2','Business','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(134,5,'B2','Business','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(135,5,'C2','Business','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(136,5,'D2','Business','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(137,5,'E2','Business','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(138,5,'F2','Business','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(139,5,'G2','Business','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(140,5,'A3','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(141,5,'B3','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(142,5,'C3','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(143,5,'D3','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(144,5,'E3','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(145,5,'F3','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(146,5,'G3','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(147,5,'A4','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(148,5,'B4','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(149,5,'C4','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(150,5,'D4','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(151,5,'E4','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(152,5,'F4','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(153,5,'G4','Premium Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(154,5,'A5','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(155,5,'B5','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(156,5,'C5','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(157,5,'D5','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(158,5,'E5','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(159,5,'F5','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(160,5,'G5','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(161,5,'A6','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(162,5,'B6','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(163,5,'C6','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(164,5,'D6','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(165,5,'E6','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(166,5,'F6','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(167,5,'G6','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(168,5,'A7','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(169,5,'B7','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(170,5,'C7','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(171,5,'D7','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(172,5,'E7','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(173,5,'F7','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(174,5,'G7','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(175,5,'A8','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(176,5,'B8','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(177,5,'C8','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(178,5,'D8','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(179,5,'E8','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(180,5,'F8','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(181,5,'G8','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(182,5,'A9','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(183,5,'B9','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(184,5,'C9','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(185,5,'D9','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(186,5,'E9','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(187,5,'F9','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(188,5,'G9','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(189,5,'A10','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(190,5,'B10','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(191,5,'C10','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(192,5,'D10','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(193,5,'E10','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(194,5,'F10','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(195,5,'G10','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(196,5,'A11','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(197,5,'B11','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(198,5,'C11','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(199,5,'D11','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(200,5,'E11','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(201,5,'F11','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(202,5,'G11','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(203,5,'A12','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(204,5,'B12','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(205,5,'C12','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(206,5,'D12','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(207,5,'E12','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(208,5,'F12','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(209,5,'G12','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(210,5,'A13','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(211,5,'B13','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(212,5,'C13','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(213,5,'D13','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(214,5,'E13','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(215,5,'F13','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(216,5,'G13','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(217,5,'A14','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(218,5,'B14','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(219,5,'C14','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(220,5,'D14','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(221,5,'E14','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(222,5,'F14','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(223,5,'G14','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(224,5,'A15','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(225,5,'B15','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(226,5,'C15','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(227,5,'D15','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(228,5,'E15','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(229,5,'F15','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(230,5,'G15','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(231,5,'A16','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(232,5,'B16','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(233,5,'C16','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(234,5,'D16','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(235,5,'E16','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(236,5,'F16','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(237,5,'G16','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(238,5,'A17','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(239,5,'B17','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(240,5,'C17','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(241,5,'D17','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(242,5,'E17','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(243,5,'F17','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(244,5,'G17','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(245,5,'A18','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(246,5,'B18','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(247,5,'C18','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(248,5,'D18','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(249,5,'E18','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(250,5,'F18','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(251,5,'G18','Economy','available','2024-12-18 07:30:49','2024-12-18 07:30:49'),(252,6,'A1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(253,6,'B1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(254,6,'C1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(255,6,'D1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(256,6,'E1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(257,6,'F1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(258,6,'G1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(259,6,'A2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(260,6,'B2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(261,6,'C2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(262,6,'D2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(263,6,'E2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(264,6,'F2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(265,6,'G2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(266,6,'A3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(267,6,'B3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(268,6,'C3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(269,6,'D3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(270,6,'E3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(271,6,'F3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(272,6,'G3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(273,6,'A4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(274,6,'B4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(275,6,'C4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(276,6,'D4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(277,6,'E4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(278,6,'F4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(279,6,'G4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(280,6,'A5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(281,6,'B5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(282,6,'C5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(283,6,'D5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(284,6,'E5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(285,6,'F5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(286,6,'G5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(287,6,'A6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(288,6,'B6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(289,6,'C6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(290,6,'D6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(291,6,'E6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(292,6,'F6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(293,6,'G6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(294,6,'A7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(295,6,'B7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(296,6,'C7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(297,6,'D7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(298,6,'E7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(299,6,'F7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(300,6,'G7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(301,6,'A8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(302,6,'B8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(303,6,'C8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(304,6,'D8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(305,6,'E8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(306,6,'F8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(307,6,'G8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(308,6,'A9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(309,6,'B9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(310,6,'C9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(311,6,'D9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(312,6,'E9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(313,6,'F9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(314,6,'G9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(315,6,'A10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(316,6,'B10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(317,6,'C10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(318,6,'D10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(319,6,'E10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(320,6,'F10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(321,6,'G10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(322,6,'A11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(323,6,'B11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(324,6,'C11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(325,6,'D11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(326,6,'E11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(327,6,'F11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(328,6,'G11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(329,6,'A12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(330,6,'B12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(331,6,'C12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(332,6,'D12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(333,6,'E12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(334,6,'F12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(335,6,'G12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(336,6,'A13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(337,6,'B13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(338,6,'C13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(339,6,'D13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(340,6,'E13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(341,6,'F13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(342,6,'G13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(343,6,'A14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(344,6,'B14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(345,6,'C14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(346,6,'D14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(347,6,'E14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(348,6,'F14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(349,6,'G14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(350,6,'A15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(351,6,'B15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(352,6,'C15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(353,6,'D15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(354,6,'E15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(355,6,'F15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(356,6,'G15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(357,6,'A16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(358,6,'B16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(359,6,'C16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(360,6,'D16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(361,6,'E16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(362,6,'F16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(363,6,'G16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(364,6,'A17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(365,6,'B17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(366,6,'C17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(367,6,'D17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(368,6,'E17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(369,6,'F17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(370,6,'G17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(371,6,'A18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(372,6,'B18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(373,6,'C18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(374,6,'D18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(375,6,'E18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(376,6,'F18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(377,6,'G18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(378,7,'A1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(379,7,'B1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(380,7,'C1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(381,7,'D1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(382,7,'E1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(383,7,'F1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(384,7,'G1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(385,7,'A2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(386,7,'B2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(387,7,'C2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(388,7,'D2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(389,7,'E2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(390,7,'F2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(391,7,'G2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(392,7,'A3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(393,7,'B3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(394,7,'C3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(395,7,'D3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(396,7,'E3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(397,7,'F3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(398,7,'G3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(399,7,'A4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(400,7,'B4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(401,7,'C4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(402,7,'D4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(403,7,'E4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(404,7,'F4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(405,7,'G4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(406,7,'A5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(407,7,'B5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(408,7,'C5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(409,7,'D5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(410,7,'E5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(411,7,'F5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(412,7,'G5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(413,7,'A6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(414,7,'B6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(415,7,'C6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(416,7,'D6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(417,7,'E6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(418,7,'F6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(419,7,'G6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(420,7,'A7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(421,7,'B7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(422,7,'C7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(423,7,'D7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(424,7,'E7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(425,7,'F7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(426,7,'G7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(427,7,'A8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(428,7,'B8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(429,7,'C8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(430,7,'D8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(431,7,'E8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(432,7,'F8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(433,7,'G8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(434,7,'A9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(435,7,'B9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(436,7,'C9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(437,7,'D9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(438,7,'E9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(439,7,'F9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(440,7,'G9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(441,7,'A10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(442,7,'B10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(443,7,'C10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(444,7,'D10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(445,7,'E10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(446,7,'F10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(447,7,'G10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(448,7,'A11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(449,7,'B11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(450,7,'C11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(451,7,'D11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(452,7,'E11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(453,7,'F11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(454,7,'G11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(455,7,'A12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(456,7,'B12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(457,7,'C12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(458,7,'D12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(459,7,'E12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(460,7,'F12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(461,7,'G12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(462,7,'A13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(463,7,'B13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(464,7,'C13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(465,7,'D13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(466,7,'E13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(467,7,'F13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(468,7,'G13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(469,7,'A14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(470,7,'B14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(471,7,'C14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(472,7,'D14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(473,7,'E14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(474,7,'F14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(475,7,'G14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(476,7,'A15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(477,7,'B15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(478,7,'C15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(479,7,'D15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(480,7,'E15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(481,7,'F15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(482,7,'G15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(483,7,'A16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(484,7,'B16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(485,7,'C16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(486,7,'D16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(487,7,'E16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(488,7,'F16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(489,7,'G16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(490,7,'A17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(491,7,'B17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(492,7,'C17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(493,7,'D17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(494,7,'E17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(495,7,'F17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(496,7,'G17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(497,7,'A18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(498,7,'B18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(499,7,'C18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(500,7,'D18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(501,7,'E18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(502,7,'F18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(503,7,'G18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(504,8,'A1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(505,8,'B1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(506,8,'C1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(507,8,'D1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(508,8,'E1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(509,8,'F1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(510,8,'G1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(511,8,'A2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(512,8,'B2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(513,8,'C2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(514,8,'D2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(515,8,'E2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(516,8,'F2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(517,8,'G2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(518,8,'A3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(519,8,'B3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(520,8,'C3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(521,8,'D3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(522,8,'E3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(523,8,'F3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(524,8,'G3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(525,8,'A4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(526,8,'B4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(527,8,'C4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(528,8,'D4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(529,8,'E4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(530,8,'F4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(531,8,'G4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(532,8,'A5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(533,8,'B5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(534,8,'C5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(535,8,'D5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(536,8,'E5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(537,8,'F5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(538,8,'G5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(539,8,'A6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(540,8,'B6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(541,8,'C6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(542,8,'D6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(543,8,'E6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(544,8,'F6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(545,8,'G6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(546,8,'A7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(547,8,'B7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(548,8,'C7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(549,8,'D7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(550,8,'E7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(551,8,'F7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(552,8,'G7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(553,8,'A8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(554,8,'B8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(555,8,'C8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(556,8,'D8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(557,8,'E8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(558,8,'F8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(559,8,'G8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(560,8,'A9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(561,8,'B9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(562,8,'C9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(563,8,'D9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(564,8,'E9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(565,8,'F9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(566,8,'G9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(567,8,'A10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(568,8,'B10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(569,8,'C10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(570,8,'D10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(571,8,'E10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(572,8,'F10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(573,8,'G10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(574,8,'A11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(575,8,'B11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(576,8,'C11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(577,8,'D11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(578,8,'E11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(579,8,'F11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(580,8,'G11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(581,8,'A12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(582,8,'B12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(583,8,'C12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(584,8,'D12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(585,8,'E12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(586,8,'F12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(587,8,'G12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(588,8,'A13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(589,8,'B13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(590,8,'C13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(591,8,'D13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(592,8,'E13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(593,8,'F13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(594,8,'G13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(595,8,'A14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(596,8,'B14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(597,8,'C14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(598,8,'D14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(599,8,'E14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(600,8,'F14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(601,8,'G14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(602,8,'A15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(603,8,'B15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(604,8,'C15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(605,8,'D15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(606,8,'E15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(607,8,'F15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(608,8,'G15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(609,8,'A16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(610,8,'B16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(611,8,'C16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(612,8,'D16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(613,8,'E16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(614,8,'F16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(615,8,'G16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(616,8,'A17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(617,8,'B17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(618,8,'C17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(619,8,'D17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(620,8,'E17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(621,8,'F17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(622,8,'G17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(623,8,'A18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(624,8,'B18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(625,8,'C18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(626,8,'D18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(627,8,'E18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(628,8,'F18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(629,8,'G18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(630,9,'A1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(631,9,'B1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(632,9,'C1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(633,9,'D1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(634,9,'E1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(635,9,'F1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(636,9,'G1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(637,9,'A2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(638,9,'B2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(639,9,'C2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(640,9,'D2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(641,9,'E2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(642,9,'F2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(643,9,'G2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(644,9,'A3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(645,9,'B3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(646,9,'C3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(647,9,'D3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(648,9,'E3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(649,9,'F3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(650,9,'G3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(651,9,'A4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(652,9,'B4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(653,9,'C4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(654,9,'D4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(655,9,'E4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(656,9,'F4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(657,9,'G4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(658,9,'A5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(659,9,'B5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(660,9,'C5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(661,9,'D5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(662,9,'E5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(663,9,'F5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(664,9,'G5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(665,9,'A6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(666,9,'B6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(667,9,'C6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(668,9,'D6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(669,9,'E6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(670,9,'F6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(671,9,'G6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(672,9,'A7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(673,9,'B7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(674,9,'C7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(675,9,'D7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(676,9,'E7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(677,9,'F7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(678,9,'G7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(679,9,'A8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(680,9,'B8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(681,9,'C8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(682,9,'D8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(683,9,'E8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(684,9,'F8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(685,9,'G8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(686,9,'A9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(687,9,'B9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(688,9,'C9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(689,9,'D9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(690,9,'E9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(691,9,'F9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(692,9,'G9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(693,9,'A10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(694,9,'B10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(695,9,'C10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(696,9,'D10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(697,9,'E10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(698,9,'F10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(699,9,'G10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(700,9,'A11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(701,9,'B11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(702,9,'C11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(703,9,'D11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(704,9,'E11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(705,9,'F11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(706,9,'G11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(707,9,'A12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(708,9,'B12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(709,9,'C12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(710,9,'D12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(711,9,'E12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(712,9,'F12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(713,9,'G12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(714,9,'A13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(715,9,'B13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(716,9,'C13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(717,9,'D13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(718,9,'E13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(719,9,'F13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(720,9,'G13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(721,9,'A14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(722,9,'B14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(723,9,'C14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(724,9,'D14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(725,9,'E14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(726,9,'F14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(727,9,'G14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(728,9,'A15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(729,9,'B15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(730,9,'C15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(731,9,'D15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(732,9,'E15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(733,9,'F15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(734,9,'G15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(735,9,'A16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(736,9,'B16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(737,9,'C16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(738,9,'D16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(739,9,'E16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(740,9,'F16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(741,9,'G16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(742,9,'A17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(743,9,'B17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(744,9,'C17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(745,9,'D17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(746,9,'E17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(747,9,'F17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(748,9,'G17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(749,9,'A18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(750,9,'B18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(751,9,'C18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(752,9,'D18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(753,9,'E18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(754,9,'F18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(755,9,'G18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(756,10,'A1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(757,10,'B1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(758,10,'C1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(759,10,'D1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(760,10,'E1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(761,10,'F1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(762,10,'G1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(763,10,'A2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(764,10,'B2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(765,10,'C2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(766,10,'D2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(767,10,'E2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(768,10,'F2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(769,10,'G2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(770,10,'A3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(771,10,'B3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(772,10,'C3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(773,10,'D3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(774,10,'E3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(775,10,'F3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(776,10,'G3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(777,10,'A4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(778,10,'B4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(779,10,'C4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(780,10,'D4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(781,10,'E4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(782,10,'F4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(783,10,'G4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(784,10,'A5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(785,10,'B5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(786,10,'C5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(787,10,'D5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(788,10,'E5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(789,10,'F5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(790,10,'G5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(791,10,'A6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(792,10,'B6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(793,10,'C6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(794,10,'D6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(795,10,'E6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(796,10,'F6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(797,10,'G6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(798,10,'A7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(799,10,'B7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(800,10,'C7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(801,10,'D7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(802,10,'E7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(803,10,'F7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(804,10,'G7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(805,10,'A8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(806,10,'B8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(807,10,'C8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(808,10,'D8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(809,10,'E8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(810,10,'F8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(811,10,'G8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(812,10,'A9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(813,10,'B9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(814,10,'C9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(815,10,'D9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(816,10,'E9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(817,10,'F9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(818,10,'G9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(819,10,'A10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(820,10,'B10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(821,10,'C10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(822,10,'D10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(823,10,'E10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(824,10,'F10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(825,10,'G10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(826,10,'A11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(827,10,'B11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(828,10,'C11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(829,10,'D11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(830,10,'E11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(831,10,'F11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(832,10,'G11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(833,10,'A12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(834,10,'B12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(835,10,'C12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(836,10,'D12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(837,10,'E12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(838,10,'F12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(839,10,'G12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(840,10,'A13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(841,10,'B13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(842,10,'C13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(843,10,'D13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(844,10,'E13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(845,10,'F13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(846,10,'G13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(847,10,'A14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(848,10,'B14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(849,10,'C14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(850,10,'D14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(851,10,'E14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(852,10,'F14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(853,10,'G14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(854,10,'A15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(855,10,'B15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(856,10,'C15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(857,10,'D15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(858,10,'E15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(859,10,'F15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(860,10,'G15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(861,10,'A16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(862,10,'B16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(863,10,'C16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(864,10,'D16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(865,10,'E16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(866,10,'F16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(867,10,'G16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(868,10,'A17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(869,10,'B17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(870,10,'C17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(871,10,'D17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(872,10,'E17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(873,10,'F17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(874,10,'G17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(875,10,'A18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(876,10,'B18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(877,10,'C18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(878,10,'D18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(879,10,'E18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(880,10,'F18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(881,10,'G18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(882,11,'A1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(883,11,'B1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(884,11,'C1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(885,11,'D1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(886,11,'E1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(887,11,'F1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(888,11,'G1','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(889,11,'A2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(890,11,'B2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(891,11,'C2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(892,11,'D2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(893,11,'E2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(894,11,'F2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(895,11,'G2','Business','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(896,11,'A3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(897,11,'B3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(898,11,'C3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(899,11,'D3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(900,11,'E3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(901,11,'F3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(902,11,'G3','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(903,11,'A4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(904,11,'B4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(905,11,'C4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(906,11,'D4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(907,11,'E4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(908,11,'F4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(909,11,'G4','Premium Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(910,11,'A5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(911,11,'B5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(912,11,'C5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(913,11,'D5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(914,11,'E5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(915,11,'F5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(916,11,'G5','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(917,11,'A6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(918,11,'B6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(919,11,'C6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(920,11,'D6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(921,11,'E6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(922,11,'F6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(923,11,'G6','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(924,11,'A7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(925,11,'B7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(926,11,'C7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(927,11,'D7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(928,11,'E7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(929,11,'F7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(930,11,'G7','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(931,11,'A8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(932,11,'B8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(933,11,'C8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(934,11,'D8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(935,11,'E8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(936,11,'F8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(937,11,'G8','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(938,11,'A9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(939,11,'B9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(940,11,'C9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(941,11,'D9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(942,11,'E9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(943,11,'F9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(944,11,'G9','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(945,11,'A10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(946,11,'B10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(947,11,'C10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(948,11,'D10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(949,11,'E10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(950,11,'F10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(951,11,'G10','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(952,11,'A11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(953,11,'B11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(954,11,'C11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(955,11,'D11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(956,11,'E11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(957,11,'F11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(958,11,'G11','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(959,11,'A12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(960,11,'B12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(961,11,'C12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(962,11,'D12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(963,11,'E12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(964,11,'F12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(965,11,'G12','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(966,11,'A13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(967,11,'B13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(968,11,'C13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(969,11,'D13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(970,11,'E13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(971,11,'F13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(972,11,'G13','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(973,11,'A14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(974,11,'B14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(975,11,'C14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(976,11,'D14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(977,11,'E14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(978,11,'F14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(979,11,'G14','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(980,11,'A15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(981,11,'B15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(982,11,'C15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(983,11,'D15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(984,11,'E15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(985,11,'F15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(986,11,'G15','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(987,11,'A16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(988,11,'B16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(989,11,'C16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(990,11,'D16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(991,11,'E16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(992,11,'F16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(993,11,'G16','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(994,11,'A17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(995,11,'B17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(996,11,'C17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(997,11,'D17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(998,11,'E17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(999,11,'F17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(1000,11,'G17','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(1001,11,'A18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(1002,11,'B18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(1003,11,'C18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(1004,11,'D18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(1005,11,'E18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(1006,11,'F18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49'),(1007,11,'G18','Economy','available','2024-12-20 07:55:49','2024-12-20 07:55:49');
+/*!40000 ALTER TABLE `seats` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Cấu trúc bảng cho bảng `tickets`
+-- Table structure for table `tickets`
 --
 
+DROP TABLE IF EXISTS `tickets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tickets` (
-  `ticket_id` int NOT NULL,
+  `ticket_id` int NOT NULL AUTO_INCREMENT,
   `flight_id` int NOT NULL,
   `class_type` varchar(50) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `status` varchar(50) DEFAULT NULL,
-  `seat_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `seat_id` int NOT NULL,
+  PRIMARY KEY (`ticket_id`),
+  KEY `flight_id` (`flight_id`),
+  KEY `ix_tickets_ticket_id` (`ticket_id`),
+  KEY `seat_id` (`seat_id`),
+  CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`flight_id`) REFERENCES `flights` (`flight_id`),
+  CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`seat_id`) REFERENCES `seats` (`seat_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=510 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Đang đổ dữ liệu cho bảng `tickets`
+-- Dumping data for table `tickets`
 --
 
-INSERT INTO `tickets` (`ticket_id`, `flight_id`, `class_type`, `price`, `status`, `seat_id`) VALUES
-(1, 1, 'Economy', 100.00, 'Available', 1),
-(2, 2, 'Business', 120.00, 'Available', 2),
-(3, 1, 'string', 100.00, 'available', 1),
-(4, 1, 'string', 100.00, 'available', 1),
-(5, 2, 'string', 100.00, 'available', 1),
-(7, 2, 'string', 100.00, 'available', 1),
-(8, 2, 'string', 100.00, 'available', 1);
-
--- --------------------------------------------------------
+LOCK TABLES `tickets` WRITE;
+/*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
+INSERT INTO `tickets` VALUES (1,1,'Economy',100.00,'sold',1),(2,2,'Business',120.00,'sold',2),(3,1,'Economy',100.00,'sold',5),(4,1,'Bthg',100.00,'sold',3),(5,1,'Economy',100.00,'sold',4),(6,1,'Economy',100.00,'available',5),(7,29,'Economy',120000.00,'available',1),(8,29,'Bthg',120000.00,'sold',3),(9,29,'Economy',120000.00,'available',4),(10,29,'Economy',120000.00,'available',5),(11,30,'Business',240000.00,'available',126),(12,30,'Business',240000.00,'available',127),(13,30,'Business',240000.00,'available',128),(14,30,'Business',240000.00,'available',129),(15,30,'Business',240000.00,'available',130),(16,30,'Business',240000.00,'available',131),(17,30,'Business',240000.00,'available',132),(18,30,'Business',240000.00,'available',133),(19,30,'Business',240000.00,'available',134),(20,30,'Business',240000.00,'available',135),(21,30,'Business',240000.00,'available',136),(22,30,'Business',240000.00,'available',137),(23,30,'Business',240000.00,'available',138),(24,30,'Business',240000.00,'available',139),(25,30,'Premium Economy',120000.00,'available',140),(26,30,'Premium Economy',120000.00,'available',141),(27,30,'Premium Economy',120000.00,'available',142),(28,30,'Premium Economy',120000.00,'available',143),(29,30,'Premium Economy',120000.00,'available',144),(30,30,'Premium Economy',120000.00,'available',145),(31,30,'Premium Economy',120000.00,'available',146),(32,30,'Premium Economy',120000.00,'available',147),(33,30,'Premium Economy',120000.00,'available',148),(34,30,'Premium Economy',120000.00,'available',149),(35,30,'Premium Economy',120000.00,'available',150),(36,30,'Premium Economy',120000.00,'available',151),(37,30,'Premium Economy',120000.00,'available',152),(38,30,'Premium Economy',120000.00,'available',153),(39,30,'Economy',120000.00,'available',154),(40,30,'Economy',120000.00,'available',155),(41,30,'Economy',120000.00,'available',156),(42,30,'Economy',120000.00,'available',157),(43,30,'Economy',120000.00,'available',158),(44,30,'Economy',120000.00,'available',159),(45,30,'Economy',120000.00,'available',160),(46,30,'Economy',120000.00,'available',161),(47,30,'Economy',120000.00,'available',162),(48,30,'Economy',120000.00,'available',163),(49,30,'Economy',120000.00,'available',164),(50,30,'Economy',120000.00,'available',165),(51,30,'Economy',120000.00,'available',166),(52,30,'Economy',120000.00,'available',167),(53,30,'Economy',120000.00,'available',168),(54,30,'Economy',120000.00,'available',169),(55,30,'Economy',120000.00,'available',170),(56,30,'Economy',120000.00,'available',171),(57,30,'Economy',120000.00,'available',172),(58,30,'Economy',120000.00,'available',173),(59,30,'Economy',120000.00,'available',174),(60,30,'Economy',120000.00,'available',175),(61,30,'Economy',120000.00,'available',176),(62,30,'Economy',120000.00,'available',177),(63,30,'Economy',120000.00,'available',178),(64,30,'Economy',120000.00,'available',179),(65,30,'Economy',120000.00,'available',180),(66,30,'Economy',120000.00,'available',181),(67,30,'Economy',120000.00,'available',182),(68,30,'Economy',120000.00,'available',183),(69,30,'Economy',120000.00,'available',184),(70,30,'Economy',120000.00,'available',185),(71,30,'Economy',120000.00,'available',186),(72,30,'Economy',120000.00,'available',187),(73,30,'Economy',120000.00,'available',188),(74,30,'Economy',120000.00,'available',189),(75,30,'Economy',120000.00,'available',190),(76,30,'Economy',120000.00,'available',191),(77,30,'Economy',120000.00,'available',192),(78,30,'Economy',120000.00,'available',193),(79,30,'Economy',120000.00,'available',194),(80,30,'Economy',120000.00,'available',195),(81,30,'Economy',120000.00,'available',196),(82,30,'Economy',120000.00,'available',197),(83,30,'Economy',120000.00,'available',198),(84,30,'Economy',120000.00,'available',199),(85,30,'Economy',120000.00,'available',200),(86,30,'Economy',120000.00,'available',201),(87,30,'Economy',120000.00,'available',202),(88,30,'Economy',120000.00,'available',203),(89,30,'Economy',120000.00,'available',204),(90,30,'Economy',120000.00,'available',205),(91,30,'Economy',120000.00,'available',206),(92,30,'Economy',120000.00,'available',207),(93,30,'Economy',120000.00,'available',208),(94,30,'Economy',120000.00,'available',209),(95,30,'Economy',120000.00,'available',210),(96,30,'Economy',120000.00,'available',211),(97,30,'Economy',120000.00,'available',212),(98,30,'Economy',120000.00,'available',213),(99,30,'Economy',120000.00,'available',214),(100,30,'Economy',120000.00,'available',215),(101,30,'Economy',120000.00,'available',216),(102,30,'Economy',120000.00,'available',217),(103,30,'Economy',120000.00,'available',218),(104,30,'Economy',120000.00,'available',219),(105,30,'Economy',120000.00,'available',220),(106,30,'Economy',120000.00,'available',221),(107,30,'Economy',120000.00,'available',222),(108,30,'Economy',120000.00,'available',223),(109,30,'Economy',120000.00,'available',224),(110,30,'Economy',120000.00,'available',225),(111,30,'Economy',120000.00,'available',226),(112,30,'Economy',120000.00,'available',227),(113,30,'Economy',120000.00,'available',228),(114,30,'Economy',120000.00,'available',229),(115,30,'Economy',120000.00,'available',230),(116,30,'Economy',120000.00,'available',231),(117,30,'Economy',120000.00,'available',232),(118,30,'Economy',120000.00,'available',233),(119,30,'Economy',120000.00,'available',234),(120,30,'Economy',120000.00,'available',235),(121,30,'Economy',120000.00,'available',236),(122,30,'Economy',120000.00,'available',237),(123,30,'Economy',120000.00,'available',238),(124,30,'Economy',120000.00,'available',239),(125,30,'Economy',120000.00,'available',240),(126,30,'Economy',120000.00,'available',241),(127,30,'Economy',120000.00,'available',242),(128,30,'Economy',120000.00,'available',243),(129,30,'Economy',120000.00,'available',244),(130,30,'Economy',120000.00,'available',245),(131,30,'Economy',120000.00,'available',246),(132,30,'Economy',120000.00,'available',247),(133,30,'Economy',120000.00,'available',248),(134,30,'Economy',120000.00,'available',249),(135,30,'Economy',120000.00,'available',250),(136,30,'Economy',120000.00,'available',251),(137,32,'Business',240000.00,'sold',126),(138,32,'Business',240000.00,'available',127),(139,32,'Business',240000.00,'available',128),(140,32,'Business',240000.00,'available',129),(141,32,'Business',240000.00,'available',130),(142,32,'Business',240000.00,'available',131),(143,32,'Business',240000.00,'available',132),(144,32,'Business',240000.00,'available',133),(145,32,'Business',240000.00,'available',134),(146,32,'Business',240000.00,'available',135),(147,32,'Business',240000.00,'available',136),(148,32,'Business',240000.00,'available',137),(149,32,'Business',240000.00,'available',138),(150,32,'Business',240000.00,'available',139),(151,32,'Premium Economy',120000.00,'available',140),(152,32,'Premium Economy',120000.00,'available',141),(153,32,'Premium Economy',120000.00,'available',142),(154,32,'Premium Economy',120000.00,'available',143),(155,32,'Premium Economy',120000.00,'available',144),(156,32,'Premium Economy',120000.00,'available',145),(157,32,'Premium Economy',120000.00,'available',146),(158,32,'Premium Economy',120000.00,'available',147),(159,32,'Premium Economy',120000.00,'available',148),(160,32,'Premium Economy',120000.00,'available',149),(161,32,'Premium Economy',120000.00,'available',150),(162,32,'Premium Economy',120000.00,'available',151),(163,32,'Premium Economy',120000.00,'available',152),(164,32,'Premium Economy',120000.00,'available',153),(165,32,'Economy',120000.00,'available',154),(166,32,'Economy',120000.00,'available',155),(167,32,'Economy',120000.00,'available',156),(168,32,'Economy',120000.00,'available',157),(169,32,'Economy',120000.00,'available',158),(170,32,'Economy',120000.00,'available',159),(171,32,'Economy',120000.00,'available',160),(172,32,'Economy',120000.00,'available',161),(173,32,'Economy',120000.00,'available',162),(174,32,'Economy',120000.00,'available',163),(175,32,'Economy',120000.00,'available',164),(176,32,'Economy',120000.00,'available',165),(177,32,'Economy',120000.00,'available',166),(178,32,'Economy',120000.00,'available',167),(179,32,'Economy',120000.00,'available',168),(180,32,'Economy',120000.00,'available',169),(181,32,'Economy',120000.00,'available',170),(182,32,'Economy',120000.00,'available',171),(183,32,'Economy',120000.00,'available',172),(184,32,'Economy',120000.00,'available',173),(185,32,'Economy',120000.00,'available',174),(186,32,'Economy',120000.00,'available',175),(187,32,'Economy',120000.00,'available',176),(188,32,'Economy',120000.00,'available',177),(189,32,'Economy',120000.00,'available',178),(190,32,'Economy',120000.00,'available',179),(191,32,'Economy',120000.00,'available',180),(192,32,'Economy',120000.00,'available',181),(193,32,'Economy',120000.00,'available',182),(194,32,'Economy',120000.00,'available',183),(195,32,'Economy',120000.00,'available',184),(196,32,'Economy',120000.00,'available',185),(197,32,'Economy',120000.00,'available',186),(198,32,'Economy',120000.00,'available',187),(199,32,'Economy',120000.00,'available',188),(200,32,'Economy',120000.00,'available',189),(201,32,'Economy',120000.00,'available',190),(202,32,'Economy',120000.00,'available',191),(203,32,'Economy',120000.00,'available',192),(204,32,'Economy',120000.00,'available',193),(205,32,'Economy',120000.00,'available',194),(206,32,'Economy',120000.00,'available',195),(207,32,'Economy',120000.00,'available',196),(208,32,'Economy',120000.00,'available',197),(209,32,'Economy',120000.00,'available',198),(210,32,'Economy',120000.00,'available',199),(211,32,'Economy',120000.00,'available',200),(212,32,'Economy',120000.00,'available',201),(213,32,'Economy',120000.00,'available',202),(214,32,'Economy',120000.00,'available',203),(215,32,'Economy',120000.00,'available',204),(216,32,'Economy',120000.00,'available',205),(217,32,'Economy',120000.00,'available',206),(218,32,'Economy',120000.00,'available',207),(219,32,'Economy',120000.00,'available',208),(220,32,'Economy',120000.00,'available',209),(221,32,'Economy',120000.00,'available',210),(222,32,'Economy',120000.00,'available',211),(223,32,'Economy',120000.00,'available',212),(224,32,'Economy',120000.00,'available',213),(225,32,'Economy',120000.00,'available',214),(226,32,'Economy',120000.00,'available',215),(227,32,'Economy',120000.00,'available',216),(228,32,'Economy',120000.00,'available',217),(229,32,'Economy',120000.00,'available',218),(230,32,'Economy',120000.00,'available',219),(231,32,'Economy',120000.00,'available',220),(232,32,'Economy',120000.00,'available',221),(233,32,'Economy',120000.00,'available',222),(234,32,'Economy',120000.00,'available',223),(235,32,'Economy',120000.00,'available',224),(236,32,'Economy',120000.00,'available',225),(237,32,'Economy',120000.00,'available',226),(238,32,'Economy',120000.00,'available',227),(239,32,'Economy',120000.00,'available',228),(240,32,'Economy',120000.00,'available',229),(241,32,'Economy',120000.00,'available',230),(242,32,'Economy',120000.00,'available',231),(243,32,'Economy',120000.00,'available',232),(244,32,'Economy',120000.00,'available',233),(245,32,'Economy',120000.00,'available',234),(246,32,'Economy',120000.00,'available',235),(247,32,'Economy',120000.00,'available',236),(248,32,'Economy',120000.00,'available',237),(249,32,'Economy',120000.00,'available',238),(250,32,'Economy',120000.00,'available',239),(251,32,'Economy',120000.00,'available',240),(252,32,'Economy',120000.00,'available',241),(253,32,'Economy',120000.00,'available',242),(254,32,'Economy',120000.00,'available',243),(255,32,'Economy',120000.00,'available',244),(256,32,'Economy',120000.00,'available',245),(257,32,'Economy',120000.00,'available',246),(258,32,'Economy',120000.00,'available',247),(259,32,'Economy',120000.00,'available',248),(260,32,'Economy',120000.00,'available',249),(261,32,'Economy',120000.00,'available',250),(262,32,'Economy',120000.00,'available',251),(263,33,'Business',240000.00,'available',127),(264,33,'Business',240000.00,'available',128),(265,33,'Business',240000.00,'available',130),(266,33,'Business',240000.00,'available',131),(267,33,'Business',240000.00,'available',132),(268,33,'Business',240000.00,'available',133),(269,33,'Business',240000.00,'available',134),(270,33,'Business',240000.00,'available',135),(271,33,'Business',240000.00,'available',136),(272,33,'Business',240000.00,'available',137),(273,33,'Business',240000.00,'available',138),(274,33,'Business',240000.00,'available',139),(275,33,'Premium Economy',120000.00,'available',140),(276,33,'Premium Economy',120000.00,'available',141),(277,33,'Premium Economy',120000.00,'available',142),(278,33,'Premium Economy',120000.00,'available',143),(279,33,'Premium Economy',120000.00,'available',144),(280,33,'Premium Economy',120000.00,'available',145),(281,33,'Premium Economy',120000.00,'available',146),(282,33,'Premium Economy',120000.00,'available',147),(283,33,'Premium Economy',120000.00,'available',148),(284,33,'Premium Economy',120000.00,'available',149),(285,33,'Premium Economy',120000.00,'available',150),(286,33,'Premium Economy',120000.00,'available',151),(287,33,'Premium Economy',120000.00,'available',152),(288,33,'Premium Economy',120000.00,'available',153),(289,33,'Economy',120000.00,'available',154),(290,33,'Economy',120000.00,'available',155),(291,33,'Economy',120000.00,'available',156),(292,33,'Economy',120000.00,'available',157),(293,33,'Economy',120000.00,'available',158),(294,33,'Economy',120000.00,'available',159),(295,33,'Economy',120000.00,'available',160),(296,33,'Economy',120000.00,'available',161),(297,33,'Economy',120000.00,'available',162),(298,33,'Economy',120000.00,'available',163),(299,33,'Economy',120000.00,'available',164),(300,33,'Economy',120000.00,'available',165),(301,33,'Economy',120000.00,'available',166),(302,33,'Economy',120000.00,'available',167),(303,33,'Economy',120000.00,'available',168),(304,33,'Economy',120000.00,'available',169),(305,33,'Economy',120000.00,'available',170),(306,33,'Economy',120000.00,'available',171),(307,33,'Economy',120000.00,'available',172),(308,33,'Economy',120000.00,'available',173),(309,33,'Economy',120000.00,'available',174),(310,33,'Economy',120000.00,'available',175),(311,33,'Economy',120000.00,'available',176),(312,33,'Economy',120000.00,'available',177),(313,33,'Economy',120000.00,'available',178),(314,33,'Economy',120000.00,'available',179),(315,33,'Economy',120000.00,'available',180),(316,33,'Economy',120000.00,'available',181),(317,33,'Economy',120000.00,'available',182),(318,33,'Economy',120000.00,'available',183),(319,33,'Economy',120000.00,'available',184),(320,33,'Economy',120000.00,'available',185),(321,33,'Economy',120000.00,'available',186),(322,33,'Economy',120000.00,'available',187),(323,33,'Economy',120000.00,'available',188),(324,33,'Economy',120000.00,'available',189),(325,33,'Economy',120000.00,'available',190),(326,33,'Economy',120000.00,'available',191),(327,33,'Economy',120000.00,'available',192),(328,33,'Economy',120000.00,'available',193),(329,33,'Economy',120000.00,'available',194),(330,33,'Economy',120000.00,'available',195),(331,33,'Economy',120000.00,'available',196),(332,33,'Economy',120000.00,'available',197),(333,33,'Economy',120000.00,'available',198),(334,33,'Economy',120000.00,'available',199),(335,33,'Economy',120000.00,'available',200),(336,33,'Economy',120000.00,'available',201),(337,33,'Economy',120000.00,'available',202),(338,33,'Economy',120000.00,'available',203),(339,33,'Economy',120000.00,'available',204),(340,33,'Economy',120000.00,'available',205),(341,33,'Economy',120000.00,'available',206),(342,33,'Economy',120000.00,'available',207),(343,33,'Economy',120000.00,'available',208),(344,33,'Economy',120000.00,'available',209),(345,33,'Economy',120000.00,'available',210),(346,33,'Economy',120000.00,'available',211),(347,33,'Economy',120000.00,'available',212),(348,33,'Economy',120000.00,'available',213),(349,33,'Economy',120000.00,'available',214),(350,33,'Economy',120000.00,'available',215),(351,33,'Economy',120000.00,'available',216),(352,33,'Economy',120000.00,'available',217),(353,33,'Economy',120000.00,'available',218),(354,33,'Economy',120000.00,'available',219),(355,33,'Economy',120000.00,'available',220),(356,33,'Economy',120000.00,'available',221),(357,33,'Economy',120000.00,'available',222),(358,33,'Economy',120000.00,'available',223),(359,33,'Economy',120000.00,'available',224),(360,33,'Economy',120000.00,'available',225),(361,33,'Economy',120000.00,'available',226),(362,33,'Economy',120000.00,'available',227),(363,33,'Economy',120000.00,'available',228),(364,33,'Economy',120000.00,'available',229),(365,33,'Economy',120000.00,'available',230),(366,33,'Economy',120000.00,'available',231),(367,33,'Economy',120000.00,'available',232),(368,33,'Economy',120000.00,'available',233),(369,33,'Economy',120000.00,'available',234),(370,33,'Economy',120000.00,'available',235),(371,33,'Economy',120000.00,'available',236),(372,33,'Economy',120000.00,'available',237),(373,33,'Economy',120000.00,'available',238),(374,33,'Economy',120000.00,'available',239),(375,33,'Economy',120000.00,'available',240),(376,33,'Economy',120000.00,'available',241),(377,33,'Economy',120000.00,'available',242),(378,33,'Economy',120000.00,'available',243),(379,33,'Economy',120000.00,'available',244),(380,33,'Economy',120000.00,'available',245),(381,33,'Economy',120000.00,'available',246),(382,33,'Economy',120000.00,'available',247),(383,33,'Economy',120000.00,'available',248),(384,33,'Economy',120000.00,'available',249),(385,33,'Economy',120000.00,'available',250),(386,33,'Economy',120000.00,'available',251),(387,35,'Business',240000.00,'available',128),(388,35,'Business',240000.00,'sold',130),(389,35,'Business',240000.00,'sold',131),(390,35,'Business',240000.00,'sold',132),(391,35,'Business',240000.00,'available',133),(392,35,'Business',240000.00,'available',134),(393,35,'Business',240000.00,'available',135),(394,35,'Business',240000.00,'available',136),(395,35,'Business',240000.00,'available',137),(396,35,'Business',240000.00,'available',138),(397,35,'Business',240000.00,'available',139),(398,35,'Premium Economy',120000.00,'available',140),(399,35,'Premium Economy',120000.00,'available',141),(400,35,'Premium Economy',120000.00,'available',142),(401,35,'Premium Economy',120000.00,'available',143),(402,35,'Premium Economy',120000.00,'available',144),(403,35,'Premium Economy',120000.00,'available',145),(404,35,'Premium Economy',120000.00,'available',146),(405,35,'Premium Economy',120000.00,'available',147),(406,35,'Premium Economy',120000.00,'available',148),(407,35,'Premium Economy',120000.00,'available',149),(408,35,'Premium Economy',120000.00,'available',150),(409,35,'Premium Economy',120000.00,'available',151),(410,35,'Premium Economy',120000.00,'available',152),(411,35,'Premium Economy',120000.00,'available',153),(412,35,'Economy',120000.00,'available',154),(413,35,'Economy',120000.00,'available',155),(414,35,'Economy',120000.00,'available',156),(415,35,'Economy',120000.00,'available',157),(416,35,'Economy',120000.00,'available',158),(417,35,'Economy',120000.00,'available',159),(418,35,'Economy',120000.00,'available',160),(419,35,'Economy',120000.00,'available',161),(420,35,'Economy',120000.00,'available',162),(421,35,'Economy',120000.00,'available',163),(422,35,'Economy',120000.00,'available',164),(423,35,'Economy',120000.00,'available',165),(424,35,'Economy',120000.00,'available',166),(425,35,'Economy',120000.00,'available',167),(426,35,'Economy',120000.00,'available',168),(427,35,'Economy',120000.00,'available',169),(428,35,'Economy',120000.00,'available',170),(429,35,'Economy',120000.00,'available',171),(430,35,'Economy',120000.00,'available',172),(431,35,'Economy',120000.00,'available',173),(432,35,'Economy',120000.00,'available',174),(433,35,'Economy',120000.00,'available',175),(434,35,'Economy',120000.00,'available',176),(435,35,'Economy',120000.00,'available',177),(436,35,'Economy',120000.00,'available',178),(437,35,'Economy',120000.00,'available',179),(438,35,'Economy',120000.00,'available',180),(439,35,'Economy',120000.00,'available',181),(440,35,'Economy',120000.00,'available',182),(441,35,'Economy',120000.00,'available',183),(442,35,'Economy',120000.00,'available',184),(443,35,'Economy',120000.00,'available',185),(444,35,'Economy',120000.00,'available',186),(445,35,'Economy',120000.00,'available',187),(446,35,'Economy',120000.00,'available',188),(447,35,'Economy',120000.00,'available',189),(448,35,'Economy',120000.00,'available',190),(449,35,'Economy',120000.00,'available',191),(450,35,'Economy',120000.00,'available',192),(451,35,'Economy',120000.00,'available',193),(452,35,'Economy',120000.00,'available',194),(453,35,'Economy',120000.00,'available',195),(454,35,'Economy',120000.00,'available',196),(455,35,'Economy',120000.00,'available',197),(456,35,'Economy',120000.00,'available',198),(457,35,'Economy',120000.00,'available',199),(458,35,'Economy',120000.00,'available',200),(459,35,'Economy',120000.00,'available',201),(460,35,'Economy',120000.00,'available',202),(461,35,'Economy',120000.00,'available',203),(462,35,'Economy',120000.00,'available',204),(463,35,'Economy',120000.00,'available',205),(464,35,'Economy',120000.00,'available',206),(465,35,'Economy',120000.00,'available',207),(466,35,'Economy',120000.00,'available',208),(467,35,'Economy',120000.00,'available',209),(468,35,'Economy',120000.00,'available',210),(469,35,'Economy',120000.00,'available',211),(470,35,'Economy',120000.00,'available',212),(471,35,'Economy',120000.00,'available',213),(472,35,'Economy',120000.00,'available',214),(473,35,'Economy',120000.00,'available',215),(474,35,'Economy',120000.00,'available',216),(475,35,'Economy',120000.00,'available',217),(476,35,'Economy',120000.00,'available',218),(477,35,'Economy',120000.00,'available',219),(478,35,'Economy',120000.00,'available',220),(479,35,'Economy',120000.00,'available',221),(480,35,'Economy',120000.00,'available',222),(481,35,'Economy',120000.00,'available',223),(482,35,'Economy',120000.00,'available',224),(483,35,'Economy',120000.00,'available',225),(484,35,'Economy',120000.00,'available',226),(485,35,'Economy',120000.00,'available',227),(486,35,'Economy',120000.00,'available',228),(487,35,'Economy',120000.00,'available',229),(488,35,'Economy',120000.00,'available',230),(489,35,'Economy',120000.00,'available',231),(490,35,'Economy',120000.00,'available',232),(491,35,'Economy',120000.00,'available',233),(492,35,'Economy',120000.00,'available',234),(493,35,'Economy',120000.00,'available',235),(494,35,'Economy',120000.00,'available',236),(495,35,'Economy',120000.00,'available',237),(496,35,'Economy',120000.00,'available',238),(497,35,'Economy',120000.00,'available',239),(498,35,'Economy',120000.00,'available',240),(499,35,'Economy',120000.00,'available',241),(500,35,'Economy',120000.00,'available',242),(501,35,'Economy',120000.00,'available',243),(502,35,'Economy',120000.00,'available',244),(503,35,'Economy',120000.00,'available',245),(504,35,'Economy',120000.00,'available',246),(505,35,'Economy',120000.00,'available',247),(506,35,'Economy',120000.00,'available',248),(507,35,'Economy',120000.00,'available',249),(508,35,'Economy',120000.00,'available',250),(509,35,'Economy',120000.00,'available',251);
+/*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `user_id` int NOT NULL,
+  `user_id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `full_name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `hashed_password` varchar(255) NOT NULL,
   `phone` varchar(15) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `updated_at` datetime DEFAULT NULL,
+  `address` longtext,
+  `date_of_birth` datetime DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `username` (`username`),
+  KEY `ix_users_user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Đang đổ dữ liệu cho bảng `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `full_name`, `email`, `hashed_password`, `phone`, `created_at`, `updated_at`) VALUES
-(1, '123', '123', '123@gmail.com', '$2b$12$LwjzmxG5Byslf2RXVJhVQO9MOVbtrfyR16u2D3jJdBIRkGqOxcQk6', NULL, '2024-11-25 11:00:39', '2024-11-25 11:00:39'),
-(2, 'dat', 'dat', 'dat@gmail.com', '$2b$12$sc1E/HMUXkgS809JnWsiVuOZSvKln44L.TF4QTLKKcKJ3NCLEC756', NULL, '2024-11-25 13:57:07', '2024-11-25 13:57:07'),
-(3, 'dat1', 'dat1', 'dat1@gmail.com', '$2b$12$ySAIgZh1S6ranReWCwc1mefDcrMbKK4YX3TIxy38TrcoOkmDUuNQe', NULL, '2024-11-25 13:57:07', '2024-11-25 13:57:07'),
-(4, 'testuser1', 'Test User 1', 'testuser1@gmail.com', 'hashedpassword3', '1234567890', '2024-11-25 10:55:00', '2024-11-25 11:00:00'),
-(5, 'testuser2', 'Test User 2', 'testuser2@gmail.com', 'hashedpassword4', '0987654321', '2024-11-25 11:05:00', '2024-11-25 11:10:00'),
-(7, 'hello', 'hello', 'hello@gmail.com', '$2b$12$reBeco4dZ.R1aZhUVyupN.axyoffXKTZPaPzNtVEYWrO0nascQ3uG', NULL, '2024-11-29 09:17:35', '2024-11-29 09:17:35'),
-(8, 'hehe', 'hehe', 'hehe@gmail.com', '$2b$12$ZZMlvg/H4Gs31FNyTfPzluaWuguC3T3B4Vc88sAqFuFgn3r4m69bm', NULL, '2024-12-03 08:14:06', '2024-12-03 08:14:06'),
-(9, 'hehehe', 'hehehe', 'hehehe@gmail.com', '$2b$12$gj2dwrzqpSlffOC57OC22OTjKLBoc8z6Uk9N3lME/Gn3qKkk5TOsO', NULL, '2024-12-03 08:14:06', '2024-12-03 08:14:06');
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'123','123','123@gmail.com','$2b$12$LwjzmxG5Byslf2RXVJhVQO9MOVbtrfyR16u2D3jJdBIRkGqOxcQk6','0366603376','2024-11-25 11:00:39','2024-12-18 13:47:19',NULL,NULL),(2,'dat','dat','dat@gmail.com','$2b$12$sc1E/HMUXkgS809JnWsiVuOZSvKln44L.TF4QTLKKcKJ3NCLEC756',NULL,'2024-11-25 13:57:07','2024-11-25 13:57:07',NULL,NULL),(3,'dat1','dat1','dat1@gmail.com','$2b$12$ySAIgZh1S6ranReWCwc1mefDcrMbKK4YX3TIxy38TrcoOkmDUuNQe',NULL,'2024-11-25 13:57:07','2024-11-25 13:57:07',NULL,NULL),(4,'testuser1','Test User 1','testuser1@gmail.com','hashedpassword3','1234567890','2024-11-25 10:55:00','2024-11-25 11:00:00',NULL,NULL),(5,'testuser2','Test User 2','testuser2@gmail.com','hashedpassword4','0987654321','2024-11-25 11:05:00','2024-11-25 11:10:00',NULL,NULL),(6,'test1','test1','test1@gmail.com','$2b$12$d79KxNwJD7N2dp31jh5KLOPTiDdyBKc3BenPzM0f5en9IX01zdCbG',NULL,'2024-12-04 10:09:20','2024-12-04 10:09:20',NULL,NULL),(7,'phandat01666603376@gmail.com','Đạt Phan Tiến','phandat01666603376@gmail.com','$2b$12$/DeTr7fOKGYMAfGre6lhYe7YkIGWfLLNb5Ez8SsvnSApemV.VmujW','0366603376','2024-12-11 15:03:44','2024-12-14 09:06:52',NULL,NULL),(8,'22024529@vnu.edu.vn','22024529 Phan Tiến Đạt','22024529@vnu.edu.vn','$2b$12$nOk01ddRNaaigv2aWpiRo.PmWaG4wMRzGSrwK0bO6JimzyPG9MkN6',NULL,'2024-12-14 08:47:19','2024-12-14 08:47:19',NULL,NULL);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Dumping routines for database 'qairline'
 --
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Chỉ mục cho bảng `admins`
---
-ALTER TABLE `admins`
-  ADD PRIMARY KEY (`admin_id`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD KEY `ix_admins_admin_id` (`admin_id`);
-
---
--- Chỉ mục cho bảng `airplanes`
---
-ALTER TABLE `airplanes`
-  ADD PRIMARY KEY (`airplane_id`),
-  ADD KEY `ix_airplanes_airplane_id` (`airplane_id`);
-
---
--- Chỉ mục cho bảng `airports`
---
-ALTER TABLE `airports`
-  ADD PRIMARY KEY (`airport_id`),
-  ADD UNIQUE KEY `iata_code` (`iata_code`),
-  ADD UNIQUE KEY `icao_code` (`icao_code`),
-  ADD KEY `ix_airports_airport_id` (`airport_id`);
-
---
--- Chỉ mục cho bảng `alembic_version`
---
-ALTER TABLE `alembic_version`
-  ADD PRIMARY KEY (`version_num`);
-
---
--- Chỉ mục cho bảng `booked_tickets`
---
-ALTER TABLE `booked_tickets`
-  ADD PRIMARY KEY (`booked_ticket_id`),
-  ADD KEY `flight_id` (`flight_id`),
-  ADD KEY `seat_id` (`seat_id`),
-  ADD KEY `ticket_id` (`ticket_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `ix_booked_tickets_booked_ticket_id` (`booked_ticket_id`);
-
---
--- Chỉ mục cho bảng `flights`
---
-ALTER TABLE `flights`
-  ADD PRIMARY KEY (`flight_id`),
-  ADD UNIQUE KEY `flight_number` (`flight_number`),
-  ADD KEY `airplane_id` (`airplane_id`),
-  ADD KEY `ix_flights_flight_id` (`flight_id`),
-  ADD KEY `arrival_airport_id` (`arrival_airport_id`),
-  ADD KEY `departure_airport_id` (`departure_airport_id`);
-
---
--- Chỉ mục cho bảng `flight_logs`
---
-ALTER TABLE `flight_logs`
-  ADD PRIMARY KEY (`log_id`),
-  ADD KEY `flight_id` (`flight_id`),
-  ADD KEY `ix_flight_logs_log_id` (`log_id`);
-
---
--- Chỉ mục cho bảng `general_info`
---
-ALTER TABLE `general_info`
-  ADD PRIMARY KEY (`info_id`),
-  ADD KEY `ix_general_info_info_id` (`info_id`);
-
---
--- Chỉ mục cho bảng `news`
---
-ALTER TABLE `news`
-  ADD PRIMARY KEY (`news_id`),
-  ADD KEY `author_id` (`author_id`),
-  ADD KEY `ix_news_news_id` (`news_id`);
-
---
--- Chỉ mục cho bảng `notifications`
---
-ALTER TABLE `notifications`
-  ADD PRIMARY KEY (`notification_id`),
-  ADD KEY `flight_id` (`flight_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `ix_notifications_notification_id` (`notification_id`);
-
---
--- Chỉ mục cho bảng `promotions`
---
-ALTER TABLE `promotions`
-  ADD PRIMARY KEY (`promotion_id`),
-  ADD KEY `ix_promotions_promotion_id` (`promotion_id`);
-
---
--- Chỉ mục cho bảng `seats`
---
-ALTER TABLE `seats`
-  ADD PRIMARY KEY (`seat_id`),
-  ADD KEY `airplane_id` (`airplane_id`),
-  ADD KEY `ix_seats_seat_id` (`seat_id`);
-
---
--- Chỉ mục cho bảng `tickets`
---
-ALTER TABLE `tickets`
-  ADD PRIMARY KEY (`ticket_id`),
-  ADD KEY `flight_id` (`flight_id`),
-  ADD KEY `ix_tickets_ticket_id` (`ticket_id`),
-  ADD KEY `seat_id` (`seat_id`);
-
---
--- Chỉ mục cho bảng `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD KEY `ix_users_user_id` (`user_id`);
-
---
--- AUTO_INCREMENT cho các bảng đã đổ
---
-
---
--- AUTO_INCREMENT cho bảng `admins`
---
-ALTER TABLE `admins`
-  MODIFY `admin_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT cho bảng `airplanes`
---
-ALTER TABLE `airplanes`
-  MODIFY `airplane_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT cho bảng `airports`
---
-ALTER TABLE `airports`
-  MODIFY `airport_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT cho bảng `booked_tickets`
---
-ALTER TABLE `booked_tickets`
-  MODIFY `booked_ticket_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT cho bảng `flights`
---
-ALTER TABLE `flights`
-  MODIFY `flight_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT cho bảng `flight_logs`
---
-ALTER TABLE `flight_logs`
-  MODIFY `log_id` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `general_info`
---
-ALTER TABLE `general_info`
-  MODIFY `info_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT cho bảng `news`
---
-ALTER TABLE `news`
-  MODIFY `news_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT cho bảng `notifications`
---
-ALTER TABLE `notifications`
-  MODIFY `notification_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT cho bảng `promotions`
---
-ALTER TABLE `promotions`
-  MODIFY `promotion_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT cho bảng `seats`
---
-ALTER TABLE `seats`
-  MODIFY `seat_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT cho bảng `tickets`
---
-ALTER TABLE `tickets`
-  MODIFY `ticket_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT cho bảng `users`
---
-ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- Các ràng buộc cho các bảng đã đổ
---
-
---
--- Các ràng buộc cho bảng `booked_tickets`
---
-ALTER TABLE `booked_tickets`
-  ADD CONSTRAINT `booked_tickets_ibfk_1` FOREIGN KEY (`flight_id`) REFERENCES `flights` (`flight_id`),
-  ADD CONSTRAINT `booked_tickets_ibfk_2` FOREIGN KEY (`seat_id`) REFERENCES `seats` (`seat_id`),
-  ADD CONSTRAINT `booked_tickets_ibfk_3` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`ticket_id`),
-  ADD CONSTRAINT `booked_tickets_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
-
---
--- Các ràng buộc cho bảng `flights`
---
-ALTER TABLE `flights`
-  ADD CONSTRAINT `flights_ibfk_1` FOREIGN KEY (`airplane_id`) REFERENCES `airplanes` (`airplane_id`),
-  ADD CONSTRAINT `flights_ibfk_2` FOREIGN KEY (`arrival_airport_id`) REFERENCES `airports` (`airport_id`),
-  ADD CONSTRAINT `flights_ibfk_3` FOREIGN KEY (`departure_airport_id`) REFERENCES `airports` (`airport_id`);
-
---
--- Các ràng buộc cho bảng `flight_logs`
---
-ALTER TABLE `flight_logs`
-  ADD CONSTRAINT `flight_logs_ibfk_1` FOREIGN KEY (`flight_id`) REFERENCES `flights` (`flight_id`);
-
---
--- Các ràng buộc cho bảng `news`
---
-ALTER TABLE `news`
-  ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `admins` (`admin_id`);
-
---
--- Các ràng buộc cho bảng `notifications`
---
-ALTER TABLE `notifications`
-  ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`flight_id`) REFERENCES `flights` (`flight_id`),
-  ADD CONSTRAINT `notifications_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
-
---
--- Các ràng buộc cho bảng `seats`
---
-ALTER TABLE `seats`
-  ADD CONSTRAINT `seats_ibfk_1` FOREIGN KEY (`airplane_id`) REFERENCES `airplanes` (`airplane_id`);
-
---
--- Các ràng buộc cho bảng `tickets`
---
-ALTER TABLE `tickets`
-  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`flight_id`) REFERENCES `flights` (`flight_id`),
-  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`seat_id`) REFERENCES `seats` (`seat_id`);
-COMMIT;
-
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-12-20 16:07:25
