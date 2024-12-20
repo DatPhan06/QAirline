@@ -1,196 +1,143 @@
-/* PaymentGuide.module.css */
-
-/* CSS Variables for Consistent Styling */
-:root {
-  --primary-color: #0d5777;
-  --secondary-color: #0056b3;
-  --background-color: #ffffff;
-  --text-color: #0b203b;
-  --heading-color: #333;
-  --subtext-color: #555;
-  --shadow-light: rgba(0, 0, 0, 0.1);
-  --shadow-dark: rgba(0, 0, 0, 0.15);
-  --transition-speed: 0.3s;
-  --font-family: 'Arial, sans-serif';
-}
-
-/* Container Styling */
+/* Container chính */
 .container {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  font-family: var(--font-family);
+  min-height: 100vh;
+  background : white;
+  background-size: cover;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  padding: 40px 20px;
 }
 
-/* Title Styling */
-.title {
-  font-size: 2.5rem;
-  color: var(--text-color);
-  margin-bottom: 2.5rem;
-  font-weight: bold;
-  text-align: center;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: color var(--transition-speed) ease;
-}
-
-.title:hover {
-  color: var(--secondary-color);
-}
-
-/* Content Area */
+/* Content layout */
 .content {
   display: flex;
-  width: 100%;
-  max-width: 1300px;
-  justify-content: space-between;
-  gap: 2.5rem;
-  animation: fadeIn 1s ease-in-out;
-  margin-bottom: 2.5rem;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #f9f7f3;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
-/* Buttons Section */
+/* Left section - Button area */
 .buttons {
+  width: 300px;
+  background: #e3e0da;
+  padding: 30px;
   display: flex;
   flex-direction: column;
-  gap: 1.5625rem; /* 25px */
-  width: 30%;
-  background-color: var(--background-color);
-  padding: 2.1875rem; /* 35px */
-  border-radius: 0.75rem; /* 12px */
-  box-shadow: 0 10px 30px var(--shadow-light);
-  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  gap: 15px;
 }
 
-.buttons:hover {
-  transform: scale(1.05);
-  box-shadow: 0 15px 40px var(--shadow-dark);
-}
-
-/* Button Styling */
+/* Button styling */
 .button {
-  padding: 1.125rem; /* 18px */
-  font-size: 1rem;
-  background-color: var(--primary-color);
-  color: var(--background-color);
+  width: 100%;
+  padding: 15px 20px;
+  text-align: left;
+  background: transparent;
   border: none;
-  border-radius: 0.5rem; /* 8px */
+  border-left: 4px solid transparent;
+  font-size: 1rem;
+  color: #4a5568;
   cursor: pointer;
-  transition: background-color var(--transition-speed) ease, transform 0.2s ease, box-shadow var(--transition-speed) ease;
-  box-shadow: 0 4px 10px var(--shadow-light);
+  transition: all 0.3s ease;
+  border-radius: 8px;
 }
 
 .button:hover {
-  background-color: var(--secondary-color);
-  transform: translateY(-0.3125rem); /* -5px */
+  background: #edf2f7;
+  color: #2d3748;
 }
 
-.button:active {
-  transform: translateY(0.125rem); /* 2px */
+.button.active {
+  background: #0d5777;
+  color: white;
+  border-left-color: #ffd700;
 }
 
-/* Active Button Styling */
-.active {
-  background-color: var(--secondary-color);
-}
-
-/* Frame (Content Display Area) */
+/* Right section - Frame content */
 .frame {
-  width: 65%;
-  padding: 2.1875rem; /* 35px */
-  background-color: var(--background-color);
-  box-shadow: 0 10px 30px var(--shadow-light);
-  border-radius: 0.75rem; /* 12px */
-  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-  max-height: 600px;
-  overflow-y: auto;
+  flex: 1;
+  padding: 30px;
+  background: #f9f7f3; /* Gradient nhẹ từ trắng sang xám nhạt */
 }
 
-.frame:hover {
-  transform: scale(1.02);
-  box-shadow: 0 15px 40px var(--shadow-dark);
-}
-
-/* Headings in Content */
+/* Content sections */
 .frame h2 {
-  font-size: 1.5rem;
-  color: var(--heading-color);
-  margin-bottom: 1.25rem; /* 20px */
-  font-weight: bold;
-  position: relative;
-  padding-left: 1.5625rem; /* 25px */
-  border-left: 0.3125rem solid var(--secondary-color); /* 5px */
+  color: #2d3748;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #edf2f7;
 }
 
-/* Paragraphs in Content */
 .frame p {
-  font-size: 1rem;
-  color: var(--subtext-color);
+  color: #4a5568;
   line-height: 1.6;
-  margin-bottom: 1.25rem; /* 20px */
-  opacity: 0;
-  animation: fadeInContent 1s ease-in-out forwards;
+  margin-bottom: 15px;
 }
 
-/* Lists in Content */
-.frame ul {
-  list-style-type: square;
-  padding-left: 1.5625rem; /* 25px */
-  margin-bottom: 1.875rem; /* 30px */
-  animation: fadeInContent 1s ease-in-out forwards;
+.frame ol {
+  padding: 0;
 }
 
-.frame li {
-  font-size: 1rem;
-  color: var(--text-color);
-  margin-bottom: 0.75rem; /* 12px */
-  transition: color var(--transition-speed) ease, transform 0.2s ease;
+.frame ol li{
+  color: #4a5568;
+  padding: 10px 0;
+  padding-left: 25px;
+  position: relative;
 }
 
-.frame li:hover {
-  color: var(--secondary-color);
-  transform: translateX(0.625rem); /* 10px */
-  cursor: pointer;
+.frame ol li::before {
+  color: #0d5777;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(1.25rem); /* 20px */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInContent {
-  to {
-    opacity: 1;
-  }
-}
-
-/* Responsive Design */
+/* Responsive design */
 @media (max-width: 768px) {
   .content {
     flex-direction: column;
-    gap: 2rem;
   }
 
-  .buttons, .frame {
+  .buttons {
     width: 100%;
+  }
+
+  .button {
+    text-align: center;
+    border-left: none;
+    border-bottom: 4px solid transparent;
+  }
+
+  .button.active {
+    border-left: none;
+    border-bottom-color: #ffd700;
+  }
+
+  .frame {
+    padding: 20px;
   }
 
   .title {
     font-size: 2rem;
   }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin-top: 60px;
+  }
 
   .frame h2 {
     font-size: 1.5rem;
+  }
+
+  .button {
+    font-size: 0.9rem;
+    padding: 12px 15px;
   }
 }
