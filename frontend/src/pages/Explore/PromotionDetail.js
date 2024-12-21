@@ -26,11 +26,25 @@ const PromotionDetail = () => {
 
   return (
     <div className={styles.promotionDetailContainer}>
-      <h1>{promotion.title}</h1>
-      <p>{promotion.description}</p>
-      <p>Discount: {promotion.discount_percentage}%</p>
-      <p>Start Date: {new Date(promotion.start_date).toLocaleDateString()}</p>
-      <p>End Date: {new Date(promotion.end_date).toLocaleDateString()}</p>
+      <div className={styles.promotionHeader}>
+        <h1>{promotion.title}</h1>
+        <p className={styles.discount}>
+          Giảm giá: {promotion.discount_percentage}%
+        </p>
+      </div>
+      <div className={styles.promotionContent}>
+        <p className={styles.description}>{promotion.description}</p>
+        <div className={styles.dates}>
+          <p>
+            <strong>Ngày bắt đầu:</strong>{" "}
+            {new Date(promotion.start_date).toLocaleDateString()}
+          </p>
+          <p>
+            <strong>Ngày kết thúc:</strong>{" "}
+            {new Date(promotion.end_date).toLocaleDateString()}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

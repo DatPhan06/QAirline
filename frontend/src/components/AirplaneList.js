@@ -2,6 +2,36 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./AirplaneList.module.css";
 
+/**
+ * Component to display a list of airplanes with pagination and search functionality.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Array} props.airplanes - The list of airplanes to display.
+ * @param {Function} props.onAirplaneClick - Callback function to handle airplane click events.
+ *
+ * @returns {JSX.Element} The rendered AirplaneList component.
+ *
+ * @example
+ * const airplanes = [
+ *   {
+ *     airplane_id: 1,
+ *     model: 'Boeing 737',
+ *     manufacturer: 'Boeing',
+ *     seat_capacity: 180,
+ *     range_km: 5000,
+ *     year_of_manufacture: 2015,
+ *     maintenance_status: 'Up to date',
+ *     status: 'Active'
+ *   },
+ *   // More airplanes...
+ * ];
+ * const handleAirplaneClick = (airplane) => {
+ *   console.log('Airplane clicked:', airplane);
+ * };
+ *
+ * <AirplaneList airplanes={airplanes} onAirplaneClick={handleAirplaneClick} />
+ */
 const AirplaneList = ({ airplanes, onAirplaneClick }) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);

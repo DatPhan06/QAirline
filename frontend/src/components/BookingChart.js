@@ -2,6 +2,21 @@ import React, { useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
 import styles from "./BookingChart.module.css";
 
+/**
+ * BookingChart component renders a bar chart displaying booking and revenue statistics.
+ *
+ * @param {Object[]} monthlyStats - Array of monthly statistics.
+ * @param {number} monthlyStats[].month - The month number (1-12).
+ * @param {number} monthlyStats[].day - The day number (1-31).
+ * @param {number} monthlyStats[].bookings - The number of bookings.
+ * @param {number} monthlyStats[].revenue - The revenue amount.
+ * @param {number} selectedMonth - The selected month (0 for all months).
+ * @param {number} selectedYear - The selected year.
+ * @param {function} handleMonthChange - Function to handle month change.
+ * @param {function} handleYearChange - Function to handle year change.
+ *
+ * @returns {JSX.Element} The rendered BookingChart component.
+ */
 const BookingChart = ({
   monthlyStats,
   selectedMonth,

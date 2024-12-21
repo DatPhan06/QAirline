@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./AirportList.module.css";
 
+/**
+ * AirportList component renders a list of airports with pagination and search functionality.
+ *
+ * @param {Object} props - The component props.
+ * @param {Array} props.airports - The list of airports to display.
+ * @param {Function} props.onAirportClick - Callback function to handle airport click events.
+ *
+ * @returns {JSX.Element} The rendered AirportList component.
+ */
 const AirportList = ({ airports, onAirportClick }) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);

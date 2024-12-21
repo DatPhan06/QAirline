@@ -12,6 +12,63 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./ViewBookings.module.css";
 
+/**
+ * ViewBookings component renders the admin view for booking statistics and booking list.
+ * It includes functionalities for fetching and displaying general stats, monthly stats,
+ * and bookings, as well as searching and paginating through the bookings.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * return <ViewBookings />
+ *
+ * @typedef {Object} Booking
+ * @property {number} booked_ticket_id - The ID of the booked ticket.
+ * @property {Object} user - The user who booked the ticket.
+ * @property {string} user.full_name - The full name of the user.
+ * @property {string} user.email - The email of the user.
+ * @property {string} user.phone - The phone number of the user.
+ * @property {Object} flight - The flight information.
+ * @property {string} flight.flight_number - The flight number.
+ * @property {Object} flight.departure_airport - The departure airport information.
+ * @property {string} flight.departure_airport.name - The name of the departure airport.
+ * @property {Object} flight.arrival_airport - The arrival airport information.
+ * @property {string} flight.arrival_airport.name - The name of the arrival airport.
+ * @property {string} status - The status of the booking.
+ * @property {number} price - The price of the booking.
+ * @property {Object} seat - The seat information.
+ * @property {string} seat.seat_number - The seat number.
+ *
+ * @typedef {Object} Stats
+ * @property {number} totalBookings - The total number of bookings.
+ * @property {number} totalRevenue - The total revenue from bookings.
+ * @property {number} totalAirplanes - The total number of airplanes.
+ * @property {number} totalFlights - The total number of flights.
+ *
+ * @typedef {Object} MonthlyStats
+ * @property {number} bookings - The number of bookings.
+ * @property {number} revenue - The revenue from bookings.
+ * @property {string} day - The day of the month.
+ *
+ * @typedef {Object} GeneralStats
+ * @property {number} total_bookings - The total number of bookings.
+ * @property {number} total_revenue - The total revenue from bookings.
+ * @property {number} total_airplanes - The total number of airplanes.
+ * @property {number} total_flights - The total number of flights.
+ *
+ * @typedef {Object} BookingStatsByMonth
+ * @property {Array<MonthlyStats>} bookingsByMonth - The bookings grouped by month.
+ * @property {Array<MonthlyStats>} bookingsByDay - The bookings grouped by day.
+ *
+ * @typedef {Object} UserData
+ * @property {string} name - The username.
+ * @property {number} bookings - The number of bookings by the user.
+ *
+ * @typedef {Object} FlightData
+ * @property {string} name - The flight number.
+ * @property {number} bookings - The number of bookings for the flight.
+ */
 const ViewBookings = () => {
   const [stats, setStats] = useState({
     totalBookings: 0,

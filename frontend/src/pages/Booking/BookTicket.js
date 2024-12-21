@@ -7,6 +7,48 @@ import { getAirports } from "../../services/airportService";
 import { getCurrentUser } from "../../services/userService";
 import FlightDetail from "../../components/FlightDetail";
 
+/**
+ * Component for booking a flight ticket.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * <BookTicket />
+ *
+ * @description
+ * This component allows users to search for flights, select a trip type (one-way or round-trip),
+ * choose departure and arrival airports, select departure and return dates, and specify the number of passengers.
+ * It fetches user data, available flights, and airports from the server and displays matching flights based on the search criteria.
+ *
+ * @typedef {Object} Flight
+ * @property {string} departure_airport - The departure airport city.
+ * @property {string} arrival_airport - The arrival airport city.
+ * @property {string} departure_time - The departure time of the flight.
+ * @property {string} [return_time] - The return time of the flight (if round-trip).
+ *
+ * @typedef {Object} Airport
+ * @property {string} airport_id - The unique identifier of the airport.
+ * @property {string} city - The city where the airport is located.
+ *
+ * @typedef {Object} User
+ * @property {string} id - The unique identifier of the user.
+ * @property {string} name - The name of the user.
+ *
+ * @typedef {Object} SearchParams
+ * @property {string} departure - The departure airport city.
+ * @property {string} arrival - The arrival airport city.
+ * @property {string} tripType - The type of trip (one-way or round-trip).
+ * @property {string} departureDate - The departure date.
+ * @property {string} returnDate - The return date (if round-trip).
+ * @property {number} passengers - The number of passengers.
+ *
+ * @param {Object} props - The component props.
+ * @param {Flight[]} props.flights - The list of available flights.
+ * @param {Airport[]} props.airports - The list of available airports.
+ * @param {User} props.user - The current user data.
+ * @param {SearchParams} props.searchParams - The search parameters for flights.
+ */
 const BookTicket = () => {
   const [departure_airport, setDeparture_airport] = useState("");
   const [arrival_airport, setArrival_airport] = useState("");
@@ -133,7 +175,14 @@ const BookTicket = () => {
       setPassengers(passengers);
 
       // Thực hiện tìm kiếm trực tiếp với các tham số
-      searchFlights(departure, arrival, departureDate, returnDate, passengers, tripType);
+      searchFlights(
+        departure,
+        arrival,
+        departureDate,
+        returnDate,
+        passengers,
+        tripType
+      );
     }
   }, [searchParams, flights]);
 
@@ -173,7 +222,9 @@ const BookTicket = () => {
           {/* Container cho phần "Từ" và "Đến" */}
           <div className={styles.fromToContainer}>
             <div className={styles.formGroup}>
-              <label htmlFor="departure" className={styles.label}>Từ</label>
+              <label htmlFor="departure" className={styles.label}>
+                Từ
+              </label>
               <select
                 id="departure"
                 value={departure_airport}
@@ -188,9 +239,11 @@ const BookTicket = () => {
                 ))}
               </select>
             </div>
-  
+
             <div className={styles.formGroup}>
-              <label htmlFor="arrival" className={styles.label}>Đến</label>
+              <label htmlFor="arrival" className={styles.label}>
+                Đến
+              </label>
               <select
                 id="arrival"
                 value={arrival_airport}
@@ -206,11 +259,13 @@ const BookTicket = () => {
               </select>
             </div>
           </div>
-  
+
           {/* Container cho phần Ngày đi và Ngày về */}
           <div className={styles.dateContainer}>
             <div className={styles.formGroup}>
-              <label htmlFor="date" className={styles.label}>Ngày đi</label>
+              <label htmlFor="date" className={styles.label}>
+                Ngày đi
+              </label>
               <input
                 type="date"
                 id="date"
@@ -219,10 +274,12 @@ const BookTicket = () => {
                 className={styles.input}
               />
             </div>
-  
+
             {tripType === "round-trip" && (
               <div className={styles.formGroup}>
-                <label htmlFor="returnDate" className={styles.label}>Ngày về</label>
+                <label htmlFor="returnDate" className={styles.label}>
+                  Ngày về
+                </label>
                 <input
                   type="date"
                   id="returnDate"
@@ -233,11 +290,13 @@ const BookTicket = () => {
               </div>
             )}
           </div>
-  
+
           {/* Passenger Selection */}
           <div className={styles.passengerContainer}>
             <div className={styles.formGroup}>
-              <label htmlFor="passengers" className={styles.label}>Số hành khách</label>
+              <label htmlFor="passengers" className={styles.label}>
+                Số hành khách
+              </label>
               <input
                 type="number"
                 id="passengers"
@@ -249,7 +308,7 @@ const BookTicket = () => {
               />
             </div>
           </div>
-  
+
           <button type="submit" className={styles.searchButton}>
             Tìm chuyến bay
           </button>

@@ -3,6 +3,47 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/userService";
 import styles from "./SignUp.module.css";
 
+/**
+ * SignUp component renders the sign-up form for new users.
+ * It handles user input, form submission, and OAuth login redirection.
+ *
+ * @component
+ * @example
+ * return (
+ *   <SignUp />
+ * )
+ *
+ * @returns {JSX.Element} The rendered sign-up form component.
+ *
+ * @function
+ * @name SignUp
+ *
+ * @description
+ * This component maintains the state of the form data using the useState hook.
+ * It provides input fields for full name, username, email, and password.
+ * On form submission, it attempts to register the user and navigates to the sign-in page upon success.
+ * It also provides options for OAuth login via Google and GitHub.
+ *
+ * @property {Object} formData - The state object containing form data.
+ * @property {string} formData.full_name - The full name of the user.
+ * @property {string} formData.username - The username of the user.
+ * @property {string} formData.email - The email of the user.
+ * @property {string} formData.password - The password of the user.
+ *
+ * @method handleInputChange
+ * @description Updates the formData state when an input field value changes.
+ * @param {Object} e - The event object.
+ * @param {string} e.target.name - The name of the input field.
+ * @param {string} e.target.value - The value of the input field.
+ *
+ * @method handleSubmit
+ * @description Handles form submission, attempts to register the user, and navigates to the sign-in page upon success.
+ * @param {Object} e - The event object.
+ *
+ * @method handleOAuthLogin
+ * @description Redirects the user to the OAuth login page for the specified provider.
+ * @param {string} provider - The OAuth provider (e.g., "google", "github").
+ */
 function SignUp() {
   const [formData, setFormData] = useState({
     username: "",

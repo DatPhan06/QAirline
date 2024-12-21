@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { changePassword } from "../../services/userService";
+import { getCurrentUser, changePassword } from "../../services/userService";
 import styles from "./Setting.module.css";
 
 const Setting = () => {
@@ -10,11 +10,23 @@ const Setting = () => {
   });
   const [language, setLanguage] = useState("vi");
   const [darkMode, setDarkMode] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const savedDarkMode = localStorage.getItem("darkMode") === "true";
     setDarkMode(savedDarkMode);
     document.body.classList.toggle("dark-mode", savedDarkMode);
+
+    const fetchUser = async () => {
+      try {
+        const userData = await getCurrentUser();
+        setUser(userData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUser();
   }, []);
 
   const handlePasswordChange = (e) => {
@@ -28,13 +40,10 @@ const Setting = () => {
       return;
     }
     try {
-      await changePassword(
-        user.user_id, 
-        {
-          "current_password": passwordData.currentPassword,
-          "new_password": passwordData.newPassword,
-        }
-      );
+      await changePassword(user.user_id, {
+        current_password: passwordData.currentPassword,
+        new_password: passwordData.newPassword,
+      });
       alert("Đổi mật khẩu thành công!");
       setPasswordData({
         currentPassword: "",

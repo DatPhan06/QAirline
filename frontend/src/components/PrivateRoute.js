@@ -11,6 +11,20 @@ import axios from "axios";
  * @param {React.ReactNode} props.children - Các component con sẽ được hiển thị nếu người dùng đã đăng nhập.
  * @returns {React.ReactNode} - Trả về các component con nếu người dùng đã đăng nhập, nếu không sẽ chuyển hướng đến trang đăng nhập.
  */
+/**
+ * PrivateRoute component that checks if the user is authenticated before rendering the children components.
+ * If the user is not authenticated, it redirects to the sign-in page.
+ *
+ * @component
+ * @param {Object} props - The props object.
+ * @param {React.ReactNode} props.children - The child components to render if authenticated.
+ * @returns {React.ReactNode} The rendered component.
+ *
+ * @example
+ * <PrivateRoute>
+ *   <Dashboard />
+ * </PrivateRoute>
+ */
 const PrivateRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 

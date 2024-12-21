@@ -12,6 +12,72 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { createNotification } from "../../services/notificationService";
 
+/**
+ * ManageFlights component for managing flight information.
+ *
+ * This component allows users to create, update, and view a list of flights.
+ * It includes a form for adding new flights or editing existing ones, and a guide modal for instructions.
+ *
+ * @component
+ * @example
+ * return (
+ *   <ManageFlights />
+ * )
+ *
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @function
+ * @name ManageFlights
+ *
+ * @property {Object} flightData - The state object containing flight information.
+ * @property {string} flightData.flight_number - The flight number.
+ * @property {string} flightData.airplane_id - The airplane ID.
+ * @property {string} flightData.departure_airport_id - The departure airport ID.
+ * @property {string} flightData.arrival_airport_id - The arrival airport ID.
+ * @property {string} flightData.departure_time - The departure time.
+ * @property {string} flightData.arrival_time - The arrival time.
+ * @property {string} flightData.flight_duration - The flight duration.
+ * @property {string} flightData.status - The flight status.
+ * @property {string} flightData.available_seats - The number of available seats.
+ * @property {string} flightData.price - The flight price.
+ *
+ * @property {Array} flights - The state array containing the list of flights.
+ *
+ * @property {boolean} isModalOpen - The state boolean indicating if the modal is open.
+ * @property {boolean} isGuideOpen - The state boolean indicating if the guide modal is open.
+ *
+ * @property {Object|null} selectedFlight - The state object containing the selected flight information or null if no flight is selected.
+ *
+ * @function handleInputChange
+ * @description Handles input changes in the form and updates the flightData state.
+ * @param {Object} e - The event object.
+ *
+ * @function handleFormSubmit
+ * @description Handles form submission for creating or updating a flight.
+ * @param {Object} e - The event object.
+ *
+ * @function handleFlightClick
+ * @description Handles the click event on a flight to edit it.
+ * @param {Object} flight - The flight object.
+ *
+ * @function handleAddNewFlight
+ * @description Handles the event to add a new flight.
+ *
+ * @function handleCloseModal
+ * @description Handles the event to close the modal.
+ *
+ * @function toggleGuide
+ * @description Toggles the guide modal.
+ *
+ * @requires getFlights - Function to fetch the list of flights.
+ * @requires createFlight - Function to create a new flight.
+ * @requires updateFlightAndNotify - Function to update an existing flight and notify users.
+ * @requires AdminSidebar - Component for the admin sidebar.
+ * @requires FlightList - Component for displaying the list of flights.
+ * @requires FontAwesomeIcon - Component for displaying font awesome icons.
+ * @requires faQuestionCircle - Font awesome question circle icon.
+ * @requires styles - CSS module for styling the component.
+ */
 const ManageFlights = () => {
   const [selectedFlight, setSelectedFlight] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

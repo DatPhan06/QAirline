@@ -11,6 +11,34 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 
+/**
+ * AdminSidebar component renders the sidebar for the admin panel.
+ * It includes navigation links to various admin functionalities and a logout button.
+ * The sidebar can be toggled open or closed on mouse enter/leave events.
+ *
+ * @component
+ * @example
+ * return (
+ *   <AdminSidebar />
+ * )
+ *
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @function
+ * @name AdminSidebar
+ *
+ * @description
+ * - Uses `useNavigate` hook from `react-router-dom` for navigation.
+ * - Uses `useState` hook from `react` to manage sidebar open/close state.
+ * - `handleLogout` function removes the admin token from local storage and navigates to the admin login page.
+ * - `handleSidebarToggle` function toggles the sidebar open/close state and adds/removes the shifted class from the main content.
+ *
+ * @dependencies
+ * - `react-router-dom` for navigation.
+ * - `react` for state management.
+ * - `styles` for CSS module styles.
+ * - `FaInfoCircle`, `FaPlane`, `FaMapMarkerAlt`, `FaClipboardList`, `FaChartBar`, `FaUserShield`, `FaSignOutAlt` from `react-icons/fa` for icons.
+ */
 const AdminSidebar = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

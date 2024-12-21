@@ -1,12 +1,94 @@
-/* PromotionDetail.module.css */
 .promotionDetailContainer {
-  padding: 20px;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 40px;
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.promotionDetailContainer h1 {
+.promotionDetailContainer:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+.promotionHeader {
+  margin-bottom: 30px;
+}
+
+.promotionHeader h1 {
+  font-size: 2.5rem;
+  color: #0d5777;
+  margin-bottom: 10px;
+  position: relative;
+  font-weight: 700;
+}
+
+.promotionHeader h1::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, #0d5777, #2193b0);
+  border-radius: 2px;
+}
+
+.discount {
+  font-size: 1.8rem;
+  color: #e74c3c;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.promotionContent {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.description {
+  font-size: 1.2rem;
+  color: #4a5568;
+  line-height: 1.8;
   margin-bottom: 20px;
 }
 
-.promotionDetailContainer p {
-  margin: 10px 0;
+.dates {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  color: #2d3748;
+  border-top: 1px solid #edf2f7;
+  padding-top: 20px;
+}
+
+.dates p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .promotionDetailContainer {
+    padding: 20px;
+  }
+
+  .promotionHeader h1 {
+    font-size: 2rem;
+  }
+
+  .discount {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .dates {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

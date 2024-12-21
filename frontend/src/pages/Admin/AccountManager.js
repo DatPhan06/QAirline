@@ -8,6 +8,39 @@ import {
 import AdminSidebar from "../../components/AdminSidebar";
 import styles from "./AccountManager.module.css";
 
+/**
+ * AccountManager component manages the admin accounts.
+ * It allows fetching, creating, updating, and deleting admin accounts.
+ * It also handles the display of a modal for adding or editing an admin.
+ *
+ * @component
+ * @example
+ * return (
+ *   <AccountManager />
+ * )
+ *
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @function
+ * @name AccountManager
+ *
+ * @property {Array} admins - The list of admin accounts.
+ * @property {Function} setAdmins - Function to set the list of admin accounts.
+ * @property {Object|null} selectedAdmin - The currently selected admin for editing.
+ * @property {Function} setSelectedAdmin - Function to set the selected admin.
+ * @property {Object} adminData - The data of the admin being added or edited.
+ * @property {Function} setAdminData - Function to set the admin data.
+ * @property {boolean} isModalOpen - State to control the visibility of the modal.
+ * @property {Function} setIsModalOpen - Function to set the modal visibility.
+ *
+ * @function useEffect - Fetches the list of admins when the component mounts.
+ * @function handleInputChange - Handles input changes in the admin form.
+ * @function handleFormSubmit - Handles form submission for adding or updating an admin.
+ * @function handleAdminClick - Handles the click event for editing an admin.
+ * @function handleAddNewAdmin - Handles the event for adding a new admin.
+ * @function handleDeleteAdmin - Handles the event for deleting an admin.
+ * @function handleCloseModal - Handles the event for closing the modal.
+ */
 const AccountManager = () => {
   const [admins, setAdmins] = useState([]);
   const [selectedAdmin, setSelectedAdmin] = useState(null);

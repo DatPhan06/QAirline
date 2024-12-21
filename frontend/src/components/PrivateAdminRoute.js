@@ -2,6 +2,24 @@ import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 
+/**
+ * PrivateAdminRoute component to protect admin routes.
+ *
+ * This component checks if the user is authenticated as an admin by verifying
+ * the presence of a valid admin token in local storage and making an API call
+ * to validate the token. If the user is authenticated, it renders the child
+ * components; otherwise, it redirects to the admin login page.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The child components to render if authenticated.
+ * @returns {React.ReactNode} The rendered component.
+ *
+ * @example
+ * <PrivateAdminRoute>
+ *   <AdminDashboard />
+ * </PrivateAdminRoute>
+ */
 const PrivateAdminRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 

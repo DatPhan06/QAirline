@@ -35,6 +35,78 @@ import { getCurrentAdmin } from "../../services/adminService";
 import AdminSidebar from "../../components/AdminSidebar";
 import styles from "./PostInfo.module.css";
 
+/**
+ * Component for managing various types of information in the admin panel.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * return (
+ *   <PostInfo />
+ * )
+ *
+ * @typedef {Object} FormData
+ * @property {string} [title] - The title of the post.
+ * @property {string} [content] - The content of the post.
+ * @property {string} [description] - The description of the promotion.
+ * @property {number} [discount_percentage] - The discount percentage of the promotion.
+ * @property {string} [start_date] - The start date of the promotion.
+ * @property {string} [end_date] - The end date of the promotion.
+ * @property {string} [type] - The type of notification.
+ * @property {number} [user_id] - The ID of the user for the notification.
+ * @property {number} [flight_id] - The ID of the flight for the notification.
+ *
+ * @typedef {Object} AdminData
+ * @property {number} admin_id - The ID of the current admin.
+ *
+ * @typedef {Object} Item
+ * @property {number} [info_id] - The ID of the general info item.
+ * @property {number} [news_id] - The ID of the news item.
+ * @property {number} [promotion_id] - The ID of the promotion item.
+ * @property {number} [notification_id] - The ID of the notification item.
+ * @property {string} [title] - The title of the item.
+ * @property {string} [content] - The content of the item.
+ * @property {string} [description] - The description of the promotion.
+ * @property {number} [discount_percentage] - The discount percentage of the promotion.
+ * @property {string} [start_date] - The start date of the promotion.
+ * @property {string} [end_date] - The end date of the promotion.
+ * @property {string} [type] - The type of notification.
+ * @property {number} [user_id] - The ID of the user for the notification.
+ * @property {number} [flight_id] - The ID of the flight for the notification.
+ * @property {string} [created_at] - The creation date of the item.
+ * @property {string} [updated_at] - The last update date of the item.
+ *
+ * @typedef {Object} Section
+ * @property {string} generalInfo - The general information section.
+ * @property {string} news - The news section.
+ * @property {string} promotions - The promotions section.
+ * @property {string} notifications - The notifications section.
+ *
+ * @typedef {Object} Styles
+ * @property {string} formGroup - The form group style.
+ * @property {string} inputGroup - The input group style.
+ * @property {string} adminContainer - The admin container style.
+ * @property {string} adminSidebar - The admin sidebar style.
+ * @property {string} mainContent - The main content style.
+ * @property {string} sectionTabs - The section tabs style.
+ * @property {string} active - The active tab style.
+ * @property {string} searchContainer - The search container style.
+ * @property {string} searchInput - The search input style.
+ * @property {string} createButton - The create button style.
+ * @property {string} modal - The modal style.
+ * @property {string} modalContent - The modal content style.
+ * @property {string} closeButton - The close button style.
+ * @property {string} itemCard - The item card style.
+ * @property {string} itemHeader - The item header style.
+ * @property {string} actions - The actions style.
+ * @property {string} editButton - The edit button style.
+ * @property {string} deleteButton - The delete button style.
+ * @property {string} itemContent - The item content style.
+ * @property {string} guideButton - The guide button style.
+ * @property {string} guide - The guide style.
+ * @property {string} modalOverlay - The modal overlay style.
+ */
 const PostInfo = () => {
   const [activeSection, setActiveSection] = useState("generalInfo");
   const [data, setData] = useState([]);

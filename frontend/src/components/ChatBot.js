@@ -9,6 +9,36 @@ import { sendMessage } from "../services/chatService";
 import ReactMarkdown from "react-markdown";
 import styles from "./ChatBot.module.css";
 
+/**
+ * ChatBot component renders a chatbot interface with a toggle button to open/close the chat window.
+ * It allows users to send messages and receive responses from the bot.
+ *
+ * @component
+ * @example
+ * return (
+ *   <ChatBot />
+ * )
+ *
+ * @returns {JSX.Element} The rendered ChatBot component.
+ *
+ * @function
+ * @name ChatBot
+ *
+ * @description
+ * - Uses `useState` to manage the state of the chat window, messages, input message, and loading status.
+ * - Uses `useRef` to reference the end of the messages container for scrolling.
+ * - Uses `useEffect` to scroll to the bottom of the messages container whenever messages change.
+ * - Handles form submission to send user messages and receive bot responses.
+ *
+ * @property {boolean} isOpen - State to manage the visibility of the chat window.
+ * @property {Array} messages - State to store the list of chat messages.
+ * @property {string} inputMessage - State to store the current input message.
+ * @property {boolean} isLoading - State to manage the loading status while waiting for bot response.
+ * @property {Object} messagesEndRef - Reference to the end of the messages container for scrolling.
+ *
+ * @method scrollToBottom - Scrolls the messages container to the bottom.
+ * @method handleSubmit - Handles the form submission to send user messages and receive bot responses.
+ */
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
