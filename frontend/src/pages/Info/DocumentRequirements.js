@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./DocumentRequirements.module.css";
 
 const DocumentRequirements = () => {
-  const [activeSection, setActiveSection] = useState(null);
+  const [activeSection, setActiveSection] = useState(1);
 
   const sections = [
     {
@@ -30,17 +30,17 @@ const DocumentRequirements = () => {
           </p>
           <p> Quy định xuất nhập cảnh tại Việt Nam</p>
           <ul>
-            <li> 1. Đối tượng nhập cảnh 
+            <li> Đối tượng nhập cảnh 
                 Tất cả hành khách (Đã tiêm phòng đầy đủ, không/chưa tiêm phòng đầy đủ) đều được phép nhập cảnh vào Anh khi có các giấy tờ nhập cảnh hợp lệ. </li>
 
-            <li> 2. Các biểu mẫu và Ứng dụng: Không yêu cầu</li>
+            <li> Các biểu mẫu và Ứng dụng: Không yêu cầu</li>
 
-            <li>3. Bảo hiểm sức khỏe: Không yêu cầu</li>
+            <li>Bảo hiểm sức khỏe: Không yêu cầu</li>
             
-            <li>4. Yêu cầu về xét nghiệm COVID-19: 
+            <li>Yêu cầu về xét nghiệm COVID-19: 
             Không yêu cầu
             </li>
-            <li>5. Yêu cầu về cách ly: Không yêu cầu</li>
+            <li>Yêu cầu về cách ly: Không yêu cầu</li>
           </ul>
 
           <p>
