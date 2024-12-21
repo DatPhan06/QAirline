@@ -163,6 +163,12 @@ const ViewBookings = () => {
     return groupedData;
   };
 
+  // Add handleBookingClick function
+  const handleBookingClick = (booking) => {
+    setSelectedBooking(booking);
+    setIsModalOpen(true);
+  };
+
   if (!stats) {
     return <p>Đang tải dữ liệu thống kê...</p>;
   }

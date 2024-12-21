@@ -22,7 +22,7 @@ class UserBase(BaseModel):
     full_name: str
     phone: Optional[str] = None  # Đảm bảo phone là chuỗi hoặc None
     address: Optional[str] = None
-    date_of_birth: Optional[str] = None
+    date_of_birth: Optional[datetime] = None
 
 
 class UserCreate(UserBase):
@@ -68,7 +68,7 @@ class User(UserBase):
     user_id: int
     phone: Optional[str] = None
     address: Optional[str] = None
-    date_of_birth: Optional[str] = None
+    date_of_birth: Optional[datetime] = None
 
     class Config:
         orm_mode = True
