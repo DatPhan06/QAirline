@@ -1,12 +1,10 @@
 /* Container chính */
 .container {
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background : white;
+  background-image: url('../../assets/images/back.png');
   background-size: cover;
-  font-family: 'Segoe UI', 'Arial', sans-serif;
-  padding: 40px 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 40px 40px;
 }
 
 /* Content layout */
