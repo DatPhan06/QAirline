@@ -8,7 +8,6 @@
   flex-direction: column;
   min-height: 100vh;
   font-family: 'Montserrat', sans-serif;
-  background-image: url("../../assets/images/back.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -21,7 +20,7 @@
 }
 
 .header h1 {
-  font-size: 28px;
+  font-size: 38px;
   font-weight: 700;
   margin-bottom: 10px;
 }
@@ -121,8 +120,8 @@
 
 /* Phần cuối - Footer */
 .footer {
-  background-color: #fcf4d9;
-  border-top: 1px solid #ffeeba;
+  background-color: #f4f1ea;
+  border-top: 1px solid #5f4a0b;
   padding: 20px 30px;
   max-width: 1000px;
   margin: 20px auto;
@@ -131,7 +130,7 @@
 
 .footer h3 {
   margin-top: 0;
-  color: #ff9900;
+  color: #ff7300;
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 10px;

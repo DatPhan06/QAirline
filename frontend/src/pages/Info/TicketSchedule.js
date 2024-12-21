@@ -32,7 +32,7 @@ const TicketSchedule = () => {
   return (
     <div className={styles.container}>
       <FlightList flights={flights} onFlightClick={handleSelectFlight} />
-      {selectedFlight && <FlightDetails flight={selectedFlight} />}
+      {selectedFlight && <FlightDetails flight={selectedFlight}  className = {styles.detail}/>}
     </div>
   );
 };
