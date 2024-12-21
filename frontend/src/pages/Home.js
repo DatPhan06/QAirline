@@ -5,6 +5,33 @@ import FlightList from "../components/FlightList";
 import Slideshow from "../components/SlideShow";
 import { getFlights } from "../services/flightService";
 
+/**
+ * Home component renders the main page of the QAirline application.
+ * It includes a slideshow, a list of flights, a modal for flight details,
+ * a flight search component, an email signup form, and a list of popular destinations.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Home component.
+ *
+ * @example
+ * return (
+ *   <Home />
+ * )
+ *
+ * @function
+ * @name Home
+ *
+ * @description
+ * - Fetches flight data on component mount using useEffect.
+ * - Manages state for flights, selected flight, and modal visibility using useState.
+ * - Handles flight selection and modal close actions.
+ *
+ * @property {Array} slideshowImages - Array of image paths for the slideshow.
+ * @property {Array} popularDestinations - Array of popular destination objects with id, name, and image.
+ *
+ * @property {function} handleFlightClick - Handles the selection of a flight and opens the modal.
+ * @property {function} handleCloseModal - Closes the modal and resets the selected flight.
+ */
 const Home = () => {
   const [flights, setFlights] = useState([]);
   const [selectedFlight, setSelectedFlight] = useState(null);
