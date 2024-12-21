@@ -3,9 +3,10 @@
 /* Blue-Gray Color Palette */
 .flightExperience {
   padding: 80px 60px;
-  background-color: #f7f9fc; /* Light Blue-Gray Background */
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #2c3e50; /* Dark Blue-Gray Text */
+  color: #324c66; /* Dark Blue-Gray Text */
+  width: 1200px;
+  margin: 0 auto;
 }
 
 .headerSection {
@@ -25,7 +26,7 @@
   content: '';
   width: 120px;
   height: 6px;
-  background-color: #3498db; /* Bright Blue Accent */
+  background-color: #133d59; /* Bright Blue Accent */
   display: block;
   margin: 15px auto 0;
   border-radius: 3px;
@@ -33,7 +34,7 @@
 
 .headerSubtitle {
   font-size: 1.3rem;
-  color: #7f8c8d; /* Light Gray Text */
+  color: #f9f7f396; /* Light Gray Text */
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -78,7 +79,7 @@
 
 .categoryButton {
   padding: 10px 20px;
-  background-color: #ecf0f1; /* Light Gray */
+  background-color: #f9f7f383; /* Light Gray */
   border: none;
   border-radius: 25px;
   cursor: pointer;
@@ -101,7 +102,7 @@
 }
 
 .newsItem {
-  background-color: #ffffff; /* White Background */
+  background-color: #ffffff95; /* White Background */
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle Shadow */
   overflow: hidden;
@@ -151,7 +152,7 @@
 }
 
 .newsItem:hover .title {
-  color: #3498db; /* Bright Blue on Hover */
+  color: #083a5c; /* Bright Blue on Hover */
 }
 
 .description {
@@ -176,7 +177,7 @@
 
 .subscribeSection {
   text-align: center;
-  background-color: #ffffff; /* White Background */
+  background-color: #ffffffcd; /* White Background */
   padding: 50px 30px;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle Shadow */
@@ -228,7 +229,7 @@
 }
 
 .subscribeButton:hover {
-  background-color: #2980b9; /* Darker Blue on Hover */
+  background-color: #0b3856; /* Darker Blue on Hover */
   transform: translateY(-3px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Enhanced Shadow on Hover */
 }

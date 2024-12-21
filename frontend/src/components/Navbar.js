@@ -184,7 +184,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className={styles.subMenuItem}>
-                <Link to="/qairline/news" className={styles.subMenuLink}>
+                <Link to="/explore/flight-experience" className={styles.subMenuLink}>
                   Tin tức
                 </Link>
               </li>
@@ -207,7 +207,7 @@ const Navbar = () => {
               </li>
               <li className={styles.subMenuItem}>
                 <Link
-                  to="/explore/flight-experience"
+                  to="/qairline/news"
                   className={styles.subMenuLink}
                 >
                   Trải nghiệm bay
