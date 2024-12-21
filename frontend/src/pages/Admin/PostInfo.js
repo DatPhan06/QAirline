@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faQuestionCircle,
+  faEdit,
+  faTrash,
+  faPlus,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   getGeneralInfo,
   createGeneralInfo,
@@ -36,6 +44,7 @@ const PostInfo = () => {
   const [editId, setEditId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -375,6 +384,100 @@ const PostInfo = () => {
     }
   };
 
+  const toggleGuide = () => {
+    setIsGuideOpen(!isGuideOpen);
+  };
+
+  const renderGuide = () => (
+    <div className={styles.guide}>
+      <h2>Hướng dẫn sử dụng trang Quản lý thông tin</h2>
+      <p>
+        Trang này cho phép bạn quản lý các loại thông tin khác nhau của hệ
+        thống. Dưới đây là hướng dẫn chi tiết:
+      </p>
+
+      <section>
+        <h3>1. Các loại thông tin</h3>
+        <ul>
+          <li>
+            <strong>Thông tin chung:</strong>
+            <ul>
+              <li>Thông tin cơ bản về hãng hàng không</li>
+              <li>Chính sách và quy định chung</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Tin tức:</strong>
+            <ul>
+              <li>Tin tức mới về hoạt động của hãng</li>
+              <li>Sự kiện và thông báo quan trọng</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Khuyến mãi:</strong>
+            <ul>
+              <li>Các chương trình giảm giá</li>
+              <li>Ưu đãi đặc biệt cho khách hàng</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Thông báo:</strong>
+            <ul>
+              <li>Thông báo cho người dùng cụ thể</li>
+              <li>Thông báo về chuyến bay</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>2. Chức năng chính</h3>
+        <ul>
+          <li>
+            <strong>Tạo mới:</strong>
+            <ul>
+              <li>Nhấn nút "Thêm mới"</li>
+              <li>Điền đầy đủ thông tin theo mẫu</li>
+              <li>Nhấn "Lưu" để hoàn tất</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Chỉnh sửa:</strong>
+            <ul>
+              <li>Nhấn vào nút "Sửa" trên mục cần chỉnh sửa</li>
+              <li>Cập nhật thông tin trong form</li>
+              <li>Nhấn "Lưu thay đổi" để hoàn tất</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Xóa:</strong>
+            <ul>
+              <li>Nhấn nút "Xóa" trên mục cần xóa</li>
+              <li>Xác nhận xóa trong hộp thoại</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>3. Tìm kiếm và Lọc</h3>
+        <ul>
+          <li>Sử dụng ô tìm kiếm để lọc nội dung</li>
+          <li>Chọn loại thông tin từ các tab phía trên</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>4. Lưu ý quan trọng</h3>
+        <ul>
+          <li>Đảm bảo đăng nhập với tài khoản admin</li>
+          <li>Kiểm tra kỹ thông tin trước khi đăng</li>
+          <li>Nội dung phải tuân thủ quy định của hãng</li>
+        </ul>
+      </section>
+    </div>
+  );
+
   return (
     <div className={styles.adminContainer}>
       <div className={styles.adminSidebar}>
@@ -382,7 +485,16 @@ const PostInfo = () => {
       </div>
 
       <div className={styles.mainContent}>
-        <h1>Quản lý thông tin</h1>
+        <h1>
+          Quản lý thông tin
+          <button
+            className={styles.guideButton}
+            onClick={toggleGuide}
+            title="Xem hướng dẫn"
+          >
+            <FontAwesomeIcon icon={faQuestionCircle} />
+          </button>
+        </h1>
         <div className={styles.sectionTabs}>
           <button
             className={`${
@@ -570,6 +682,19 @@ const PostInfo = () => {
             </div>
           </div>
         ))}
+        {isGuideOpen && (
+          <div className={styles.modalOverlay} onClick={toggleGuide}>
+            <div
+              className={styles.modalContent}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className={styles.closeButton} onClick={toggleGuide}>
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
+              {renderGuide()}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

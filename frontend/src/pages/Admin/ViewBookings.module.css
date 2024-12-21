@@ -404,6 +404,7 @@
   font-weight: 700;
   margin: 20px 0 10px;
   background: linear-gradient(45deg, #0d5777, #2193b0);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
