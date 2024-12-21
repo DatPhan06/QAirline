@@ -43,19 +43,67 @@ const ManageAirports = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Validate input data
+      if (
+        !airportData.name ||
+        !airportData.city ||
+        !airportData.country ||
+        !airportData.iataCode ||
+        !airportData.icaoCode
+      ) {
+        alert("Vui lòng điền đầy đủ thông tin sân bay");
+        return;
+      }
+
+      // Validate IATA code format (3 letters)
+      if (!/^[A-Z]{3}$/.test(airportData.iataCode.toUpperCase())) {
+        alert("Mã IATA phải có đúng 3 ký tự chữ");
+        return;
+      }
+
+      // Validate ICAO code format (4 letters)
+      if (!/^[A-Z]{4}$/.test(airportData.icaoCode.toUpperCase())) {
+        alert("Mã ICAO phải có đúng 4 ký tự chữ");
+        return;
+      }
+
+      const formattedData = {
+        ...airportData,
+        iata_code: airportData.iataCode.toUpperCase(),
+        icao_code: airportData.icaoCode.toUpperCase(),
+      };
+
       if (selectedAirport) {
-        await updateAirport(selectedAirport.airport_id, airportData);
+        // Update existing airport
+        await updateAirport(selectedAirport.airport_id, formattedData);
         alert("Sân bay đã được cập nhật thành công!");
       } else {
-        const newAirport = await createAirport(airportData);
+        // Create new airport
+        await createAirport(formattedData);
         alert("Sân bay mới đã được thêm thành công!");
       }
+
+      // Close modal and refresh airport list
       setIsModalOpen(false);
       const updatedAirports = await getAirports();
       setAirports(updatedAirports);
+
+      // Reset form data
+      setAirportData({
+        name: "",
+        city: "",
+        country: "",
+        iataCode: "",
+        icaoCode: "",
+      });
+      setSelectedAirport(null);
     } catch (error) {
       console.error("Error submitting airport data:", error);
-      alert("Cập nhật sân bay thất bại. Vui lòng thử lại.");
+      if (error.response?.data?.detail) {
+        alert(`Lỗi: ${error.response.data.detail}`);
+      } else {
+        alert("Cập nhật sân bay thất bại. Vui lòng thử lại.");
+      }
     }
   };
 
@@ -65,8 +113,8 @@ const ManageAirports = () => {
       name: airport.name,
       city: airport.city,
       country: airport.country,
-      iataCode: airport.iataCode,
-      icaoCode: airport.icaoCode,
+      iataCode: airport.iata_code,
+      icaoCode: airport.icao_code,
     });
     setIsModalOpen(true);
   };

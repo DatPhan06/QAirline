@@ -139,3 +139,58 @@
 .pagination span {
   font-size: 1rem;
 }
+
+/* Hover effect cho hàng trong bảng */
+.airportRow {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.airportRow:hover {
+  background-color: #f5f5f5;
+}
+
+/* Modal styling */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
+  max-width: 500px;
+  position: relative;
+}
+
+.modalClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modalHeader {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
