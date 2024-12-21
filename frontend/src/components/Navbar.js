@@ -14,6 +14,58 @@ import Markdown from "markdown-to-jsx";
  * @component
  * @returns {JSX.Element} Thành phần Navbar.
  */
+/**
+ * Navbar component that renders the navigation bar with various menu items and user account options.
+ * It also handles fetching notifications and user data, and displays notifications in a modal.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Navbar component.
+ *
+ * @example
+ * return (
+ *   <Navbar />
+ * )
+ *
+ * @function
+ * @name Navbar
+ *
+ * @description
+ * The Navbar component manages the state for menu and notification toggles, fetches user data and notifications,
+ * and displays them in a dropdown and modal. It also provides navigation links for different sections of the application.
+ *
+ * @property {boolean} isMenuOpen - State to track if the menu is open.
+ * @property {function} setIsMenuOpen - Function to set the state of isMenuOpen.
+ * @property {boolean} isNotificationOpen - State to track if the notification dropdown is open.
+ * @property {function} setIsNotificationOpen - Function to set the state of isNotificationOpen.
+ * @property {Array} notifications - State to store the list of notifications.
+ * @property {function} setNotifications - Function to set the state of notifications.
+ * @property {Object|null} currentUser - State to store the current user data.
+ * @property {function} setCurrentUser - Function to set the state of currentUser.
+ * @property {Object|null} selectedNotification - State to store the selected notification for the modal.
+ * @property {function} setSelectedNotification - Function to set the state of selectedNotification.
+ * @property {boolean} isModalOpen - State to track if the notification modal is open.
+ * @property {function} setIsModalOpen - Function to set the state of isModalOpen.
+ * @property {string|null} token - The authentication token retrieved from localStorage.
+ * @property {boolean} isLoggedIn - Boolean indicating if the user is logged in.
+ *
+ * @method fetchNotifications
+ * @description Fetches notifications from the server and updates the notifications state.
+ *
+ * @method fetchUserAndNotifications
+ * @description Fetches the current user data and their notifications if the user is logged in.
+ *
+ * @method toggleNotification
+ * @description Toggles the state of the notification dropdown.
+ *
+ * @method toggleMenu
+ * @description Toggles the state of the menu.
+ *
+ * @method handleNotificationClick
+ * @description Handles the click event on a notification item, sets the selected notification, and opens the modal.
+ *
+ * @method handleCloseModal
+ * @description Handles the event to close the notification modal.
+ */
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);

@@ -5,6 +5,35 @@ import { getAirports } from "../services/airportService";
 import { getFlights } from "../services/flightService";
 // FlightList không được sử dụng trong FlightSearch nên có thể loại bỏ nếu không cần
 
+/**
+ * FlightSearch component allows users to search for flights based on various criteria.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * return (
+ *   <FlightSearch />
+ * )
+ *
+ * @description
+ * The FlightSearch component provides a form for users to search for flights.
+ * Users can select the trip type (one-way or round-trip), departure and arrival locations,
+ * departure date, return date (if round-trip), and the number of passengers.
+ * The component fetches airport and flight data on mount and handles form submission
+ * to navigate to the booking page with the search parameters.
+ *
+ * @function
+ * @name FlightSearch
+ *
+ * @requires useState
+ * @requires useEffect
+ * @requires useNavigate
+ * @requires getAirports
+ * @requires getFlights
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 const FlightSearch = () => {
   const [departure, setDeparture] = useState("");
   const [arrival, setArrival] = useState("");
@@ -39,7 +68,12 @@ const FlightSearch = () => {
     }
 
     // Validate required fields
-    if (!departure || !arrival || !date || (tripType === "round-trip" && !returnDate)) {
+    if (
+      !departure ||
+      !arrival ||
+      !date ||
+      (tripType === "round-trip" && !returnDate)
+    ) {
       alert("Vui lòng điền đầy đủ thông tin tìm kiếm");
       return;
     }
@@ -53,9 +87,9 @@ const FlightSearch = () => {
           tripType,
           departureDate: date,
           returnDate,
-          passengers
-        }
-      }
+          passengers,
+        },
+      },
     });
   };
 
@@ -91,7 +125,9 @@ const FlightSearch = () => {
         {/* Container cho phần "Từ" và "Đến" */}
         <div className={styles.fromToContainer}>
           <div className={styles.formGroup}>
-            <label htmlFor="departure" className={styles.label}>Từ</label>
+            <label htmlFor="departure" className={styles.label}>
+              Từ
+            </label>
             <select
               id="departure"
               value={departure}
@@ -108,7 +144,9 @@ const FlightSearch = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="arrival" className={styles.label}>Đến</label>
+            <label htmlFor="arrival" className={styles.label}>
+              Đến
+            </label>
             <select
               id="arrival"
               value={arrival}
@@ -128,7 +166,9 @@ const FlightSearch = () => {
         {/* Container cho phần Ngày đi và Ngày về */}
         <div className={styles.dateContainer}>
           <div className={styles.formGroup}>
-            <label htmlFor="date" className={styles.label}>Ngày đi</label>
+            <label htmlFor="date" className={styles.label}>
+              Ngày đi
+            </label>
             <input
               type="date"
               id="date"
@@ -140,7 +180,9 @@ const FlightSearch = () => {
 
           {tripType === "round-trip" && (
             <div className={styles.formGroup}>
-              <label htmlFor="returnDate" className={styles.label}>Ngày về</label>
+              <label htmlFor="returnDate" className={styles.label}>
+                Ngày về
+              </label>
               <input
                 type="date"
                 id="returnDate"
@@ -155,7 +197,9 @@ const FlightSearch = () => {
         {/* Passenger Selection */}
         <div className={styles.passengerContainer}>
           <div className={styles.formGroup}>
-            <label htmlFor="passengers" className={styles.label}>Số hành khách</label>
+            <label htmlFor="passengers" className={styles.label}>
+              Số hành khách
+            </label>
             <input
               type="number"
               id="passengers"

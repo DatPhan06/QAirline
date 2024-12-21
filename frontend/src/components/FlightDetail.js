@@ -12,6 +12,35 @@ import {
 
 import styles from "./FlightDetail.module.css";
 
+/**
+ * FlightDetail component displays detailed information about a flight, including
+ * flight details, airplane information, and a seat map with ticket selection functionality.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {Object} props.flight - Flight object containing flight details
+ * @param {string} props.flight.flight_id - Unique identifier for the flight
+ * @param {string} props.flight.flight_number - Flight number
+ * @param {Object} props.flight.departure_airport - Departure airport details
+ * @param {string} props.flight.departure_airport.name - Departure airport name
+ * @param {string} props.flight.departure_airport.iata_code - Departure airport IATA code
+ * @param {Date} props.flight.departure_time - Departure time
+ * @param {Object} props.flight.arrival_airport - Arrival airport details
+ * @param {string} props.flight.arrival_airport.name - Arrival airport name
+ * @param {string} props.flight.arrival_airport.iata_code - Arrival airport IATA code
+ * @param {Date} props.flight.arrival_time - Arrival time
+ * @param {string} props.flight.flight_duration - Flight duration
+ * @param {string} props.flight.status - Flight status
+ * @param {number} props.flight.available_seats - Number of available seats
+ * @param {Object} props.flight.airplane - Airplane details
+ * @param {string} props.flight.airplane.model - Airplane model
+ * @param {string} props.flight.airplane.manufacturer - Airplane manufacturer
+ * @param {number} props.flight.airplane.seat_capacity - Airplane seat capacity
+ * @param {number} props.flight.airplane.year_of_manufacture - Year of manufacture
+ * @param {string} props.flight.airplane.status - Airplane status
+ *
+ * @returns {JSX.Element} JSX element representing the flight detail component
+ */
 const FlightDetail = ({ flight }) => {
   const [tickets, setTickets] = useState([]);
   const [filteredTickets, setFilteredTickets] = useState([]);

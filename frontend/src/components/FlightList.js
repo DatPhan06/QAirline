@@ -2,6 +2,30 @@ import React, { useState, useEffect } from "react";
 import styles from "./FlightList.module.css";
 
 // FlightList.js
+/**
+ * FlightList component renders a list of flights with pagination and search functionality.
+ *
+ * @component
+ * @param {Object[]} flights - Array of flight objects to be displayed.
+ * @param {function} onFlightClick - Callback function to handle click events on a flight row.
+ *
+ * @example
+ * const flights = [
+ *   {
+ *     flight_id: 1,
+ *     flight_number: "VN123",
+ *     departure_airport: { iata_code: "SGN" },
+ *     departure_time: "2023-10-10T10:00:00Z",
+ *     flight_duration: "2h 30m",
+ *     arrival_airport: { iata_code: "HAN" },
+ *     arrival_time: "2023-10-10T12:30:00Z",
+ *     price: 1500000
+ *   },
+ *   // more flights
+ * ];
+ * const handleFlightClick = (flight) => console.log(flight);
+ * <FlightList flights={flights} onFlightClick={handleFlightClick} />
+ */
 const FlightList = ({ flights, onFlightClick }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
