@@ -120,68 +120,137 @@
   .fullWidth h2::after {
     width: 250px; /* Đường kẻ dài hơn cho frame đầu */
   }
+  
+/* Fullscreen service styles */
+.serviceContent {
+  max-width: 900px; 
+  margin: 40px auto;
+  padding: 60px 70px; /* Tăng padding để tạo không gian thoải mái hơn */
+  background: linear-gradient(145deg, #ffffff, #f1f2f3);
+  border-radius: 30px;
+  box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(13, 87, 119, 0.08),
+      inset 0 0 25px rgba(255, 255, 255, 0.6); /* Inner shadow mềm mại hơn */
+  position: relative;
+  border: none;
+  overflow: hidden;
+}
 
-  /* Background images for each frame */
+.serviceContent h2 {
+  color: #0d5777;
+  font-size: 2.6rem; /* Tăng kích thước chữ */
+  margin-bottom: 10px;
+  text-align: center;
+  position: relative;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  z-index: 1;
+}
+
+.serviceContent h3 {
+  color: #1a8098;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.serviceContent p {
+  color: #4a5568;
+  line-height: 1.8;
+  font-size: 1.2rem;
+  letter-spacing: 0.4px;
+  margin-bottom: 20px;
+}
+
+.serviceContent ul {
+  background: rgba(248, 249, 250, 0.85);
+  padding: 30px 45px;
+  border-radius: 20px;
+  margin: 25px 0;
+  border: 1px solid rgba(13, 87, 119, 0.12);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.serviceContent li {
+  color: #4a5568;
+  margin-bottom: 18px;
+  position: relative;
+  padding-left: 30px;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.serviceContent li:before {
+  content: "\2022"; /* Thay đổi bullet thành ký hiệu unicode */
+  color: #0d5777;
+  position: absolute;
+  left: 0;
+  font-size: 1.6rem;
+  top: 0;
+}
+
+.serviceContent li:hover {
+  transform: translateX(8px);
+  transition: transform 0.3s ease, color 0.3s ease;
+  color: #1a8098;
+}
+
+.priceSection {
+  background: linear-gradient(145deg, #ffffff, #f7f8fa);
+  padding: 40px;
+  border-radius: 25px;
+  margin: 40px 0;
+  border: 1px solid rgba(13, 87, 119, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+}
+
+.bookButton {
+  display: inline-block;
+  padding: 18px 45px;
+  background: linear-gradient(135deg, #0d5777, #1a8098);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 35px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 35px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(13, 87, 119, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.bookButton:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(13, 87, 119, 0.4);
+  background: linear-gradient(135deg, #1a8098, #0d5777);
+}
+
+.backButton {
+  display: block;
+  margin: 40px auto;
+  padding: 18px 40px;
+  background: linear-gradient(135deg, #e7c150, #b7950b);
+  color: #ffffff;
+  border: none;
+  border-radius: 35px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(183, 149, 11, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.backButton:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(183, 149, 11, 0.4);
+  background: linear-gradient(135deg, #b7950b, #e7c150);
+}
 
   
-  /* Fullscreen service styles */
-  .fullscreenService {
-    min-height: 100vh;
-    padding: 40px;
-    background: #f5f5f5;
-  }
-  
-  .serviceContent {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .serviceContent h2 {
-    color: #0d5777;
-    margin-bottom: 20px;
-  }
-  
-  .serviceContent ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .serviceContent li {
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .backButton {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background: #0d5777;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .backButton:hover {
-    background: #0a4561;
-  }
-  
-  @media (max-width: 768px) {
-    .servicesGrid {
-      grid-template-columns: 1fr;
-    }
-    
-    .serviceFrame {
-      height: 150px;
-    }
-    
-    .fullWidth {
-      height: 200px;
-    }
-  }

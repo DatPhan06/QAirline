@@ -36,12 +36,11 @@ const CheckIn = () => {
     <div className={styles.container}>
       {/* Phần đầu - Thông tin giới thiệu */}
       <header className={styles.header}>
-        <h1>Làm thủ tục tại sân bay</h1>
+        <h1>HƯỚNG DẪN LÀM THỦ TỤC CHUYẾN BAY</h1>
         <p>
           Để hành trình với QAirline được bắt đầu suôn sẻ và thuận lợi, Quý khách vui lòng lưu ý một số thông
           tin dưới đây khi làm thủ tục tại sân bay:
         </p>
-        <h2>Hướng dẫn làm thủ tục tại sân bay</h2>
       </header>
 
       {/* Phần giữa - Các bước làm thủ tục */}

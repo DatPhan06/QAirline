@@ -85,6 +85,7 @@ const CancelTicket = () => {
   };
 
   return (
+    <div className = {styles.pageIf}> 
     <div className={styles.container}>
       {/* Phần 1: Lựa chọn Hạng vé */}
       <section className={styles.ticketSelectionSection}>
@@ -135,6 +136,7 @@ const CancelTicket = () => {
         <p> Tất cả các phí trên đã bao gồm VAT (ngoại trừ giá vé của em bé dưới 2 tuổi). </p>
         <p>Phí hoàn vé, phí thay đổi chuyến bay/ hành trình, phí đảo trật tự họ tên áp dụng theo đầu vé (phí/ 1 người/1 lần đổi)</p>
       </section>
+    </div>
     </div>
   );
 };

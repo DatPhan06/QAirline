@@ -1,8 +1,15 @@
+.pageIf {
+  background-image: url('../../assets/images/back.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 10px 40px;
+}
+
 /* Container chính */
 .container {
   max-width: 1200px;
   margin: 40px auto;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -21,7 +28,7 @@
   flex-direction: column;
   gap: 15px;
   min-width: 250px;
-  background: #0c213c;
+  background: #E3E0DA;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -39,23 +46,27 @@
   transition: all 0.3s ease;
   text-align: left;
   font-weight: 100;
-}
-
-.ticketButton:hover {
-  background: #f0f0f0;
-  transform: translateY(-2px);
+  background: transparent;
+  border: none;
+  border-left: 4px solid transparent;
 }
 
 .ticketButton.active {
   background: #0d5777;
   color: white;
-  border-color: #0d5777;
+  border-left-color: #ffd700;
 }
+
+.ticketButton:hover {
+  background: #edf2f7;
+  color: #2d3748;
+}
+
 
 /* Bảng thông tin chi tiết bên phải */
 .ticketDetails {
   flex: 1;
-  background: white;
+  background: #f9f7f3; /* Gradient nhẹ từ trắng sang xám nhạt */
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -75,7 +86,6 @@
 }
 
 .ticketTable th {
-  background: #f8f9fa;
   font-weight: 600;
   color: #333;
   width: 30%;

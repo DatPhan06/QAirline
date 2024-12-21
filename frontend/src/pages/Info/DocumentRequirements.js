@@ -166,19 +166,6 @@ const DocumentRequirements = () => {
 
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <header className={styles.header}>
-        <div className={styles.logoContainer}>
-          <img src=".images/ylogo.png" alt="QAirline Logo" className={styles.logo} />
-        </div>
-        <nav className={styles.nav}>
-          <ul>
-            <li><a href="/">Trang Chủ</a></li>
-            <li><a href="/about">Giới Thiệu</a></li>
-            <li><a href="/contact">Liên Hệ</a></li>
-          </ul>
-        </nav>
-      </header>
 
       {/* Nội dung chính */}
       <main>
