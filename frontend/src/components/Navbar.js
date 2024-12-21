@@ -151,11 +151,11 @@ const Navbar = () => {
                   Dịch Vụ Đặc Biệt
                 </Link>
               </li>
-              <li className={styles.subMenuItem}>
+              {/* <li className={styles.subMenuItem}>
                 <Link to="/info/baggage" className={styles.subMenuLink}>
                   Hành Lý
                 </Link>
-              </li>
+              </li> */}
               <li className={styles.subMenuItem}>
                 <Link to="/info/check-in" className={styles.subMenuLink}>
                   Hướng dẫn thủ Tục

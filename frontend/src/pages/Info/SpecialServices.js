@@ -10,15 +10,44 @@ const SpecialServices = () => {
       title: "Chọn Chỗ Ngồi Yêu Thích",
       content: (
         <div className={styles.serviceContent}>
-          <h2>Chọn Chỗ Ngồi Yêu Thích</h2>
-          <p>Tận hưởng chuyến bay thoải mái với vị trí ghế như ý</p>
+          <h2>Tận hưởng chuyến bay với vị trí ghế như ý !</h2>
+          
+          <h3>Các lựa chọn ghế ngồi:</h3>
           <ul>
-            <li>Ghế gần cửa sổ - Ngắm nhìn bầu trời</li>
-            <li>Ghế cạnh lối đi - Dễ dàng di chuyển</li>
-            <li>Hàng ghế đầu - Không gian để chân rộng rãi</li>
+            <li>Ghế gần cửa sổ - Ngắm nhìn bầu trời mây trắng</li>
+            <li>Ghế cạnh lối đi - Dễ dàng di chuyển trong suốt chuyến bay</li>
+            <li>Hàng ghế đầu - Không gian để chân rộng rãi thoải mái</li>
             <li>Ghế gần cửa thoát hiểm - Thêm không gian để chân</li>
+            <li>Ghế khu vực yên tĩnh - Phù hợp nghỉ ngơi</li>
+            <li>Ghế gần bếp - Được phục vụ suất ăn sớm</li>
           </ul>
-          <p>Giá dịch vụ: Từ 50.000 VND - 200.000 VND tùy vị trí</p>
+
+          <h3>Ưu điểm:</h3>
+          <ul>
+            <li>Đặt trước để có vị trí ưa thích</li>
+            <li>Ngồi cùng nhóm/gia đình</li>
+            <li>Thoải mái hơn trong suốt chuyến bay</li>
+            <li>Ưu tiên lên máy bay trước</li>
+          </ul>
+
+          <div className={styles.priceSection}>
+            <h3>Bảng giá tham khảo:</h3>
+            <ul>
+              <li>Ghế thường: 50.000 VND</li>
+              <li>Ghế cạnh lối đi: 100.000 VND</li>
+              <li>Ghế cửa sổ: 150.000 VND</li> 
+              <li>Ghế khu vực yên tĩnh: 180.000 VND</li>
+              <li>Ghế hàng đầu: 200.000 VND</li>
+            </ul>
+          </div>
+
+          <div className={styles.noteSection}>
+            <p><strong>Lưu ý:</strong> Giá có thể thay đổi tùy theo chuyến bay và thời điểm đặt vé</p>
+          </div>
+
+          <Link to="/booking/book-ticket" className={styles.bookButton}>
+            Đặt vé ngay
+          </Link>
         </div>
       )
     },
