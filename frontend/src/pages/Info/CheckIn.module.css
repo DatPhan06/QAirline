@@ -20,6 +20,7 @@
 }
 
 .header h1 {
+  color: #062844;
   font-size: 38px;
   font-weight: 700;
   margin-bottom: 10px;
@@ -35,47 +36,47 @@
 /* Phần giữa - Main */
 .main {
   display: flex;
-  flex: 1;
-  padding: 5px;
-  max-width: 1000px;
+  gap:0;
+  max-width: 1200px;
   margin: 0 auto; /* Trung tâm hóa nội dung */
   width: 100%;
+  background-image: url("../../assets/images/tk6.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
 }
 
 .sidebar {
-  width: 220px;
-  background-color: #13374f;
-  padding: 20px;
+  width: 300px;
+  padding: 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  border-radius: 12px 0 0 12px;
 }
 
 .button {
-  display: flex;
-  align-items: center;
   width: 100%;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  background-color: #F9F7F3;
+  padding: 15px 20px;
+  text-align: left;
+  background: transparent;
   border: none;
   border-left: 4px solid transparent;
-  border-radius: 6px;
+  font-size: 1rem;
+  color: #4a5568;
   cursor: pointer;
-  transition: background-color 0.3s, border-left-color 0.3s, box-shadow 0.3s;
-  font-size: 14px;
-  color: #333333;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 .button:hover {
-  background-color: #e6f0ff;
-  border-left-color: #002147;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background: #edf2f7;
+  color: #2d3748;
 }
 
 .active {
-  background-color: #D0A932;
-  color: #3e3d3d;
-  border-left-color: #ffcc00; /* Accent color for active step */
+  background: #0d5777;
+  color: white;
+  border-left-color: #ffd700;
 }
 
 .icon {
@@ -98,9 +99,8 @@
 .content {
   flex: 1;
   padding: 20px 30px;
-  background-color: #F9F7F3;
-  border-radius: 8px;
-  margin-left: 20px;
+  background-color: #ffffff74;
+  border-radius: 0 12px 12px 0;;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -120,7 +120,7 @@
 
 /* Phần cuối - Footer */
 .footer {
-  background-color: #f4f1ea;
+  background-color: #e4e4e4;
   border-top: 1px solid #5f4a0b;
   padding: 20px 30px;
   max-width: 1000px;
