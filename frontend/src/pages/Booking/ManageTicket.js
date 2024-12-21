@@ -229,8 +229,13 @@ const ManageTicket = () => {
                           <time>
                             {new Date(
                               selectedBooking.flight.departure_time
+                            ).toLocaleDateString()}
+                          </time>      
+                          <p>
+                            {new Date(
+                              selectedBooking.flight.departure_time
                             ).toLocaleTimeString()}
-                          </time>
+                          </p>                     
                         </div>
 
                         <div className={styles.flightPath}>
@@ -250,8 +255,13 @@ const ManageTicket = () => {
                           <time>
                             {new Date(
                               selectedBooking.flight.arrival_time
-                            ).toLocaleTimeString()}
+                            ).toLocaleDateString()}
                           </time>
+                          <p>
+                            {new Date(
+                              selectedBooking.flight.arrival_time
+                            ).toLocaleTimeString()}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -262,11 +272,9 @@ const ManageTicket = () => {
                         <strong>{selectedBooking.user.full_name}</strong>
                       </div>
                       <div className={styles.detail}>
-                        <span>Ngày bay</span>
+                        <span>Thời gian bay</span>
                         <strong>
-                          {new Date(
-                            selectedBooking.flight.departure_time
-                          ).toLocaleDateString()}
+                          {selectedBooking.flight.flight_duration}
                         </strong>
                       </div>
                       <div className={styles.detail}>
