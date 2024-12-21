@@ -40,6 +40,26 @@
   border-radius: 2px;
 }
 
+.sectionTitle input[type="text"] {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 250px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.sectionTitle input[type="text"]:focus {
+  outline: none;
+  border-color: #0d5777;
+  box-shadow: 0 0 5px rgba(13, 87, 119, 0.2);
+}
+
+.sectionTitle input[type="text"]::placeholder {
+  color: #999;
+}
+
 /* Bảng chuyến bay */
 .flightTable {
   width: 100%;
