@@ -5,17 +5,6 @@ import {
   getBookingStatsByMonth,
   getGeneralStats,
 } from "../../services/adminService";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
 import AdminSidebar from "../../components/AdminSidebar";
 import BookingChart from "../../components/BookingChart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -220,64 +209,80 @@ const ViewBookings = () => {
         </div>
 
         <div className={styles.bookingsListContainer}>
-          <h2>Danh Sách Đặt Vé</h2>
-          {/* Thanh tìm kiếm */}
-          <div className={styles.searchContainer}>
+          <h2 className={styles.sectionTitle}>
+            DANH SÁCH ĐẶT VÉ
             <input
               type="text"
               placeholder="Tìm kiếm đặt vé..."
               value={searchQuery}
-              onChange={handleSearchChange}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className={styles.searchInput}
             />
-          </div>
+          </h2>
           {filteredBookings.length === 0 ? (
             <p>Không có đặt vé nào.</p>
           ) : (
             <div>
-              <table className={styles.bookingsTable}>
+              <table className={styles.bookingTable}>
                 <thead>
                   <tr>
-                    <th>ID Đặt Vé</th>
-                    <th>User ID</th>
-                    <th>Flight ID</th>
-                    <th>Giá</th>
-                    <th>Trạng Thái</th>
-                    <th>Ngày Đặt</th>
+                    <th title="Mã đặt vé">Mã đặt vé</th>
+                    <th title="Thông tin khách hàng">Khách hàng</th>
+                    <th title="Thông tin chuyến bay">Chuyến bay</th>
+                    <th title="Số ghế">Ghế</th>
+                    <th title="Giá vé">Giá (VND)</th>
+                    <th title="Trạng thái đặt vé">Trạng thái</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentBookings.map((booking) => (
                     <tr
                       key={booking.booked_ticket_id}
-                      onClick={() => handleRowClick(booking)}
-                      className={styles.tableRow}
+                      onClick={() => handleBookingClick(booking)}
                     >
                       <td>{booking.booked_ticket_id}</td>
-                      <td>{booking.user_id}</td>
-                      <td>{booking.flight_id}</td>
-                      <td>{booking.price.toLocaleString()} VND</td>
-                      <td>{booking.status}</td>
                       <td>
-                        {new Date(booking.booking_time).toLocaleDateString()}
+                        {booking.user?.full_name}
+                        <br />
+                        <span className={styles.subInfo}>
+                          {booking.user?.email}
+                        </span>
                       </td>
+                      <td>
+                        {booking.flight?.flight_number}
+                        <br />
+                        <span className={styles.subInfo}>
+                          {new Date(
+                            booking.flight?.departure_time
+                          ).toLocaleString()}
+                        </span>
+                      </td>
+                      <td>{booking.seat?.seat_number}</td>
+                      <td>{booking.price?.toLocaleString()}</td>
+                      <td>{booking.status}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
               <div className={styles.pagination}>
                 <button
-                  onClick={() => handlePageChange(currentPage - 1)}
+                  className={styles.pageButton}
+                  onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
                 >
                   Trang trước
                 </button>
                 <span>
-                  Trang {currentPage} / {totalPages}
+                  Trang {currentPage} /{" "}
+                  {Math.ceil(filteredBookings.length / bookingsPerPage)}
                 </span>
                 <button
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
+                  className={styles.pageButton}
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                  disabled={
+                    currentPage ===
+                    Math.ceil(filteredBookings.length / bookingsPerPage)
+                  }
                 >
                   Trang sau
                 </button>

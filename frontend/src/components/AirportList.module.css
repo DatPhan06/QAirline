@@ -1,11 +1,13 @@
+/* Container cho danh sách sân bay */
 .airportListContainer {
   width: 100%;
   max-width: 1200px;
   margin: 40px auto;
   padding: 20px;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  background: #fff;
-  box-sizing: border-box;
+  background-image: url("../assets/images/tk4.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 20px;
 }
 
 .noAirports {
@@ -16,6 +18,7 @@
   font-style: italic;
 }
 
+/* Tiêu đề phần */
 .sectionTitle {
   font-size: 2rem;
   font-weight: 700;
@@ -24,7 +27,6 @@
   margin-bottom: 25px;
   letter-spacing: 1px;
   position: relative;
-  padding-bottom: 10px;
 }
 
 .sectionTitle::after {
@@ -49,13 +51,13 @@
   font-size: 1rem;
 }
 
+/* Bảng sân bay */
 .airportTable {
   width: 100%;
   border-collapse: collapse;
   font-size: 1rem;
   color: #333;
   margin-bottom: 40px;
-  background-color: #fdfdfd;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
@@ -69,6 +71,23 @@
   padding: 14px 10px;
   text-align: left;
   border-bottom: 2px solid #0d5777;
+  position: relative;
+}
+
+.airportTable th:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in-out;
 }
 
 .airportTable tbody td {
@@ -80,6 +99,18 @@
 .airportTable tbody tr:hover {
   background: #f7faff;
   cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
 
 .pagination {
@@ -107,4 +138,59 @@
 
 .pagination span {
   font-size: 1rem;
+}
+
+/* Hover effect cho hàng trong bảng */
+.airportRow {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.airportRow:hover {
+  background-color: #f5f5f5;
+}
+
+/* Modal styling */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
+  max-width: 500px;
+  position: relative;
+}
+
+.modalClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modalHeader {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }

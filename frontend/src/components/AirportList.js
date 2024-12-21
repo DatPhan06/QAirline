@@ -5,12 +5,22 @@ import styles from "./AirportList.module.css";
 const AirportList = ({ airports, onAirportClick }) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedAirport, setSelectedAirport] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const airportsPerPage = 10;
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleEditClick = (airport) => {
-    // navigate(`/admin/edit-airport/${airport.airport_id}`);
-    return;
+    setSelectedAirport(airport);
+    setShowModal(true);
+    if (onAirportClick) {
+      onAirportClick(airport);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedAirport(null);
   };
 
   const handleSearchChange = (e) => {
