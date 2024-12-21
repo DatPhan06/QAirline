@@ -152,46 +152,34 @@ const FlightDetail = ({ flight }) => {
 
       <div className={styles.infoContainer}>
         {/* Flight Information */}
-        <div className={styles.flightInfo}>
-          <h3 className={styles.subSectionTitle}>Thông tin chuyến bay</h3>
-          <div className={styles.infoGrid}>
-            <p>
-              <strong>Số hiệu:</strong> {flight.flight_number}
-            </p>
-            <p>
-              <strong>Khởi hành:</strong> {flight.departure_airport.name}
-            </p>
-            <p>
-              <strong>Điểm đến:</strong> {flight.arrival_airport.name}
-            </p>
-            <p>
-              <strong>Thời gian bay:</strong> {flight.departure_time}
-            </p>
-            <p>
-              <strong>Thời gian đến:</strong> {flight.arrival_time}
-            </p>
+        <div className={styles.flightCard}>
+          <div className={styles.flightHeader}>
+            <h3>Thông tin chuyến bay</h3>
+            <span className={styles.flightNumber}>{flight.flight_number}</span>
           </div>
-        </div>
 
-        {/* Airplane Information */}
-        <div className={styles.airplaneInfo}>
-          <h3 className={styles.subSectionTitle}>Thông tin máy bay</h3>
-          <div className={styles.infoGrid}>
-            <p>
-              <strong>Model:</strong> {flight.airplane.model}
-            </p>
-            <p>
-              <strong>Nhà sản xuất:</strong> {flight.airplane.manufacturer}
-            </p>
-            <p>
-              <strong>Sức chứa:</strong> {flight.airplane.seat_capacity}
-            </p>
-          </div>
-        </div>
-      </div>
+          <div className={styles.flightRoute}>
+            <div className={styles.routePoint}>
+              <div className={styles.airportInfo}>
+                <span className={styles.airportName}>
+                  {flight.departure_airport.name}
+                </span>
+                <span className={styles.iataCode}>
+                  ({flight.departure_airport.iata_code})
+                </span>
+              </div>
+              <div className={styles.timeInfo}>
+                <span className={styles.time}>
+                  {new Date(flight.departure_time).toLocaleTimeString()}
+                </span>
+                <span className={styles.date}>
+                  {new Date(flight.departure_time).toLocaleDateString()}
+                </span>
+              </div>
+            </div>
 
-      {/* Ticket Class Selection */}
-      {/* <div className={styles.ticketClassSelection}>
+            {/* Ticket Class Selection */}
+            {/* <div className={styles.ticketClassSelection}>
         <select
           className={styles.selectClass}
           value={selectedClass}
@@ -206,18 +194,90 @@ const FlightDetail = ({ flight }) => {
         </select>
       </div> */}
 
+            <div className={styles.routeConnection}>
+              <div className={styles.flightDuration}>
+                <span>{flight.flight_duration}</span>
+              </div>
+              <div className={styles.flightLine}></div>
+            </div>
+
+            <div className={styles.routePoint}>
+              <div className={styles.airportInfo}>
+                <span className={styles.airportName}>
+                  {flight.arrival_airport.name}
+                </span>
+                <span className={styles.iataCode}>
+                  ({flight.arrival_airport.iata_code})
+                </span>
+              </div>
+              <div className={styles.timeInfo}>
+                <span className={styles.time}>
+                  {new Date(flight.arrival_time).toLocaleTimeString()}
+                </span>
+                <span className={styles.date}>
+                  {new Date(flight.arrival_time).toLocaleDateString()}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.flightStatus}>
+            <div className={styles.statusItem}>
+              <span className={styles.label}>Trạng thái</span>
+              <span className={`${styles.status} ${styles[flight.status]}`}>
+                {flight.status}
+              </span>
+            </div>
+            <div className={styles.statusItem}>
+              <span className={styles.label}>Số ghế trống</span>
+              <span className={styles.seats}>{flight.available_seats}</span>
+            </div>
+          </div>
+        </div>
+        {/* Airplane Information */}
+        <div className={styles.airplaneCard}>
+          <div className={styles.airplaneHeader}>
+            <h3>Thông tin máy bay</h3>
+            <span className={styles.modelNumber}>{flight.airplane.model}</span>
+          </div>
+
+          <div className={styles.airplaneDetails}>
+            <div className={styles.detailItem}>
+              <span className={styles.label}>Hãng sản xuất</span>
+              <span className={styles.value}>
+                {flight.airplane.manufacturer}
+              </span>
+            </div>
+            <div className={styles.detailItem}>
+              <span className={styles.label}>Sức chứa</span>
+              <span className={styles.value}>
+                {flight.airplane.seat_capacity} ghế
+              </span>
+            </div>
+            <div className={styles.detailItem}>
+              <span className={styles.label}>Năm sản xuất</span>
+              <span className={styles.value}>
+                {flight.airplane.year_of_manufacture}
+              </span>
+            </div>
+            <div className={styles.detailItem}>
+              <span className={styles.label}>Tình trạng</span>
+              <span
+                className={`${styles.status} ${styles[flight.airplane.status]}`}
+              >
+                {flight.airplane.status}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Seat Map */}
       {filteredTickets.length > 0 && (
         <div className={styles.ticketListContainer}>
-          <h2 className={styles.sectionTitle}>
-            Danh sách vé 
-          </h2>
-          {isLoading && (
-            <p className={styles.loading}>Đang xử lý đặt chỗ...</p>
-          )}
-          {bookingError && (
-            <p className={styles.error}>{bookingError}</p>
-          )}
+          <h2 className={styles.sectionTitle}>Danh sách vé</h2>
+          {isLoading && <p className={styles.loading}>Đang xử lý đặt chỗ...</p>}
+          {bookingError && <p className={styles.error}>{bookingError}</p>}
           <div className={styles.seatMap}>
             {/* Cockpit */}
             <div className={styles.cockpit}>Khoang Phi Công</div>
@@ -227,7 +287,10 @@ const FlightDetail = ({ flight }) => {
               <div className={styles.classSection}>
                 <h3 className={styles.classTitle}>Hạng Thương Gia</h3>
                 {businessRows.map((row, rowIndex) => (
-                  <div key={`business-row-${rowIndex}`} className={styles.seatRow}>
+                  <div
+                    key={`business-row-${rowIndex}`}
+                    className={styles.seatRow}
+                  >
                     {/* Left Section */}
                     <div className={styles.seatSection}>
                       {row.left.map((ticket) => (
@@ -268,12 +331,11 @@ const FlightDetail = ({ flight }) => {
                     </div>
                   </div>
                 ))}
-                  {/* Bathroom in Business Class */}
-                  <div className={styles.Busbathroom}> 🚻 </div>
+                {/* Bathroom in Business Class */}
+                <div className={styles.Busbathroom}> 🚻 </div>
 
-                  {/* Exit Door in Business Class */}
-                  <div className={styles.Busdoor}>⬅️ ➡️
-                  </div>
+                {/* Exit Door in Business Class */}
+                <div className={styles.Busdoor}>⬅️ ➡️</div>
               </div>
             )}
 
@@ -282,7 +344,10 @@ const FlightDetail = ({ flight }) => {
               <div className={styles.classSection}>
                 <h3 className={styles.classTitle}>Hạng Phổ Thông</h3>
                 {economyRows.map((row, rowIndex) => (
-                  <div key={`economy-row-${rowIndex}`} className={styles.seatRow}>
+                  <div
+                    key={`economy-row-${rowIndex}`}
+                    className={styles.seatRow}
+                  >
                     {/* Left Section */}
                     <div className={styles.seatSection}>
                       {row.left.map((ticket) => (
@@ -324,7 +389,7 @@ const FlightDetail = ({ flight }) => {
                   </div>
                 ))}
                 {/* Bathroom in Economy Class */}
-              <div className={styles.Ecombathroom}>🚻</div>
+                <div className={styles.Ecombathroom}>🚻</div>
               </div>
             )}
 
