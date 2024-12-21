@@ -1,95 +1,225 @@
-/* Profile.module.css */
+/* SignIn.module.css */
 
-/* Container tổng thể */
 .container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 80px 20px;
-  background-color: #f0f2f5;
-  font-family: "Roboto", sans-serif;
+  height: 100vh; 
 }
 
-/* Tiêu đề trang */
 .title {
-  font-size: 2.5rem;
-  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.loginBox {
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 1200px; /* Reduced width for better fit */
+  border-radius: 12px; /* Thêm thuộc tính này để bo tròn các góc */
+  width: 90%;
+}
+
+.imageContainer {
+  width: 50%;
+  background-color: #d0e8f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.formContainer {
+  flex: 1;
+  padding: 30px; /* Reduced padding for smaller size */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 24px; /* Adjusted size for emphasis */
   color: #333;
-  margin-bottom: 50px;
+  margin-bottom: 20px; /* Adjusted margin */
+  text-align: center;
 }
 
-/* Form thông tin cá nhân */
-.profileForm {
-  background-color: #fff;
-  padding: 50px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased gap between fields and buttons */
+}
+
+.inputField {
   width: 100%;
-  max-width: 600px;
-}
-
-/* Nhãn cho các trường */
-.label {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 10px;
-  font-weight: 500;
-}
-
-/* Input chung */
-.input {
-  width: 100%;
-  padding: 15px;
-  border: 1px solid #d0d7de;
-  border-radius: 8px;
-  font-size: 1rem;
-  margin-bottom: 25px;
+  padding: 10px; /* Adjusted padding */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px; /* Slightly smaller font size */
   outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: border-color 0.3s;
 }
 
-.input:focus {
-  border-color: #1d72b8;
-  box-shadow: 0 0 8px rgba(29, 114, 184, 0.2);
+.inputField:focus {
+  border-color: #3cb4b4;
 }
 
-/* Nút cập nhật */
-.updateButton {
+.submitButton {
   width: 100%;
-  padding: 16px;
-  background-color: #1d72b8;
+  padding: 12px;
+  background-color: #3cb4b4;
   color: #fff;
   border: none;
+  font-size: 1rem;
   border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.updateButton:hover {
-  background-color: #1663a2;
+.submitButton:hover {
+  background-color: #349b9b;
 }
 
-/* Form đổi mật khẩu */
-.passwordForm {
-  background-color: #fff;
-  padding: 50px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 600px;
-  margin-top: 20px;
+.quenMatKhau {
+  color: #3cb4b4;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 12px; /* Reduced font size */
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
-/* Responsive cho màn hình nhỏ */
+.socialLogin {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Adjusted gap for better alignment */
+  margin-top: 20px; /* Adjusted margin */
+}
+
+.socialLogin img {
+  width: 30px; /* Set icon size */
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.socialLogin img:hover {
+  transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+.otherLogins {
+  margin-top: 15px; /* Reduced margin */
+  text-align: center;
+}
+
+.or {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0; /* Reduced margin */
+}
+
+.line1,
+.line2 {
+  flex: 1;
+  height: 1px;
+  background-color: #ddd;
+}
+
+.or2 {
+  margin: 0 8px; /* Reduced margin */
+  font-size: 12px; /* Smaller font size */
+  color: #666;
+}
+
+.frame3 img {
+  width: 25px; /* Smaller icon size */
+  height: 25px;
+  margin: 0 8px; /* Reduced margin */
+  cursor: pointer;
+}
+
+.chuaCoTaiKhoan {
+  text-align: center;
+  margin-top: 15px; /* Reduced margin */
+  font-size: 12px; /* Smaller font size */
+  color: #666;
+}
+
+.dangKy {
+  color: #3cb4b4;
+  font-weight: bold;
+  margin-left: 5px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.dangKy:hover {
+  color: #349b9b;
+}
+
+.customerCare {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Reduced gap */
+  margin-top: 15px; /* Reduced margin */
+}
+
+.customerCare a {
+  font-size: 12px; /* Smaller font size */
+  color: #3cb4b4;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.customerCare a:hover {
+  color: #349b9b;
+}
+
+.line3 {
+  height: 3px; /* Reduced height */
+  background-color: #3cb4b4;
+  margin-top: 20px; /* Reduced margin */
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .container {
-    padding: 60px 15px;
+  .loginBox {
+    flex-direction: column;
+    max-width: 100%;
   }
 
-  .profileForm,
-  .passwordForm {
-    padding: 40px 25px;
+  .imageContainer {
+    width: 100%;
+    height: 200px; /* Adjust height for smaller screens */
+  }
+
+  .formContainer {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .inputField {
+    font-size: 1rem;
+  }
+
+  .submitButton {
+    font-size: 1rem;
   }
 }
