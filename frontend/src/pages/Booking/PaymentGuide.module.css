@@ -9,19 +9,22 @@
 /* Content layout */
 .content {
   display: flex;
-  gap: 40px;
+  gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
-  background: #f9f7f3;
-  border-radius: 12px;
+  background: #ffff;
+  border-radius: 20px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  background-image: url("../../assets/images/tk6.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* Left section - Button area */
 .buttons {
   width: 300px;
-  background: #e3e0da;
+  /* background: #F9F7F3; */
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -58,7 +61,8 @@
 .frame {
   flex: 1;
   padding: 30px;
-  background: #f9f7f3; /* Gradient nhẹ từ trắng sang xám nhạt */
+  background: #ffffff74; 
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* Content sections */
@@ -77,21 +81,35 @@
 }
 
 .frame ol {
-  padding: 0;
+  padding-left: 20px;
+  counter-reset: item;
 }
 
-.frame ol li{
-  color: #4a5568;
-  padding: 10px 0;
-  padding-left: 25px;
+.frame ol li {
   position: relative;
+  padding: 12px 0 12px 35px;
+  margin-bottom: 8px;
+  color: #4a5568;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  counter-increment: item;
 }
 
-.frame ol li::before {
-  color: #0d5777;
-  font-weight: bold;
-  position: absolute;
-  left: 0;
+.frame ol li:hover {
+  transform: translateX(8px);
+  transition: transform 0.3s ease;
+  color: #2d3748;
+}
+
+/* Style cho sub-list nếu có */
+.frame ol ol {
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.frame ol ol li::before {
+  background-color: #4a90e2;
+  font-size: 0.8rem;
 }
 
 /* Responsive design */
