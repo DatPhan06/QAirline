@@ -1,206 +1,103 @@
-/* DocumentRequirements.module.css */
-
+/* Container chính */
 .container {
-  margin: 0 auto;
-  font-family: 'Roboto', sans-serif;
-  color: #2c3e50;
-  background-color: #f5f7fa;
+  max-width: 1200px;
+  margin: 40px auto;
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.mainContent {
   display: flex;
-  flex-direction: column;
+  min-height: 600px;
 }
 
-/* Nội dung chính */
-main {
-  flex: 1;
-  padding: 40px 20px;
+/* Sidebar chứa các nút */
+.sidebar {
+  width: 280px;
+  background: #F9F7F3;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 30px 0;
 }
 
-.title {
-  text-align: center;
-  font-size: 3em;
-  margin-bottom: 20px;
-  color: #34495e;
-}
-
-.description {
-  text-align: center;
-  font-size: 1.2em;
-  margin-bottom: 50px;
-  color: #7f8c8d;
-}
-
-.sections {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
-}
-
-.card {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  width: 320px;
-  padding: 25px 20px;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-}
-
-.cardTitle {
-  font-size: 1.6em;
-  margin-bottom: 20px;
-  color: #2c3e50;
-}
-
-.viewButton {
-  background-color: #2980b9;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  padding: 12px 30px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s;
-}
-
-.viewButton:hover {
-  background-color: #1c5980;
-}
-
-/* Footer */
-.footer {
-  background-color: #34495e;
-  color: #ecf0f1;
-  padding: 20px 40px;
-}
-
-.footerContent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.footerLinks {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-.footerLinks a {
-  text-decoration: none;
-  color: #ecf0f1;
-  transition: color 0.3s;
-}
-
-.footerLinks a:hover {
-  color: #bdc3c7;
-}
-
-/* Overlay và Modal */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
+/* Style cho các nút */
+.button {
   width: 100%;
-  height: 100%;
-  background-color: rgba(44, 62, 80, 0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal {
-  background-color: #fff;
-  width: 90%;
-  max-width: 900px;
-  max-height: 90%;
-  overflow-y: auto;
-  border-radius: 10px;
-  position: relative;
-  padding: 40px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.closeButton {
-  position: absolute;
-  top: 20px;
-  right: 30px;
+  padding: 16px 25px;
   background: transparent;
   border: none;
-  font-size: 2em;
-  color: #7f8c8d;
+  border-left: 4px solid transparent;
+  text-align: left;
+  font-size: 1rem;
+  color: #4a5568;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
+  position: relative;
+  font-weight: 500;
 }
 
-.closeButton:hover {
-  color: #2c3e50;
+.button:hover {
+  background: linear-gradient(to right, #edf2f7 0%, transparent 100%);
+  color: #2d3748;
 }
 
+.button.active {
+  background: #0D5777;
+  color: white;
+  border-left-color: #ffd700;
+}
+
+.button.active::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 6px solid #fff;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+/* Content frame */
 .content {
-  font-size: 1.1em;
-  color: #2c3e50;
+  flex: 1;
+  padding: 40px 50px;
+  background: #ffffff;
 }
 
+/* Style cho nội dung trong content */
 .content h2 {
-  font-size: 2em;
-  margin-bottom: 30px;
-  color: #2980b9;
+  color: #1a202c;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  font-weight: 600;
 }
 
 .content p {
+  color: #4a5568;
   line-height: 1.8;
   margin-bottom: 20px;
+  font-size: 1.1rem;
 }
 
-.content ul,
-.content ol {
-  margin-left: 20px;
-  margin-bottom: 20px;
+.content ul {
+  color: #4a5568;
+  line-height: 1.8;
+  margin: 20px 0;
+  padding-left: 20px;
 }
 
 .content li {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 20px;
 }
 
-.content a {
-  color: #e74c3c;
-  text-decoration: underline;
+.content li::before {
+  content: '•';
+  color: #0d5777;
+  position: absolute;
+  left: 0;
   font-weight: bold;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.content a:hover {
-  color: #c0392b;
-}
-
-@media (max-width: 768px) {
-  .modal {
-    padding: 20px;
-  }
-
-  .content h2 {
-    font-size: 1.5em;
-  }
-
-  .card {
-    width: 100%;
-  }
-
-  .footerContent {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .footerLinks {
-    margin-top: 10px;
-  }
 }
