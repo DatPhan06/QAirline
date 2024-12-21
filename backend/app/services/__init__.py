@@ -12,3 +12,4 @@ from .promotion_service import *
 from .flight_log_service import *
 from .admin_service import *
 from .airplane_service import *
+from .location_service import *

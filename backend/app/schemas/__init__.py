@@ -11,5 +11,5 @@ from .promotion import PromotionBase, PromotionCreate, Promotion
 from .flight_log import FlightLogBase, FlightLogCreate, FlightLog
 from .admin import AdminBase, AdminCreate, AdminUpdate, Admin
 from .airplane import AirplaneBase, AirplaneCreate, Airplane
-from .location import LocationSchema
+from .location import LocationBase, LocationCreate, LocationUpdate, Location
 from .chat import ChatRequest

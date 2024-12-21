@@ -21,8 +21,8 @@ class Location(Base):
 
     __tablename__ = "locations"
 
-    location_id = Column(Integer, autoincrement=True, unique=True)
-    city = Column(String(100), primary_key=True)
+    location_id = Column(Integer, autoincrement=True, primary_key=True, unique=True)
+    city = Column(String(100))
     country = Column(String(100))
     screen = Column(String(255))
     food = Column(String(255))
