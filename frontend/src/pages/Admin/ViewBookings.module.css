@@ -69,11 +69,74 @@
 }
 
 /* Danh sách đặt vé */
-.bookingsListContainer {
-  background: #fff;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.bookingListContainer {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  background-image: url("../../assets/images/tk4.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.sectionTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #333;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.searchInput {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 250px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #0d5777;
+  box-shadow: 0 0 5px rgba(13, 87, 119, 0.2);
+}
+
+.bookingTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.bookingTable thead th {
+  background: #0d5777;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  padding: 14px 10px;
+  text-align: left;
+  border-bottom: 2px solid #0d5777;
+}
+
+.bookingTable tbody td {
+  border-bottom: 1px solid #e3e9ef;
+  padding: 14px 10px;
+  vertical-align: top;
+}
+
+.bookingTable tbody tr:hover {
+  background: #f7faff;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 /* Thanh tìm kiếm */
@@ -296,6 +359,85 @@
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Individual stat card */
+.statCard {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 25px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.statCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(31, 38, 135, 0.25);
+}
+
+/* Stat card title */
+.statCard h2 {
+  color: #1a374d;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.statCard h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 40px;
+  height: 3px;
+  background: #0d5777;
+  border-radius: 2px;
+}
+
+/* Stat card value */
+.statCard p {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 20px 0 10px;
+  background: linear-gradient(45deg, #0d5777, #2193b0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Different colors for each stat card */
+.statCard:nth-child(1) {
+  background: linear-gradient(135deg, #ffffff 0%, #e8f4ff 100%);
+}
+
+.statCard:nth-child(2) {
+  background: linear-gradient(135deg, #ffffff 0%, #fff4e6 100%);
+}
+
+.statCard:nth-child(3) {
+  background: linear-gradient(135deg, #ffffff 0%, #e6ffe6 100%);
+}
+
+/* Add icons to stats */
+.statCard {
+  position: relative;
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: "";
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(13, 87, 119, 0.1);
+  border-radius: 50%;
+  z-index: 0;
 }
 
 /* Responsive Design */
