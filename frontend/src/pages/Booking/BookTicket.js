@@ -7,48 +7,6 @@ import { getAirports } from "../../services/airportService";
 import { getCurrentUser } from "../../services/userService";
 import FlightDetail from "../../components/FlightDetail";
 
-/**
- * Component for booking a flight ticket.
- *
- * @component
- * @returns {JSX.Element} The rendered component.
- *
- * @example
- * <BookTicket />
- *
- * @description
- * This component allows users to search for flights, select a trip type (one-way or round-trip),
- * choose departure and arrival airports, select departure and return dates, and specify the number of passengers.
- * It fetches user data, available flights, and airports from the server and displays matching flights based on the search criteria.
- *
- * @typedef {Object} Flight
- * @property {string} departure_airport - The departure airport city.
- * @property {string} arrival_airport - The arrival airport city.
- * @property {string} departure_time - The departure time of the flight.
- * @property {string} [return_time] - The return time of the flight (if round-trip).
- *
- * @typedef {Object} Airport
- * @property {string} airport_id - The unique identifier of the airport.
- * @property {string} city - The city where the airport is located.
- *
- * @typedef {Object} User
- * @property {string} id - The unique identifier of the user.
- * @property {string} name - The name of the user.
- *
- * @typedef {Object} SearchParams
- * @property {string} departure - The departure airport city.
- * @property {string} arrival - The arrival airport city.
- * @property {string} tripType - The type of trip (one-way or round-trip).
- * @property {string} departureDate - The departure date.
- * @property {string} returnDate - The return date (if round-trip).
- * @property {number} passengers - The number of passengers.
- *
- * @param {Object} props - The component props.
- * @param {Flight[]} props.flights - The list of available flights.
- * @param {Airport[]} props.airports - The list of available airports.
- * @param {User} props.user - The current user data.
- * @param {SearchParams} props.searchParams - The search parameters for flights.
- */
 const BookTicket = () => {
   const [departure_airport, setDeparture_airport] = useState("");
   const [arrival_airport, setArrival_airport] = useState("");

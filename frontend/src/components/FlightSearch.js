@@ -5,35 +5,6 @@ import { getAirports } from "../services/airportService";
 import { getFlights } from "../services/flightService";
 // FlightList không được sử dụng trong FlightSearch nên có thể loại bỏ nếu không cần
 
-/**
- * FlightSearch component allows users to search for flights based on various criteria.
- *
- * @component
- * @returns {JSX.Element} The rendered component.
- *
- * @example
- * return (
- *   <FlightSearch />
- * )
- *
- * @description
- * The FlightSearch component provides a form for users to search for flights.
- * Users can select the trip type (one-way or round-trip), departure and arrival locations,
- * departure date, return date (if round-trip), and the number of passengers.
- * The component fetches airport and flight data on mount and handles form submission
- * to navigate to the booking page with the search parameters.
- *
- * @function
- * @name FlightSearch
- *
- * @requires useState
- * @requires useEffect
- * @requires useNavigate
- * @requires getAirports
- * @requires getFlights
- *
- * @returns {JSX.Element} The rendered component.
- */
 const FlightSearch = () => {
   const [departure, setDeparture] = useState("");
   const [arrival, setArrival] = useState("");
