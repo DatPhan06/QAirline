@@ -58,8 +58,16 @@ const Profile = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Trang Hồ Sơ</h1>
-      <form onSubmit={handleSubmit} className={styles.profileForm}>
+      <div className = {styles.loginBox}> 
+      {/* Left Side: Image */}
+      <div className={styles.imageContainer}>
+        <img src="/images/login.png" alt="Login" />
+      </div>
+      
+      {/* Right Side: Profile Form */}
+      <div className={styles.formContainer}>
+      <h2 className={styles.title}>THÔNG TIN HỒ SƠ</h2>
+      <form onSubmit={handleSubmit} className={styles.loginForm}>
         <div className={styles.formGroup}>
           <label>Tên đăng nhập:</label>
           <input
@@ -68,6 +76,7 @@ const Profile = () => {
             value={formData.username}
             onChange={handleChange}
             readOnly
+            className={styles.inputField}
           />
         </div>
         <div className={styles.formGroup}>
@@ -78,6 +87,7 @@ const Profile = () => {
             value={formData.full_name}
             onChange={handleChange}
             required
+            className={styles.inputField}
           />
         </div>
         <div className={styles.formGroup}>
@@ -88,6 +98,7 @@ const Profile = () => {
             value={formData.email}
             onChange={handleChange}
             required
+            className={styles.inputField}
           />
         </div>
         <div className={styles.formGroup}>
@@ -97,6 +108,7 @@ const Profile = () => {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
+            className={styles.inputField}
           />
         </div>
         <div className={styles.formGroup}>
@@ -106,6 +118,7 @@ const Profile = () => {
             name="address"
             value={formData.address}
             onChange={handleChange}
+            className={styles.inputField}
           />
         </div>
         <div className={styles.formGroup}>
@@ -115,12 +128,15 @@ const Profile = () => {
             name="date_of_birth"
             value={formData.date_of_birth}
             onChange={handleChange}
+            className={styles.inputField}
           />
         </div>
-        <button type="submit" className={styles.updateButton}>
+        <button type="submit" className={styles.submitButton}>
           Cập nhật
         </button>
       </form>
+      </div>
+      </div>
     </div>
   );
 };

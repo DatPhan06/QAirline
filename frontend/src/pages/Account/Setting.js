@@ -70,7 +70,7 @@ const Setting = () => {
             onClick={handleDarkModeToggle}
           ></div>
         </div>
-        <div className={styles.languageSetting}>
+        <div className={styles.languageSelector}>
           <label>Ngôn ngữ:</label>
           <select value={language} onChange={handleLanguageChange}>
             <option value="vi">Tiếng Việt</option>
