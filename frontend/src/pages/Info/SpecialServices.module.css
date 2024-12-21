@@ -293,17 +293,6 @@
   box-shadow: 0 5px 15px rgba(13, 87, 119, 0.2);
 }
 
-/* Responsive Design */
-@media (max-width: 968px) {
-  .seatTypes {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .seatCategory {
-    min-width: 100%;
-  }
-}
 
 .serviceContent p {
   color: #4a5568;
@@ -401,4 +390,206 @@
   transform: translateY(-4px);
   box-shadow: 0 10px 28px rgba(183, 149, 11, 0.4);
   background: linear-gradient(135deg, #b7950b, #e7c150);
+}
+
+/* Responsive Design */
+
+/* Laptop nhỏ và tablet lớn */
+@media screen and (max-width: 1200px) {
+  .serviceGrid {
+    grid-template-columns: 1fr 1fr; /* Giảm xuống 2 cột */
+    gap: 25px;
+  }
+
+  .serviceFrame {
+    min-height: 250px;
+  }
+
+  .serviceFrame h2 {
+    font-size: 1.6rem;
+  }
+
+  .serviceContent {
+    padding: 30px;
+  }
+}
+
+/* Tablet */
+@media screen and (max-width: 768px) {
+  .serviceGrid {
+    grid-template-columns: 1fr; /* Chuyển về 1 cột */
+    gap: 20px;
+  }
+
+  .serviceFrame {
+    min-height: 200px;
+  }
+
+  .serviceFrame h2 {
+    font-size: 1.4rem;
+    padding-bottom: 20px;
+  }
+
+  .serviceContent {
+    padding: 20px;
+  }
+
+  .serviceContent ul {
+    padding: 20px 30px;
+  }
+
+  .serviceContent li {
+    font-size: 1rem;
+    padding-left: 25px;
+  }
+
+  .backButton {
+    font-size: 1rem;
+    padding: 12px 30px;
+  }
+}
+
+/* Mobile lớn */
+@media screen and (max-width: 576px) {
+  .serviceFrame {
+    min-height: 180px;
+    padding: 20px;
+  }
+
+  .serviceFrame h2 {
+    font-size: 1.2rem;
+    padding-bottom: 15px;
+  }
+
+  .serviceContent {
+    padding: 15px;
+  }
+
+  .serviceContent ul {
+    padding: 15px 20px;
+  }
+
+  .serviceContent li {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    padding-left: 20px;
+  }
+
+  .backButton {
+    font-size: 0.9rem;
+    padding: 10px 25px;
+  }
+}
+
+/* Mobile nhỏ */
+@media screen and (max-width: 375px) {
+  .serviceFrame {
+    min-height: 150px;
+    padding: 15px;
+  }
+
+  .serviceFrame h2 {
+    font-size: 1.1rem;
+    padding-bottom: 10px;
+  }
+
+  .serviceContent {
+    padding: 10px;
+  }
+
+  .serviceContent ul {
+    padding: 10px 15px;
+  }
+
+  .serviceContent li {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    padding-left: 15px;
+  }
+
+  .backButton {
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 10px 20px;
+  }
+}
+
+/* Responsive Design cho các khung dịch vụ */
+
+/* Laptop nhỏ và tablet lớn */
+@media screen and (max-width: 1200px) {
+  .serviceGrid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cột trên màn hình lớn */
+    gap: 25px;
+  }
+
+  .serviceFrame {
+    min-height: 220px;
+  }
+}
+
+/* Tablet */
+@media screen and (max-width: 768px) {
+  .serviceGrid {
+    grid-template-columns: 1fr; /* Chuyển về 1 cột */
+    gap: 20px;
+  }
+
+  .serviceFrame,
+  .serviceFrame:nth-child(2),
+  .serviceFrame:nth-child(3),
+  .serviceFrame:nth-child(4),
+  .serviceFrame:nth-child(5) {
+    grid-column: 1 / -1; /* Mỗi frame chiếm toàn bộ chiều rộng */
+  }
+
+  .fullWidth {
+    height: 250px; /* Giảm chiều cao của frame đầu tiên */
+  }
+}
+
+/* Mobile lớn */
+@media screen and (max-width: 576px) {
+  .serviceGrid {
+    gap: 15px;
+  }
+
+  .serviceFrame {
+    min-height: 180px;
+  }
+
+  .fullWidth {
+    height: 200px;
+  }
+
+  .seatCategory {
+    padding: 15px;
+  }
+
+  .categoryContent {
+    padding: 10px;
+  }
+}
+
+/* Mobile nhỏ */
+@media screen and (max-width: 375px) {
+  .serviceGrid {
+    gap: 10px;
+  }
+
+  .serviceFrame {
+    min-height: 150px;
+  }
+
+  .fullWidth {
+    height: 180px;
+  }
+
+  .seatCategory {
+    padding: 10px;
+  }
+
+  .categoryContent {
+    padding: 8px;
+  }
 }

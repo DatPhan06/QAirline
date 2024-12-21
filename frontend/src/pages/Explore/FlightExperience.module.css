@@ -44,6 +44,7 @@
 .newsSection,
 .subscribeSection {
   margin-bottom: 80px;
+  background: none;
 }
 
 .sectionTitle {
@@ -102,7 +103,6 @@
 }
 
 .newsItem {
-  background-color: #ffffff95; /* White Background */
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle Shadow */
   overflow: hidden;
@@ -157,7 +157,6 @@
 
 .description {
   font-size: 1rem;
-  color: #7f8c8d; /* Light Gray Text */
   margin-bottom: 20px;
   line-height: 1.6;
   flex-grow: 1;
@@ -177,7 +176,6 @@
 
 .subscribeSection {
   text-align: center;
-  background-color: #ffffffcd; /* White Background */
   padding: 50px 30px;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle Shadow */
@@ -218,7 +216,6 @@
 
 .subscribeButton {
   padding: 14px 35px;
-  background-color: #3498db; /* Bright Blue */
   border: none;
   border-radius: 30px;
   color: #ffffff; /* White Text */

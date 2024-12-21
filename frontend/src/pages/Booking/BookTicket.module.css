@@ -336,3 +336,118 @@ body {
 .closeButton:hover {
   color: #666;
 }
+
+/* Desktop first approach */
+
+/* Large desktop và TV (>1200px) */
+@media screen and (min-width: 1200px) {
+  .bookingContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/* Desktop và laptop (<1200px) */
+@media screen and (max-width: 1199px) {
+  .bookingContainer {
+    max-width: 960px;
+    padding: 0 20px;
+  }
+  
+  .modalContent {
+    width: 90%;
+  }
+}
+
+/* Tablet landscape (992px) */
+@media screen and (max-width: 992px) {
+  .bookingContainer {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .flightSearchContainer {
+    width: 100%;
+  }
+
+  .flightSchedule {
+    width: 100%;
+  }
+  
+  .modalContent {
+    width: 95%;
+    padding: 20px;
+  }
+}
+
+/* Tablet portrait (768px) */ 
+@media screen and (max-width: 768px) {
+  .bookingContainer {
+    padding: 0 15px;
+  }
+
+  .searchForm {
+    gap: 15px;
+  }
+
+  .fromToContainer,
+  .dateContainer {
+    flex-direction: column;
+  }
+
+  .formGroup {
+    width: 100%;
+  }
+
+  .closeButton {
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
+  }
+
+  .flightTable {
+    font-size: 14px;
+  }
+}
+
+/* Mobile landscape (576px) */
+@media screen and (max-width: 576px) {
+  .title {
+    font-size: 18px;
+  }
+
+  .searchButton {
+    padding: 10px;
+  }
+
+  .modalContent {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .flightTable th,
+  .flightTable td {
+    padding: 8px 5px;
+  }
+}
+
+/* Mobile portrait (375px) */
+@media screen and (max-width: 375px) {
+  .searchForm {
+    padding: 10px;
+  }
+
+  .formGroup label {
+    font-size: 12px;
+  }
+
+  .select,
+  .input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .closeButton {
+    font-size: 18px;
+  }
+}
