@@ -60,3 +60,4 @@ Thumbs.db
 *.bak
 *.backup
 test.py
+backend/app/fake_data.py

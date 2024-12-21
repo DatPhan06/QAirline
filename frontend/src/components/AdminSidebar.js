@@ -8,6 +8,7 @@ import {
   FaChartBar,
   FaSignOutAlt,
   FaUserShield,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 
 const AdminSidebar = () => {
@@ -57,6 +58,12 @@ const AdminSidebar = () => {
             <Link to="/admin/manage-airplanes">
               <FaPlane className={styles.icon} />
               <span className={styles.text}>Quản Lý Máy Bay</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/manage-airports">
+              <FaMapMarkerAlt className={styles.icon} />
+              <span className={styles.text}>Quản Lý Sân Bay</span>
             </Link>
           </li>
           <li>

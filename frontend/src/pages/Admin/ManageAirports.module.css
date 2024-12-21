@@ -1,0 +1,174 @@
+/* ManageAirports.module.css */
+
+/* Container chính */
+.adminContainer {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.mainContent {
+  padding: 40px;
+  padding-left: 120px; /* Add space for collapsed sidebar */
+  transition: all 0.3s ease;
+}
+
+/* Move content when sidebar is open */
+.mainContent.shifted {
+  padding-left: 300px; /* Adjust based on expanded sidebar width */
+}
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Tiêu đề chính */
+.header h1 {
+  font-size: 2.4rem;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Nút thêm sân bay mới */
+.addButton {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addButton:hover {
+  background-color: #2980b9;
+}
+
+/* Nút hướng dẫn */
+.guideButton {
+  background-color: transparent;
+  color: #3498db;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.guideButton:hover {
+  color: #2980b9;
+}
+
+/* Hướng dẫn */
+.guide {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.guide h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.guide p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.guide ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.guide li {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+/* Danh sách sân bay */
+.listContainer {
+  margin-top: 30px;
+}
+
+/* Modal overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal content */
+.modalContent {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 600px;
+  max-width: 90%;
+  max-height: 90vh; /* Đảm bảo modal không vượt quá chiều cao màn hình */
+  overflow-y: auto; /* Cho phép cuộn nếu nội dung quá dài */
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+/* Close button */
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Tiêu đề modal */
+.modalContent h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Animations */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Nút submit */
+.submitButton {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #2980b9;
+}

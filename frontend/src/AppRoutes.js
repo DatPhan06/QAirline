@@ -53,6 +53,7 @@ import ViewBookings from "./pages/Admin/ViewBookings";
 import AccountManager from "./pages/Admin/AccountManager";
 import EditAirplane from "./pages/Admin/EditAirplane";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
+import ManageAirports from "./pages/Admin/ManageAirports";
 
 // OAuth2 callback page
 import OAuth2Callback from "./pages/OAuth2Callback";
@@ -221,6 +222,10 @@ function AppRoutes() {
       <Route
         path="/admin/edit-airplane/:airplaneId"
         element={<EditAirplane />}
+      />
+      <Route
+        path="/admin/manage-airports"
+        element={<ManageAirports />}
       />
     </Routes>
   );

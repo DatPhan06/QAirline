@@ -11,3 +11,4 @@ from app.models.general_info import GeneralInfo
 from app.models.promotions import Promotion
 from app.models.news import News
 from app.models.notifications import Notification
+from app.models.location import Location
