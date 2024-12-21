@@ -4,6 +4,7 @@ import styles from "./FlightList.module.css";
 // FlightList.js
 const FlightList = ({ flights, onFlightClick }) => {
   const [currentPage, setCurrentPage] = useState(1);
+
   const flightsPerPage = 10;
 
   const today = new Date();
@@ -23,8 +24,53 @@ const FlightList = ({ flights, onFlightClick }) => {
   // Số trang tổng cộng
   const totalPages = Math.ceil(filteredFlights.length / flightsPerPage);
 
-  // Hàm xử lý khi người dùng chuyển trang
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Xác định số lượng link hiển thị tối đa
+  const maxPageLinks = 5;
+
+  // Hàm sinh mảng trang hiển thị
+  function generatePageNumbers(currentPage, totalPages, maxLinks) {
+    const pageNumbers = [];
+
+    let startPage = Math.max(currentPage - Math.floor(maxLinks / 2), 1);
+    let endPage = startPage + maxLinks - 1;
+
+    if (endPage > totalPages) {
+      endPage = totalPages;
+      startPage = Math.max(endPage - maxLinks + 1, 1);
+    }
+
+    // Thêm trang 1
+    if (startPage > 1) {
+      pageNumbers.push(1);
+      if (startPage > 2) {
+        pageNumbers.push("...");
+      }
+    }
+
+    // Thêm các trang trong khoảng
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    // Thêm trang cuối
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        pageNumbers.push("...");
+      }
+      pageNumbers.push(totalPages);
+    }
+
+    return pageNumbers;
+  }
+
+  // Sử dụng generatePageNumbers để hiển thị số trang
+  const pageNumbers = generatePageNumbers(
+    currentPage,
+    totalPages,
+    maxPageLinks
+  );
 
   return (
     <div className={styles.flightListContainer}>
@@ -72,17 +118,33 @@ const FlightList = ({ flights, onFlightClick }) => {
           </table>
 
           <div className={styles.pagination}>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index + 1}
-                className={`${styles.pageButton} ${
-                  currentPage === index + 1 ? styles.activePageButton : ""
-                }`}
-                onClick={() => paginate(index + 1)}
-              >
-                {index + 1}
-              </button>
-            ))}
+            <button
+              onClick={() => paginate(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Trước
+            </button>
+            {pageNumbers.map((num, index) =>
+              num === "..." ? (
+                <span key={index} style={{ margin: "0 6px" }}>
+                  ...
+                </span>
+              ) : (
+                <button
+                  key={num}
+                  onClick={() => paginate(num)}
+                  className={currentPage === num ? styles.activePage : ""}
+                >
+                  {num}
+                </button>
+              )
+            )}
+            <button
+              onClick={() => paginate(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Sau
+            </button>
           </div>
         </>
       )}
