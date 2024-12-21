@@ -1,72 +1,137 @@
 .destinationsContainer {
-    background: linear-gradient(to bottom right, #fdfcfb, #e2d9d3);
-    padding: 40px;
-    font-family: "Merriweather", serif;
-    color: #4a4a4a;
-  }
-  
-  .title {
-    font-size: 3rem;
-    margin-bottom: 40px;
-    text-align: center;
-    color: #2c2c2c;
-    font-weight: 700;
-    letter-spacing: 2px;
-    position: relative;
-  }
-  
-  .title::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 3px;
-    background: #c7a26d;
-    margin: 20px auto 0;
-  }
-  
-  .locationsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-  }
-  
-  .locationCard {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    padding: 20px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .locationCard:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  }
-  
-  .locationCard h2 {
-    font-size: 1.5rem;
-    color: #2c2c2c;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-  }
-  
-  .country {
-    display: inline-block;
-    background: #c7a26d;
-    color: #ffffff;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-  }
-  
-  .locationDetails p {
-    margin: 8px 0;
-    font-size: 1rem;
-  }
-  
-  .locationDetails p strong {
-    color: #c7a26d;
-    font-weight: 600;
-  }
-  
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.title {
+  text-align: center;
+  color: #0d5777;
+  margin-bottom: 40px;
+  font-size: 2.8rem;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #0d5777, #2980b9);
+  border-radius: 2px;
+}
+
+.title::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 8px;
+  background: #0d5777;
+  border-radius: 4px;
+}
+
+/* Navigation bar styles */
+.navigationBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 0; /* Bỏ margin bottom */
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px 10px 0 0; /* Chỉ bo tròn góc trên */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-image: url("../../assets/images/tk4.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.navButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  color: #0d5777;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  border: 1px solid #0d5777;
+}
+
+.navButton:hover {
+  background: #e9ecef;
+}
+
+.navButton.active {
+  background: #0d5777;
+  color: white;
+}
+
+/* Chỉnh sửa location details */
+.locationDetails {
+  background: white;
+  padding: 30px;
+  border-radius: 0 0 10px 10px; /* Chỉ bo tròn góc dưới */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-top: 0; /* Bỏ margin top nếu có */
+  border-top: 1px solid #dee2e6; /* Thêm đường viền phía trên để phân tách */
+  background-image: url("../../assets/images/tk6.png");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Các style khác giữ nguyên */
+.locationTitle {
+  color: #0d5777;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #0d5777;
+  padding-bottom: 10px;
+}
+
+.detailsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.detailsTable th,
+.detailsTable td {
+  padding: 15px;
+  border-bottom: 1px solid #dee2e6;
+  text-align: left;
+}
+
+.detailsTable th {
+  width: 200px;
+  color: #0d5777;
+  font-weight: 600;
+  background-color: #f8f9fa8a;
+}
+
+.detailsTable tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Loading and error states */
+.loading,
+.error {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.error {
+  color: #dc3545;
+}

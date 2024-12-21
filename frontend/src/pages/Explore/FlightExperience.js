@@ -134,12 +134,6 @@ const FlightExperience = () => {
 
   return (
     <div className={styles.flightExperience}>
-      <header className={styles.headerSection}>
-        <h1 className={styles.headerTitle}>Trải Nghiệm Hàng Không</h1>
-        <p className={styles.headerSubtitle}>
-          Cập nhật những thông tin mới nhất và hấp dẫn từ QAirline
-        </p>
-      </header>
 
       <section className={styles.featuredSection}>
         <h2 className={styles.sectionTitle}>Tin Nổi Bật</h2>
