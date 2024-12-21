@@ -7,50 +7,120 @@ const SpecialServices = () => {
 
   const services = {
     seatSelection: {
-      title: "Chọn Chỗ Ngồi Yêu Thích",
+      title: "Dịch Vụ Chọn Chỗ Ngồi",
       content: (
         <div className={styles.serviceContent}>
-          <h2>Tận hưởng chuyến bay với vị trí ghế như ý !</h2>
-          
-          <h3>Các lựa chọn ghế ngồi:</h3>
-          <ul>
-            <li>Ghế gần cửa sổ - Ngắm nhìn bầu trời mây trắng</li>
-            <li>Ghế cạnh lối đi - Dễ dàng di chuyển trong suốt chuyến bay</li>
-            <li>Hàng ghế đầu - Không gian để chân rộng rãi thoải mái</li>
-            <li>Ghế gần cửa thoát hiểm - Thêm không gian để chân</li>
-            <li>Ghế khu vực yên tĩnh - Phù hợp nghỉ ngơi</li>
-            <li>Ghế gần bếp - Được phục vụ suất ăn sớm</li>
-          </ul>
-
-          <h3>Ưu điểm:</h3>
-          <ul>
-            <li>Đặt trước để có vị trí ưa thích</li>
-            <li>Ngồi cùng nhóm/gia đình</li>
-            <li>Thoải mái hơn trong suốt chuyến bay</li>
-            <li>Ưu tiên lên máy bay trước</li>
-          </ul>
-
-          <div className={styles.priceSection}>
-            <h3>Bảng giá tham khảo:</h3>
-            <ul>
-              <li>Ghế thường: 50.000 VND</li>
-              <li>Ghế cạnh lối đi: 100.000 VND</li>
-              <li>Ghế cửa sổ: 150.000 VND</li> 
-              <li>Ghế khu vực yên tĩnh: 180.000 VND</li>
-              <li>Ghế hàng đầu: 200.000 VND</li>
-            </ul>
+          <div className={styles.seatTypes}>
+            <div className={styles.seatCategory}>
+              <div className={styles.categoryHeader}>
+                <i className="fas fa-crown"></i>
+                <h4>Hạng Thương Gia</h4>
+              </div>
+              <div className={styles.categoryContent}>
+                <div className={styles.seatImage}>
+                  <img
+                    src="/images/business_economy.png"
+                    alt="Ghế Hạng Thương Gia"
+                  />
+                </div>
+                <div className={styles.seatFeatures}>
+                  <h5>Đặc quyền hạng ghế</h5>
+                  <ul>
+                    <li>
+                      <i className="fas fa-bed"></i>
+                      <span>Ghế ngả 180° thành giường phẳng</span>
+                    </li>
+                    <li>
+                      <i className="fas fa-arrows-alt-h"></i>
+                      <span>Không gian để chân rộng rãi (60 inches)</span>
+                    </li>
+                    <li>
+                      <i className="fas fa-tv"></i>
+                      <span>Màn hình giải trí 18 inch riêng</span>
+                    </li>
+                    <li>
+                      <i className="fas fa-utensils"></i>
+                      <span>Thực đơn cao cấp & rượu vang chọn lọc</span>
+                    </li>
+                    <li>
+                      <i className="fas fa-suitcase"></i>
+                      <span>Hành lý ký gửi 40kg</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className={styles.seatCategory}>
+              <div className={styles.categoryHeader}>
+                <i className="fas fa-chair"></i>
+                <h4>Hạng Phổ Thông</h4>
+              </div>
+              <div className={styles.categoryContent}>
+                <div className={styles.seatImage}>
+                  <img src="/images/standard.png" alt="Ghế Hạng Phổ Thông" />
+                </div>
+                <div className={styles.seatFeatures}>
+                  <h5>Tiện nghi cơ bản</h5>
+                  <ul>
+                    <li>
+                      <i className="fas fa-chair"></i>
+                      <span>Ghế ngả 118° thoải mái</span>
+                    </li>
+                    <li>
+                      <i className="fas fa-arrows-alt-h"></i>
+                      <span>Khoảng cách ghế 32 inches</span>
+                    </li>
+                    <li>
+                      <i className="fas fa-tv"></i>
+                      <span>Màn hình giải trí 10.6 inch</span>
+                    </li>
+                    <li>
+                      <i className="fas fa-utensils"></i>
+                      <span>Bữa ăn tiêu chuẩn</span>
+                    </li>
+                    <li>
+                      <i className="fas fa-suitcase"></i>
+                      <span>Hành lý ký gửi 23kg</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className={styles.noteSection}>
-            <p><strong>Lưu ý:</strong> Giá có thể thay đổi tùy theo chuyến bay và thời điểm đặt vé</p>
+          <div className={styles.benefitsSection}>
+            <h3>
+              <i className="fas fa-gift"></i>
+              Lợi ích khi đặt chỗ trước
+            </h3>
+            <div className={styles.benefitsList}>
+              <div className={styles.benefitItem}>
+                <i className="fas fa-check-circle"></i>
+                <span>Chủ động lựa chọn vị trí phù hợp</span>
+              </div>
+              <div className={styles.benefitItem}>
+                <i className="fas fa-users"></i>
+                <span>Đảm bảo ngồi cùng nhóm/gia đình</span>
+              </div>
+              <div className={styles.benefitItem}>
+                <i className="fas fa-clock"></i>
+                <span>Ưu tiên làm thủ tục tại quầy riêng</span>
+              </div>
+              <div className={styles.benefitItem}>
+                <i className="fas fa-plane-departure"></i>
+                <span>Lên máy bay theo nhóm ưu tiên</span>
+              </div>
+            </div>
           </div>
 
           <Link to="/booking/book-ticket" className={styles.bookButton}>
-            Đặt vé ngay
+            <i className="fas fa-ticket-alt"></i>
+            Đặt Chỗ Ngay
           </Link>
         </div>
-      )
+      ),
     },
+
     pregnantService: {
       title: "Dịch Vụ Thai Sản",
       content: (
@@ -65,7 +135,7 @@ const SpecialServices = () => {
           </ul>
           <p>Vui lòng đặt trước 48 giờ</p>
         </div>
-      )
+      ),
     },
     petTransport: {
       title: "Vận Chuyển Thú Cưng",
@@ -81,7 +151,7 @@ const SpecialServices = () => {
           </ul>
           <p>Giá: Từ 400.000 VND/thú cưng</p>
         </div>
-      )
+      ),
     },
     businessLounge: {
       title: "Phòng Chờ Thương Gia",
@@ -97,7 +167,7 @@ const SpecialServices = () => {
           </ul>
           <p>Giá: 500.000 VND/người/lượt</p>
         </div>
-      )
+      ),
     },
     mealPreorder: {
       title: "Đặt Trước Suất Ăn",
@@ -113,15 +183,15 @@ const SpecialServices = () => {
           </ul>
           <p>Đặt trước 24 giờ trước chuyến bay</p>
         </div>
-      )
-    }
+      ),
+    },
   };
 
   if (selectedService) {
     return (
       <div className={styles.fullscreenService}>
         {services[selectedService].content}
-        <button 
+        <button
           className={styles.backButton}
           onClick={() => setSelectedService(null)}
         >
@@ -132,47 +202,46 @@ const SpecialServices = () => {
   }
 
   return (
-    <div className ={styles.pagespeacial}> 
-    <div className={styles.container}>
-      
-      <div className={styles.servicesGrid}>
-        {/* Row 1 */}
-        <div 
-          className={`${styles.serviceFrame} ${styles.fullWidth}`}
-          onClick={() => setSelectedService('seatSelection')}
-        >
-          <h2>{services.seatSelection.title}</h2>
-        </div>
+    <div className={styles.pagespeacial}>
+      <div className={styles.container}>
+        <div className={styles.servicesGrid}>
+          {/* Row 1 */}
+          <div
+            className={`${styles.serviceFrame} ${styles.fullWidth}`}
+            onClick={() => setSelectedService("seatSelection")}
+          >
+            <h2>{services.seatSelection.title}</h2>
+          </div>
 
-        {/* Row 2 */}
-        <div 
-          className={styles.serviceFrame}
-          onClick={() => setSelectedService('pregnantService')}
-        >
-          <h2>{services.pregnantService.title}</h2>
-        </div>
-        <div 
-          className={styles.serviceFrame}
-          onClick={() => setSelectedService('petTransport')}
-        >
-          <h2>{services.petTransport.title}</h2>
-        </div>
+          {/* Row 2 */}
+          <div
+            className={styles.serviceFrame}
+            onClick={() => setSelectedService("pregnantService")}
+          >
+            <h2>{services.pregnantService.title}</h2>
+          </div>
+          <div
+            className={styles.serviceFrame}
+            onClick={() => setSelectedService("petTransport")}
+          >
+            <h2>{services.petTransport.title}</h2>
+          </div>
 
-        {/* Row 3 */}
-        <div 
-          className={styles.serviceFrame}
-          onClick={() => setSelectedService('businessLounge')}
-        >
-          <h2>{services.businessLounge.title}</h2>
-        </div>
-        <div 
-          className={styles.serviceFrame}
-          onClick={() => setSelectedService('mealPreorder')}
-        >
-          <h2>{services.mealPreorder.title}</h2>
+          {/* Row 3 */}
+          <div
+            className={styles.serviceFrame}
+            onClick={() => setSelectedService("businessLounge")}
+          >
+            <h2>{services.businessLounge.title}</h2>
+          </div>
+          <div
+            className={styles.serviceFrame}
+            onClick={() => setSelectedService("mealPreorder")}
+          >
+            <h2>{services.mealPreorder.title}</h2>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };
