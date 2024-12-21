@@ -26,7 +26,7 @@ const Offers = () => {
 
   return (
     <div className={styles.offersContainer}>
-      <h1>Trang Ưu Đãi</h1>
+      <h1>Nhận ngay ưu đãi hôm nay!</h1>
       <ul className={styles.promotionsList}>
         {promotions.map((promotion) => (
           <li
@@ -35,12 +35,12 @@ const Offers = () => {
             onClick={() => handlePromotionClick(promotion.promotion_id)}
           >
             <h3>{promotion.title}</h3>
-            <p>{promotion.description}</p>
+            {/* <p>{promotion.description}</p> */}
             <p>Discount: {promotion.discount_percentage}%</p>
-            <p>
+            {/* <p>
               Start Date: {new Date(promotion.start_date).toLocaleDateString()}
             </p>
-            <p>End Date: {new Date(promotion.end_date).toLocaleDateString()}</p>
+            <p>End Date: {new Date(promotion.end_date).toLocaleDateString()}</p> */}
           </li>
         ))}
       </ul>

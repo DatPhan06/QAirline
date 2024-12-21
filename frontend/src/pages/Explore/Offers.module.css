@@ -1,57 +1,74 @@
-/* Offers.module.css */
 .offersContainer {
-  padding: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.offersContainer h1 {
+  color: #0d5777;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 40px;
+  font-weight: 600;
+  position: relative;
+}
+
+.offersContainer h1::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(to right, #0d5777, #2980b9);
 }
 
 .promotionsList {
-  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
   padding: 0;
+  list-style: none;
 }
 
 .promotionItem {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-image: url("../../assets/images/voucher.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 300px; /* Thêm chiều cao tối thiểu */
+  padding: 30px; /* Thêm padding để nội dung không sát viền */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.promotionItem:hover {
+  transform: translateY(-5px);
 }
 
 .promotionItem h3 {
-  margin: 0 0 10px 0;
+  position: relative;
+  color: #0d5777;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  max-width: 60%;
 }
 
-.promotionItem p {
-  margin: 5px 0;
+.promotionItem p:last-child {
+  font-size: 0.9rem;
+  color: #888;
+  text-align: right;
+  font-style: italic;
+  text-align: center;
 }
 
-.style-layer {
-  background: var(--mint-green, #8dd3bb);
-  border-radius: 4px;
-  padding: 8px 16px 8px 16px;
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  height: 48px;
-  position: relative;
-}
-.paper-plane {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  overflow: visible;
-}
-.button2 {
-  color: var(--blackish-green, #112211);
-  text-align: left;
-  font-family: var(
-    --montserrat-medium-14px-font-family,
-    "Montserrat-Medium",
-    sans-serif
-  );
-  font-size: var(--montserrat-medium-14px-font-size, 14px);
-  font-weight: var(--montserrat-medium-14px-font-weight, 500);
-  position: relative;
-}

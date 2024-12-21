@@ -39,14 +39,19 @@
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     overflow: hidden;
+    background-image: url("../../assets/images/tk6.png");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   
   /* Airport list sidebar */
   .airportList {
-    flex: 0 0 300px;
-    background: #F9F7F3;
-    padding: 25px;
-    border-right: 1px solid #eee;
+    width: 300px;
+    /* background: #F9F7F3; */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
   
   .airportList h2 {
@@ -75,22 +80,23 @@
   }
   
   .airportItem:hover {
-    background: #e3f2fd;
+    background: #edf2f7;
+    color: #2d3748;
     transform: translateX(5px);
   }
   
   .airportItem.active {
-    background: #0D5777;
-    color: #fff;
-    font-weight: 500;
-    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
+    background: #0d5777;
+    color: white;
+    border-left-color: #ffd700;
   }
   
   /* Airport details section */
   .airportDetails {
     flex: 1;
     padding: 30px;
-    background: #fff;
+    background: #ffffff74; 
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   }
   
   .airportDetails h2 {
@@ -119,7 +125,7 @@
     width: 200px;
     color: #6c757d;
     font-weight: 600;
-    background: #f8f9fa;
+    background: #f8f9fa9b;
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
