@@ -128,3 +128,91 @@
   gap: 20px;
   margin-bottom: 20px;
 }
+
+/* Màn hình tablet lớn và laptop nhỏ */
+@media screen and (max-width: 1024px) {
+  .flightSearchContainer {
+    max-width: 90%;
+    padding: 25px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+}
+
+/* Màn hình tablet */
+@media screen and (max-width: 768px) {
+  .flightSearchContainer {
+    padding: 20px;
+  }
+
+  .searchForm {
+    gap: 15px;
+  }
+
+  .fromToContainer,
+  .dateContainer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .formGroup {
+    width: 100%;
+  }
+
+  .select, 
+  .input {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/* Màn hình mobile lớn */
+@media screen and (max-width: 576px) {
+  .flightSearchContainer {
+    padding: 15px;
+    max-width: 95%;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .tripTypeContainer {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .radioLabel {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .searchButton {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+/* Màn hình mobile nhỏ */
+@media screen and (max-width: 375px) {
+  .flightSearchContainer {
+    padding: 12px;
+  }
+
+  .label {
+    font-size: 12px;
+  }
+
+  .select,
+  .input {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .searchButton {
+    padding: 8px;
+    font-size: 12px;
+  }
+}

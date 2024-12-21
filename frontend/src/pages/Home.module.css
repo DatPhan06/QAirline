@@ -400,3 +400,46 @@
     padding: 2px 8px;
   }
 }
+
+/* Tablet styles */
+@media screen and (max-width: 1024px) {
+  .containerAll {
+    gap: 20px;
+    padding: 30px 15px 0;
+  }
+
+  .leftSection {
+    flex: 3; /* Adjust ratio */
+  }
+
+  .rightSection {
+    flex: 2;
+  }
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+  .containerAll {
+    flex-direction: column; /* Stack sections vertically */
+    gap: 30px;
+    padding: 20px 10px 0;
+  }
+
+  .leftSection,
+  .rightSection {
+    flex: none;
+    width: 100%;
+  }
+
+  .rightSection {
+    min-width: 100%;
+  }
+}
+
+/* Small mobile styles */
+@media screen and (max-width: 480px) {
+  .containerAll {
+    padding: 15px 10px 0;
+    gap: 20px;
+  }
+}

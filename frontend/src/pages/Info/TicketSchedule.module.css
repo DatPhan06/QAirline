@@ -216,3 +216,103 @@
   color: #dc3545;
   font-size: 1.1rem;
 }
+
+/* Responsive Design */
+
+/* Màn hình laptop nhỏ và tablet lớn */
+@media screen and (max-width: 1200px) {
+  .container {
+    padding: 20px;
+  }
+
+  .scheduleGrid {
+    grid-template-columns: repeat(2, 1fr); /* Giảm số cột xuống 2 */
+    gap: 20px;
+  }
+
+  .modalContent {
+    width: 90%;
+    max-height: 80vh;
+  }
+}
+
+/* Màn hình tablet */
+@media screen and (max-width: 768px) {
+  .scheduleGrid {
+    grid-template-columns: 1fr; /* Chuyển về 1 cột */
+    gap: 15px;
+  }
+
+  .filterSection {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .searchInput {
+    width: 100%;
+  }
+
+  .filterButtons {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .modalContent {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .flightDetails {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* Màn hình mobile */
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+
+  .pageTitle {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .scheduleCard {
+    padding: 15px;
+  }
+
+  .modalContent {
+    width: 100%;
+    padding: 15px;
+    border-radius: 0;
+  }
+
+  .closeButton {
+    top: 10px;
+    right: 10px;
+  }
+
+  .filterButtons button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Màn hình mobile nhỏ */
+@media screen and (max-width: 320px) {
+  .scheduleCard {
+    padding: 10px;
+  }
+
+  .filterButtons {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filterButtons button {
+    width: calc(50% - 4px);
+    font-size: 0.8rem;
+  }
+}
