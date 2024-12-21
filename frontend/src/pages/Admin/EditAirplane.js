@@ -8,6 +8,39 @@ import { getSeatsByAirplaneId, updateSeat } from "../../services/seatService";
 import AdminSidebar from "../../components/AdminSidebar";
 import styles from "./EditAirplane.module.css";
 
+/**
+ * EditAirplane component allows admin users to edit airplane details and seat statuses.
+ *
+ * @component
+ * @returns {JSX.Element} The EditAirplane component.
+ *
+ * @example
+ * // Usage example:
+ * // <EditAirplane />
+ *
+ * @description
+ * This component fetches airplane data and seat information based on the airplane ID from the URL parameters.
+ * It provides a form for editing airplane details such as model, manufacturer, seat capacity, range, year of manufacture,
+ * maintenance status, and status. It also allows updating the status of individual seats.
+ *
+ * The component includes pagination and search functionality for the seat list.
+ *
+ * @function
+ * @name EditAirplane
+ *
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @requires useParams - To get the airplane ID from the URL.
+ * @requires useNavigate - To navigate to different routes.
+ * @requires useState - To manage component state.
+ * @requires useEffect - To fetch data when the component mounts.
+ * @requires getAirplaneById - API call to fetch airplane data by ID.
+ * @requires getSeatsByAirplaneId - API call to fetch seats data by airplane ID.
+ * @requires updateAirplane - API call to update airplane data.
+ * @requires updateSeat - API call to update seat status.
+ * @requires AdminSidebar - Sidebar component for admin navigation.
+ * @requires styles - CSS module for styling the component.
+ */
 const EditAirplane = () => {
   const { airplaneId } = useParams();
   const navigate = useNavigate();

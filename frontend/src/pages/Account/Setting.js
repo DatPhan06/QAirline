@@ -2,6 +2,18 @@ import React, { useState, useEffect } from "react";
 import { changePassword } from "../../services/userService";
 import styles from "./Setting.module.css";
 
+/**
+ * Setting component renders the account settings page where users can change their password,
+ * toggle dark mode, and select their preferred language.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Setting />
+ * )
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 const Setting = () => {
   const [passwordData, setPasswordData] = useState({
     currentPassword: "",
@@ -28,13 +40,10 @@ const Setting = () => {
       return;
     }
     try {
-      await changePassword(
-        user.user_id, 
-        {
-          "current_password": passwordData.currentPassword,
-          "new_password": passwordData.newPassword,
-        }
-      );
+      await changePassword(user.user_id, {
+        current_password: passwordData.currentPassword,
+        new_password: passwordData.newPassword,
+      });
       alert("Đổi mật khẩu thành công!");
       setPasswordData({
         currentPassword: "",

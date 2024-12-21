@@ -3,6 +3,19 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Logout component that handles user logout by removing the token from localStorage
+ * and redirecting the user to the sign-in page.
+ *
+ * This component uses the useEffect hook to perform the logout operation
+ * when the component is mounted.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Logout />
+ * )
+ */
 function Logout() {
   const navigate = useNavigate();
 

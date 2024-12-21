@@ -3,6 +3,33 @@ import { useNavigate } from "react-router-dom";
 import { loginAdmin } from "../../services/adminService";
 import styles from "./AdminLogin.module.css";
 
+/**
+ * AdminLogin component renders a login form for admin users.
+ * It handles form submission, performs admin login, and navigates to the admin dashboard upon successful login.
+ *
+ * @component
+ * @example
+ * return (
+ *   <AdminLogin />
+ * )
+ *
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @function
+ * @name AdminLogin
+ *
+ * @description
+ * - Initializes form data state with username and password fields.
+ * - Uses `useNavigate` hook for navigation.
+ * - Handles form submission with `handleSubmit` function.
+ * - On successful login, stores the admin token in localStorage and navigates to the admin dashboard.
+ * - On login failure, displays an error message.
+ *
+ * @requires useState from 'react'
+ * @requires useNavigate from 'react-router-dom'
+ * @requires loginAdmin from 'path/to/loginAdmin'
+ * @requires styles from 'path/to/styles'
+ */
 const AdminLogin = () => {
   const [formData, setFormData] = useState({
     username: "",

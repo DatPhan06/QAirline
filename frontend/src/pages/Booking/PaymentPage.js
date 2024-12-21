@@ -5,6 +5,45 @@ import { updateTicketStatus } from "../../services/ticketService"; // Import the
 import { createBooking } from "../../services/bookingService"; // Import the createBooking function
 import styles from "./PaymentPage.module.css";
 
+/**
+ * PaymentPage component handles the payment process for booking a flight ticket.
+ * It displays flight and ticket information, and provides a form for the user to enter payment details.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * // Usage example:
+ * // <PaymentPage />
+ *
+ * @function
+ * @name PaymentPage
+ *
+ * @description
+ * This component uses the following hooks:
+ * - `useLocation` to access the current location object.
+ * - `useNavigate` to navigate to different routes.
+ * - `useState` to manage form input states and payment processing states.
+ *
+ * The component performs the following tasks:
+ * - Displays flight and ticket information.
+ * - Provides a form for the user to enter their name, email, and payment details.
+ * - Validates the form input before processing the payment.
+ * - Simulates the payment process and updates the ticket status.
+ * - Creates a new booking and navigates to the confirmation page upon successful payment.
+ *
+ * @throws Will display an error message if the payment process fails.
+ *
+ * @requires useLocation
+ * @requires useNavigate
+ * @requires useState
+ *
+ * @param {Object} location.state - The state object passed from the previous route.
+ * @param {Object} location.state.flight - The flight information.
+ * @param {Object} location.state.ticket - The ticket information.
+ *
+ * @returns {JSX.Element} The rendered PaymentPage component.
+ */
 const PaymentPage = () => {
   const location = useLocation();
   const navigate = useNavigate();

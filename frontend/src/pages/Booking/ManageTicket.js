@@ -10,6 +10,56 @@ import { getTicketById } from "../../services/ticketService";
 import { getUserById, getCurrentUser } from "../../services/userService";
 import styles from "./ManageTicket.module.css";
 
+/**
+ * ManageTicket component allows users to view and manage their flight bookings.
+ * Users can filter bookings by status (all, successful, canceled), view booking details,
+ * and cancel bookings if certain conditions are met.
+ *
+ * @component
+ * @example
+ * return (
+ *   <ManageTicket />
+ * )
+ *
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @function
+ * @name ManageTicket
+ *
+ * @description
+ * This component fetches the user's bookings on mount and displays them in a list.
+ * Users can filter the bookings by status and view detailed information about each booking.
+ * If a booking is in a "booked" status, users can cancel it if the flight's departure date
+ * is more than 7 days away.
+ *
+ * @property {Array} bookings - The list of bookings fetched from the backend.
+ * @property {Function} setBookings - Function to update the bookings state.
+ * @property {string} filter - The current filter applied to the bookings list.
+ * @property {Function} setFilter - Function to update the filter state.
+ * @property {boolean} isLoading - Indicates whether the bookings data is still being fetched.
+ * @property {Function} setIsLoading - Function to update the isLoading state.
+ * @property {Object|null} selectedBooking - The currently selected booking for detailed view.
+ * @property {Function} setSelectedBooking - Function to update the selectedBooking state.
+ * @property {boolean} showModal - Indicates whether the booking details modal is visible.
+ * @property {Function} setShowModal - Function to update the showModal state.
+ *
+ * @function fetchBookings
+ * Fetches the bookings data for the current user from the backend.
+ *
+ * @function handleBookingClick
+ * Handles the click event on a booking item. Fetches detailed information about the booking,
+ * including ticket and user details, and displays it in a modal.
+ *
+ * @function handleCancelBooking
+ * Handles the cancellation of a booking. Checks if the flight's departure date is more than
+ * 7 days away and confirms the cancellation with the user before proceeding.
+ *
+ * @function handleFilterChange
+ * Updates the filter state to show bookings based on the selected filter.
+ *
+ * @function filteredBookings
+ * Filters the bookings list based on the current filter and the departure date of the flights.
+ */
 const ManageTicket = () => {
   const [bookings, setBookings] = useState([]);
   const [filter, setFilter] = useState("all"); // 'all', 'successful', 'canceled'
@@ -230,12 +280,12 @@ const ManageTicket = () => {
                             {new Date(
                               selectedBooking.flight.departure_time
                             ).toLocaleDateString()}
-                          </time>      
+                          </time>
                           <p>
                             {new Date(
                               selectedBooking.flight.departure_time
                             ).toLocaleTimeString()}
-                          </p>                     
+                          </p>
                         </div>
 
                         <div className={styles.flightPath}>

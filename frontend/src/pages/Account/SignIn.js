@@ -3,6 +3,44 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { loginUser } from "../../services/userService";
 import styles from "./SignIn.module.css";
 
+/**
+ * SignIn component renders the sign-in form and handles user authentication.
+ *
+ * @component
+ *
+ * @example
+ * return (
+ *   <SignIn />
+ * )
+ *
+ * @returns {JSX.Element} The SignIn component.
+ *
+ * @description
+ * This component provides a user interface for signing in to the application.
+ * It includes fields for username and password, and handles form submission
+ * to authenticate the user. It also provides options for OAuth login with
+ * Google and GitHub, and links for password recovery, account registration,
+ * terms and conditions, support, and customer care.
+ *
+ * @function
+ * @name SignIn
+ *
+ * @property {Object} formData - The state object containing the username and password.
+ * @property {Function} setFormData - The state setter function for formData.
+ * @property {Function} navigate - The function to navigate to different routes.
+ * @property {Object} location - The location object from react-router.
+ * @property {string} location.state.message - The message passed from the previous route.
+ *
+ * @hook useState - Manages the form data state.
+ * @hook useNavigate - Provides navigation functionality.
+ * @hook useLocation - Provides access to the location object.
+ * @hook useEffect - Handles side effects, such as displaying an alert message.
+ *
+ * @param {Object} e - The event object.
+ * @param {Function} handleInputChange - Handles changes to the input fields.
+ * @param {Function} handleSubmit - Handles form submission and user authentication.
+ * @param {Function} handleOAuthLogin - Handles OAuth login with the specified provider.
+ */
 function SignIn() {
   const [formData, setFormData] = useState({
     username: "",

@@ -10,6 +10,58 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import styles from "./ManageAirports.module.css";
 
+/**
+ * ManageAirports component for managing airport data.
+ *
+ * This component allows users to view, add, and edit airport information.
+ * It includes a form for adding/editing airports and a list of existing airports.
+ *
+ * @component
+ * @example
+ * return (
+ *   <ManageAirports />
+ * )
+ *
+ * @returns {JSX.Element} The ManageAirports component.
+ *
+ * @function
+ * @name ManageAirports
+ *
+ * @property {Object} airportData - The state object containing airport details.
+ * @property {string} airportData.name - The name of the airport.
+ * @property {string} airportData.city - The city where the airport is located.
+ * @property {string} airportData.country - The country where the airport is located.
+ * @property {string} airportData.iataCode - The IATA code of the airport.
+ * @property {string} airportData.icaoCode - The ICAO code of the airport.
+ *
+ * @property {Array} airports - The state array containing the list of airports.
+ *
+ * @property {boolean} isModalOpen - The state boolean indicating if the modal is open.
+ * @property {boolean} isGuideOpen - The state boolean indicating if the guide is open.
+ *
+ * @property {Object|null} selectedAirport - The state object containing the selected airport details for editing.
+ *
+ * @function handleInputChange
+ * @description Handles input changes in the form and updates the airportData state.
+ * @param {Object} e - The event object.
+ *
+ * @function handleFormSubmit
+ * @description Handles form submission for adding or editing an airport.
+ * @param {Object} e - The event object.
+ *
+ * @function handleAirportClick
+ * @description Handles the click event on an airport item to edit its details.
+ * @param {Object} airport - The airport object.
+ *
+ * @function handleAddNewAirport
+ * @description Handles the event to open the modal for adding a new airport.
+ *
+ * @function handleCloseModal
+ * @description Handles the event to close the modal.
+ *
+ * @function toggleGuide
+ * @description Toggles the visibility of the guide.
+ */
 const ManageAirports = () => {
   const [selectedAirport, setSelectedAirport] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

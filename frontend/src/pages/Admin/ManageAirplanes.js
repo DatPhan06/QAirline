@@ -10,6 +10,63 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import styles from "./ManageAirplanes.module.css";
 
+/**
+ * ManageAirplanes component for managing the list of airplanes.
+ *
+ * This component allows the user to:
+ * - View a list of airplanes
+ * - Add a new airplane
+ * - Edit an existing airplane
+ * - View a guide on how to use the page
+ *
+ * @component
+ * @example
+ * return (
+ *   <ManageAirplanes />
+ * )
+ *
+ * @returns {JSX.Element} The ManageAirplanes component.
+ *
+ * @function
+ * @name ManageAirplanes
+ *
+ * @property {Object} airplaneData - The state object containing airplane details.
+ * @property {string} airplaneData.model - The model of the airplane.
+ * @property {string} airplaneData.manufacturer - The manufacturer of the airplane.
+ * @property {string} airplaneData.seat_capacity - The seat capacity of the airplane.
+ * @property {string} airplaneData.range_km - The range of the airplane in kilometers.
+ * @property {string} airplaneData.year_of_manufacture - The year the airplane was manufactured.
+ * @property {string} airplaneData.maintenance_status - The maintenance status of the airplane.
+ * @property {string} airplaneData.status - The status of the airplane.
+ *
+ * @property {Array} airplanes - The state array containing the list of airplanes.
+ *
+ * @property {boolean} isModalOpen - The state boolean indicating if the modal is open.
+ * @property {boolean} isGuideOpen - The state boolean indicating if the guide is open.
+ *
+ * @property {Object|null} selectedAirplane - The state object containing the selected airplane details or null if no airplane is selected.
+ *
+ * @function handleInputChange
+ * @description Handles input changes in the form and updates the airplaneData state.
+ * @param {Object} e - The event object.
+ *
+ * @function handleFormSubmit
+ * @description Handles form submission for adding or updating an airplane.
+ * @param {Object} e - The event object.
+ *
+ * @function handleAirplaneClick
+ * @description Handles the click event on an airplane to edit its details.
+ * @param {Object} airplane - The airplane object that was clicked.
+ *
+ * @function handleAddNewAirplane
+ * @description Handles the event to add a new airplane.
+ *
+ * @function handleCloseModal
+ * @description Handles the event to close the modal.
+ *
+ * @function toggleGuide
+ * @description Toggles the visibility of the guide.
+ */
 const ManageAirplanes = () => {
   const [selectedAirplane, setSelectedAirplane] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -9,6 +9,61 @@ import {
 } from "../../services/adminService";
 import styles from "./AdminDashboard.module.css";
 
+/**
+ * AdminDashboard component renders the admin dashboard page.
+ * It displays general statistics and monthly booking statistics.
+ * It also provides navigation to various admin management pages.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * return (
+ *   <AdminDashboard />
+ * )
+ *
+ * @function
+ * @name AdminDashboard
+ *
+ * @description
+ * This component fetches general statistics and monthly booking statistics
+ * from the server and displays them in a dashboard layout. It also includes
+ * navigation links to other admin management pages such as managing airplanes,
+ * flights, and viewing bookings.
+ *
+ * @property {function} useNavigate - Hook from react-router-dom for navigation.
+ * @property {object} stats - State object containing general statistics.
+ * @property {number} stats.totalBookings - Total number of bookings.
+ * @property {number} stats.totalRevenue - Total revenue.
+ * @property {number} stats.totalAirplanes - Total number of airplanes.
+ * @property {number} stats.totalFlights - Total number of flights.
+ * @property {number} selectedMonth - State for the selected month.
+ * @property {number} selectedYear - State for the selected year.
+ * @property {Array} monthlyStats - State array containing monthly booking statistics.
+ *
+ * @method
+ * @name fetchStats
+ * @description Fetches general statistics from the server and updates the state.
+ *
+ * @method
+ * @name fetchMonthlyStats
+ * @description Fetches monthly booking statistics from the server and updates the state.
+ *
+ * @method
+ * @name handleMonthChange
+ * @description Handles the change event for the month selection.
+ * @param {object} e - The event object.
+ *
+ * @method
+ * @name handleYearChange
+ * @description Handles the change event for the year selection.
+ * @param {object} e - The event object.
+ *
+ * @method
+ * @name handleCardClick
+ * @description Handles the click event for the statistic cards to navigate to different pages.
+ * @param {string} path - The path to navigate to.
+ */
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [stats, setStats] = useState({
