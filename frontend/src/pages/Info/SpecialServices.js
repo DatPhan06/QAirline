@@ -134,7 +134,6 @@ const SpecialServices = () => {
   return (
     <div className ={styles.pagespeacial}> 
     <div className={styles.container}>
-      <h1 className={styles.mainTitle}>Dịch Vụ Đặc Biệt</h1>
       
       <div className={styles.servicesGrid}>
         {/* Row 1 */}

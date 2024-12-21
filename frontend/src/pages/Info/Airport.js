@@ -37,7 +37,6 @@ const Airport = () => {
 
   return (
     <div className={styles.airportContainer}>
-      <h1 className={styles.title}>Thông Tin Sân Bay</h1>
       
       <div className={styles.content}>
         {/* Danh sách sân bay bên trái */}

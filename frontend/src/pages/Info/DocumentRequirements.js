@@ -166,44 +166,27 @@ const DocumentRequirements = () => {
 
   return (
     <div className={styles.container}>
-
-      {/* Nội dung chính */}
-      <main>
-        <h1 className={styles.title}>Trang Yêu Cầu Giấy Tờ</h1>
-        <p className={styles.description}>
-          Chào mừng bạn đến với QAirline. Vui lòng chọn một mục bên dưới để xem chi tiết yêu cầu giấy tờ cần thiết cho chuyến bay của bạn.
-        </p>
-        <div className={styles.sections}>
+      <main className={styles.mainContent}>
+        {/* Sidebar bên trái chứa các nút */}
+        <aside className={styles.sidebar}>
           {sections.map((section) => (
-            <div key={section.id} className={styles.card}>
-              <h2 className={styles.cardTitle}>{section.title}</h2>
-              <button
-                className={styles.viewButton}
-                onClick={() => openSection(section.id)}
-              >
-                Xem Chi Tiết
-              </button>
-            </div>
+            <button
+              key={section.id}
+              className={`${styles.button} ${
+                activeSection === section.id ? styles.active : ""
+              }`}
+              onClick={() => setActiveSection(section.id)}
+            >
+              {section.title}
+            </button>
           ))}
+        </aside>
+
+        {/* Frame bên phải hiển thị nội dung */}
+        <div className={styles.content}>
+          {sections.find((section) => section.id === activeSection)?.content}
         </div>
       </main>
-
-      {/* Overlay và Modal */}
-      {activeSection !== null && (
-        <div className={styles.overlay} onClick={closeSection}>
-          <div
-            className={styles.modal}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button className={styles.closeButton} onClick={closeSection}>
-              &times;
-            </button>
-            <div className={styles.content}>
-              {sections.find((section) => section.id === activeSection).content}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

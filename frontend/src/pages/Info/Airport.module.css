@@ -4,7 +4,6 @@
     max-width: 1200px;
     margin: 0 auto;
     font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: linear-gradient(to bottom, #f8f9fa, #fff);
     min-height: 100vh;
   }
   
@@ -27,7 +26,7 @@
     transform: translateX(-50%);
     width: 80px;
     height: 4px;
-    background: linear-gradient(90deg, #3498db, #2980b9);
+    background: linear-gradient(90deg, #0D5777, #0D5777);
     border-radius: 2px;
   }
   
@@ -45,7 +44,7 @@
   /* Airport list sidebar */
   .airportList {
     flex: 0 0 300px;
-    background: #f8f9fa;
+    background: #F9F7F3;
     padding: 25px;
     border-right: 1px solid #eee;
   }
@@ -81,7 +80,7 @@
   }
   
   .airportItem.active {
-    background: #1976d2;
+    background: #0D5777;
     color: #fff;
     font-weight: 500;
     box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
@@ -96,7 +95,7 @@
   
   .airportDetails h2 {
     margin-bottom: 30px;
-    color: #1976d2;
+    color: #0D5777;
     font-size: 1.8rem;
     font-weight: 600;
     padding-bottom: 15px;

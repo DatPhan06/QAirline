@@ -1,5 +1,4 @@
 .pagespeacial {
-    background-image: url('../../assets/images/back.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -9,13 +8,7 @@
     max-width: 1200px;
     margin: 0 auto;
   }
-  
-  .mainTitle {
-    text-align: center;
-    color: #0B213C;
-    margin-bottom: 40px;
-    font-size: 2.5rem;
-  }
+
   
   .servicesGrid {
     display: grid;
