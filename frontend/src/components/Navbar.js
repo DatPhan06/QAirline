@@ -96,9 +96,7 @@ const Navbar = () => {
 
           {/* Mục Đặt Vé */}
           <li className={styles.navItem}>
-            <Link to="/booking" className={styles.navLink}>
-              ĐẶT VÉ
-            </Link>
+            <p className={styles.navLink}>ĐẶT VÉ</p>
             <ul className={styles.subMenu}>
               <li className={styles.subMenuItem}>
                 <Link to="/booking/book-ticket" className={styles.subMenuLink}>
@@ -134,9 +132,7 @@ const Navbar = () => {
 
           {/* Mục Thông Tin */}
           <li className={styles.navItem}>
-            <Link to="/info" className={styles.navLink}>
-              THÔNG TIN HÀNH TRÌNH
-            </Link>
+            <p className={styles.navLink}>THÔNG TIN HÀNH TRÌNH</p>
             <ul className={styles.subMenu}>
               <li className={styles.subMenuItem}>
                 <Link to="/info/ticket-schedule" className={styles.subMenuLink}>
@@ -151,11 +147,7 @@ const Navbar = () => {
                   Dịch Vụ Đặc Biệt
                 </Link>
               </li>
-              {/* <li className={styles.subMenuItem}>
-                <Link to="/info/baggage" className={styles.subMenuLink}>
-                  Hành Lý
-                </Link>
-              </li> */}
+
               <li className={styles.subMenuItem}>
                 <Link to="/info/check-in" className={styles.subMenuLink}>
                   Hướng dẫn thủ Tục
@@ -179,9 +171,7 @@ const Navbar = () => {
 
           {/* Mục Khám Phá */}
           <li className={styles.navItem}>
-            <Link to="/explore" className={styles.navLink}>
-              KHÁM PHÁ
-            </Link>
+            <p className={styles.navLink}>KHÁM PHÁ</p>
             <ul className={styles.subMenu}>
               <li className={styles.subMenuItem}>
                 <Link to="/explore/destinations" className={styles.subMenuLink}>
@@ -194,10 +184,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className={styles.subMenuItem}>
-                <Link
-                  to="/qairline/news"
-                  className={styles.subMenuLink}
-                >
+                <Link to="/qairline/news" className={styles.subMenuLink}>
                   Tin tức
                 </Link>
               </li>
@@ -206,9 +193,7 @@ const Navbar = () => {
 
           {/* Mục Hãng Hàng Không */}
           <li className={styles.navItem}>
-            <Link to="/qairline" className={styles.navLink}>
-              QAirline
-            </Link>
+            <p className={styles.navLink}>QAirline</p>
             <ul className={styles.subMenu}>
               <li className={styles.subMenuItem}>
                 <Link to="/info/general" className={styles.subMenuLink}>
@@ -221,7 +206,10 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className={styles.subMenuItem}>
-                <Link to="/explore/flight-experience" className={styles.subMenuLink}>
+                <Link
+                  to="/explore/flight-experience"
+                  className={styles.subMenuLink}
+                >
                   Trải nghiệm bay
                 </Link>
               </li>
@@ -232,14 +220,14 @@ const Navbar = () => {
           <li className={`${styles.navItem} ${styles.account}`}>
             {isLoggedIn ? (
               <>
-                <Link to="/account" className={styles.navLink}>
+                <p className={styles.navLink}>
                   <img
                     src="/images/user.png"
                     alt="Avatar"
                     className={styles.avatar}
                   />
                   Tài khoản
-                </Link>
+                </p>
                 <ul className={styles.subMenu}>
                   <li className={styles.subMenuItem}>
                     <Link to="/account/profile" className={styles.subMenuLink}>
