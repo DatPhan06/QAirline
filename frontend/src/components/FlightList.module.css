@@ -252,3 +252,119 @@
     transform: translate(-50%, 0);
   }
 }
+
+/* Responsive design for FlightList component */
+
+/* Tablet devices (768px and up) */
+@media screen and (max-width: 768px) {
+  .flightListContainer {
+    padding: 15px;
+  }
+
+  .sectionTitle {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .sectionTitle input[type="text"] {
+    width: 100%;
+  }
+
+  .flightTable {
+    font-size: 0.9rem;
+  }
+
+  .flightTable th,
+  .flightTable td {
+    padding: 10px 8px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .pageButton {
+    padding: 6px 10px;
+    min-width: 35px;
+  }
+}
+
+/* Mobile devices (480px and below) */
+@media screen and (max-width: 480px) {
+  .flightListContainer {
+    padding: 10px;
+  }
+
+  .flightTable {
+    font-size: 0.8rem;
+  }
+
+  .flightTable thead {
+    display: none;
+  }
+
+  .flightTable tbody tr {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .flightTable td {
+    display: block;
+    text-align: right;
+    padding: 8px 5px;
+    border: none;
+    position: relative;
+  }
+
+  .flightTable td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .subInfo {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+  }
+
+  .pagination {
+    justify-content: center;
+  }
+
+  .pageButton {
+    padding: 5px 8px;
+    font-size: 12px;
+    min-width: 30px;
+  }
+
+  .pageButton:first-child,
+  .pageButton:last-child {
+    padding: 5px 12px;
+  }
+}
+
+/* Small mobile devices (320px and below) */
+@media screen and (max-width: 320px) {
+  .flightListContainer {
+    padding: 5px;
+  }
+
+  .sectionTitle h2 {
+    font-size: 1.2rem;
+  }
+
+  .flightTable {
+    font-size: 0.75rem;
+  }
+
+  .pageButton {
+    min-width: 25px;
+    padding: 4px 6px;
+  }
+}
