@@ -88,12 +88,12 @@ function SignIn() {
       <div className={styles.loginBox}>
         {/* Left Side: Image */}
         <div className={styles.imageContainer}>
-          <img src="./assets/images/login.webp" alt="Login" />
+          <img src="/images/login.png" alt="Login" />
         </div>
 
         {/* Right Side: Login Form */}
         <div className={styles.formContainer}>
-          <h2>Đăng nhập</h2>
+          <h2 className={styles.title}>Đăng nhập</h2>
           <form onSubmit={handleSubmit} className={styles.loginForm}>
             <input
               type="text"
@@ -122,22 +122,6 @@ function SignIn() {
               </a>
             </div>
           </form>
-
-          {/* Social Login Buttons */}
-          <div className={styles.socialLogin}>
-            <button
-              onClick={() => handleOAuthLogin("google")}
-              className={styles.oauthButton}
-            >
-              Đăng nhập với Google
-            </button>
-            <button
-              onClick={() => handleOAuthLogin("github")}
-              className={styles.oauthButton}
-            >
-              Đăng nhập với GitHub
-            </button>
-          </div>
 
           {/* Additional Login Options */}
           <div className={styles.otherLogins}>

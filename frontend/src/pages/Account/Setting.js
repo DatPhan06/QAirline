@@ -1,19 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { changePassword } from "../../services/userService";
+import { getCurrentUser, changePassword } from "../../services/userService";
 import styles from "./Setting.module.css";
 
-/**
- * Setting component renders the account settings page where users can change their password,
- * toggle dark mode, and select their preferred language.
- *
- * @component
- * @example
- * return (
- *   <Setting />
- * )
- *
- * @returns {JSX.Element} The rendered component.
- */
 const Setting = () => {
   const [passwordData, setPasswordData] = useState({
     currentPassword: "",
@@ -22,11 +10,23 @@ const Setting = () => {
   });
   const [language, setLanguage] = useState("vi");
   const [darkMode, setDarkMode] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const savedDarkMode = localStorage.getItem("darkMode") === "true";
     setDarkMode(savedDarkMode);
     document.body.classList.toggle("dark-mode", savedDarkMode);
+
+    const fetchUser = async () => {
+      try {
+        const userData = await getCurrentUser();
+        setUser(userData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUser();
   }, []);
 
   const handlePasswordChange = (e) => {
