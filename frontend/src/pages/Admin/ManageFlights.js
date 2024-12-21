@@ -10,6 +10,8 @@ import FlightList from "../../components/FlightList";
 import styles from "./ManageFlights.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { getAirplanes } from "../../services/airplaneService";
+import { getAirports } from "../../services/airportService";
 import { createNotification } from "../../services/notificationService";
 
 /**
@@ -82,6 +84,7 @@ const ManageFlights = () => {
   const [selectedFlight, setSelectedFlight] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const [airplanes, setAirplanes] = useState([]);
   const [flightData, setFlightData] = useState({
     flight_number: "",
     airplane_id: "",
@@ -96,6 +99,21 @@ const ManageFlights = () => {
   });
   const [flights, setFlights] = useState([]);
 
+  const [airports, setAirports] = useState([]);
+
+  // Add useEffect to fetch airports
+  useEffect(() => {
+    const fetchAirports = async () => {
+      try {
+        const response = await getAirports();
+        setAirports(response);
+      } catch (error) {
+        console.error("Error fetching airports:", error);
+      }
+    };
+    fetchAirports();
+  }, []);
+
   useEffect(() => {
     const fetchFlights = async () => {
       try {
@@ -109,9 +127,59 @@ const ManageFlights = () => {
     fetchFlights();
   }, []);
 
-  const handleInputChange = (e) => {
-    setFlightData({ ...flightData, [e.target.name]: e.target.value });
+  // Function to calculate flight duration
+  const calculateFlightDuration = (departureTime, arrivalTime) => {
+    if (!departureTime || !arrivalTime) return "";
+
+    const departure = new Date(departureTime);
+    const arrival = new Date(arrivalTime);
+
+    if (arrival < departure) {
+      alert("Thời gian đến không thể sớm hơn thời gian khởi hành!");
+      return "";
+    }
+
+    const diffMs = arrival - departure;
+    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    // Format as string "HH:MM:00"
+    return `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}:00`;
   };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFlightData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+
+      // Automatically update flight duration when departure or arrival time changes
+      if (name === "departure_time" || name === "arrival_time") {
+        if (newData.departure_time && newData.arrival_time) {
+          newData.flight_duration = calculateFlightDuration(
+            newData.departure_time,
+            newData.arrival_time
+          );
+        }
+      }
+
+      return newData;
+    });
+  };
+
+  useEffect(() => {
+    const fetchAirplanes = async () => {
+      try {
+        const response = await getAirplanes();
+        setAirplanes(response);
+      } catch (error) {
+        console.error("Error fetching airplanes:", error);
+      }
+    };
+
+    fetchAirplanes();
+  }, []);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -130,7 +198,8 @@ const ManageFlights = () => {
         alert("Cập nhật chuyến bay thành công!");
       } else {
         // Create new flight
-        await createFlight(flightData);
+        const newFlight = await createFlight(flightData);
+        await createTicketsForFlight(newFlight.flight_id);
         alert("Tạo chuyến bay mới thành công!");
       }
       setIsModalOpen(false);
@@ -246,14 +315,13 @@ const ManageFlights = () => {
                     />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Thời gian bay (HH:MM:SS):</label>
+                    <label>Thời gian bay:</label>
                     <input
                       type="text"
                       name="flight_duration"
                       value={flightData.flight_duration}
-                      onChange={handleInputChange}
-                      required
-                      className={styles.input}
+                      readOnly
+                      className={`${styles.input} ${styles.readOnly}`}
                     />
                   </div>
                   <div className={styles.formGroup}>
@@ -304,37 +372,63 @@ const ManageFlights = () => {
                     />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>ID máy bay:</label>
-                    <input
-                      type="number"
+                    <label>Chọn máy bay:</label>
+                    <select
                       name="airplane_id"
                       value={flightData.airplane_id}
                       onChange={handleInputChange}
                       required
-                      className={styles.input}
-                    />
+                    >
+                      <option value="">Select Airplane</option>
+                      {airplanes.map((airplane) => (
+                        <option
+                          key={airplane.airplane_id}
+                          value={airplane.airplane_id}
+                        >
+                          {airplane.model}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div className={styles.formGroup}>
-                    <label>ID sân bay đi:</label>
-                    <input
-                      type="number"
+                    <label>Sân bay khởi hành:</label>
+                    <select
                       name="departure_airport_id"
                       value={flightData.departure_airport_id}
                       onChange={handleInputChange}
                       required
                       className={styles.input}
-                    />
+                    >
+                      <option value="">Chọn sân bay khởi hành</option>
+                      {airports.map((airport) => (
+                        <option
+                          key={airport.airport_id}
+                          value={airport.airport_id}
+                        >
+                          {airport.name} ({airport.iata_code})
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div className={styles.formGroup}>
-                    <label>ID sân bay đến:</label>
-                    <input
-                      type="number"
+                    <label>Sân bay đến:</label>
+                    <select
                       name="arrival_airport_id"
                       value={flightData.arrival_airport_id}
                       onChange={handleInputChange}
                       required
                       className={styles.input}
-                    />
+                    >
+                      <option value="">Chọn sân bay đến</option>
+                      {airports.map((airport) => (
+                        <option
+                          key={airport.airport_id}
+                          value={airport.airport_id}
+                        >
+                          {airport.name} ({airport.iata_code})
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div className={styles.formGroup}>
                     <label>Thời gian khởi hành:</label>
@@ -359,14 +453,13 @@ const ManageFlights = () => {
                     />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Thời gian bay (HH:MM:SS):</label>
+                    <label>Thời gian bay:</label>
                     <input
                       type="text"
                       name="flight_duration"
                       value={flightData.flight_duration}
-                      onChange={handleInputChange}
-                      required
-                      className={styles.input}
+                      readOnly
+                      className={`${styles.input} ${styles.readOnly}`}
                     />
                   </div>
                   <div className={styles.formGroup}>

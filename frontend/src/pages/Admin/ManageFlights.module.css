@@ -59,7 +59,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  animation: fadeIn 0.3s ease;
+  padding: 20px;
 }
 
 .modalContent {
@@ -68,9 +68,30 @@
   border-radius: 16px;
   width: 600px;
   max-width: 90%;
+  max-height: 90vh; /* Giới hạn chiều cao tối đa là 90% chiều cao màn hình */
+  overflow-y: auto; /* Cho phép cuộn dọc khi nội dung vượt quá */
   position: relative;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   animation: slideIn 0.4s ease;
+}
+
+/* Tùy chỉnh thanh cuộn */
+.modalContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modalContent::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+  background: #0d5777;
+  border-radius: 4px;
+}
+
+.modalContent::-webkit-scrollbar-thumb:hover {
+  background: #0a4560;
 }
 
 .closeButton {

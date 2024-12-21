@@ -322,7 +322,7 @@
 }
 .statsAndChartContainer {
   display: flex;
-  gap: 30px;
+  gap: 60px;
   margin-bottom: 30px;
 }
 
@@ -335,7 +335,7 @@
 
 .statCard {
   background: #fff;
-  padding: 20px;
+  padding: 12px;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
