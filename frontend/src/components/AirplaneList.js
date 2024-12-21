@@ -53,8 +53,8 @@ const AirplaneList = ({ airplanes, onAirplaneClick }) => {
         <p className={styles.noAirplanes}>Hiện tại không có máy bay nào.</p>
       ) : (
         <>
-          <h2 className={styles.sectionTitle}>Danh Sách Máy Bay</h2>
-          <div className={styles.searchContainer}>
+          <h2 className={styles.sectionTitle}>
+            DANH SÁCH MÁY BAY
             <input
               type="text"
               placeholder="Tìm kiếm máy bay..."
@@ -62,17 +62,18 @@ const AirplaneList = ({ airplanes, onAirplaneClick }) => {
               onChange={handleSearchChange}
               className={styles.searchInput}
             />
-          </div>
+          </h2>
+
           <table className={styles.airplaneTable}>
             <thead>
               <tr>
-                <th>Model</th>
-                <th>Nhà sản xuất</th>
-                <th>Sức chứa ghế</th>
-                <th>Tầm bay (km)</th>
-                <th>Năm sản xuất</th>
-                <th>Tình trạng bảo trì</th>
-                <th>Trạng thái</th>
+                <th title="Model máy bay">Model</th>
+                <th title="Hãng sản xuất">Nhà sản xuất</th>
+                <th title="Số ghế tối đa">Sức chứa ghế</th>
+                <th title="Phạm vi bay">Tầm bay (km)</th>
+                <th title="Năm sản xuất máy bay">Năm sản xuất</th>
+                <th title="Tình trạng bảo trì">Tình trạng bảo trì</th>
+                <th title="Trạng thái hoạt động">Trạng thái</th>
               </tr>
             </thead>
             <tbody>
@@ -80,7 +81,6 @@ const AirplaneList = ({ airplanes, onAirplaneClick }) => {
                 <tr
                   key={airplane.airplane_id}
                   onClick={() => handleEditClick(airplane)}
-                  style={{ cursor: "pointer" }}
                 >
                   <td>{airplane.model}</td>
                   <td>{airplane.manufacturer}</td>
@@ -93,15 +93,23 @@ const AirplaneList = ({ airplanes, onAirplaneClick }) => {
               ))}
             </tbody>
           </table>
+
           <div className={styles.pagination}>
-            <button onClick={handlePrevPage} disabled={currentPage === 1}>
+            <button
+              className={styles.pageButton}
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+            >
               Trang trước
             </button>
+
             <span>
               Trang {currentPage} /{" "}
               {Math.ceil(filteredAirplanes.length / airplanesPerPage)}
             </span>
+
             <button
+              className={styles.pageButton}
               onClick={handleNextPage}
               disabled={
                 currentPage ===

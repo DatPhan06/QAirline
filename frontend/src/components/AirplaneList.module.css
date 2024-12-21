@@ -1,15 +1,15 @@
-/* AirplaneList.module.css */
-
 .airplaneListContainer {
   width: 100%;
   max-width: 1200px;
   margin: 40px auto;
   padding: 20px;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  background: #fff;
-  box-sizing: border-box;
+  background-image: url("../assets/images/tk4.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 20px;
 }
 
+/* Thông báo không có máy bay */
 .noAirplanes {
   font-size: 1.2rem;
   color: #777;
@@ -19,16 +19,18 @@
 }
 
 .sectionTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 2rem;
   font-weight: 700;
   text-transform: uppercase;
   color: #333;
   margin-bottom: 25px;
-  letter-spacing: 1px;
   position: relative;
-  padding-bottom: 10px;
 }
 
+/* Hiệu ứng gạch chân cho tiêu đề */
 .sectionTitle::after {
   content: "";
   display: block;
@@ -39,19 +41,6 @@
   border-radius: 2px;
 }
 
-/* Search Container */
-.searchContainer {
-  margin-bottom: 20px;
-}
-
-.searchInput {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
 /* Bảng máy bay */
 .airplaneTable {
   width: 100%;
@@ -59,10 +48,35 @@
   font-size: 1rem;
   color: #333;
   margin-bottom: 40px;
-  background-color: #fdfdfd;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
+.airplaneTable th:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
 .airplaneTable thead th {
   background: #0d5777;
   color: #ffffff;
@@ -84,32 +98,78 @@
 .airplaneTable tbody tr:hover {
   background: #f7faff;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-/* Pagination */
+/* Phân trang */
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 8px;
   margin-top: 20px;
-  gap: 10px;
 }
 
-.pagination button {
-  background-color: #3498db;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
+.pageButton {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  min-width: 40px;
+  font-size: 14px;
+  transition: all 0.2s ease;
 }
 
-.pagination button:disabled {
-  background-color: #bdc3c7;
+.pageButton:disabled {
+  background: #f5f5f5;
   cursor: not-allowed;
+  color: #999;
 }
 
-.pagination span {
-  font-size: 1rem;
+.pageButton.active {
+  background: #0d5777;
+  color: white;
+  border-color: #0d5777;
+}
+
+.pageButton:not(:disabled):hover {
+  background: #f0f0f0;
+  border-color: #0d5777;
+}
+
+.pageButton:first-child,
+.pageButton:last-child {
+  background: #0d5777;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  font-weight: 500;
+}
+
+/* Hiệu ứng hover cho nút */
+.pageButton:hover:not(:disabled) {
+  background: #166b82;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Thanh tìm kiếm */
+.searchInput {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 250px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #0d5777;
+  box-shadow: 0 0 5px rgba(13, 87, 119, 0.2);
+}
+
+.searchInput::placeholder {
+  color: #999;
 }
